@@ -220,3 +220,23 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+
+== Shorthand equivalent alias for commands.
+
+For example, besides typing `clear`, the user can also type `c` to remove all persons in the list.
+
+* *Add* : `add` : `a`
+* *Edit* : `edit` : `e`
+* *Select* : `select` : `s`
+* *Delete* : `delete` : `d`
+* *Clear* : `clear` : `c`
+* *Find* : `find` : `f`
+* *List* : `list` : `ls`
+* *History* : `history` : `h`
+* *Undo* : `undo` : `u`
+* *Redo* : `redo` : `r`
+
+[NOTE]
+====
+Commands `exit` and `help` do not have aliases.
+====
