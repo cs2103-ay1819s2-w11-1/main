@@ -2,7 +2,6 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.logging.Logger;
 
@@ -13,7 +12,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ReverseCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
@@ -22,7 +20,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
-import seedu.address.ui.ListElementPointer;
 
 /**
  * The main LogicManager of the app.
@@ -35,7 +32,7 @@ public class LogicManager implements Logic {
     private final Storage storage;
     private final CommandHistory history;
     private final CommandStack commandStack;
-    private ListIterator<Pair<Command, Command>> commandSnapShot;
+    private ListIterator<Pair<Command, Command>> commandIterator;
     private final AddressBookParser addressBookParser;
     private boolean addressBookModified;
 
@@ -44,7 +41,7 @@ public class LogicManager implements Logic {
         this.storage = storage;
         history = new CommandHistory();
         commandStack = new CommandStack();
-        commandSnapShot = commandStack.getCommandHistory().listIterator();
+        commandIterator = commandStack.getCommandHistory().listIterator();
         addressBookParser = new AddressBookParser();
 
         // Set addressBookModified to true whenever the models' address book is modified.
@@ -60,16 +57,16 @@ public class LogicManager implements Logic {
         try {
             Command command = addressBookParser.parseCommand(commandText);
             if(command instanceof ReverseCommand){
-                if (!commandSnapShot.hasPrevious()) {
+                if (!commandIterator.hasPrevious()) {
                     throw new CommandException("No commands to reverse");
                 }
-                Command previousCommand = commandSnapShot.previous().getValue();
+                Command previousCommand = commandIterator.previous().getValue();
                 commandResult = previousCommand.execute(model, history);
             } else {
                 commandResult = command.execute(model, history);
                 Command inverseCommand = command.inverse(model);
                 commandStack.add(command, inverseCommand);
-                commandSnapShot.next();
+                commandIterator.next();
             }
 
         } finally {

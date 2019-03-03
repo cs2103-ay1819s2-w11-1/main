@@ -25,7 +25,8 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
-    private final Index targetIndex;
+    private Index targetIndex;
+    private Person personToDelete;
 
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -40,7 +41,7 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
@@ -53,6 +54,6 @@ public class DeleteCommand extends Command {
                 && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
     }
     public Command inverse(Model model){
-        return this;
+        return new AddCommand(personToDelete, targetIndex);
     }
 }

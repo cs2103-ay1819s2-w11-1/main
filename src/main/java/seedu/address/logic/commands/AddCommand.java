@@ -8,6 +8,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.swing.text.html.Option;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -41,6 +44,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
+    private Optional<Index> indexToInsert;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -48,6 +52,13 @@ public class AddCommand extends Command {
     public AddCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
+        indexToInsert = Optional.empty();
+    }
+
+    public AddCommand(Person person, Index targetIndex) {
+        requireNonNull(person);
+        toAdd = person;
+        indexToInsert = Optional.of(targetIndex);
     }
 
     /**
@@ -69,7 +80,12 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
+        if (indexToInsert.isPresent()){
+            model.addPerson(toAdd, indexToInsert.get());
+        } else {
+            model.addPerson(toAdd);
+        }
+
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

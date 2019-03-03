@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.InvalidationListenerManager;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -76,6 +77,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addPerson(Person p) {
         persons.add(p);
+        indicateModified();
+    }
+
+    /**
+     * Adds a person to the address book at a certain index.
+     * The person must not already exist in the address book.
+     */
+    public void addPerson(Person p, Index i) {
+        persons.add(p, i);
         indicateModified();
     }
 
