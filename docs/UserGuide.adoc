@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= Top Deck - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -36,9 +36,9 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* *`index`* : lists all cards
+* **`add`**`add card f/Capital of Hawaii b/Honolulu` : creates a card for this trivia and adds it onto the Deck.
+* **`delete`**`3` : deletes the 3rd card shown in the current list
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -49,10 +49,10 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add f/QUESTION b/ANSWER`, `QUESTION` is a parameter which can be used as `add f/Powerhouse of the cell b/Mitochondria`.
+* Items in square brackets are optional e.g `f/QUESTION b/ANSWER [t/TAG]` can be used as `f/Powerhouse of the cell b/Mitochondria t/biology` or as `f/Powerhouse of the cell b/Mitochondria`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Parameters can be in any order e.g. if the command specifies `f/QUESTION b/ANSWER`, `f/QUESTION b/ANSWER` is also acceptable.
 ====
 
 === Viewing help : `help`
