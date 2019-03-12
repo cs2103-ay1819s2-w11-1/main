@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">TopDeck</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link active" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/cs2103-ay1819s2-w11-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Top Deck - User Guide</h1></div><div id="content"><div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>By: <code>W11-1</code>      Since: <code>Feb 2018</code>      Licence: <code>MIT</code></p>
+<p>By: <code>W11-1</code>      Since: <code>Feb 2019</code>      Licence: <code>MIT</code></p>
 </div>
 </div>
 <div id="toc" class="toc">
@@ -14,26 +14,29 @@
 <li><a href="#Features">3. Features</a>
 <ul class="sectlevel2">
 <li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
-<li><a href="#creating-a-deck-code-deck-new-code">3.2. Creating a deck: <code>deck new</code></a></li>
+<li><a href="#creating-a-deck-code-deck-add-code">3.2. Creating a deck: <code>deck add</code></a></li>
 <li><a href="#deleting-a-deck-code-deck-delete-code">3.3. Deleting a deck: <code>deck delete</code></a></li>
-<li><a href="#listing-all-decks-code-list-code">3.4. Listing all decks: <code>list</code></a></li>
-<li><a href="#selecting-a-deck-code-select-code">3.5. Selecting a deck: <code>select</code></a></li>
-<li><a href="#adding-card-to-selected-deck-code-add-card-code">3.6. Adding card to selected deck: <code>add card</code></a></li>
-<li><a href="#deleting-card-in-the-selected-deck-code-card-delete-code">3.7. Deleting card in the selected deck: <code>card delete</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">3.8. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">3.9. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.10. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#importing-a-deck-code-import-deck-code">3.11. Importing a deck: <code>import deck</code></a></li>
-<li><a href="#exporting-a-deck-code-export-deck-code">3.12. Exporting a deck: <code>export deck</code></a></li>
-<li><a href="#studying-a-deck-code-study-code">3.13. Studying a deck: <code>study</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.14. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.15. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.16. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.17. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#deleting-a-deck-code-deck-find-code">3.4. Deleting a deck: <code>deck find</code></a></li>
+<li><a href="#listing-all-decks-code-list-code">3.5. Listing all decks: <code>list</code></a></li>
+<li><a href="#selecting-a-deck-code-select-code">3.6. Selecting a deck: <code>select</code></a></li>
+<li><a href="#adding-card-to-selected-deck-code-card-add-code">3.7. Adding card to selected deck: <code>card add</code></a></li>
+<li><a href="#editing-card-code-card-edit-code">3.8. Editing card: <code>card edit</code></a></li>
+<li><a href="#finding-card-code-card-find-code">3.9. Finding card: <code>card find</code></a></li>
+<li><a href="#deleting-card-in-the-selected-deck-code-card-delete-code">3.10. Deleting card in the selected deck: <code>card delete</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code">3.11. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">3.12. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.13. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#importing-a-deck-code-import-deck-code">3.14. Importing a deck: <code>import deck</code></a></li>
+<li><a href="#exporting-a-deck-code-export-deck-code">3.15. Exporting a deck: <code>export deck</code></a></li>
+<li><a href="#studying-a-deck-code-study-code">3.16. Studying a deck: <code>study</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">3.17. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.18. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.19. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.20. Encrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
-<li><a href="#command-summary">5. Command Summary</a></li>
+<li><a href="#glossary">5. Glossary</a></li>
 </ul>
 </div>
 </div>
@@ -57,7 +60,7 @@ have been looking for, then jump to <a href="#quick-start">Section 2, &#8220;Qui
 <p>Ensure you have Java version <code>9</code> or later installed in your Computer.</p>
 </li>
 <li>
-<p>Download the latest <code>addressbook.jar</code> <a href="https://github.com/cs2103-ay1819s2-w11-1/main//releases">here</a>.</p>
+<p>Download the latest <code>topdeck.jar</code> <a href="https://github.com/cs2103-ay1819s2-w11-1/main//releases">here</a>.</p>
 </li>
 <li>
 <p>Copy the file to the folder you want to use as the home folder for your Address Book.</p>
@@ -82,10 +85,10 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><strong><code>index</code></strong> : lists all cards</p>
 </li>
 <li>
-<p><strong><code>add</code></strong><code>add card f/Capital of Hawaii b/Honolulu</code> : creates a card for this trivia and adds it onto the Deck.</p>
+<p><strong><code>deck add</code></strong><code>Capitals</code>  creates a deck entitled "Capitals"</p>
 </li>
 <li>
-<p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd card shown in the current list</p>
+<p><strong><code>deck delete</code></strong><code>3</code> : deletes the 3rd deck shown in the current list</p>
 </li>
 <li>
 <p><strong><code>exit</code></strong> : exits the app</p>
@@ -111,16 +114,16 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add f/QUESTION b/ANSWER</code>, <code>QUESTION</code> is a parameter which can be used as <code>add f/Powerhouse of the cell b/Mitochondria</code>.</p>
+<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add q/QUESTION a/ANSWER</code>, <code>QUESTION</code> is a parameter which can be used as <code>add q/Honduras a/Tegucigalpa</code>.</p>
 </li>
 <li>
-<p>Items in square brackets are optional e.g <code>f/QUESTION b/ANSWER [t/TAG]</code> can be used as <code>f/Powerhouse of the cell b/Mitochondria t/biology</code> or as <code>f/Powerhouse of the cell b/Mitochondria</code>.</p>
+<p>Items in square brackets are optional e.g <code>f/QUESTION b/ANSWER [t/TAG]</code> can be used as <code>q/China a/Beijing t/Asia</code> or as <code>q/China a/Beijing</code>.</p>
 </li>
 <li>
-<p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>t/friend</code>, <code>t/friend t/family</code> etc.</p>
+<p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>t/Asia</code>, <code>t/trivia t/history</code> etc.</p>
 </li>
 <li>
-<p>Parameters can be in any order e.g. if the command specifies <code>f/QUESTION b/ANSWER</code>, <code>f/QUESTION b/ANSWER</code> is also acceptable.</p>
+<p>Parameters can be in any order e.g. if the command specifies <code>q/QUESTION a/ANSWER</code>, <code>q/QUESTION a/ANSWER</code> is also acceptable.</p>
 </li>
 </ul>
 </div>
@@ -129,40 +132,62 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="sect2">
 <h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></h3>
 <div class="paragraph">
-<p>Format: <code>help</code></p>
+<p><strong>Format</strong>: <code>help</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Displays information regarding commands</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="creating-a-deck-code-deck-new-code"><a class="link" href="#creating-a-deck-code-deck-new-code">3.2. Creating a deck: <code>deck new</code></a></h3>
+<h3 id="creating-a-deck-code-deck-add-code"><a class="link" href="#creating-a-deck-code-deck-add-code">3.2. Creating a deck: <code>deck add</code></a></h3>
 <div class="paragraph">
-<p>Format: <code>deck new DECK_NAME</code></p>
+<p><strong>Format</strong>: <code>deck add DECK_NAME</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Creates new deck called DECK_NAME</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="deleting-a-deck-code-deck-delete-code"><a class="link" href="#deleting-a-deck-code-deck-delete-code">3.3. Deleting a deck: <code>deck delete</code></a></h3>
 <div class="paragraph">
-<p>Format: <code>deck delete DECK_NAME</code></p>
+<p><strong>Format</strong>: <code>deck delete DECK_INDEX</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Deletes deck at index DECK_INDEX</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-decks-code-list-code"><a class="link" href="#listing-all-decks-code-list-code">3.4. Listing all decks: <code>list</code></a></h3>
+<h3 id="deleting-a-deck-code-deck-find-code"><a class="link" href="#deleting-a-deck-code-deck-find-code">3.4. Deleting a deck: <code>deck find</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of all decks in TopDeck<br>
-Format: <code>list</code></p>
+<p><strong>Format</strong>: <code>deck find KEYWORD</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Lists all decks containing that keyword in its name</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-deck-code-select-code"><a class="link" href="#selecting-a-deck-code-select-code">3.5. Selecting a deck: <code>select</code></a></h3>
+<h3 id="listing-all-decks-code-list-code"><a class="link" href="#listing-all-decks-code-list-code">3.5. Listing all decks: <code>list</code></a></h3>
 <div class="paragraph">
-<p>Selects a deck and lists its card in the right pane.<br>
-Format: <code>select INDEX</code></p>
+<p><strong>Format</strong>: <code>list</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Displays list of all decks. Deselects the current deck</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="selecting-a-deck-code-select-code"><a class="link" href="#selecting-a-deck-code-select-code">3.6. Selecting a deck: <code>select</code></a></h3>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>select DECK_INDEX</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Selects deck to to enable you to manage the cards inside</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Selects the deck at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed deck list. The index <strong>must be a positive integer</strong> 1, 2, 3&#8230;&#8203;</p>
+<p>The index refers to the index number shown in the displayed deck list. The index <strong>must be a positive integer</strong> 1, 2, 3&#8230;&#8203;</p>
 </li>
 </ul>
 </div>
@@ -170,10 +195,12 @@ Format: <code>select INDEX</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-card-to-selected-deck-code-add-card-code"><a class="link" href="#adding-card-to-selected-deck-code-add-card-code">3.6. Adding card to selected deck: <code>add card</code></a></h3>
+<h3 id="adding-card-to-selected-deck-code-card-add-code"><a class="link" href="#adding-card-to-selected-deck-code-card-add-code">3.7. Adding card to selected deck: <code>card add</code></a></h3>
 <div class="paragraph">
-<p>Creates and adds a card to selected deck.<br>
-Format: <code>card add f/FRONT_TEXT b/BACK_TEXT</code></p>
+<p><strong>Format</strong>: <code>card add q/QUESTION a/ANSWER</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Creates and adds a new card containing QUESTION in front and ANSWER at the back onto selected deck</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -189,29 +216,55 @@ Format: <code>card add f/FRONT_TEXT b/BACK_TEXT</code></p>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Examples:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>add card f/Are you curious about the app b/yes!</code></p>
-</li>
-</ul>
+<div class="sect2">
+<h3 id="editing-card-code-card-edit-code"><a class="link" href="#editing-card-code-card-edit-code">3.8. Editing card: <code>card edit</code></a></h3>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>card edit CARD_INDEX q/QUESTION a/ANSWER</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Edits card at CARD_INDEX to change either the question or the answer or both</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-card-in-the-selected-deck-code-card-delete-code"><a class="link" href="#deleting-card-in-the-selected-deck-code-card-delete-code">3.7. Deleting card in the selected deck: <code>card delete</code></a></h3>
+<h3 id="finding-card-code-card-find-code"><a class="link" href="#finding-card-code-card-find-code">3.9. Finding card: <code>card find</code></a></h3>
 <div class="paragraph">
-<p>Deletes a card in the selected deck.<br>
-Format: <code>card delete INDEX</code></p>
+<p><strong>Format</strong>: <code>card find KEYWORD</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Lists down all cards containing keyword</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When this command is called while a deck is selected, search results are limited to the results from that deck.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.8. Listing entered commands : <code>history</code></a></h3>
+<h3 id="deleting-card-in-the-selected-deck-code-card-delete-code"><a class="link" href="#deleting-card-in-the-selected-deck-code-card-delete-code">3.10. Deleting card in the selected deck: <code>card delete</code></a></h3>
 <div class="paragraph">
-<p>Lists all the commands that you have entered in reverse chronological order.<br>
-Format: <code>history</code></p>
+<p><strong>Format</strong>: <code>card delete CARD_INDEX</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Deletes the card at CARD_INDEX</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.11. Listing entered commands : <code>history</code></a></h3>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>history</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Lists all the commands that you have entered in reverse chronological order</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -229,10 +282,12 @@ Format: <code>history</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.9. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.12. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
-<p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
-Format: <code>undo</code></p>
+<p><strong>Format</strong>: <code>undo</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Restores the address book to the state before the previous <em>undoable</em> command was executed.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -249,7 +304,7 @@ Format: <code>undo</code></p>
 </table>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Example usage</strong>:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -260,18 +315,20 @@ Format: <code>undo</code></p>
 </li>
 <li>
 <p><code>card delete 1</code><br>
-<code>card add f/hello b/world</code><br>
-<code>undo</code> (reverses the <code>card delete</code> command)<br>
-<code>undo</code> (reverses the <code>card add</code> command)<br></p>
+<code>card add q/Russia a/Moscow</code><br>
+<code>undo</code> (reverses the <code>card add</code> command)<br>
+<code>undo</code> (reverses the <code>card delete</code> command)<br></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.10. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.13. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.<br>
-Format: <code>redo</code></p>
+<p><strong>Format</strong>: <code>redo</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Reverses the most recent <code>undo</code> command</p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -290,7 +347,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </li>
 <li>
 <p><code>card delete 1</code><br>
-<code>card add f/hello b/world</code><br>
+<code>card add q/Panama a/Panama</code><br>
 <code>undo</code> (reverses the <code>card add</code> command)<br>
 <code>undo</code> (reverses the <code>card delete</code> command)<br>
 <code>redo</code> (reapplies the <code>card delete</code> command)<br>
@@ -300,23 +357,30 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="importing-a-deck-code-import-deck-code"><a class="link" href="#importing-a-deck-code-import-deck-code">3.11. Importing a deck: <code>import deck</code></a></h3>
+<h3 id="importing-a-deck-code-import-deck-code"><a class="link" href="#importing-a-deck-code-import-deck-code">3.14. Importing a deck: <code>import deck</code></a></h3>
 <div class="paragraph">
-<p>Imports a deck from the given filepath.<br>
-Format: <code>import deck FILE_PATH</code></p>
+<p><strong>Format</strong>: <code>import deck FILE_PATH</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Imports a deck from the given filepath</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exporting-a-deck-code-export-deck-code"><a class="link" href="#exporting-a-deck-code-export-deck-code">3.12. Exporting a deck: <code>export deck</code></a></h3>
+<h3 id="exporting-a-deck-code-export-deck-code"><a class="link" href="#exporting-a-deck-code-export-deck-code">3.15. Exporting a deck: <code>export deck</code></a></h3>
 <div class="paragraph">
-<p>Exports a deck to the given filepath.<br>
-Format: <code>export deck FILE_PATH</code></p>
+<p><strong>Format</strong>: <code>export deck FILE_PATH</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Exports a deck to the given filepath</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="studying-a-deck-code-study-code"><a class="link" href="#studying-a-deck-code-study-code">3.13. Studying a deck: <code>study</code></a></h3>
+<h3 id="studying-a-deck-code-study-code"><a class="link" href="#studying-a-deck-code-study-code">3.16. Studying a deck: <code>study</code></a></h3>
 <div class="paragraph">
-<p>Studies a chosen deck.<br></p>
+<p><strong>Format</strong>: <code>study DECK_INDEX</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Enters <strong>Study Mode</strong> using the cards from deck DECK_INDEX.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -332,33 +396,34 @@ Format: <code>export deck FILE_PATH</code></p>
 </div>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.17. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
-<p>Format: <code>study INDEX</code></p>
+<p><strong>Format</strong>: <code>clear</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Clears all entries in TopDeck</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.14. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.18. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
-<p>Clears all entries in TopDeck.<br>
-Format: <code>clear</code></p>
+<p><strong>Format</strong>: <code>exit</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Exits the program</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.15. Exiting the program : <code>exit</code></a></h3>
-<div class="paragraph">
-<p>Exits the program.<br>
-Format: <code>exit</code></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.16. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.19. Saving the data</a></h3>
 <div class="paragraph">
 <p>TopDeck data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.17. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.20. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
@@ -370,54 +435,21 @@ There is no need to save manually.</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
-<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.</p>
+<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TopDeck folder.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="command-summary"><a class="link" href="#command-summary">5. Command Summary</a></h2>
+<h2 id="glossary"><a class="link" href="#glossary">5. Glossary</a></h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Add</strong> <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague</code></p>
-</li>
-<li>
-<p><strong>Clear</strong> : <code>clear</code></p>
-</li>
-<li>
-<p><strong>Delete</strong> : <code>delete INDEX</code><br>
-e.g. <code>delete 3</code></p>
-</li>
-<li>
-<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>edit 2 n/James Lee e/jameslee@example.com</code></p>
-</li>
-<li>
-<p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code><br>
-e.g. <code>find James Jake</code></p>
-</li>
-<li>
-<p><strong>List</strong> : <code>list</code></p>
-</li>
-<li>
-<p><strong>Help</strong> : <code>help</code></p>
-</li>
-<li>
-<p><strong>Select</strong> : <code>select INDEX</code><br>
-e.g.<code>select 2</code></p>
-</li>
-<li>
-<p><strong>History</strong> : <code>history</code></p>
-</li>
-<li>
-<p><strong>Undo</strong> : <code>undo</code></p>
-</li>
-<li>
-<p><strong>Redo</strong> : <code>redo</code></p>
-</li>
-</ul>
+<div class="paragraph">
+<p><strong>Card</strong>: An object that contains questions on one side and answer on the flip slide. During study mode, one side of the card is shown. Once you&#8217;ve locked in your answer, you can choose when to reveal the opposite side.</p>
+</div>
+<div class="paragraph">
+<p><strong>Deck</strong>: A collection of cards</p>
+</div>
+<div class="paragraph">
+<p><strong>Undoable commands</strong>: These are commands that can be undone with the <code>undo</code> command. All commands are undoable commands, with the exception of the following: <code>help</code>, <code>study</code>, <code>undo</code>, <code>redo</code></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-08 18:15:07 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-12 03:50:12 UTC</div></div></div></body></html>
