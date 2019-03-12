@@ -37,7 +37,7 @@ public class LogicManager implements Logic {
         history = new CommandHistory();
         topDeckParser = new TopDeckParser();
 
-        // Set topDeckModified to true whenever the models' address book is modified.
+        // Set topDeckModified to true whenever the models' top deck is modified.
         model.getTopDeck().addListener(observable -> topDeckModified = true);
     }
 
@@ -55,7 +55,7 @@ public class LogicManager implements Logic {
         }
 
         if (topDeckModified) {
-            logger.info("Address book modified, saving to file.");
+            logger.info("TopDeck modified, saving to file.");
             try {
                 storage.saveTopDeck(model.getTopDeck());
             } catch (IOException ioe) {

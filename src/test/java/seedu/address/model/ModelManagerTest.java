@@ -19,7 +19,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.deck.Card;
-import seedu.address.model.deck.NameContainsKeywordsPredicate;
+import seedu.address.model.deck.QuestionContainsKeywordsPredicate;
 import seedu.address.model.deck.exceptions.CardNotFoundException;
 import seedu.address.testutil.CardBuilder;
 import seedu.address.testutil.TopDeckBuilder;
@@ -173,7 +173,7 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ADDITION.getQuestion().split("\\s+");
-        modelManager.updateFilteredCardList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredCardList(new QuestionContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(topDeck, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

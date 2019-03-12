@@ -11,21 +11,21 @@ import org.junit.Test;
 
 import seedu.address.testutil.CardBuilder;
 
-public class NameContainsKeywordsPredicateTest {
+public class QuestionContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        NameContainsKeywordsPredicate firstPredicate = new NameContainsKeywordsPredicate(firstPredicateKeywordList);
-        NameContainsKeywordsPredicate secondPredicate = new NameContainsKeywordsPredicate(secondPredicateKeywordList);
+        QuestionContainsKeywordsPredicate firstPredicate = new QuestionContainsKeywordsPredicate(firstPredicateKeywordList);
+        QuestionContainsKeywordsPredicate secondPredicate = new QuestionContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        NameContainsKeywordsPredicate firstPredicateCopy = new NameContainsKeywordsPredicate(firstPredicateKeywordList);
+        QuestionContainsKeywordsPredicate firstPredicateCopy = new QuestionContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -41,34 +41,34 @@ public class NameContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
+        QuestionContainsKeywordsPredicate predicate = new QuestionContainsKeywordsPredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new CardBuilder().withQuestion("Alice Bob").build()));
 
         // Multiple keywords
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
+        predicate = new QuestionContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
         assertTrue(predicate.test(new CardBuilder().withQuestion("Alice Bob").build()));
 
         // Only one matching keyword
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
+        predicate = new QuestionContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
         assertTrue(predicate.test(new CardBuilder().withQuestion("Alice Carol").build()));
 
         // Mixed-case keywords
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
+        predicate = new QuestionContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
         assertTrue(predicate.test(new CardBuilder().withQuestion("Alice Bob").build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.emptyList());
+        QuestionContainsKeywordsPredicate predicate = new QuestionContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new CardBuilder().withQuestion("Alice").build()));
 
         // Non-matching keyword
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Carol"));
+        predicate = new QuestionContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new CardBuilder().withQuestion("Alice Bob").build()));
 
         // Keywords match answer but does not match question
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345"));
+        predicate = new QuestionContainsKeywordsPredicate(Arrays.asList("12345"));
         assertFalse(predicate.test(new CardBuilder().withQuestion("Alice").withAnswer("12345").build()));
     }
 }
