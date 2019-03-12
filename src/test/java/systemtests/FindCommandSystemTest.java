@@ -32,6 +32,7 @@ public class FindCommandSystemTest extends TopDeckSystemTest {
         String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_HTTP + "   ";
         Model expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, LAYER, TRANSPORT, OK_STATUS); // first names of Benson and Daniel are "Meier"
+
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -120,6 +121,7 @@ public class FindCommandSystemTest extends TopDeckSystemTest {
         /* Case: find tags of card in deck -> 0 cards found */
         List<Tag> tags = new ArrayList<>(TRANSPORT.getTags());
         command = FindCommand.COMMAND_WORD + " " + tags.get(0).tagName;
+        ModelHelper.setFilteredList(expectedModel, OK_STATUS);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
