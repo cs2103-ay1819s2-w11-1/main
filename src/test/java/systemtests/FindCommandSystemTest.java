@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.TypicalCards.HELLO_WORLD;
 import static seedu.address.testutil.TypicalCards.KEYWORD_MATCHING_HTTP;
 import static seedu.address.testutil.TypicalCards.LAYER;
+import static seedu.address.testutil.TypicalCards.OK_STATUS;
 import static seedu.address.testutil.TypicalCards.TRANSPORT;
 
 import java.util.ArrayList;
@@ -26,11 +27,11 @@ public class FindCommandSystemTest extends TopDeckSystemTest {
     @Test
     public void find() {
         /* Case: find multiple cards in deck, command with leading spaces and trailing spaces
-         * -> 2 cards found
+         * -> 3 cards found
          */
         String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_HTTP + "   ";
         Model expectedModel = getModel();
-        ModelHelper.setFilteredList(expectedModel, LAYER, TRANSPORT); // first names of Benson and Daniel are "Meier"
+        ModelHelper.setFilteredList(expectedModel, LAYER, TRANSPORT, OK_STATUS); // first names of Benson and Daniel are "Meier"
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -42,7 +43,7 @@ public class FindCommandSystemTest extends TopDeckSystemTest {
         assertSelectedCardUnchanged();
 
         /* Case: find card where card list is not displaying the card we are finding -> 1 card found */
-        command = FindCommand.COMMAND_WORD + " Hello?";
+        command = FindCommand.COMMAND_WORD + " Hello";
         ModelHelper.setFilteredList(expectedModel, HELLO_WORLD);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
@@ -80,12 +81,12 @@ public class FindCommandSystemTest extends TopDeckSystemTest {
         expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
-        /* Case: find same cards in deck after deleting 1 of them -> 1 card found */
+        /* Case: find same cards in deck after deleting 1 of them -> 2 card found */
         executeCommand(DeleteCommand.COMMAND_WORD + " 1");
         assertFalse(getModel().getTopDeck().getCardList().contains(LAYER));
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_HTTP;
         expectedModel = getModel();
-        ModelHelper.setFilteredList(expectedModel, TRANSPORT);
+        ModelHelper.setFilteredList(expectedModel, TRANSPORT, OK_STATUS);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
