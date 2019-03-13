@@ -56,7 +56,7 @@ public class UniqueCardList implements Iterable<Card> {
      */
     public void add(Card toAdd, Index targetIndex) {
         requireNonNull(toAdd);
-        if (contains(toAdd) {
+        if (contains(toAdd)) {
             throw new DuplicateCardException();
         }
         internalList.add(targetIndex.getZeroBased(), toAdd);
