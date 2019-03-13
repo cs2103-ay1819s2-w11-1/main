@@ -53,7 +53,7 @@ public class SelectCommand extends Command {
                 && targetIndex.equals(((SelectCommand) other).targetIndex)); // state check
     }
 
-    public Command inverse(Model model){
+    public Command inverse(Model model) {
         return this;
     }
 }

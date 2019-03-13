@@ -28,7 +28,7 @@ public class RedoCommand extends Command {
         model.updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
-    public Command inverse(Model model){
+    public Command inverse(Model model) {
         return this;
     }
 }

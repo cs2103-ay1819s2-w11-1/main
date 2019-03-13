@@ -20,7 +20,7 @@ public class HelpCommand extends Command {
         return new HelpCommandResult(SHOWING_HELP_MESSAGE);
     }
 
-    public Command inverse(Model model){
+    public Command inverse(Model model) {
         return this;
     }
 }
