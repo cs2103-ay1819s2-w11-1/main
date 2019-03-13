@@ -41,7 +41,7 @@ public class FindCommand extends Command {
                 && predicate.equals(((FindCommand) other).predicate)); // state check
     }
 
-    public Command inverse(Model model){
+    public Command inverse(Model model) {
         return this;
     }
 }

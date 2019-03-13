@@ -54,7 +54,7 @@ public class DeleteCommand extends Command {
                 || (other instanceof DeleteCommand // instanceof handles nulls
                 && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
     }
-    public Command inverse(Model model){
+    public Command inverse(Model model) {
         return new AddCommand(cardToDelete, targetIndex);
     }
 }

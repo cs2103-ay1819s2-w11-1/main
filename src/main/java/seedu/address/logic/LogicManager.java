@@ -57,7 +57,7 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         try {
             Command command = topDeckParser.parseCommand(commandText);
-            if(command instanceof ReverseCommand){
+            if (command instanceof ReverseCommand) {
                 if (!commandIterator.hasPrevious()) {
                     throw new CommandException("No commands to reverse");
                 }

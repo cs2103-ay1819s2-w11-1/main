@@ -218,7 +218,7 @@ public class EditCommand extends Command {
         }
     }
 
-    public Command inverse(Model model){
+    public Command inverse(Model model) {
         return this;
     }
 }

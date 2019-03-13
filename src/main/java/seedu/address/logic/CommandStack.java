@@ -11,8 +11,8 @@ import seedu.address.logic.commands.Command;
  * Stores the history of command (together with its inverse) executed by the user.
  */
 public class CommandStack {
-    private final ObservableList<Pair<Command,Command>> userCommandHistory = FXCollections.observableArrayList();
-    private final ObservableList<Pair<Command,Command>> unmodifiableUserCommandHistory =
+    private final ObservableList<Pair<Command, Command>> userCommandHistory = FXCollections.observableArrayList();
+    private final ObservableList<Pair<Command, Command>> unmodifiableUserCommandHistory =
             FXCollections.unmodifiableObservableList(userCommandHistory);
 
 
@@ -35,7 +35,7 @@ public class CommandStack {
     /**
      * Returns an unmodifiable view of {@code userCommandHistory}.
      */
-    public ObservableList<Pair<Command,Command>> getCommandHistory() {
+    public ObservableList<Pair<Command, Command>> getCommandHistory() {
         return unmodifiableUserCommandHistory;
     }
 

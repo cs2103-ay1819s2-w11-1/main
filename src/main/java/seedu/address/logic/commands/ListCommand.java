@@ -23,7 +23,7 @@ public class ListCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
-    public Command inverse(Model model){
+    public Command inverse(Model model) {
         return this;
     }
 }

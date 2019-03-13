@@ -18,7 +18,7 @@ public class ReverseCommand extends Command {
         throw new CommandException(MESSAGE_FAILURE);
     }
 
-    public Command inverse(Model model){
+    public Command inverse(Model model) {
         return this;
     }
 }
