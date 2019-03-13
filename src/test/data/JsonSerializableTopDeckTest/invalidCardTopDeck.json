@@ -1,0 +1,7 @@
+{
+  "cards": [ {
+    "question": "Is there any invalid question or answers?",
+    "answer": "No",
+    "tagged": [ "bad*tag" ]
+  } ]
+}

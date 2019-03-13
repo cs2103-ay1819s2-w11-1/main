@@ -34,9 +34,9 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new PrefillCommandBoxCommandResult("feedback", "a")));
 
         // PrefillCommandBoxCommandResult with different fields -> returns false
-        CommandResult PrefillCommandBoxCommandResult1 = new PrefillCommandBoxCommandResult("feedback", "a");
-        CommandResult PrefillCommandBoxCommandResult2 = new PrefillCommandBoxCommandResult("feedback", "b");
-        assertFalse(PrefillCommandBoxCommandResult1.equals(PrefillCommandBoxCommandResult2));
+        CommandResult prefillCommandBoxCommandResult1 = new PrefillCommandBoxCommandResult("feedback", "a");
+        CommandResult prefillCommandBoxCommandResult2 = new PrefillCommandBoxCommandResult("feedback", "b");
+        assertFalse(prefillCommandBoxCommandResult1.equals(prefillCommandBoxCommandResult2));
     }
 
     @Test
@@ -59,8 +59,8 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new PrefillCommandBoxCommandResult("feedback", "a").hashCode());
 
         // PrefillCommandBoxCommandResult with different fields -> returns different hashcode
-        CommandResult PrefillCommandBoxCommandResult1 = new PrefillCommandBoxCommandResult("feedback", "a");
-        CommandResult PrefillCommandBoxCommandResult2 = new PrefillCommandBoxCommandResult("feedback", "b");
-        assertNotEquals(PrefillCommandBoxCommandResult1.hashCode(), PrefillCommandBoxCommandResult2.hashCode());
+        CommandResult prefillCommandBoxCommandResult1 = new PrefillCommandBoxCommandResult("feedback", "a");
+        CommandResult prefillCommandBoxCommandResult2 = new PrefillCommandBoxCommandResult("feedback", "b");
+        assertNotEquals(prefillCommandBoxCommandResult1.hashCode(), prefillCommandBoxCommandResult2.hashCode());
     }
 }

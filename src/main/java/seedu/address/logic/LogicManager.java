@@ -14,11 +14,11 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ReverseCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.TopDeckParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.ReadOnlyTopDeck;
+import seedu.address.model.deck.Card;
 import seedu.address.storage.Storage;
 
 /**
@@ -33,8 +33,9 @@ public class LogicManager implements Logic {
     private final CommandHistory history;
     private final CommandStack commandStack;
     private ListIterator<Pair<Command, Command>> commandIterator;
-    private final AddressBookParser addressBookParser;
-    private boolean addressBookModified;
+    private final TopDeckParser topDeckParser;
+    private boolean topDeckModified;
+
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
@@ -42,20 +43,20 @@ public class LogicManager implements Logic {
         history = new CommandHistory();
         commandStack = new CommandStack();
         commandIterator = commandStack.getCommandHistory().listIterator();
-        addressBookParser = new AddressBookParser();
+        topDeckParser = new TopDeckParser();
 
-        // Set addressBookModified to true whenever the models' address book is modified.
-        model.getAddressBook().addListener(observable -> addressBookModified = true);
+        // Set topDeckModified to true whenever the models' address book is modified.
+        model.getTopDeck().addListener(observable -> topDeckModified = true);
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-        addressBookModified = false;
+        topDeckModified = false;
 
         CommandResult commandResult;
         try {
-            Command command = addressBookParser.parseCommand(commandText);
+            Command command = topDeckParser.parseCommand(commandText);
             if(command instanceof ReverseCommand){
                 if (!commandIterator.hasPrevious()) {
                     throw new CommandException("No commands to reverse");
@@ -68,15 +69,14 @@ public class LogicManager implements Logic {
                 commandStack.add(command, inverseCommand);
                 commandIterator.next();
             }
-
         } finally {
             history.add(commandText);
         }
 
-        if (addressBookModified) {
+        if (topDeckModified) {
             logger.info("Address book modified, saving to file.");
             try {
-                storage.saveAddressBook(model.getAddressBook());
+                storage.saveTopDeck(model.getTopDeck());
             } catch (IOException ioe) {
                 throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
             }
@@ -86,13 +86,13 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyTopDeck getTopDeck() {
+        return model.getTopDeck();
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Card> getFilteredCardList() {
+        return model.getFilteredCardList();
     }
 
     @Override
@@ -101,13 +101,14 @@ public class LogicManager implements Logic {
     }
 
     @Override
+
     public ObservableList<Pair<Command, Command>> getCommandHistory() {
         return commandStack.getCommandHistory();
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getTopDeckFilePath() {
+        return model.getTopDeckFilePath();
     }
 
     @Override
@@ -121,12 +122,12 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyProperty<Person> selectedPersonProperty() {
-        return model.selectedPersonProperty();
+    public ReadOnlyProperty<Card> selectedCardProperty() {
+        return model.selectedCardProperty();
     }
 
     @Override
-    public void setSelectedPerson(Person person) {
-        model.setSelectedPerson(person);
+    public void setSelectedCard(Card card) {
+        model.setSelectedCard(card);
     }
 }

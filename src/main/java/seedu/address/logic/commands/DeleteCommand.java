@@ -9,24 +9,24 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.deck.Card;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a card identified using it's displayed index from the deck.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the card identified by the index number used in the displayed card list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_CARD_SUCCESS = "Deleted Card: %1$s";
 
     private Index targetIndex;
-    private Person personToDelete;
+    private Card cardToDelete;
 
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -35,16 +35,17 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Card> lastShownList = model.getFilteredCardList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
         }
 
-        personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        cardToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteCard(cardToDelete);
+        model.commitTopDeck();
+        return new CommandResult(String.format(MESSAGE_DELETE_CARD_SUCCESS, cardToDelete));
+
     }
 
     @Override
@@ -54,6 +55,6 @@ public class DeleteCommand extends Command {
                 && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
     }
     public Command inverse(Model model){
-        return new AddCommand(personToDelete, targetIndex);
+        return new AddCommand(cardToDelete, targetIndex);
     }
 }

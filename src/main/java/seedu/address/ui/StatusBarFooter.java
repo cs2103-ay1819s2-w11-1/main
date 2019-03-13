@@ -8,7 +8,7 @@ import java.util.Date;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTopDeck;
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.
@@ -18,7 +18,7 @@ public class StatusBarFooter extends UiPart<Region> {
     public static final String SYNC_STATUS_INITIAL = "Not updated yet in this session";
     public static final String SYNC_STATUS_UPDATED = "Last Updated: %s";
 
-    public static final String TOTAL_PERSONS_STATUS = "%d person(s) total";
+    public static final String TOTAL_CARDS_STATUS = "%d card(s) total";
 
     /**
      * Used to generate time stamps.
@@ -35,17 +35,17 @@ public class StatusBarFooter extends UiPart<Region> {
     @FXML
     private Label syncStatus;
     @FXML
-    private Label totalPersonsStatus;
+    private Label totalCardsStatus;
     @FXML
     private Label saveLocationStatus;
 
 
-    public StatusBarFooter(Path saveLocation, ReadOnlyAddressBook addressBook) {
+    public StatusBarFooter(Path saveLocation, ReadOnlyTopDeck topDeck) {
         super(FXML);
-        addressBook.addListener(observable -> updateSyncStatus());
-        addressBook.addListener(observable -> updateTotalPersonsStatus((ReadOnlyAddressBook) observable));
+        topDeck.addListener(observable -> updateSyncStatus());
+        topDeck.addListener(observable -> updateTotalCardsStatus((ReadOnlyTopDeck) observable));
         syncStatus.setText(SYNC_STATUS_INITIAL);
-        updateTotalPersonsStatus(addressBook);
+        updateTotalCardsStatus(topDeck);
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
     }
 
@@ -73,11 +73,11 @@ public class StatusBarFooter extends UiPart<Region> {
     }
 
     /**
-     * Updates person count in the status bar to the actual count.
+     * Updates card count in the status bar to the actual count.
      */
-    private void updateTotalPersonsStatus(ReadOnlyAddressBook addressBook) {
-        int personsCount = addressBook.getPersonList().size();
-        totalPersonsStatus.setText(String.format(TOTAL_PERSONS_STATUS, personsCount));
+    private void updateTotalCardsStatus(ReadOnlyTopDeck topDeck) {
+        int personsCount = topDeck.getCardList().size();
+        totalCardsStatus.setText(String.format(TOTAL_CARDS_STATUS, personsCount));
     }
 
 }

@@ -1,0 +1,11 @@
+{
+  "cards": [ {
+    "question": "Duplicate question?",
+    "answer": "Duplicate answer!",
+    "tagged": [ "tag1", "tag2" ]
+  }, {
+    "question": "Duplicate question?",
+    "answer": "Duplicate answer!",
+    "tagged": [ "tag1", "tag2" ]
+  } ]
+}

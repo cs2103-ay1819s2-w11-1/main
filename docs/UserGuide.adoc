@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/cs2103-ay1819s2-w11-1/main/
 
-By: `W11-1`      Since: `Feb 2018`      Licence: `MIT`
+By: `W11-1`      Since: `Feb 2019`      Licence: `MIT`
 
 == Introduction
 
@@ -26,7 +26,7 @@ have been looking for, then jump to <<Quick Start>> to get started. Enjoy!
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
+.  Download the latest `topdeck.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Address Book.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
@@ -37,8 +37,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`index`* : lists all cards
-* **`add`**`add card f/Capital of Hawaii b/Honolulu` : creates a card for this trivia and adds it onto the Deck.
-* **`delete`**`3` : deletes the 3rd card shown in the current list
+* **`deck add`**`Capitals`  creates a deck entitled "Capitals"
+* **`deck delete`**`3` : deletes the 3rd deck shown in the current list
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -49,61 +49,93 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add f/QUESTION b/ANSWER`, `QUESTION` is a parameter which can be used as `add f/Powerhouse of the cell b/Mitochondria`.
-* Items in square brackets are optional e.g `f/QUESTION b/ANSWER [t/TAG]` can be used as `f/Powerhouse of the cell b/Mitochondria t/biology` or as `f/Powerhouse of the cell b/Mitochondria`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `f/QUESTION b/ANSWER`, `f/QUESTION b/ANSWER` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add q/QUESTION a/ANSWER`, `QUESTION` is a parameter which can be used as `add q/Honduras a/Tegucigalpa`.
+* Items in square brackets are optional e.g `f/QUESTION b/ANSWER [t/TAG]` can be used as `q/China a/Beijing t/Asia` or as `q/China a/Beijing`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/Asia`, `t/trivia t/history` etc.
+* Parameters can be in any order e.g. if the command specifies `q/QUESTION a/ANSWER`, `q/QUESTION a/ANSWER` is also acceptable.
 ====
 
 === Viewing help : `help`
 
-Format: `help`
+**Format**: `help`
 
-=== Creating a deck: `deck new`
+**Outcome**: Displays information regarding commands
 
-Format: `deck new DECK_NAME`
+=== Creating a deck: `deck add`
+
+**Format**: `deck add DECK_NAME`
+
+**Outcome**: Creates new deck called DECK_NAME
 
 === Deleting a deck: `deck delete`
 
-Format: `deck delete DECK_NAME`
+**Format**: `deck delete DECK_INDEX`
+
+**Outcome**: Deletes deck at index DECK_INDEX
+
+=== Deleting a deck: `deck find`
+
+**Format**: `deck find KEYWORD`
+
+**Outcome**: Lists all decks containing that keyword in its name
 
 === Listing all decks: `list`
 
-Shows a list of all decks in TopDeck +
-Format: `list`
+**Format**: `list`
+
+**Outcome**: Displays list of all decks. Deselects the current deck
 
 === Selecting a deck: `select`
 
-Selects a deck and lists its card in the right pane. +
-Format: `select INDEX`
+**Format**: `select DECK_INDEX`
+
+**Outcome**: Selects deck to to enable you to manage the cards inside
 
 ****
-* Selects the deck at the specified `INDEX`. The index refers to the index number shown in the displayed deck list. The index *must be a positive integer* 1, 2, 3...
+* The index refers to the index number shown in the displayed deck list. The index *must be a positive integer* 1, 2, 3...
 ****
 
-=== Adding card to selected deck: `add card`
+=== Adding card to selected deck: `card add`
 
-Creates and adds a card to selected deck. +
-Format: `card add f/FRONT_TEXT b/BACK_TEXT`
+**Format**: `card add q/QUESTION a/ANSWER`
+
+**Outcome**: Creates and adds a new card containing QUESTION in front and ANSWER at the back onto selected deck
 
 [NOTE]
 ====
 A deck must be selected before this command is called.
 ====
 
-Examples:
+=== Editing card: `card edit`
 
-* `add card f/Are you curious about the app b/yes!`
+**Format**: `card edit CARD_INDEX q/QUESTION a/ANSWER`
+
+**Outcome**: Edits card at CARD_INDEX to change either the question or the answer or both
+
+=== Finding card: `card find`
+
+**Format**: `card find KEYWORD`
+
+**Outcome**: Lists down all cards containing keyword
+
+[NOTE]
+====
+When this command is called while a deck is selected, search results are limited to the results from that deck.
+====
+
 
 === Deleting card in the selected deck: `card delete`
 
-Deletes a card in the selected deck. +
-Format: `card delete INDEX`
+
+**Format**: `card delete CARD_INDEX`
+
+**Outcome**: Deletes the card at CARD_INDEX
 
 === Listing entered commands : `history`
 
-Lists all the commands that you have entered in reverse chronological order. +
-Format: `history`
+**Format**: `history`
+
+**Outcome**: Lists all the commands that you have entered in reverse chronological order
 
 [NOTE]
 ====
@@ -113,29 +145,33 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 // tag::undoredo[]
 === Undoing previous command : `undo`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
-Format: `undo`
+
+**Format**: `undo`
+
+**Outcome**: Restores the address book to the state before the previous _undoable_ command was executed.
 
 [NOTE]
 ====
 Undoable commands: You are not able to undo a study session.
 ====
 
-Examples:
+**Example usage**:
 
 * `card delete 1` +
 `list` +
 `undo` (reverses the `card delete 1` command) +
 
 * `card delete 1` +
-`card add f/hello b/world` +
-`undo` (reverses the `card delete` command) +
+`card add q/Russia a/Moscow` +
 `undo` (reverses the `card add` command) +
+`undo` (reverses the `card delete` command) +
 
 === Redoing the previously undone command : `redo`
 
-Reverses the most recent `undo` command. +
-Format: `redo`
+
+**Format**: `redo`
+
+**Outcome**: Reverses the most recent `undo` command
 
 Examples:
 
@@ -148,7 +184,7 @@ Examples:
 The `redo` command fails as there are no `undo` commands executed previously.
 
 * `card delete 1` +
-`card add f/hello b/world` +
+`card add q/Panama a/Panama` +
 `undo` (reverses the `card add` command) +
 `undo` (reverses the `card delete` command) +
 `redo` (reapplies the `card delete` command) +
@@ -157,34 +193,42 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Importing a deck: `import deck`
 
-Imports a deck from the given filepath. +
-Format: `import deck FILE_PATH`
+
+**Format**: `import deck FILE_PATH`
+
+**Outcome**: Imports a deck from the given filepath
 
 === Exporting a deck: `export deck`
 
-Exports a deck to the given filepath. +
-Format: `export deck FILE_PATH`
+**Format**: `export deck FILE_PATH`
+
+**Outcome**: Exports a deck to the given filepath
 
 === Studying a deck: `study`
 
-Studies a chosen deck. +
+**Format**: `study DECK_INDEX`
+
+**Outcome**: Enters **Study Mode** using the cards from deck DECK_INDEX.
 
 ****
 * If `INDEX` is not given, defaults to the selected deck.
 * Enters Study Mode which responds to a different set of commands.
 ****
 
-Format: `study INDEX`
+
 
 === Clearing all entries : `clear`
 
-Clears all entries in TopDeck. +
-Format: `clear`
+**Format**: `clear`
+
+**Outcome**: Clears all entries in TopDeck
 
 === Exiting the program : `exit`
 
-Exits the program. +
-Format: `exit`
+**Format**: `exit`
+
+**Outcome**: Exits the program
+
 
 === Saving the data
 
@@ -200,23 +244,13 @@ _{explain how the user can enable/disable data encryption}_
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TopDeck folder.
 
-== Command Summary
+== Glossary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
+**Card**: An object that contains questions on one side and answer on the flip slide. During study mode, one side of the card is shown. Once you've locked in your answer, you can choose when to reveal the opposite side.
+
+**Deck**: A collection of cards
+
+**Undoable commands**: These are commands that can be undone with the `undo` command. All commands are undoable commands, with the exception of the following: `help`, `study`, `undo`, `redo`
+

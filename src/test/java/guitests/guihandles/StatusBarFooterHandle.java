@@ -10,7 +10,7 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
     public static final String STATUS_BAR_PLACEHOLDER = "#statusbarPlaceholder";
 
     private static final String SYNC_STATUS_ID = "#syncStatus";
-    private static final String TOTAL_PERSONS_STATUS_ID = "#totalPersonsStatus";
+    private static final String TOTAL_PERSONS_STATUS_ID = "#totalCardsStatus";
     private static final String SAVE_LOCATION_STATUS_ID = "#saveLocationStatus";
 
     private final Labeled syncStatusNode;

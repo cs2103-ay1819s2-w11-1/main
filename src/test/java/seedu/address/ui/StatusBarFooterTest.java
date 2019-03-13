@@ -1,10 +1,10 @@
 package seedu.address.ui;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalCards.ADDITION;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
-import static seedu.address.ui.StatusBarFooter.TOTAL_PERSONS_STATUS;
+import static seedu.address.ui.StatusBarFooter.TOTAL_CARDS_STATUS;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,7 +19,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import guitests.guihandles.StatusBarFooterHandle;
-import seedu.address.model.AddressBook;
+import seedu.address.model.TopDeck;
 
 public class StatusBarFooterTest extends GuiUnitTest {
 
@@ -32,7 +32,7 @@ public class StatusBarFooterTest extends GuiUnitTest {
     private static final Clock injectedClock = Clock.fixed(Instant.now(), ZoneId.systemDefault());
 
     private StatusBarFooterHandle statusBarFooterHandle;
-    private final AddressBook addressBook = new AddressBook();
+    private final TopDeck topDeck = new TopDeck();
 
     @BeforeClass
     public static void setUpBeforeClass() {
@@ -48,7 +48,7 @@ public class StatusBarFooterTest extends GuiUnitTest {
 
     @Before
     public void setUp() {
-        StatusBarFooter statusBarFooter = new StatusBarFooter(STUB_SAVE_LOCATION, addressBook);
+        StatusBarFooter statusBarFooter = new StatusBarFooter(STUB_SAVE_LOCATION, topDeck);
         uiPartRule.setUiPart(statusBarFooter);
 
         statusBarFooterHandle = new StatusBarFooterHandle(statusBarFooter.getRoot());
@@ -58,13 +58,13 @@ public class StatusBarFooterTest extends GuiUnitTest {
     public void display() {
         // initial state
         assertStatusBarContent(RELATIVE_PATH.resolve(STUB_SAVE_LOCATION).toString(), SYNC_STATUS_INITIAL,
-                String.format(TOTAL_PERSONS_STATUS, INITIAL_TOTAL_PERSONS));
+                String.format(TOTAL_CARDS_STATUS, INITIAL_TOTAL_PERSONS));
 
         // after address book is updated
-        guiRobot.interact(() -> addressBook.addPerson(ALICE));
+        guiRobot.interact(() -> topDeck.addCard(ADDITION));
         assertStatusBarContent(RELATIVE_PATH.resolve(STUB_SAVE_LOCATION).toString(),
                 String.format(SYNC_STATUS_UPDATED, new Date(injectedClock.millis()).toString()),
-                String.format(TOTAL_PERSONS_STATUS, addressBook.getPersonList().size()));
+                String.format(TOTAL_CARDS_STATUS, topDeck.getCardList().size()));
     }
 
     /**

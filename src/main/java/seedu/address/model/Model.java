@@ -7,14 +7,14 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.person.Person;
+import seedu.address.model.deck.Card;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Card> PREDICATE_SHOW_ALL_CARDS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -39,100 +39,99 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getTopDeckFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setTopDeckFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces TopDeck data with the data in {@code topDeck}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setTopDeck(ReadOnlyTopDeck topDeck);
 
     /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyTopDeck getTopDeck();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a card with the same identity as {@code card} exists in the deck.
      */
-    boolean hasPerson(Person person);
+    boolean hasCard(Card card);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given card.
+     * The card must exist in the deck.
      */
-    void deletePerson(Person target);
+    void deleteCard(Card target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given card.
+     * {@code card} must not already exist in the deck.
      */
-    void addPerson(Person person);
+    void addCard(Card card);
 
     /**
      * Adds the given person at a certain index.
      * {@code person} must not already exist in the address book.
      */
-    void addPerson(Person person, Index index);
-
+    void addCard(Card card, Index index);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given card {@code target} with {@code editedCard}.
+     * {@code target} must exist in the deck.
+     * The card identity of {@code editedCard} must not be the same as another existing card in the deck.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setCard(Card target, Card editedCard);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered card list */
+    ObservableList<Card> getFilteredCardList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered card list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredCardList(Predicate<Card> predicate);
 
     /**
-     * Returns true if the model has previous address book states to restore.
+     * Returns true if the model has previous TopDeck states to restore.
      */
-    boolean canUndoAddressBook();
+    boolean canUndoTopDeck();
 
     /**
-     * Returns true if the model has undone address book states to restore.
+     * Returns true if the model has undone TopDeck states to restore.
      */
-    boolean canRedoAddressBook();
+    boolean canRedoTopDeck();
 
     /**
-     * Restores the model's address book to its previous state.
+     * Restores the model's TopDeck to its previous state.
      */
-    void undoAddressBook();
+    void undoTopDeck();
 
     /**
-     * Restores the model's address book to its previously undone state.
+     * Restores the model's TopDeck to its previously undone state.
      */
-    void redoAddressBook();
+    void redoTopDeck();
 
     /**
-     * Saves the current address book state for undo/redo.
+     * Saves the current TopDeck state for undo/redo.
      */
-    void commitAddressBook();
+    void commitTopDeck();
 
     /**
-     * Selected person in the filtered person list.
-     * null if no person is selected.
+     * Selected card in the filtered card list.
+     * null if no card is selected.
      */
-    ReadOnlyProperty<Person> selectedPersonProperty();
+    ReadOnlyProperty<Card> selectedCardProperty();
 
     /**
-     * Returns the selected person in the filtered person list.
-     * null if no person is selected.
+     * Returns the selected card in the filtered card list.
+     * null if no card is selected.
      */
-    Person getSelectedPerson();
+    Card getSelectedCard();
 
     /**
-     * Sets the selected person in the filtered person list.
+     * Sets the selected card in the filtered card list.
      */
-    void setSelectedPerson(Person person);
+    void setSelectedCard(Card card);
 }
