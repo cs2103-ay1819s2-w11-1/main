@@ -21,14 +21,14 @@ public class TagUtil {
     public static boolean containsWordInTags(Set<Tag> tags, String word) {
         requireNonNull(word);
 
-        String preppedWord = word.trim();
+        String preppedWord = word.trim().toLowerCase();
         if (preppedWord.split("\\s+").length > 1) {
             return false;
         }
 
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
 
-        return tags.stream().map(tag -> tag.tagName)
+        return tags.stream().map(tag -> tag.tagName.toLowerCase())
             .anyMatch(preppedWord::equalsIgnoreCase);
     }
 }

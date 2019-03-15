@@ -6,7 +6,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
-import java.util.Set;
 
 /**
  * Helper functions for handling strings.
@@ -23,18 +22,26 @@ public class StringUtil {
      *       containsWordIgnoreCase("ABc def?", "def") == true
      *       </pre>
      * @param sentence cannot be null
+     * @param keyword
      */
-    public static boolean containsWordIgnoreCase(String sentence, String word) {
+    public static boolean containsWordIgnoreCase(String sentence, String keyword) {
         requireNonNull(sentence);
-        requireNonNull(word);
+        requireNonNull(keyword);
 
-        String preppedWord = word.trim();
+        String preppedWord = keyword.toLowerCase().trim();
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
 
-        String preppedSentence = sentence;
-        preppedSentence = preppedSentence.replaceAll("[\\.|\\?]", "");
+        String preppedSentence = sentence.toLowerCase().replaceAll("[\\.|\\?]", "");
 
-        return preppedSentence.contains(word);
+        if (!preppedSentence.contains(preppedWord)) {
+            return false;
+        }
+
+        return Arrays.stream(preppedWord.split("\\s+")).allMatch(
+            key -> Arrays.stream(preppedSentence.split("\\s+")).anyMatch(
+                sentenceWord -> sentenceWord.equals(key)
+            )
+        );
     }
 
     /**

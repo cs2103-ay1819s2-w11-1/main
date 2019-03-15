@@ -147,7 +147,7 @@ public abstract class TopDeckSystemTest {
      * Displays all cards with any parts of their questions matching {@code keyword} (case-insensitive).
      */
     protected void showCardsWithQuestion(String keyword) {
-        executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
+        executeCommand(FindCommand.COMMAND_WORD + " \"" + keyword + "\"");
         assertTrue(getModel().getFilteredCardList().size() < getModel().getTopDeck().getCardList().size());
     }
 
