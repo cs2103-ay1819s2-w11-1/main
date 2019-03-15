@@ -2,7 +2,9 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -12,6 +14,8 @@ import seedu.address.model.deck.QuestionContainsKeywordsPredicate;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
+
+    private final String IN_BETWEEN_QUOTES_REGEX = "\"([^\"]*)\"";
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -25,9 +29,23 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        ArrayList<String> questionKeywords = new ArrayList<>();
+        Pattern p = Pattern.compile( IN_BETWEEN_QUOTES_REGEX );
+        Matcher m = p.matcher( trimmedArgs );
+        while( m.find()) {
+            questionKeywords.add(m.group(1));
+        }
 
-        return new FindCommand(new QuestionContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        trimmedArgs = trimmedArgs.replaceAll(IN_BETWEEN_QUOTES_REGEX, "");
+        String[] keyArgs = trimmedArgs.split("\\s+");
+
+        for (String key: keyArgs) {
+            if (!key.isEmpty()) {
+                questionKeywords.add(key);
+            }
+        }
+
+        return new FindCommand(new QuestionContainsKeywordsPredicate(questionKeywords));
     }
 
 }

@@ -23,7 +23,6 @@ public class StringUtil {
      *       containsWordIgnoreCase("ABc def?", "def") == true
      *       </pre>
      * @param sentence cannot be null
-     * @param word cannot be null, cannot be empty, must be a single word
      */
     public static boolean containsWordIgnoreCase(String sentence, String word) {
         requireNonNull(sentence);
@@ -31,15 +30,11 @@ public class StringUtil {
 
         String preppedWord = word.trim();
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
-        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
 
         String preppedSentence = sentence;
         preppedSentence = preppedSentence.replaceAll("[\\.|\\?]", "");
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
-
-        return Arrays.stream(wordsInPreppedSentence)
-                .anyMatch(preppedWord::equalsIgnoreCase);
+        return preppedSentence.contains(word);
     }
 
     /**
