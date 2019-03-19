@@ -230,16 +230,127 @@ This section describes some noteworthy details on how certain features are imple
 
 //tag::studysessions[]
 === Study Sessions feature
+
 ==== Current Implementation
 
 The third ViewState is called `StudyState`.
 
-This state can be accessed when user executes the command `select DECK_NUMBER` and then `study`.
+This state can be accessed when user executes the command `study DECK_NUMBER`
 
 The following commands are supported under the study sessions:
 
-* `close` - Finishes the study sessions and saves user score for each card under.
+Study View supports the following operations:
+* `done`
+* [any other command]
+* [difficulty rating]
 
+==== Data Structure Implementation
+
+The study mechanism is facilitated by `Deck`.
+
+It extends `Model` with a  `cardShown` property, stored internally as an `ReadOnlyProperty` with generic type `Card`.
+Additionally, it implements the following operations:
+
+* `Deck#generateRandomCard()` -- Generates a random index based on the size of UniqueCardList in Deck
+* `TopDeck#commit()` -- Saves the current address book state in its history.
+
+Given below is an example usage scenario and how the `study` mechanism behaves at each step.
+
+Step 1. User enter study mode using `study 1` command.
+
+A `StudyDeck` command is returned after reading the command word, `study`.
+Deck#generateRandomCard() is executed automatically as part of `StudyDeck` execution.
+
+This modifies `cardShown` to a random card based on the index generated.
+The `textShown` property in the UI is also modified right after.
+The `textType` property in the UI is also modified to 0 for question.
+
+Step 2. User executes the `[wildcard]` command to signal that he has come up with the answer.
+
+Step 3. This command calls `Card#getAnswer()`
+This changes the `textShown` property in the UI.
+The `textType` property in the UI is also modified to 1 for answer.
+
+Step 4. User enters the difficulty rating command.
+
+
+==== Design Considerations
+
+===== Aspect: How study view is linked to the UI
+
+* **Alternative 1 (current choice):**
+** Pros: Easy to implement.
+** Cons: UI just changes state based on commands issued.
+* **Alternative 2: (current choice):** Use an event listener to see whether the `textShown` has changed.
+Because it is easy to modify textShown immediately, there is no need for the UI to track this variable as
+that would be costly.
+
+==== UI Implementation
+
+`QuestionPanel` replaces the `ListPanel` when the active `ViewState` in the model is an instance
+of `StudyView`.
+
+`QuestionPanel` only has 1 property which is `textShown` and `textType`.
+The first contains the words which will be shown, whether question or answer.
+
+`textType` contains an enum to specify whether the panel is showing a question or an answer.
+
+// end::studysessions[]
+
+
+=== Card Management
+==== Data Structure Implementation
+
+A Card consists of a question, an answer and the respective tags associated with it.
+Card's are deemed as equal if they have the same question to prevent the user from
+creating same question twice or to have 2 different answer for the same question.
+Within the Model, `Card` is encapsulated by the following data structure:
+
+* `Model`
+* `VersionedTopDeck`
+* `TopDeck`
+* `UniqueDeckList`
+* `Deck`
+* `UniqueCardList`
+* `Card`
+
+The Create, Read, Update and Delete(CRUD) operation will trickle down the encapsulations
+and be executed in `UniqueCardList`. One of the repercussion of having this data structure
+is the need to find the respective deck that the user wants to edit the `UniqueCardList` from.
+Currently, this is done by passing the activeDeck in the `CardView` object in
+model into `UniqueDeckList` to find the deck that we want to edit.
+
+==== Current Implementation
+
+Card Management is currently facilitated by `Deck` which implements the following operations:
+
+* hasCard(Card card)
+* addCard(Card card)
+* removeCard(Card target)
+* editCard(Card newCard)
+* selectCard(Card toSelect)
+
+The CRUD operations are exposed in the Model interface as `Model#addCard(Card card)`,
+`Model#deleteCard(Card toDelete)` and `Model#setCard(Card newCard)`. For each card operation,
+there are 2 main updates that need to be done. The first update will be on the model
+and the second will be on the `ViewState`.
+
+Given below is an example usage scenario and how the addCard(Card) mechanism behaves at each step:
+
+1. The user starts up the application and is in the `DecksView`. The user then
+executes the `select 1` command to select the first deck. This should change the
+`ViewState` in the `ModelManager` from `DeckView` to `CardView`. For more information, refer to
+Deck's feature.
+
+2. The user executes `add q/question a/answer` to add the new card into the current deck.
+The `add` command is parsed and calls `Model#addCard(Card card)`.
+
+3. `Model#addCard(Card card)` first checks if the current state is a
+CardsView. Following, it will pass the current activeDeck and the card to
+be added into `VersionedTopDeck.addCard(Card card, Deck ActiveDeck)`. This will search for the
+currently active deck, add the card into the deck and replace it with the current deck.
+
+4. Once that is done, the filteredItems list is being updated to reflect the change.
 
 
 
