@@ -148,6 +148,17 @@ These are commands are only available in cards view, after a deck has been selec
 
 **Outcome**: Returns to decks view.
 
+
+=== Study View
+
+These are commands are only available in study view, after `study` command is executed.
+
+==== Returning to decks view: `done`
+
+**Format**: `done`
+
+**Outcome**: Returns to decks view.
+
 === Global commands
 
 These commands are available in either view.
