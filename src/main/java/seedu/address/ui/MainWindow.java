@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private ContentPanel contentPanel;
     private ListPanel listPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -47,7 +48,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane contentPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -117,7 +118,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         listPanel = new ListPanel(logic.getFilteredList(), logic.selectedItemProperty(), logic::setSelectedItem);
-        personListPanelPlaceholder.getChildren().add(listPanel.getRoot());
+        contentPanelPlaceholder.getChildren().add(listPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -129,7 +130,7 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         questionPanel = new QuestionPanel();
-        personListPanelPlaceholder.getChildren().add(questionPanel.getRoot());
+        contentPanelPlaceholder.getChildren().add(questionPanel.getRoot());
 
     }
 
@@ -189,8 +190,8 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             if (commandResult instanceof UpdatePanelCommandResult) {
                 listPanel = new ListPanel(logic.getFilteredList(), logic.selectedItemProperty(), logic::setSelectedItem);
-                personListPanelPlaceholder.getChildren().clear();
-                personListPanelPlaceholder.getChildren().add(listPanel.getRoot());
+                contentPanelPlaceholder.getChildren().clear();
+                contentPanelPlaceholder.getChildren().add(listPanel.getRoot());
             } else if (commandResult instanceof HelpCommandResult) {
                 handleHelp();
             } else if (commandResult instanceof ExitCommandResult) {
