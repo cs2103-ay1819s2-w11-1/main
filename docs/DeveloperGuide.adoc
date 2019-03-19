@@ -228,6 +228,45 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+=== Stateful user interface
+==== Introduction
+
+TopDeck has a stateful user interface.
+This means that the set of valid commands and their respective functionality
+depend on the context of the application state.
+
+For example, the command word `add` is "overloaded" with two capabilities:
+
+- Add a new deck: `add DECK_NAME`
+- Add a new card to a particular deck: `add q/QUESTION a/ANSWER`
+
+The state in TopDeck determines which command is called.
+The second command does not take the target deck as an argument as it is implicit in the state.
+
+==== Current Implementation
+
+States in TopDeck partition the functionalities that are exposed to a user.
+The states are: decks view, cards view and study view.
+Their responsibilites should be self-descriptive.
+The following figure illustrates the transitions between these states.
+
+.State diagram for TopDeck
+[plantuml]
+....
+(*) --> "Decks view"
+"Decks view" --> [Open] "Cards view"
+"Cards view" --> [Close] "Decks view"
+"Decks view" -> [Study] "Study view"
+"Study view" -> [Finish study] "Decks view"
+....
+
+These states are implemented as subtypes of `ViewState`.
+Each state holds transient data that is relevant only while the state is active.
+For example, `CardsView` has `activeDeck` which is the deck that commands such as `add` operate on.
+
+ModelManager owns the one instance of `ViewState` and exposes methods to handle state transitions.
+This abstraction barrier allows `ModelManager` to enforce mutual exclusion.
+
 //tag::studysessions[]
 === Study Sessions feature
 
@@ -352,7 +391,51 @@ currently active deck, add the card into the deck and replace it with the curren
 
 4. Once that is done, the filteredItems list is being updated to reflect the change.
 
+=== Deck Management
+==== Data Structure Implementation
 
+A Deck consists of a list of `cards`. Decks are deemed as equal if they have the same name. This
+is to prevent users from creating 2 or more decks with the same name.
+
+Within the Model, `Deck` is encapsulated by the following data structure:
+
+* `Model`
+* `VersionedTopDeck`
+* `TopDeck`
+* `UniqueDeckList`
+* `Deck`
+
+The Create, Read, Update and Delete(CRUD) operation will trickle down the encapsulations
+and be executed in `UniqueDeckList`.
+
+==== Current Implementation
+
+Deck Management is facilitated by `Deck` which implements the following operations:
+
+* adddeck(Deck deck)
+* editdeck(Deck deck)
+* deletedeck(Deck deck)
+* select(Deck toSelect)
+
+The CRUD operations are exposed in the Model interface as `Model#addDeck(Deck deck)` and
+`Model#deleteDeck(Deck toDelete)`. For each deck operation,
+there are 2 main updates that need to be done. The first update will be on the model
+and the second will be on the `ViewState`.
+
+Given below is an example usage scenario and how the addDeck(Deck) mechanism behaves at each step:
+
+1. The user starts up the application and is in the `DecksView`. The user then
+executes the `addDeck` command `adddeck n/NAME` to create a new deck. The `adddeck` command
+is parsed and calls `Model#addDeck(Deck deck)`.
+
+2. `Model#addDeck(Deck deck)` first checks if the current state is a
+DecksView. Following, it will create a new deck to be added into `VersionedTopDeck.addDeck(Deck deck).
+
+3. Once that is done, the filteredItems list is being updated to reflect the change.
+
+4. To continue to add `cards`, the user will then execute the command `select INDEX`. For example, user
+executes the `select 1` command to select the first deck. This should change the `ViewState` in the
+`ModelManager` from `DeckView` to `CardView`. For more information on `cards`, refer to cards's feature.
 
 // tag::undoredo[]
 === Undo/Redo feature
