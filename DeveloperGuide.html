@@ -29,10 +29,14 @@
 </li>
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
-<li><a href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.3. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.4. Configuration</a></li>
+<li><a href="#stateful-user-interface">3.1. Stateful user interface</a></li>
+<li><a href="#study-sessions-feature">3.2. Study Sessions feature</a></li>
+<li><a href="#card-management">3.3. Card Management</a></li>
+<li><a href="#deck-management">3.4. Deck Management</a></li>
+<li><a href="#undo-redo-feature">3.5. Undo/Redo feature</a></li>
+<li><a href="#proposed-data-encryption">3.6. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.7. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.8. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -553,9 +557,363 @@ The following class plays an important role at the architecture level:</p>
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.1. Undo/Redo feature</a></h3>
+<h3 id="stateful-user-interface"><a class="link" href="#stateful-user-interface">3.1. Stateful user interface</a></h3>
 <div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.1. Current Implementation</a></h4>
+<h4 id="introduction"><a class="link" href="#introduction">3.1.1. Introduction</a></h4>
+<div class="paragraph">
+<p>TopDeck has a stateful user interface.
+This means that the set of valid commands and their respective functionality
+depend on the context of the application state.</p>
+</div>
+<div class="paragraph">
+<p>For example, the command word <code>add</code> is "overloaded" with two capabilities:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Add a new deck: <code>add DECK_NAME</code></p>
+</li>
+<li>
+<p>Add a new card to a particular deck: <code>add q/QUESTION a/ANSWER</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The state in TopDeck determines which command is called.
+The second command does not take the target deck as an argument as it is implicit in the state.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.2. Current Implementation</a></h4>
+<div class="paragraph">
+<p>States in TopDeck partition the functionalities that are exposed to a user.
+The states are: decks view, cards view and study view.
+Their responsibilites should be self-descriptive.
+The following figure illustrates the transitions between these states.</p>
+</div>
+<div class="literalblock">
+<div class="title">State diagram for TopDeck</div>
+<div class="content">
+<pre>(*) --&gt; "Decks view"
+"Decks view" --&gt; [Open] "Cards view"
+"Cards view" --&gt; [Close] "Decks view"
+"Decks view" -&gt; [Study] "Study view"
+"Study view" -&gt; [Finish study] "Decks view"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>These states are implemented as subtypes of <code>ViewState</code>.
+Each state holds transient data that is relevant only while the state is active.
+For example, <code>CardsView</code> has <code>activeDeck</code> which is the deck that commands such as <code>add</code> operate on.</p>
+</div>
+<div class="paragraph">
+<p>ModelManager owns the one instance of <code>ViewState</code> and exposes methods to handle state transitions.
+This abstraction barrier allows <code>ModelManager</code> to enforce mutual exclusion.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="study-sessions-feature"><a class="link" href="#study-sessions-feature">3.2. Study Sessions feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The third ViewState is called <code>StudyState</code>.</p>
+</div>
+<div class="paragraph">
+<p>This state can be accessed when user executes the command <code>study DECK_NUMBER</code></p>
+</div>
+<div class="paragraph">
+<p>The following commands are supported under the study sessions:</p>
+</div>
+<div class="paragraph">
+<p>Study View supports the following operations:
+* <code>done</code>
+* [any other command]
+* [difficulty rating]</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="data-structure-implementation"><a class="link" href="#data-structure-implementation">3.2.2. Data Structure Implementation</a></h4>
+<div class="paragraph">
+<p>The study mechanism is facilitated by <code>Deck</code>.</p>
+</div>
+<div class="paragraph">
+<p>It extends <code>Model</code> with a  <code>cardShown</code> property, stored internally as an <code>ReadOnlyProperty</code> with generic type <code>Card</code>.
+Additionally, it implements the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Deck#generateRandomCard()</code>&#8201;&#8212;&#8201;Generates a random index based on the size of UniqueCardList in Deck</p>
+</li>
+<li>
+<p><code>TopDeck#commit()</code>&#8201;&#8212;&#8201;Saves the current address book state in its history.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the <code>study</code> mechanism behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. User enter study mode using <code>study 1</code> command.</p>
+</div>
+<div class="paragraph">
+<p>A <code>StudyDeck</code> command is returned after reading the command word, <code>study</code>.
+Deck#generateRandomCard() is executed automatically as part of <code>StudyDeck</code> execution.</p>
+</div>
+<div class="paragraph">
+<p>This modifies <code>cardShown</code> to a random card based on the index generated.
+The <code>textShown</code> property in the UI is also modified right after.
+The <code>textType</code> property in the UI is also modified to 0 for question.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. User executes the <code>[wildcard]</code> command to signal that he has come up with the answer.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. This command calls <code>Card#getAnswer()</code>
+This changes the <code>textShown</code> property in the UI.
+The <code>textType</code> property in the UI is also modified to 1 for answer.</p>
+</div>
+<div class="paragraph">
+<p>Step 4. User enters the difficulty rating command.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.2.3. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-study-view-is-linked-to-the-ui"><a class="link" href="#aspect-how-study-view-is-linked-to-the-ui">Aspect: How study view is linked to the UI</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: UI just changes state based on commands issued.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2: (current choice):</strong> Use an event listener to see whether the <code>textShown</code> has changed.
+Because it is easy to modify textShown immediately, there is no need for the UI to track this variable as
+that would be costly.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ui-implementation"><a class="link" href="#ui-implementation">3.2.4. UI Implementation</a></h4>
+<div class="paragraph">
+<p><code>QuestionPanel</code> replaces the <code>ListPanel</code> when the active <code>ViewState</code> in the model is an instance
+of <code>StudyView</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>QuestionPanel</code> only has 1 property which is <code>textShown</code> and <code>textType</code>.
+The first contains the words which will be shown, whether question or answer.</p>
+</div>
+<div class="paragraph">
+<p><code>textType</code> contains an enum to specify whether the panel is showing a question or an answer.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="card-management"><a class="link" href="#card-management">3.3. Card Management</a></h3>
+<div class="sect3">
+<h4 id="data-structure-implementation-2"><a class="link" href="#data-structure-implementation-2">3.3.1. Data Structure Implementation</a></h4>
+<div class="paragraph">
+<p>A Card consists of a question, an answer and the respective tags associated with it.
+Card&#8217;s are deemed as equal if they have the same question to prevent the user from
+creating same question twice or to have 2 different answer for the same question.
+Within the Model, <code>Card</code> is encapsulated by the following data structure:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Model</code></p>
+</li>
+<li>
+<p><code>VersionedTopDeck</code></p>
+</li>
+<li>
+<p><code>TopDeck</code></p>
+</li>
+<li>
+<p><code>UniqueDeckList</code></p>
+</li>
+<li>
+<p><code>Deck</code></p>
+</li>
+<li>
+<p><code>UniqueCardList</code></p>
+</li>
+<li>
+<p><code>Card</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Create, Read, Update and Delete(CRUD) operation will trickle down the encapsulations
+and be executed in <code>UniqueCardList</code>. One of the repercussion of having this data structure
+is the need to find the respective deck that the user wants to edit the <code>UniqueCardList</code> from.
+Currently, this is done by passing the activeDeck in the <code>CardView</code> object in
+model into <code>UniqueDeckList</code> to find the deck that we want to edit.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.2. Current Implementation</a></h4>
+<div class="paragraph">
+<p>Card Management is currently facilitated by <code>Deck</code> which implements the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>hasCard(Card card)</p>
+</li>
+<li>
+<p>addCard(Card card)</p>
+</li>
+<li>
+<p>removeCard(Card target)</p>
+</li>
+<li>
+<p>editCard(Card newCard)</p>
+</li>
+<li>
+<p>selectCard(Card toSelect)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The CRUD operations are exposed in the Model interface as <code>Model#addCard(Card card)</code>,
+<code>Model#deleteCard(Card toDelete)</code> and <code>Model#setCard(Card newCard)</code>. For each card operation,
+there are 2 main updates that need to be done. The first update will be on the model
+and the second will be on the <code>ViewState</code>.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the addCard(Card) mechanism behaves at each step:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The user starts up the application and is in the <code>DecksView</code>. The user then
+executes the <code>select 1</code> command to select the first deck. This should change the
+<code>ViewState</code> in the <code>ModelManager</code> from <code>DeckView</code> to <code>CardView</code>. For more information, refer to
+Deck&#8217;s feature.</p>
+</li>
+<li>
+<p>The user executes <code>add q/question a/answer</code> to add the new card into the current deck.
+The <code>add</code> command is parsed and calls <code>Model#addCard(Card card)</code>.</p>
+</li>
+<li>
+<p><code>Model#addCard(Card card)</code> first checks if the current state is a
+CardsView. Following, it will pass the current activeDeck and the card to
+be added into <code>VersionedTopDeck.addCard(Card card, Deck ActiveDeck)</code>. This will search for the
+currently active deck, add the card into the deck and replace it with the current deck.</p>
+</li>
+<li>
+<p>Once that is done, the filteredItems list is being updated to reflect the change.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deck-management"><a class="link" href="#deck-management">3.4. Deck Management</a></h3>
+<div class="sect3">
+<h4 id="data-structure-implementation-3"><a class="link" href="#data-structure-implementation-3">3.4.1. Data Structure Implementation</a></h4>
+<div class="paragraph">
+<p>A Deck consists of a list of <code>cards</code>. Decks are deemed as equal if they have the same name. This
+is to prevent users from creating 2 or more decks with the same name.</p>
+</div>
+<div class="paragraph">
+<p>Within the Model, <code>Deck</code> is encapsulated by the following data structure:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Model</code></p>
+</li>
+<li>
+<p><code>VersionedTopDeck</code></p>
+</li>
+<li>
+<p><code>TopDeck</code></p>
+</li>
+<li>
+<p><code>UniqueDeckList</code></p>
+</li>
+<li>
+<p><code>Deck</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Create, Read, Update and Delete(CRUD) operation will trickle down the encapsulations
+and be executed in <code>UniqueDeckList</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.2. Current Implementation</a></h4>
+<div class="paragraph">
+<p>Deck Management is facilitated by <code>Deck</code> which implements the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>adddeck(Deck deck)</p>
+</li>
+<li>
+<p>editdeck(Deck deck)</p>
+</li>
+<li>
+<p>deletedeck(Deck deck)</p>
+</li>
+<li>
+<p>select(Deck toSelect)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The CRUD operations are exposed in the Model interface as <code>Model#addDeck(Deck deck)</code> and
+<code>Model#deleteDeck(Deck toDelete)</code>. For each deck operation,
+there are 2 main updates that need to be done. The first update will be on the model
+and the second will be on the <code>ViewState</code>.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the addDeck(Deck) mechanism behaves at each step:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The user starts up the application and is in the <code>DecksView</code>. The user then
+executes the <code>addDeck</code> command <code>adddeck n/NAME</code> to create a new deck. The <code>adddeck</code> command
+is parsed and calls <code>Model#addDeck(Deck deck)</code>.</p>
+</li>
+<li>
+<p><code>Model#addDeck(Deck deck)</code> first checks if the current state is a
+DecksView. Following, it will create a new deck to be added into `VersionedTopDeck.addDeck(Deck deck).</p>
+</li>
+<li>
+<p>Once that is done, the filteredItems list is being updated to reflect the change.</p>
+</li>
+<li>
+<p>To continue to add <code>cards</code>, the user will then execute the command <code>select INDEX</code>. For example, user
+executes the <code>select 1</code> command to select the first deck. This should change the <code>ViewState</code> in the
+<code>ModelManager</code> from <code>DeckView</code> to <code>CardView</code>. For more information on <code>cards</code>, refer to cards&#8217;s feature.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.5. Undo/Redo feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedAddressBook</code>.
 It extends <code>AddressBook</code> with an undo/redo history, stored internally as an <code>addressBookStateList</code> and <code>currentStatePointer</code>.
@@ -685,7 +1043,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.5.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -755,20 +1113,20 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.6. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.3. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.7. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.4, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.8, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -799,7 +1157,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.4. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.8. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2260,4 +2618,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-13 04:26:05 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-20 20:06:42 SGT</div></div></div></body></html>
