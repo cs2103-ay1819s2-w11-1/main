@@ -311,3 +311,34 @@ There is no need to save manually.
 When studying, TopDeck will show the question, and the answer will be revealed when prompted by the user.
 
 **Deck**: A deck is a collection of cards that are studied together.
+
+[width="100%",cols="20%,<30%",options="header",]
+|=======================================================================
+|Command | What does it do?
+|`help` | Lists all available commands and their respective formats.
+|`list` | Displays a list of all available decks. If inside a deck displays all cards in that deck.
+|`add n/NAME` | Adds a new deck.
+|`edit INDEX n/NAME` | Edits the name of the deck at INDEX.
+|`delete INDEX` | Deletes the deck at INDEX.
+|`select INDEX` | Navigates into the deck at INDEX. +
+Use `done` to navigate out of the deck.
+|`find NAME` | Finds a deck by name.
+|`add q/QUESTION a/ANSWER` | Adds a new card in the current deck. +
+You must be inside a deck to perform this operation.
+|`edit INDEX [q/QUESTION]-[a/ANSWER]` | Edits the details of the card at INDEX. +
+At least one parameter must be present. +
+You must be inside a deck to perform this operation.
+|`delete INDEX` | Deletes the card at INDEX. +
+You must be inside a deck to perform this operation.
+|`find NAME` | Finding a card in the active deck by name.
+|`study` | Studying the active deck.
+|`done` | Returning to deck view.
+|`export INDEX` | Exports the deck at the specified INDEX. (Default location is the same folder as TopDeck)
+|`import FILEPATH` | Imports a deck from the `json` file at the specified FILEPATH.
+|`history` | List all entered commands in reverse chronological order.
+|`undo` | Undo previous command.
+|`redo` | Redo previously undone command.
+|`clear` | Clear all decks and cards.
+|`exit` | Exits the program.
+
+|=======================================================================
