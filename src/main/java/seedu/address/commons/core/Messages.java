@@ -16,8 +16,8 @@ public class Messages {
 
     public static final String MESSAGE_EMPTY_DECK = "Deck is empty. Unable to go into study mode";
 
-    public static final String MESSAGE_INVALID_DECK_OPERATION = "This command is invalid, please"
-            + " exit current deck and try again.";
+    public static final String MESSAGE_INVALID_DECK_OPERATION =
+            "This command is invalid, please" + " exit current deck and try again.";
 
 
 }

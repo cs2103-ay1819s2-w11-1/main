@@ -19,10 +19,9 @@ public class StudyDeckCommandParser {
     public StudyDeckCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
-            return new StudyDeckCommand(index, (DecksView)viewState);
+            return new StudyDeckCommand(index, viewState);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, OpenDeckCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, OpenDeckCommand.MESSAGE_USAGE), pe);
         }
     }
 }

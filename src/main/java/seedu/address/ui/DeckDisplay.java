@@ -51,7 +51,6 @@ public class DeckDisplay extends UiPart<Region> {
 
         // state check
         DeckDisplay card = (DeckDisplay) other;
-        return id.getText().equals(card.id.getText())
-                && deck.equals(card.deck);
+        return id.getText().equals(card.id.getText()) && deck.equals(card.deck);
     }
 }

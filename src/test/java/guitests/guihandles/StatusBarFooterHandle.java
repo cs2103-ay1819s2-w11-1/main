@@ -75,12 +75,14 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
     public boolean isSyncStatusChanged() {
         return !lastRememberedSyncStatus.equals(getSyncStatus());
     }
+
     /**
      * Remembers the content of the 'total cards' portion of the status bar.
      */
     public void rememberTotalCardsStatus() {
         lastRememberedTotalCardsStatus = getTotalCardsStatus();
     }
+
     /**
      * Remembers the content of the 'total decks' portion of the status bar.
      */

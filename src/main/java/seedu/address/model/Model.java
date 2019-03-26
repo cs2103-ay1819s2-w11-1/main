@@ -23,18 +23,20 @@ public interface Model {
      */
     Predicate<Deck> PREDICATE_SHOW_ALL_DECKS = unused -> true;
 
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<Card> PREDICATE_SHOW_ALL_CARDS = unused -> true;
-
     /**
-     * Replaces user prefs data with the data in {@code userPrefs}.
+     * {@code Predicate} that always evaluate to true
      */
-    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
+    Predicate<Card> PREDICATE_SHOW_ALL_CARDS = unused -> true;
 
     /**
      * Returns the user prefs.
      */
     ReadOnlyUserPrefs getUserPrefs();
+
+    /**
+     * Replaces user prefs data with the data in {@code userPrefs}.
+     */
+    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
 
     /**
      * Returns the user prefs' GUI settings.
@@ -57,12 +59,14 @@ public interface Model {
     void setTopDeckFilePath(Path addressBookFilePath);
 
     /**
+     * Returns the TopDeck
+     */
+    ReadOnlyTopDeck getTopDeck();
+
+    /**
      * Replaces TopDeck data with the data in {@code topDeck}.
      */
     void setTopDeck(ReadOnlyTopDeck topDeck);
-
-    /** Returns the TopDeck */
-    ReadOnlyTopDeck getTopDeck();
 
     /**
      * Returns true if a card with the same identity as {@code card} exists in the deck.
@@ -88,11 +92,14 @@ public interface Model {
      */
     void setCard(Card target, Card editedCard);
 
-    /** Returns an unmodifiable view of the filtered list */
+    /**
+     * Returns an unmodifiable view of the filtered list
+     */
     ObservableList<ListItem> getFilteredList();
 
     /**
      * Updates the filter of the filtered card list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredList(Predicate<? extends ListItem> predicate);
@@ -141,6 +148,7 @@ public interface Model {
 
     /**
      * Adds a new deck in the filtered deck list.
+     *
      * @param deck
      */
     void addDeck(Deck deck);
@@ -168,6 +176,7 @@ public interface Model {
 
     /**
      * Changes view state to show a single card at a time
+     *
      * @param deck
      */
     void studyDeck(Deck deck);

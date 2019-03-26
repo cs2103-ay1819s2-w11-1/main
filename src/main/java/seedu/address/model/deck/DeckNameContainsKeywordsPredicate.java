@@ -20,8 +20,8 @@ public class DeckNameContainsKeywordsPredicate implements Predicate<Deck> {
         if (keywords.size() == 1) {
             return deck.getName().toString().toLowerCase().contains(keywords.get(0).toLowerCase());
         }
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsKeywordsInQuestionIgnoreCase(deck.getName().fullName, keyword));
+        return keywords.stream().anyMatch(
+                keyword -> StringUtil.containsKeywordsInQuestionIgnoreCase(deck.getName().fullName, keyword));
     }
 
     @Override

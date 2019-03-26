@@ -32,13 +32,9 @@ public class EditCardCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the card identified "
             + "by the index number used in the displayed card list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_QUESTION + "QUESTION] "
-            + "[" + PREFIX_ANSWER + "ANSWER] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_QUESTION + "What is the sum from 1 to 10? "
-            + PREFIX_ANSWER + "55";
+            + "Parameters: INDEX (must be a positive integer) " + "[" + PREFIX_QUESTION + "QUESTION] " + "["
+            + PREFIX_ANSWER + "ANSWER] " + "[" + PREFIX_TAG + "TAG]...\n" + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_QUESTION + "What is the sum from 1 to 10? " + PREFIX_ANSWER + "55";
 
     public static final String MESSAGE_EDIT_CARD_SUCCESS = "Edited Card: %1$s";
     public static final String MESSAGE_EDIT_CARD_AUTOCOMPLETE = "";
@@ -110,12 +106,9 @@ public class EditCardCommand extends Command {
             for (Tag tag : tags) {
                 builder.append(" ").append(PREFIX_TAG).append(tag.tagName);
             }
-            String updatedText = String.format("%s %d %s%s %s%s %s",
-                    COMMAND_WORD,
-                    index.getOneBased(),
-                    PREFIX_QUESTION, question,
-                    PREFIX_ANSWER, answer,
-                    builder.toString());
+            String updatedText = String
+                    .format("%s %d %s%s %s%s %s", COMMAND_WORD, index.getOneBased(), PREFIX_QUESTION, question,
+                            PREFIX_ANSWER, answer, builder.toString());
             return new PrefillCommandBoxCommandResult(MESSAGE_EDIT_CARD_AUTOCOMPLETE, updatedText);
         }
     }
@@ -134,8 +127,7 @@ public class EditCardCommand extends Command {
 
         // state check
         EditCardCommand e = (EditCardCommand) other;
-        return index.equals(e.index)
-                && editCardDescriptor.equals(e.editCardDescriptor);
+        return index.equals(e.index) && editCardDescriptor.equals(e.editCardDescriptor);
     }
 
     /**
@@ -215,9 +207,8 @@ public class EditCardCommand extends Command {
             // state check
             EditCardDescriptor e = (EditCardDescriptor) other;
 
-            return getQuestion().equals(e.getQuestion())
-                    && getAnswer().equals(e.getAnswer())
-                    && getTags().equals(e.getTags());
+            return getQuestion().equals(e.getQuestion()) && getAnswer().equals(e.getAnswer()) && getTags()
+                    .equals(e.getTags());
         }
     }
 }

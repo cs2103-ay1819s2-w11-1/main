@@ -4,8 +4,8 @@ import java.util.List;
 
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import seedu.address.logic.commands.DoneCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DoneCommand;
 import seedu.address.logic.commands.GenerateQuestionCommand;
 import seedu.address.logic.commands.ShowAnswerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -14,18 +14,14 @@ import seedu.address.model.deck.Card;
 import seedu.address.model.deck.Deck;
 
 public class StudyView implements ViewState {
-    private final Model model;
     public final List<Card> listOfCards;
+    private final Model model;
     private final Deck activeDeck;
-    private Card currentCard;
     private final SimpleObjectProperty<studyState> currentStudyState = new SimpleObjectProperty<>();
     private final SimpleObjectProperty<String> textShown = new SimpleObjectProperty<>();
     private final SimpleObjectProperty<String> userAnswer = new SimpleObjectProperty<>();
+    private Card currentCard;
     private DeckShuffler deckShuffler;
-
-    public enum studyState {
-        QUESTION, ANSWER;
-    }
 
     public StudyView(Model model, Deck deck) {
         this.model = model;
@@ -44,7 +40,7 @@ public class StudyView implements ViewState {
                 return new DoneCommand();
             default:
                 if (getCurrentStudyState() == studyState.QUESTION) {
-                    return new ShowAnswerCommand(commandWord+arguments);
+                    return new ShowAnswerCommand(commandWord + arguments);
                 } else {
                     return new GenerateQuestionCommand();
                 }
@@ -55,59 +51,60 @@ public class StudyView implements ViewState {
         return activeDeck;
     }
 
-    //=========== Current Card ================================================================================
-
-
     public void setCurrentCard(Card card) {
         currentCard = card;
     }
 
+    //=========== Current Card ================================================================================
+
     public void generateCard() {
         setCurrentCard(deckShuffler.generateCard());
         updateTextShown();
-    };
-
-    //=========== Study States ================================================================================
+    }
 
     public ReadOnlyProperty<studyState> studyStateProperty() {
         return currentStudyState;
+    }
+
+    //=========== Study States ================================================================================
+
+    public studyState getCurrentStudyState() {
+        return currentStudyState.getValue();
     }
 
     public void setCurrentStudyState(studyState state) {
         currentStudyState.setValue(state);
     }
 
-    public studyState getCurrentStudyState() {
-        return currentStudyState.getValue();
-    }
-
-    //=========== TextShown ================================================================================
-
     public void updateTextShown() {
-        String text =  (getCurrentStudyState() == studyState.QUESTION)
-                ? currentCard.getQuestion()
-                : currentCard.getAnswer();
+        String text = (getCurrentStudyState() == studyState.QUESTION) ? currentCard.getQuestion() : currentCard
+                .getAnswer();
         textShown.setValue(text);
     }
 
+    //=========== TextShown ================================================================================
 
     public ReadOnlyProperty<String> textShownProperty() {
         updateTextShown();
         return textShown;
     }
 
-    //=========== User Answer ================================================================================
-
     public ReadOnlyProperty<String> userAnswerProperty() {
         return userAnswer;
+    }
+
+    //=========== User Answer ================================================================================
+
+    public String getUserAnswer() {
+        return userAnswer.getValue();
     }
 
     public void setUserAnswer(String answer) {
         userAnswer.setValue(answer);
     }
 
-    public String getUserAnswer() {
-        return userAnswer.getValue();
+    public enum studyState {
+        QUESTION, ANSWER
     }
 
 }

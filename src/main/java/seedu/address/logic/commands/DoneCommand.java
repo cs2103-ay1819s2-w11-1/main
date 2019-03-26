@@ -12,9 +12,8 @@ public class DoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": End your study state and return to the main page.\n"
-            + "Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_USAGE =
+            COMMAND_WORD + ": End your study state and return to the main page.\n" + "Example: " + COMMAND_WORD + " 1";
 
     private static final String MESSAGE_CLOSE_DECK_SUCCESS = "Done studying";
 

@@ -67,7 +67,7 @@ public class StringUtilTest {
     }
 
     private void assertExceptionThrown(Class<? extends Throwable> exceptionClass, String sentence, String word,
-            Optional<String> errorMessage) {
+                                       Optional<String> errorMessage) {
         thrown.expect(exceptionClass);
         errorMessage.ifPresent(message -> thrown.expectMessage(message));
         StringUtil.containsKeywordsInQuestionIgnoreCase(sentence, word);
@@ -76,7 +76,7 @@ public class StringUtilTest {
     @Test
     public void containsWordIgnoreCase_emptyWord_throwsIllegalArgumentException() {
         assertExceptionThrown(IllegalArgumentException.class, "typical sentence", "  ",
-                Optional.of("Word parameter cannot be empty"));
+                              Optional.of("Word parameter cannot be empty"));
     }
 
     @Test

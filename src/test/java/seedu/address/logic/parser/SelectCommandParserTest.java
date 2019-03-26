@@ -7,6 +7,7 @@ import static seedu.address.testutil.TypicalCards.getTypicalTopDeck;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CARD;
 
 import org.junit.Test;
+
 import seedu.address.logic.DecksView;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SelectDeckCommand;

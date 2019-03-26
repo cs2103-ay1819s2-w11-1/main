@@ -18,6 +18,7 @@ public class CardUtil {
 
     /**
      * Returns an add command string for adding the {@code card}.
+     *
      * @param card
      */
     public static String getAddCommand(Card card) {
@@ -31,9 +32,7 @@ public class CardUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_QUESTION + card.getQuestion() + " ");
         sb.append(PREFIX_ANSWER + card.getAnswer() + " ");
-        card.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        );
+        card.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));
         return sb.toString();
     }
 

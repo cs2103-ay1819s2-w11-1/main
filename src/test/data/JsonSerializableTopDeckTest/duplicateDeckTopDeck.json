@@ -1,27 +1,36 @@
 {
-  "decks" : [ {
-    "name" : "DuplicateDeck",
-    "cards" : [ {
-      "question" : "watsup",
-      "answer" : "nothing mcuh",
-      "tags" : [ ]
-    }, {
-      "question" : "why",
-      "answer" : "because",
-      "tags" : [ ]
-    }, {
-      "question" : "hhhh",
-      "answer" : "bbbb",
-      "tags" : [ ]
-    } ]
-  }, {
-    "name" : "DuplicateDeck",
-    "cards" : [ ]
-  }, {
-    "name" : "betaalpha",
-    "cards" : [ ]
-  }, {
-    "name" : "supppppppp",
-    "cards" : [ ]
-  } ]
+  "decks": [
+    {
+      "name": "DuplicateDeck",
+      "cards": [
+        {
+          "question": "watsup",
+          "answer": "nothing mcuh",
+          "tags": []
+        },
+        {
+          "question": "why",
+          "answer": "because",
+          "tags": []
+        },
+        {
+          "question": "hhhh",
+          "answer": "bbbb",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "name": "DuplicateDeck",
+      "cards": []
+    },
+    {
+      "name": "betaalpha",
+      "cards": []
+    },
+    {
+      "name": "supppppppp",
+      "cards": []
+    }
+  ]
 }

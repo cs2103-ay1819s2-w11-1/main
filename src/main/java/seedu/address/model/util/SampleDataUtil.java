@@ -17,12 +17,10 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static Card[] getSampleCards() {
-        return new Card[] {
-            new Card("What layer is HTTP at?", "Application", getTagSet("CS2105")),
-            new Card("What transport does HTTP use?", "TCP", getTagSet("CS2105")),
-            new Card("How many sides does a triangle have?", "3", getTagSet("Geometry")),
-            new Card("How many seconds are there in 1 millisecond?", "1 * 10^-3", new HashSet<Tag>())
-        };
+        return new Card[]{new Card("What layer is HTTP at?", "Application", getTagSet("CS2105")), new Card(
+                "What transport does HTTP use?", "TCP", getTagSet("CS2105")), new Card(
+                "How many sides does a triangle have?", "3", getTagSet("Geometry")), new Card(
+                "How many seconds are there in 1 millisecond?", "1 * 10^-3", new HashSet<Tag>())};
     }
 
     public static Deck[] getSampleDecks() {
@@ -30,12 +28,12 @@ public class SampleDataUtil {
         for (Card sampleCard : getSampleCards()) {
             sampleDeck.addCard(sampleCard);
         }
-        return new Deck[] { sampleDeck };
+        return new Deck[]{sampleDeck};
     }
 
     public static ReadOnlyTopDeck getSampleTopDeck() {
         TopDeck sampleTd = new TopDeck();
-        for (Deck sampleDeck: getSampleDecks()) {
+        for (Deck sampleDeck : getSampleDecks()) {
             sampleTd.addDeck(sampleDeck);
         }
         return sampleTd;
@@ -45,9 +43,7 @@ public class SampleDataUtil {
      * Returns a tag set containing the list of strings given.
      */
     public static Set<Tag> getTagSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
+        return Arrays.stream(strings).map(Tag::new).collect(Collectors.toSet());
     }
 
 }

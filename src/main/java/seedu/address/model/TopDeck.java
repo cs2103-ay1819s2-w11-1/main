@@ -29,12 +29,12 @@ public class TopDeck implements ReadOnlyTopDeck {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */
-    {
+     */ {
         decks = new UniqueDeckList();
     }
 
-    public TopDeck() {}
+    public TopDeck() {
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -82,6 +82,7 @@ public class TopDeck implements ReadOnlyTopDeck {
     }
 
     //// card operations
+
     /**
      * Adds a card to TopDeck
      * The card should not already exist in the {@code deck} activeDeck.
@@ -127,7 +128,7 @@ public class TopDeck implements ReadOnlyTopDeck {
      * The {@code Card} target should exist in the {@code deck} activeDeck.
      */
     public void setCard(Card target, Card newCard, Deck activeDeck) throws DeckNotFoundException,
-        CardNotFoundException {
+            CardNotFoundException {
         if (!decks.contains(activeDeck)) {
             throw new DeckNotFoundException();
         }

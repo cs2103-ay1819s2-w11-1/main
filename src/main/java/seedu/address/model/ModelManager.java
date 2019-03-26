@@ -35,8 +35,8 @@ public class ModelManager implements Model {
 
     private final VersionedTopDeck versionedTopDeck;
     private final UserPrefs userPrefs;
-    private FilteredList<? extends ListItem> filteredItems;
     private final SimpleObjectProperty<ListItem> selectedItem = new SimpleObjectProperty<>();
+    private FilteredList<? extends ListItem> filteredItems;
     private ViewState viewState;
 
     /**
@@ -106,14 +106,14 @@ public class ModelManager implements Model {
     //=========== UserPrefs ==================================================================================
 
     @Override
-    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-        requireNonNull(userPrefs);
-        this.userPrefs.resetData(userPrefs);
+    public ReadOnlyUserPrefs getUserPrefs() {
+        return userPrefs;
     }
 
     @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
+    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        requireNonNull(userPrefs);
+        this.userPrefs.resetData(userPrefs);
     }
 
     @Override
@@ -141,13 +141,13 @@ public class ModelManager implements Model {
     //=========== TopDeck ================================================================================
 
     @Override
-    public void setTopDeck(ReadOnlyTopDeck topDeck) {
-        versionedTopDeck.resetData(topDeck);
+    public ReadOnlyTopDeck getTopDeck() {
+        return versionedTopDeck;
     }
 
     @Override
-    public ReadOnlyTopDeck getTopDeck() {
-        return versionedTopDeck;
+    public void setTopDeck(ReadOnlyTopDeck topDeck) {
+        versionedTopDeck.resetData(topDeck);
     }
 
     @Override
@@ -158,7 +158,7 @@ public class ModelManager implements Model {
             throw new IllegalOperationWhileReviewingDeckException();
         }
 
-        CardsView cardsView = (CardsView)viewState;
+        CardsView cardsView = (CardsView) viewState;
 
         return cardsView.getActiveDeck().hasCard(card);
     }
@@ -169,7 +169,7 @@ public class ModelManager implements Model {
             throw new IllegalOperationWhileReviewingDeckException();
         }
 
-        CardsView cardsView = (CardsView)viewState;
+        CardsView cardsView = (CardsView) viewState;
         versionedTopDeck.deleteCard(target, cardsView.getActiveDeck());
 
         cardsView.filteredCards.remove(target);
@@ -186,7 +186,7 @@ public class ModelManager implements Model {
             throw new IllegalOperationWhileReviewingDeckException();
         }
 
-        CardsView cardsView = (CardsView)viewState;
+        CardsView cardsView = (CardsView) viewState;
         versionedTopDeck.addCard(card, cardsView.getActiveDeck());
         updateFilteredList(PREDICATE_SHOW_ALL_CARDS);
     }
@@ -199,7 +199,7 @@ public class ModelManager implements Model {
             throw new IllegalOperationWhileReviewingDeckException();
         }
 
-        CardsView cardsView = (CardsView)viewState;
+        CardsView cardsView = (CardsView) viewState;
 
         versionedTopDeck.setCard(target, editedCard, cardsView.getActiveDeck());
         updateFilteredList(PREDICATE_SHOW_ALL_CARDS);
@@ -238,7 +238,7 @@ public class ModelManager implements Model {
             throw new IllegalOperationWhileReviewingDeckException();
         }
 
-        DecksView decksView = (DecksView)viewState;
+        DecksView decksView = (DecksView) viewState;
 
         versionedTopDeck.setDecks(decksView.filteredDecks);
         updateFilteredList(PREDICATE_SHOW_ALL_DECKS);
@@ -318,8 +318,8 @@ public class ModelManager implements Model {
 
         if (card instanceof Card && isAtCardsView()) {
             CardsView cardsView = (CardsView) viewState;
-            cardsView.selectedCard.set((Card)card);
-        } else if (card instanceof Deck && isAtDecksView()){
+            cardsView.selectedCard.set((Card) card);
+        } else if (card instanceof Deck && isAtDecksView()) {
             //TODO: Deck has to set its selection
 
         } else if (card != null) {
@@ -341,10 +341,8 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedTopDeck.equals(other.versionedTopDeck)
-                && userPrefs.equals(other.userPrefs)
-                && filteredItems.equals(other.filteredItems)
-                && Objects.equals(selectedItem.get(), other.selectedItem.get());
+        return versionedTopDeck.equals(other.versionedTopDeck) && userPrefs.equals(other.userPrefs) && filteredItems
+                .equals(other.filteredItems) && Objects.equals(selectedItem.get(), other.selectedItem.get());
     }
 
 }

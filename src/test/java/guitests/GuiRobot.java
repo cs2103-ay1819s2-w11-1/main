@@ -50,7 +50,7 @@ public class GuiRobot extends FxRobot {
      * Waits for {@code event} to be true by {@code DEFAULT_WAIT_FOR_EVENT_TIMEOUT_MILLISECONDS} milliseconds.
      *
      * @throws EventTimeoutException if the time taken exceeds {@code DEFAULT_WAIT_FOR_EVENT_TIMEOUT_MILLISECONDS}
-     * milliseconds.
+     *                               milliseconds.
      */
     public void waitForEvent(BooleanSupplier event) {
         waitForEvent(event, DEFAULT_WAIT_FOR_EVENT_TIMEOUT_MILLISECONDS);
@@ -90,8 +90,9 @@ public class GuiRobot extends FxRobot {
      */
     public int getNumberOfWindowsShown(String stageTitle) {
         return (int) listTargetWindows().stream()
-                .filter(window -> window instanceof Stage && ((Stage) window).getTitle().equals(stageTitle))
-                .count();
+                                        .filter(window -> window instanceof Stage && ((Stage) window).getTitle()
+                                                                                                     .equals(stageTitle))
+                                        .count();
     }
 
     /**
@@ -103,10 +104,11 @@ public class GuiRobot extends FxRobot {
      */
     public Stage getStage(String stageTitle) {
         Optional<Stage> targetStage = listTargetWindows().stream()
-                .filter(Stage.class::isInstance) // checks that the window is of type Stage
-                .map(Stage.class::cast)
-                .filter(stage -> stage.getTitle().equals(stageTitle))
-                .findFirst();
+                                                         .filter(Stage.class::isInstance) // checks that the window
+                                                         // is of type Stage
+                                                         .map(Stage.class::cast)
+                                                         .filter(stage -> stage.getTitle().equals(stageTitle))
+                                                         .findFirst();
 
         return targetStage.orElseThrow(StageNotFoundException::new);
     }

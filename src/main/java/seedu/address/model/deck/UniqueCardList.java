@@ -19,7 +19,7 @@ import seedu.address.model.deck.exceptions.DuplicateCardException;
  * to ensure that the new card being added is unique in terms of its identity. However, the removal
  * of a card uses Card#equal(Object) so as to ensure that the card with exactly the same fields
  * will be removed.
- *
+ * <p>
  * Supports a minimal set of list operations.
  *
  * @see Card#isSameCard(Card)
@@ -27,8 +27,8 @@ import seedu.address.model.deck.exceptions.DuplicateCardException;
 public class UniqueCardList implements Iterable<Card> {
 
     public final ObservableList<Card> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Card> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+    private final ObservableList<Card> internalUnmodifiableList = FXCollections
+            .unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent card as the given argument.
@@ -111,7 +111,7 @@ public class UniqueCardList implements Iterable<Card> {
      * Sort all cards in the list in alphabetical order according to the question.
      */
     public void sort() {
-        internalList.sort(Comparator.comparing(o -> o.getQuestion().toString().toLowerCase()));
+        internalList.sort(Comparator.comparing(o -> o.getQuestion().toLowerCase()));
     }
 
 

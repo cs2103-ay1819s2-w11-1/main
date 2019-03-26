@@ -47,8 +47,7 @@ public class DeleteDeckCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredList().size() + 1);
         DeleteDeckCommand deleteCommand = new DeleteDeckCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, commandHistory,
-                Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);
     }
 
     @Test
@@ -77,8 +76,7 @@ public class DeleteDeckCommandTest {
 
         DeleteDeckCommand deleteCommand = new DeleteDeckCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, commandHistory,
-                Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);
     }
 
     @Test

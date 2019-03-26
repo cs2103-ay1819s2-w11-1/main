@@ -19,10 +19,8 @@ public class OpenDeckCommand extends Command {
 
     public static final String COMMAND_WORD = "open";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Opens the deck identified by the index number.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Opens the deck identified by the index number.\n"
+            + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " 1";
 
     private static final String MESSAGE_OPEN_DECK_SUCCESS = "Opened deck";
 

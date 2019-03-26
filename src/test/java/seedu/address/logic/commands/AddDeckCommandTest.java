@@ -17,7 +17,6 @@ import org.junit.rules.ExpectedException;
 
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
-
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.ListItem;
@@ -31,7 +30,6 @@ import seedu.address.model.TopDeck;
 import seedu.address.model.deck.Card;
 import seedu.address.model.deck.Deck;
 import seedu.address.testutil.DeckBuilder;
-
 
 
 public class AddDeckCommandTest {

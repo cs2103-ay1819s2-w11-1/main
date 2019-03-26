@@ -82,6 +82,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -162,7 +163,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                                                  (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
@@ -184,12 +185,12 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             if (commandResult instanceof UpdatePanelCommandResult) {
                 listPanel = new ListPanel(logic.getFilteredList(), logic.selectedItemProperty(),
-                    logic::setSelectedItem);
+                                          logic::setSelectedItem);
                 contentPanelPlaceholder.getChildren().clear();
                 contentPanelPlaceholder.getChildren().add(listPanel.getRoot());
             } else if (commandResult instanceof StudyPanelCommand) {
                 studyPanel = new StudyPanel(logic.textShownProperty(), logic.studyStateProperty(),
-                    logic.userAnswerProperty());
+                                            logic.userAnswerProperty());
                 contentPanelPlaceholder.getChildren().clear();
                 contentPanelPlaceholder.getChildren().add(studyPanel.getRoot());
             } else if (commandResult instanceof HelpCommandResult) {

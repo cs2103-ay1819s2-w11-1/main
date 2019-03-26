@@ -39,9 +39,7 @@ public class JsonAdaptedDeck {
      */
     public JsonAdaptedDeck(Deck source) {
         name = source.getName().fullName;
-        cards = source.getCards().internalList.stream()
-                .map(JsonAdaptedCard::new)
-                .collect(Collectors.toList());
+        cards = source.getCards().internalList.stream().map(JsonAdaptedCard::new).collect(Collectors.toList());
     }
 
     /**
@@ -77,8 +75,7 @@ public class JsonAdaptedDeck {
         }
 
         JsonAdaptedDeck otherDeck = (JsonAdaptedDeck) other;
-        return Objects.equals(name, otherDeck.name)
-                && cards.equals(otherDeck.cards);
+        return Objects.equals(name, otherDeck.name) && cards.equals(otherDeck.cards);
     }
 }
 

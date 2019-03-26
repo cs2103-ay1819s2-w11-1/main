@@ -10,14 +10,15 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import javafx.beans.InvalidationListener;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.deck.Deck;
 import seedu.address.model.deck.exceptions.DuplicateDeckException;
 import seedu.address.testutil.DeckBuilder;

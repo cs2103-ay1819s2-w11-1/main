@@ -106,7 +106,7 @@ public class GuiTestAssert {
      */
     private static void assertTagsEqual(Card expectedCard, CardDisplayHandle actualCard) {
         List<String> expectedTags = new ArrayList<String>();
-        for (Tag tag: expectedCard.getTags()) {
+        for (Tag tag : expectedCard.getTags()) {
             expectedTags.add(tag.tagName);
         }
         assertEquals(expectedTags, actualCard.getTags());

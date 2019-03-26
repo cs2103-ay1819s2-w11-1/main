@@ -21,15 +21,15 @@ public class OpenDeckCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the OpenDeckCommand
      * and returns an OpenDeckCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public OpenDeckCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
-            return new OpenDeckCommand(index, (DecksView)viewState);
+            return new OpenDeckCommand(index, viewState);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, OpenDeckCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, OpenDeckCommand.MESSAGE_USAGE), pe);
         }
     }
 }

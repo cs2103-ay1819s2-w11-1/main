@@ -25,10 +25,9 @@ import seedu.address.model.deck.Deck;
  */
 public class DecksView implements ListViewState {
 
+    public final FilteredList<Deck> filteredDecks;
     private final SimpleObjectProperty<Deck> selectedDeck = new SimpleObjectProperty<>();
     private Model model;
-
-    public final FilteredList<Deck> filteredDecks;
 
     public DecksView(Model model, FilteredList<Deck> deckList) {
         this.model = model;
@@ -66,8 +65,11 @@ public class DecksView implements ListViewState {
                 return;
             }
 
-            boolean wasSelectedItemReplaced = change.wasReplaced() && change.getAddedSize() == change.getRemovedSize()
-                    && change.getRemoved().contains(selectedDeck.getValue());
+            boolean wasSelectedItemReplaced =
+                    change.wasReplaced() && change.getAddedSize() == change.getRemovedSize() && change.getRemoved()
+                                                                                                      .contains(
+                                                                                                              selectedDeck
+                                                                                                                      .getValue());
             if (wasSelectedItemReplaced) {
                 // Update selectedDeck to its new value.
                 int index = change.getRemoved().indexOf(selectedDeck.getValue());
@@ -75,8 +77,8 @@ public class DecksView implements ListViewState {
                 continue;
             }
 
-            boolean wasSelectedItemRemoved = change.getRemoved().stream()
-                    .anyMatch(removedItem -> selectedDeck.getValue().equals(removedItem));
+            boolean wasSelectedItemRemoved = change.getRemoved().stream().anyMatch(
+                    removedItem -> selectedDeck.getValue().equals(removedItem));
             if (wasSelectedItemRemoved) {
                 // Select the card that came before it in the list,
                 // or clear the selection if there is no such card.

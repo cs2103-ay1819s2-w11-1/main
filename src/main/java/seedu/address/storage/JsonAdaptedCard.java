@@ -43,9 +43,7 @@ public class JsonAdaptedCard {
     public JsonAdaptedCard(Card source) {
         this.question = source.getQuestion();
         this.answer = source.getAnswer();
-        this.tags.addAll(source.getTags()
-                .stream().map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        this.tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }
 
     /**

@@ -34,8 +34,8 @@ public class EditCardCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
-    private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCardCommand.MESSAGE_USAGE);
+    private static final String MESSAGE_INVALID_FORMAT = String
+            .format(MESSAGE_INVALID_COMMAND_FORMAT, EditCardCommand.MESSAGE_USAGE);
 
     private EditCardCommandParser parser = new EditCardCommandParser();
 
@@ -78,11 +78,13 @@ public class EditCardCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_CARD;
-        String userInput = targetIndex.getOneBased() + QUESTION_DESC_HELLO + ANSWER_DESC_HELLO + TAG_DESC_SUBJECT
-            + TAG_DESC_MOD;
+        String userInput =
+                targetIndex.getOneBased() + QUESTION_DESC_HELLO + ANSWER_DESC_HELLO + TAG_DESC_SUBJECT + TAG_DESC_MOD;
 
         EditCardDescriptor descriptor = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_HELLO)
-                .withAnswer(VALID_ANSWER_HELLO).withTags(VALID_TAG_SUBJECT, VALID_TAG_MOD).build();
+                                                                       .withAnswer(VALID_ANSWER_HELLO)
+                                                                       .withTags(VALID_TAG_SUBJECT, VALID_TAG_MOD)
+                                                                       .build();
         EditCardCommand expectedCommand = new EditCardCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -93,8 +95,8 @@ public class EditCardCommandParserTest {
         Index targetIndex = INDEX_FIRST_CARD;
         String userInput = targetIndex.getOneBased() + ANSWER_DESC_HELLO;
 
-        EditCardCommand.EditCardDescriptor descriptor = new EditCardDescriptorBuilder()
-            .withAnswer(VALID_ANSWER_HELLO).build();
+        EditCardCommand.EditCardDescriptor descriptor = new EditCardDescriptorBuilder().withAnswer(VALID_ANSWER_HELLO)
+                                                                                       .build();
         EditCardCommand expectedCommand = new EditCardCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -116,7 +118,7 @@ public class EditCardCommandParserTest {
         Index targetIndex = INDEX_THIRD_CARD;
         String userInput = targetIndex.getOneBased() + QUESTION_DESC_ADDITION;
         EditCardCommand.EditCardDescriptor descriptor = new EditCardDescriptorBuilder()
-            .withQuestion(VALID_QUESTION_ADDITION).build();
+                .withQuestion(VALID_QUESTION_ADDITION).build();
         EditCardCommand expectedCommand = new EditCardCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -136,11 +138,14 @@ public class EditCardCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_CARD;
-        String userInput = targetIndex.getOneBased() + ANSWER_DESC_ADDITION + ANSWER_DESC_SUBTRACTION
-            + ANSWER_DESC_HELLO + TAG_DESC_MOD + TAG_DESC_SUBJECT;
+        String userInput =
+                targetIndex.getOneBased() + ANSWER_DESC_ADDITION + ANSWER_DESC_SUBTRACTION + ANSWER_DESC_HELLO
+                        + TAG_DESC_MOD + TAG_DESC_SUBJECT;
 
         EditCardCommand.EditCardDescriptor descriptor = new EditCardDescriptorBuilder().withAnswer(VALID_ANSWER_HELLO)
-                .withTags(VALID_TAG_MOD, VALID_TAG_SUBJECT).build();
+                                                                                       .withTags(VALID_TAG_MOD,
+                                                                                                 VALID_TAG_SUBJECT)
+                                                                                       .build();
         EditCardCommand expectedCommand = new EditCardCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

@@ -13,6 +13,7 @@ public class DeleteDeckCommandParser implements Parser<DeleteDeckCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteDeckCommand
      * and returns an DeleteDeckCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteDeckCommand parse(String args) throws ParseException {
@@ -20,8 +21,8 @@ public class DeleteDeckCommandParser implements Parser<DeleteDeckCommand> {
             Index index = ParserUtil.parseIndex(args);
             return new DeleteDeckCommand(index);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteDeckCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteDeckCommand.MESSAGE_USAGE),
+                                     pe);
         }
     }
 }

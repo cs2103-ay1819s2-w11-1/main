@@ -19,10 +19,9 @@ public class DeleteCardCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the card identified by the index number used in the displayed card list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_USAGE =
+            COMMAND_WORD + ": Deletes the card identified by the index number used in the displayed card list.\n"
+                    + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_CARD_SUCCESS = "Deleted Card: %1$s";
 

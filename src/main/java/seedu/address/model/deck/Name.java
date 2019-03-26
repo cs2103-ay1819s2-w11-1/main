@@ -9,8 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
-    public static final String MESSAGE_NAME =
-            "Names should contain only alphanumeric characters and not be empty";
+    public static final String MESSAGE_NAME = "Names should contain only alphanumeric characters and not be empty";
 
     /*
      * The first character must not be whitespace,

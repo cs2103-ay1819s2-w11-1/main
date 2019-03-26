@@ -28,7 +28,6 @@ public class TagUtil {
 
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
 
-        return tags.stream().map(tag -> tag.tagName.toLowerCase())
-            .anyMatch(preppedWord::equalsIgnoreCase);
+        return tags.stream().map(tag -> tag.tagName.toLowerCase()).anyMatch(preppedWord::equalsIgnoreCase);
     }
 }

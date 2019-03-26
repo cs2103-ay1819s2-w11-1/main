@@ -25,7 +25,8 @@ public class ListPanelHandle extends NodeHandle<ListView<Deck>> {
     /**
      * Returns a handle to the selected {@code DeckDisplayHandle}.
      * A maximum of 1 item can be selected at any time.
-     * @throws AssertionError if no deck is selected, or more than 1 deck is selected.
+     *
+     * @throws AssertionError        if no deck is selected, or more than 1 deck is selected.
      * @throws IllegalStateException if the selected deck is currently not in the scene graph.
      */
     public DeckDisplayHandle getHandleToSelectedDeck() {
@@ -35,11 +36,9 @@ public class ListPanelHandle extends NodeHandle<ListView<Deck>> {
             throw new AssertionError("Deck list size expected 1.");
         }
 
-        return getAllDeckNodes().stream()
-                .map(DeckDisplayHandle::new)
-                .filter(handle -> handle.equals(selectedDeckList.get(0)))
-                .findFirst()
-                .orElseThrow(IllegalStateException::new);
+        return getAllDeckNodes().stream().map(DeckDisplayHandle::new)
+                                .filter(handle -> handle.equals(selectedDeckList.get(0))).findFirst()
+                                .orElseThrow(IllegalStateException::new);
     }
 
     /**
@@ -99,14 +98,12 @@ public class ListPanelHandle extends NodeHandle<ListView<Deck>> {
 
     /**
      * Returns the display deck handle of a deck associated with the {@code index} in the list.
+     *
      * @throws IllegalStateException if the selected deck is currently not in the scene graph.
      */
     public DeckDisplayHandle getDeckDisplayHandle(int index) {
-        return getAllDeckNodes().stream()
-                .map(DeckDisplayHandle::new)
-                .filter(handle -> handle.equals(getDeck(index)))
-                .findFirst()
-                .orElseThrow(IllegalStateException::new);
+        return getAllDeckNodes().stream().map(DeckDisplayHandle::new).filter(handle -> handle.equals(getDeck(index)))
+                                .findFirst().orElseThrow(IllegalStateException::new);
     }
 
     private Deck getDeck(int index) {
@@ -145,8 +142,9 @@ public class ListPanelHandle extends NodeHandle<ListView<Deck>> {
         if (selectedItems.size() == 0) {
             return lastRememberedSelectedDeckDisplay.isPresent();
         } else {
-            return !lastRememberedSelectedDeckDisplay.isPresent()
-                    || !lastRememberedSelectedDeckDisplay.get().equals(selectedItems.get(0));
+            return !lastRememberedSelectedDeckDisplay.isPresent() || !lastRememberedSelectedDeckDisplay.get()
+                                                                                                       .equals(selectedItems
+                                                                                                                       .get(0));
         }
     }
 

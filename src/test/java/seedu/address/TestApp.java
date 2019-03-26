@@ -27,8 +27,8 @@ public class TestApp extends MainApp {
 
     public static final Path SAVE_LOCATION_FOR_TESTING = TestUtil.getFilePathInSandboxFolder("sampleData.json");
 
-    protected static final Path DEFAULT_PREF_FILE_LOCATION_FOR_TESTING =
-            TestUtil.getFilePathInSandboxFolder("pref_testing.json");
+    protected static final Path DEFAULT_PREF_FILE_LOCATION_FOR_TESTING = TestUtil
+            .getFilePathInSandboxFolder("pref_testing.json");
     protected Supplier<ReadOnlyTopDeck> initialDataSupplier = () -> null;
     protected Path saveFileLocation = SAVE_LOCATION_FOR_TESTING;
 
@@ -49,6 +49,10 @@ public class TestApp extends MainApp {
                 throw new AssertionError(ioe);
             }
         }
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 
     @Override
@@ -100,10 +104,6 @@ public class TestApp extends MainApp {
     @Override
     public void start(Stage primaryStage) {
         ui.start(primaryStage);
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 
 }

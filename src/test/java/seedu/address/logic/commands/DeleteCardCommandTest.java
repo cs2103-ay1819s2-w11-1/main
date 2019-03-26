@@ -84,8 +84,8 @@ public class DeleteCardCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_CARD;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased()
-                < model.getTopDeck().getDeckList().get(0).getCards().internalList.size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getTopDeck().getDeckList().get(0).getCards().internalList
+                .size());
 
         DeleteCardCommand deleteCommand = new DeleteCardCommand(outOfBoundIndex);
 

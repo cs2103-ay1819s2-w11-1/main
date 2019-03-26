@@ -21,8 +21,8 @@ import seedu.address.testutil.EditDeckDescriptorBuilder;
 
 public class EditDeckCommandParserTest {
 
-    private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDeckCommand.MESSAGE_USAGE);
+    private static final String MESSAGE_INVALID_FORMAT = String
+            .format(MESSAGE_INVALID_COMMAND_FORMAT, EditDeckCommand.MESSAGE_USAGE);
 
     private EditDeckCommandParser parser = new EditDeckCommandParser();
 
@@ -62,8 +62,7 @@ public class EditDeckCommandParserTest {
     public void parse_repeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_DECK;
         String userInput = targetIndex.getOneBased() + VALID_DECK_NAME_A_ARGS + VALID_DECK_NAME_B_ARGS;
-        EditDeckDescriptor descriptor = new EditDeckDescriptorBuilder()
-                .withName(VALID_NAME_DECK_B).build();
+        EditDeckDescriptor descriptor = new EditDeckDescriptorBuilder().withName(VALID_NAME_DECK_B).build();
         EditDeckCommand expectedCommand = new EditDeckCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -74,8 +73,7 @@ public class EditDeckCommandParserTest {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_DECK;
         String userInput = targetIndex.getOneBased() + INVALID_DECK_NAME_ARGS + VALID_DECK_NAME_B_ARGS;
-        EditDeckDescriptor descriptor = new EditDeckDescriptorBuilder()
-                .withName(VALID_NAME_DECK_B).build();
+        EditDeckDescriptor descriptor = new EditDeckDescriptorBuilder().withName(VALID_NAME_DECK_B).build();
         EditDeckCommand expectedCommand = new EditDeckCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

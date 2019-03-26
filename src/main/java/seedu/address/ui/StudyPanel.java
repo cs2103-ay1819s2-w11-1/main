@@ -39,8 +39,7 @@ public class StudyPanel extends UiPart<Region> {
     private Label userAnswerLabel;
 
 
-    public StudyPanel(ObservableValue<String> textShown,
-                      ObservableValue<StudyView.studyState> studyState,
+    public StudyPanel(ObservableValue<String> textShown, ObservableValue<StudyView.studyState> studyState,
                       ObservableValue<String> userAnswer) {
         super(FXML);
 

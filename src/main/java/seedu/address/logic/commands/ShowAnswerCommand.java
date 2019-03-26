@@ -13,7 +13,7 @@ public class ShowAnswerCommand extends Command {
     private static String userAnswer;
 
     public ShowAnswerCommand(String userAnswer) {
-        this.userAnswer = userAnswer;
+        ShowAnswerCommand.userAnswer = userAnswer;
     }
 
     @Override
@@ -24,8 +24,6 @@ public class ShowAnswerCommand extends Command {
         studyView.setUserAnswer(userAnswer);
         return new CommandResult("");
     }
-
-
 
 
 }
