@@ -45,20 +45,20 @@ public class TopDeckParser {
             return model.parse(commandWord, arguments);
         } catch (ParseException e) {
             switch (commandWord) {
-                case ListCommand.COMMAND_WORD:
-                    return new ListCommand();
-                case HistoryCommand.COMMAND_WORD:
-                    return new HistoryCommand();
-                case UndoCommand.COMMAND_WORD:
-                    return new UndoCommand();
-                case RedoCommand.COMMAND_WORD:
-                    return new RedoCommand();
-                case ExitCommand.COMMAND_WORD:
-                    return new ExitCommand();
-                case HelpCommand.COMMAND_WORD:
-                    return new HelpCommand();
-                default:
-                    throw e;
+            case ListCommand.COMMAND_WORD:
+                return new ListCommand();
+            case HistoryCommand.COMMAND_WORD:
+                return new HistoryCommand();
+            case UndoCommand.COMMAND_WORD:
+                return new UndoCommand();
+            case RedoCommand.COMMAND_WORD:
+                return new RedoCommand();
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
+            default:
+                throw e;
             }
         }
 

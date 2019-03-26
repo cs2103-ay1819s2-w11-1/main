@@ -45,10 +45,10 @@ import seedu.address.testutil.DeckBuilder;
 import seedu.address.testutil.EditCardDescriptorBuilder;
 
 public class TopDeckParserTest {
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
     private final TopDeckParser parser = new TopDeckParser();
     private final Model model = new ModelManager(getTypicalTopDeck(), new UserPrefs());
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void parseCommand_addDeck() throws Exception {

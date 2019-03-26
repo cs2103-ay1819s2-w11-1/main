@@ -38,20 +38,20 @@ public class DecksView implements ListViewState {
     @Override
     public Command parse(String commandWord, String arguments) throws ParseException {
         switch (commandWord) {
-            case AddDeckCommand.COMMAND_WORD:
-                return new AddDeckCommandParser().parse(arguments);
-            case SelectCommand.COMMAND_WORD:
-                return new SelectCommandParser(this).parse(arguments);
-            case OpenDeckCommand.COMMAND_WORD:
-                return new OpenDeckCommandParser(this).parse(arguments);
-            case StudyDeckCommand.COMMAND_WORD:
-                return new StudyDeckCommandParser(this).parse(arguments);
-            case DeleteDeckCommand.COMMAND_WORD:
-                return new DeleteDeckCommandParser().parse(arguments);
-            case EditDeckCommand.COMMAND_WORD:
-                return new EditDeckCommandParser().parse(arguments);
-            default:
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        case AddDeckCommand.COMMAND_WORD:
+            return new AddDeckCommandParser().parse(arguments);
+        case SelectCommand.COMMAND_WORD:
+            return new SelectCommandParser(this).parse(arguments);
+        case OpenDeckCommand.COMMAND_WORD:
+            return new OpenDeckCommandParser(this).parse(arguments);
+        case StudyDeckCommand.COMMAND_WORD:
+            return new StudyDeckCommandParser(this).parse(arguments);
+        case DeleteDeckCommand.COMMAND_WORD:
+            return new DeleteDeckCommandParser().parse(arguments);
+        case EditDeckCommand.COMMAND_WORD:
+            return new EditDeckCommandParser().parse(arguments);
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 

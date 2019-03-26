@@ -22,9 +22,9 @@ import seedu.address.model.deck.exceptions.DuplicateCardException;
 import seedu.address.testutil.CardBuilder;
 
 public class UniqueCardListTest {
+    private final UniqueCardList uniqueCardList = new UniqueCardList();
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-    private final UniqueCardList uniqueCardList = new UniqueCardList();
 
     @Test
     public void contains_nullCard_throwsNullPointerException() {

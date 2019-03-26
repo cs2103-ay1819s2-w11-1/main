@@ -36,14 +36,14 @@ public class StudyView implements ViewState {
     public Command parse(String commandWord, String arguments) throws ParseException {
 
         switch (commandWord) {
-            case DoneCommand.COMMAND_WORD:
-                return new DoneCommand();
-            default:
-                if (getCurrentStudyState() == studyState.QUESTION) {
-                    return new ShowAnswerCommand(commandWord + arguments);
-                } else {
-                    return new GenerateQuestionCommand();
-                }
+        case DoneCommand.COMMAND_WORD:
+            return new DoneCommand();
+        default:
+            if (getCurrentStudyState() == studyState.QUESTION) {
+                return new ShowAnswerCommand(commandWord + arguments);
+            } else {
+                return new GenerateQuestionCommand();
+            }
         }
     }
 

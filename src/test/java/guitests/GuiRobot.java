@@ -90,9 +90,8 @@ public class GuiRobot extends FxRobot {
      */
     public int getNumberOfWindowsShown(String stageTitle) {
         return (int) listTargetWindows().stream()
-                                        .filter(window
-                                            -> window instanceof Stage && ((Stage) window).getTitle()
-                                                                                          .equals(stageTitle))
+                                        .filter(window -> window instanceof Stage && ((Stage) window).getTitle()
+                                                                                                     .equals(stageTitle))
                                         .count();
     }
 

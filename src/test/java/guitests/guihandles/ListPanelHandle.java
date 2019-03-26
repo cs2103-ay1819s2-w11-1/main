@@ -142,10 +142,9 @@ public class ListPanelHandle extends NodeHandle<ListView<Deck>> {
         if (selectedItems.size() == 0) {
             return lastRememberedSelectedDeckDisplay.isPresent();
         } else {
-            return !lastRememberedSelectedDeckDisplay.isPresent()
-                    || !lastRememberedSelectedDeckDisplay.get()
-                                                         .equals(selectedItems
-                                                         .get(0));
+            return !lastRememberedSelectedDeckDisplay.isPresent() || !lastRememberedSelectedDeckDisplay.get()
+                                                                                                       .equals(selectedItems
+                                                                                                                       .get(0));
         }
     }
 
