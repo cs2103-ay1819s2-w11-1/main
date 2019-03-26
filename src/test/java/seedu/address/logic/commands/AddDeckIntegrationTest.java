@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_DECK;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalCards.getTypicalTopDeck;
-import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_DECK;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,7 +37,7 @@ public class AddDeckIntegrationTest {
         expectedModel.commitTopDeck();
 
         assertCommandSuccess(new AddDeckCommand(validDeck), model, commandHistory,
-                String.format(AddDeckCommand.MESSAGE_SUCCESS, validDeck), expectedModel);
+                             String.format(AddDeckCommand.MESSAGE_SUCCESS, validDeck), expectedModel);
     }
 
     @Test

@@ -3,11 +3,8 @@ package seedu.address.logic;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.ANSWER_DESC_ADDITION;
-import static seedu.address.logic.commands.CommandTestUtil.QUESTION_DESC_ADDITION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DECK_A;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DECK_NAME_A_ARGS;
-import static seedu.address.testutil.TypicalCards.ADDITION;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -18,7 +15,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.logic.commands.AddCardCommand;
 import seedu.address.logic.commands.AddDeckCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.HistoryCommand;
@@ -29,12 +25,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTopDeck;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.deck.Card;
 import seedu.address.model.deck.Deck;
 import seedu.address.storage.JsonTopDeckStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.CardBuilder;
 import seedu.address.testutil.DeckBuilder;
 
 

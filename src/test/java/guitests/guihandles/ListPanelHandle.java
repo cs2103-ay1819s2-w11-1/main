@@ -1,6 +1,5 @@
 package guitests.guihandles;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -19,8 +18,8 @@ public class ListPanelHandle extends NodeHandle<ListView<Deck>> {
 
     private Optional<Deck> lastRememberedSelectedDeckDisplay;
 
-    public ListPanelHandle(ListView<Deck> ListPanelNode) {
-        super(ListPanelNode);
+    public ListPanelHandle(ListView<Deck> listPanelHandle) {
+        super(listPanelHandle);
     }
 
     /**

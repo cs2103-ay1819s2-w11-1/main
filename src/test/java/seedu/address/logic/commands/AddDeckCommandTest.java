@@ -11,22 +11,27 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import javafx.beans.property.ReadOnlyProperty;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
+
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.ListItem;
 import seedu.address.logic.ViewState;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.*;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyTopDeck;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.TopDeck;
 import seedu.address.model.deck.Card;
 import seedu.address.model.deck.Deck;
 import seedu.address.testutil.DeckBuilder;
+
 
 
 public class AddDeckCommandTest {
@@ -96,12 +101,12 @@ public class AddDeckCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
+        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -126,12 +131,12 @@ public class AddDeckCommandTest {
         }
 
         @Override
-        public void setTopDeck(ReadOnlyTopDeck newData) {
+        public ReadOnlyTopDeck getTopDeck() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyTopDeck getTopDeck() {
+        public void setTopDeck(ReadOnlyTopDeck newData) {
             throw new AssertionError("This method should not be called.");
         }
 

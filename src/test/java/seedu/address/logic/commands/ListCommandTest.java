@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showCardAtIndex;
 import static seedu.address.logic.commands.CommandTestUtil.showDeckAtIndex;
 import static seedu.address.testutil.TypicalDecks.getTypicalTopDeck;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CARD;

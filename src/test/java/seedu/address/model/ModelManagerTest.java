@@ -1,5 +1,19 @@
 package seedu.address.model;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DECKS;
+import static seedu.address.testutil.TypicalCards.ADDITION;
+import static seedu.address.testutil.TypicalCards.SUBTRACTION;
+import static seedu.address.testutil.TypicalDecks.DECK_A;
+import static seedu.address.testutil.TypicalDecks.DECK_B;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -9,20 +23,6 @@ import seedu.address.model.deck.DeckNameContainsKeywordsPredicate;
 import seedu.address.model.deck.exceptions.CardNotFoundException;
 import seedu.address.model.deck.exceptions.IllegalOperationWhileReviewingDeckException;
 import seedu.address.testutil.TopDeckBuilder;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Collections;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DECKS;
-import static seedu.address.testutil.TypicalCards.ADDITION;
-import static seedu.address.testutil.TypicalCards.SUBTRACTION;
-import static seedu.address.testutil.TypicalDecks.DECK_A;
-import static seedu.address.testutil.TypicalDecks.DECK_B;
 
 public class ModelManagerTest {
     @Rule
@@ -156,22 +156,22 @@ public class ModelManagerTest {
     }
 
     //TODO for card
-//    @Test
-//    public void deleteCard_cardIsSelectedAndFirstCardInFilteredCardList_selectionCleared() {
-//        modelManager.addCard(ADDITION);
-//        modelManager.setSelectedItem(ADDITION);
-//        modelManager.deleteCard(ADDITION);
-//        assertEquals(null, modelManager.getSelectedItem());
-//    }
+    //    @Test
+    //    public void deleteCard_cardIsSelectedAndFirstCardInFilteredCardList_selectionCleared() {
+    //        modelManager.addCard(ADDITION);
+    //        modelManager.setSelectedItem(ADDITION);
+    //        modelManager.deleteCard(ADDITION);
+    //        assertEquals(null, modelManager.getSelectedItem());
+    //    }
 
     //TODO delete functionality for deck
-//    @Test
-//    public void deleteDeck_deckIsSelectedAndFirstDeckInFilteredDeckList_selectionCleared() {
-//        modelManager.addDeck(DECK_A);
-//        modelManager.setSelectedItem(DECK_A);
-//        modelManager.deleteDeck(DECK_A);
-//        assertEquals(null, modelManager.getSelectedItem());
-//    }
+    //    @Test
+    //    public void deleteDeck_deckIsSelectedAndFirstDeckInFilteredDeckList_selectionCleared() {
+    //        modelManager.addDeck(DECK_A);
+    //        modelManager.setSelectedItem(DECK_A);
+    //        modelManager.deleteDeck(DECK_A);
+    //        assertEquals(null, modelManager.getSelectedItem());
+    //    }
 
     //TODO: Fix selection of card after delete
     @Test
@@ -186,35 +186,35 @@ public class ModelManagerTest {
     }
 
     //TODO add delete deck functionality
-//    @Test
-//    public void deleteDeck_deckIsSelectedAndSecondDeckInFilteredDeckList_firstDeckSelected() {
-//        modelManager.addDeck(DECK_A);
-//        modelManager.addDeck(DECK_B);
-//        assertEquals(Arrays.asList(DECK_A, DECK_B), modelManager.getFilteredList());
-//        modelManager.setSelectedItem(DECK_B);
-//        modelManager.deleteDeck(DECK_B);
-//        assertEquals(DECK_A, modelManager.getSelectedItem());
-//    }
+    //    @Test
+    //    public void deleteDeck_deckIsSelectedAndSecondDeckInFilteredDeckList_firstDeckSelected() {
+    //        modelManager.addDeck(DECK_A);
+    //        modelManager.addDeck(DECK_B);
+    //        assertEquals(Arrays.asList(DECK_A, DECK_B), modelManager.getFilteredList());
+    //        modelManager.setSelectedItem(DECK_B);
+    //        modelManager.deleteDeck(DECK_B);
+    //        assertEquals(DECK_A, modelManager.getSelectedItem());
+    //    }
 
     //TODO for card
-//    @Test
-//    public void setCard_cardIsSelected_selectedCardUpdated() {
-//        modelManager.addCard(ADDITION);
-//        modelManager.setSelectedItem(ADDITION);
-//        Card updatedAddition = new CardBuilder(ADDITION).withAnswer(VALID_ANSWER_MOD).build();
-//        modelManager.setCard(ADDITION, updatedAddition);
-//        assertEquals(updatedAddition, modelManager.getSelectedItem());
-//    }
+    //    @Test
+    //    public void setCard_cardIsSelected_selectedCardUpdated() {
+    //        modelManager.addCard(ADDITION);
+    //        modelManager.setSelectedItem(ADDITION);
+    //        Card updatedAddition = new CardBuilder(ADDITION).withAnswer(VALID_ANSWER_MOD).build();
+    //        modelManager.setCard(ADDITION, updatedAddition);
+    //        assertEquals(updatedAddition, modelManager.getSelectedItem());
+    //    }
 
     //TODO add setDeck
-//    @Test
-//    public void setDeck_deckIsSelected_selectedDeckUpdated() {
-//        modelManager.addDeck(DECK_A);
-//        modelManager.setSelectedItem(DECK_A);
-//        Deck updatedAddition = new DeckBuilder(DECK_A).build();
-//        modelManager.setDeck(DECK_A, updatedAddition);
-//        assertEquals(updatedAddition, modelManager.getSelectedItem());
-//    }
+    //    @Test
+    //    public void setDeck_deckIsSelected_selectedDeckUpdated() {
+    //        modelManager.addDeck(DECK_A);
+    //        modelManager.setSelectedItem(DECK_A);
+    //        Deck updatedAddition = new DeckBuilder(DECK_A).build();
+    //        modelManager.setDeck(DECK_A, updatedAddition);
+    //        assertEquals(updatedAddition, modelManager.getSelectedItem());
+    //    }
 
     @Test
     public void getFilteredList_modifyList_throwsUnsupportedOperationException() {
@@ -229,13 +229,13 @@ public class ModelManagerTest {
     }
 
     //TODO for card
-//    @Test
-//    public void setSelectedItem_cardInFilteredCardList_setsSelectedCard() {
-//        modelManager.addCard(ADDITION);
-//        assertEquals(Collections.singletonList(ADDITION), modelManager.getFilteredList());
-//        modelManager.setSelectedItem(ADDITION);
-//        assertEquals(ADDITION, modelManager.getSelectedItem());
-//    }
+    //    @Test
+    //    public void setSelectedItem_cardInFilteredCardList_setsSelectedCard() {
+    //        modelManager.addCard(ADDITION);
+    //        assertEquals(Collections.singletonList(ADDITION), modelManager.getFilteredList());
+    //        modelManager.setSelectedItem(ADDITION);
+    //        assertEquals(ADDITION, modelManager.getSelectedItem());
+    //    }
 
     @Test
     public void setSelectedItem_deckInFilteredDeckList_setsSelectedDeck() {
@@ -269,10 +269,10 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentTopDeck, userPrefs)));
 
         //TODO for card
-//        // different filteredList -> returns false
-//        String[] keywords = ADDITION.getQuestion().split("\\s+");
-//        modelManager.updateFilteredList(new QuestionContainsKeywordsPredicate(Arrays.asList(keywords)));
-//        assertFalse(modelManager.equals(new ModelManager(topDeck, userPrefs)));
+        //        // different filteredList -> returns false
+        //        String[] keywords = ADDITION.getQuestion().split("\\s+");
+        //        modelManager.updateFilteredList(new QuestionContainsKeywordsPredicate(Arrays.asList(keywords)));
+        //        assertFalse(modelManager.equals(new ModelManager(topDeck, userPrefs)));
 
         // different filteredList -> returns false
         String keyword = DECK_A.getName().toString();

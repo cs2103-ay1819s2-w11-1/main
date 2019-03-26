@@ -117,15 +117,22 @@ public class StringUtilTest {
         assertFalse(StringUtil.containsKeywordsInQuestionIgnoreCase("    ", "123"));
 
         // Matches a partial word only
-        assertFalse(StringUtil.containsKeywordsInQuestionIgnoreCase("aaa bbb ccc", "bb")); // Sentence word bigger than query word
-        assertFalse(StringUtil.containsKeywordsInQuestionIgnoreCase("aaa bbb ccc", "bbbb")); // Query word bigger than sentence word
+        // Sentence word bigger than query word
+        assertFalse(StringUtil.containsKeywordsInQuestionIgnoreCase("aaa bbb ccc", "bb"));
+        // Query word bigger than sentence word
+        assertFalse(StringUtil.containsKeywordsInQuestionIgnoreCase("aaa bbb ccc", "bbbb"));
 
         // Matches word in the sentence, different upper/lower case letters
-        assertTrue(StringUtil.containsKeywordsInQuestionIgnoreCase("aaa bBb ccc", "Bbb")); // First word (boundary case)
-        assertTrue(StringUtil.containsKeywordsInQuestionIgnoreCase("aaa bBb ccc@1", "CCc@1")); // Last word (boundary case)
-        assertTrue(StringUtil.containsKeywordsInQuestionIgnoreCase("  AAA   bBb   ccc  ", "aaa")); // Sentence has extra spaces
-        assertTrue(StringUtil.containsKeywordsInQuestionIgnoreCase("Aaa", "aaa")); // Only one word in sentence (boundary case)
-        assertTrue(StringUtil.containsKeywordsInQuestionIgnoreCase("aaa bbb ccc", "  ccc  ")); // Leading/trailing spaces
+        // First word (boundary case)
+        assertTrue(StringUtil.containsKeywordsInQuestionIgnoreCase("aaa bBb ccc", "Bbb"));
+        // Last word (boundary case)
+        assertTrue(StringUtil.containsKeywordsInQuestionIgnoreCase("aaa bBb ccc@1", "CCc@1"));
+        // Sentence has extra spaces
+        assertTrue(StringUtil.containsKeywordsInQuestionIgnoreCase("  AAA   bBb   ccc  ", "aaa"));
+        // Only one word in sentence (boundary case)
+        assertTrue(StringUtil.containsKeywordsInQuestionIgnoreCase("Aaa", "aaa"));
+        // Leading/trailing spaces
+        assertTrue(StringUtil.containsKeywordsInQuestionIgnoreCase("aaa bbb ccc", "  ccc  "));
 
         // Matches multiple words in sentence
         assertTrue(StringUtil.containsKeywordsInQuestionIgnoreCase("AAA bBb ccc  bbb", "bbB"));

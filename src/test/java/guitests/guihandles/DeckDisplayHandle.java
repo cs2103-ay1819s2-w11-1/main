@@ -3,7 +3,6 @@ package guitests.guihandles;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import seedu.address.model.deck.Deck;
-import seedu.address.model.deck.Name;
 
 /**
  * Provides a handle to a deck card in the deck list panel.

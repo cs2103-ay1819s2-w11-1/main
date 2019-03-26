@@ -3,16 +3,11 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalCards.getTypicalDeck;
 import static seedu.address.testutil.TypicalCards.getTypicalTopDeck;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CARD;
 
-import org.junit.Before;
 import org.junit.Test;
-
-import seedu.address.logic.CardsView;
 import seedu.address.logic.DecksView;
-import seedu.address.logic.commands.SelectCardCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SelectDeckCommand;
 import seedu.address.model.Model;
@@ -21,6 +16,7 @@ import seedu.address.model.UserPrefs;
 
 /**
  * Test scope: similar to {@code DeleteCardCommandParserTest}.
+ *
  * @see DeleteCardCommandParserTest
  */
 public class SelectCommandParserTest {

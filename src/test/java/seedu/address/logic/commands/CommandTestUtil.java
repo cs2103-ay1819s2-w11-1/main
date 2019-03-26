@@ -19,9 +19,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TopDeck;
 import seedu.address.model.deck.Card;
-import seedu.address.model.deck.QuestionContainsKeywordsPredicate;
 import seedu.address.model.deck.Deck;
 import seedu.address.model.deck.DeckNameContainsKeywordsPredicate;
+import seedu.address.model.deck.QuestionContainsKeywordsPredicate;
 import seedu.address.testutil.DeckBuilder;
 import seedu.address.testutil.EditCardDescriptorBuilder;
 import seedu.address.testutil.EditDeckDescriptorBuilder;
@@ -84,24 +84,22 @@ public class CommandTestUtil {
     public static final EditCardCommand.EditCardDescriptor DESC_HELLO;
     public static final EditCardCommand.EditCardDescriptor DESC_MOD;
     public static final EditCardCommand.EditCardDescriptor DESC_ADDITION;
-
-    static {
-        DESC_HELLO = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_HELLO)
-                .withAnswer(VALID_ANSWER_HELLO).withTags(VALID_TAG_MOD).build();
-        DESC_MOD = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_MOD)
-                .withAnswer(VALID_ANSWER_MOD).withTags(VALID_TAG_MOD, VALID_TAG_SUBJECT).build();
-        DESC_ADDITION = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_ADDITION)
-                .withAnswer(VALID_ANSWER_ADDITION).withTags(VALID_TAG_MATH).build();
-    }
-
     public static final EditDeckCommand.EditDeckDescriptor DESC_A;
     public static final EditDeckCommand.EditDeckDescriptor DESC_B;
 
     static {
-        DESC_A = new EditDeckDescriptorBuilder().withName(VALID_NAME_DECK_A)
-                .withCards(VALID_CARD_LIST).build();
-        DESC_B = new EditDeckDescriptorBuilder().withName(VALID_NAME_DECK_B)
-                .withCards(VALID_CARD_LIST).build();
+        DESC_HELLO = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_HELLO).withAnswer(VALID_ANSWER_HELLO)
+                                                    .withTags(VALID_TAG_MOD).build();
+        DESC_MOD = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_MOD).withAnswer(VALID_ANSWER_MOD)
+                                                  .withTags(VALID_TAG_MOD, VALID_TAG_SUBJECT).build();
+        DESC_ADDITION = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_ADDITION)
+                                                       .withAnswer(VALID_ANSWER_ADDITION).withTags(VALID_TAG_MATH)
+                                                       .build();
+    }
+
+    static {
+        DESC_A = new EditDeckDescriptorBuilder().withName(VALID_NAME_DECK_A).withCards(VALID_CARD_LIST).build();
+        DESC_B = new EditDeckDescriptorBuilder().withName(VALID_NAME_DECK_B).withCards(VALID_CARD_LIST).build();
     }
 
     /**
@@ -111,7 +109,7 @@ public class CommandTestUtil {
      * - the {@code actualCommandHistory} remains unchanged.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandHistory actualCommandHistory,
-            CommandResult expectedCommandResult, Model expectedModel) {
+                                            CommandResult expectedCommandResult, Model expectedModel) {
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
         try {
             CommandResult result = command.execute(actualModel, actualCommandHistory);
@@ -128,7 +126,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandHistory actualCommandHistory,
-            String expectedMessage, Model expectedModel) {
+                                            String expectedMessage, Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, actualCommandHistory, expectedCommandResult, expectedModel);
     }
@@ -141,7 +139,7 @@ public class CommandTestUtil {
      * - {@code actualCommandHistory} remains unchanged.
      */
     public static void assertCommandFailure(Command command, Model actualModel, CommandHistory actualCommandHistory,
-            String expectedMessage) {
+                                            String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         TopDeck expectedTopDeck = new TopDeck(actualModel.getTopDeck());
@@ -171,11 +169,10 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredList().size());
         assertTrue(model.isAtDecksView());
 
-        Deck deck = (Deck)model.getFilteredList().get(targetIndex.getZeroBased());
+        Deck deck = (Deck) model.getFilteredList().get(targetIndex.getZeroBased());
 
         final String[] splitName = deck.getName().fullName.split("\\s+");
-        model.updateFilteredList(
-                new DeckNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredList(new DeckNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredList().size());
     }
@@ -189,8 +186,7 @@ public class CommandTestUtil {
         assertTrue(model.isAtCardsView());
 
         Card card = (Card) model.getFilteredList().get(targetIndex.getZeroBased());
-        final String question = card.getQuestion().replace("?", "")
-            .replace(".", "");
+        final String question = card.getQuestion().replace("?", "").replace(".", "");
         model.updateFilteredList(new QuestionContainsKeywordsPredicate(Arrays.asList(question)));
 
         //Gets all the question that starts with what

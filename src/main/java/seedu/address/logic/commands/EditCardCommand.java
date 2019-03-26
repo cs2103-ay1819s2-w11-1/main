@@ -48,7 +48,7 @@ public class EditCardCommand extends Command {
     private final Optional<EditCardDescriptor> editCardDescriptor;
 
     /**
-     * @param index of the card in the filtered card list to edit
+     * @param index              of the card in the filtered card list to edit
      * @param editCardDescriptor details to edit the card with
      */
     public EditCardCommand(Index index, EditCardDescriptor editCardDescriptor) {
@@ -58,10 +58,25 @@ public class EditCardCommand extends Command {
         this.index = index;
         this.editCardDescriptor = Optional.of(new EditCardDescriptor(editCardDescriptor));
     }
+
     public EditCardCommand(Index index) {
         requireNonNull(index);
         this.index = index;
         this.editCardDescriptor = Optional.empty();
+    }
+
+    /**
+     * Creates and returns a {@code Card} with the details of {@code cardToEdit}
+     * edited with {@code editCardDescriptor}.
+     */
+    private static Card createEditedCard(Card cardToEdit, EditCardDescriptor editCardDescriptor) {
+        assert cardToEdit != null;
+
+        String updatedQuestion = editCardDescriptor.getQuestion().orElse(cardToEdit.getQuestion());
+        String updatedAnswer = editCardDescriptor.getAnswer().orElse(cardToEdit.getAnswer());
+        Set<Tag> updatedTags = editCardDescriptor.getTags().orElse(cardToEdit.getTags());
+
+        return new Card(updatedQuestion, updatedAnswer, updatedTags);
     }
 
     @Override
@@ -105,20 +120,6 @@ public class EditCardCommand extends Command {
         }
     }
 
-    /**
-     * Creates and returns a {@code Card} with the details of {@code cardToEdit}
-     * edited with {@code editCardDescriptor}.
-     */
-    private static Card createEditedCard(Card cardToEdit, EditCardDescriptor editCardDescriptor) {
-        assert cardToEdit != null;
-
-        String updatedQuestion = editCardDescriptor.getQuestion().orElse(cardToEdit.getQuestion());
-        String updatedAnswer = editCardDescriptor.getAnswer().orElse(cardToEdit.getAnswer());
-        Set<Tag> updatedTags = editCardDescriptor.getTags().orElse(cardToEdit.getTags());
-
-        return new Card(updatedQuestion, updatedAnswer, updatedTags);
-    }
-
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
@@ -146,7 +147,8 @@ public class EditCardCommand extends Command {
         private String answer;
         private Set<Tag> tags;
 
-        public EditCardDescriptor() {}
+        public EditCardDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -165,28 +167,20 @@ public class EditCardCommand extends Command {
             return CollectionUtil.isAnyNonNull(question, answer, tags);
         }
 
-        public void setQuestion(String question) {
-            this.question = question;
-        }
-
         public Optional<String> getQuestion() {
             return Optional.ofNullable(question);
         }
 
-        public void setAnswer(String answer) {
-            this.answer = answer;
+        public void setQuestion(String question) {
+            this.question = question;
         }
 
         public Optional<String> getAnswer() {
             return Optional.ofNullable(answer);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setAnswer(String answer) {
+            this.answer = answer;
         }
 
         /**
@@ -196,6 +190,14 @@ public class EditCardCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTags(Set<Tag> tags) {
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         @Override

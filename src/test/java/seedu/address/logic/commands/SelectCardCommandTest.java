@@ -13,7 +13,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_CARD;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CardsView;
@@ -69,8 +68,8 @@ public class SelectCardCommandTest {
 
         Index outOfBoundsIndex = INDEX_SECOND_CARD;
         // ensures that outOfBoundIndex is still in bounds of TopDeck list
-        assertTrue(outOfBoundsIndex.getZeroBased() <
-            model.getTopDeck().getDeckList().get(0).getCards().internalList.size());
+        assertTrue(outOfBoundsIndex.getZeroBased() < model.getTopDeck().getDeckList().get(0).getCards().internalList
+                .size());
 
         assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
     }
@@ -84,7 +83,8 @@ public class SelectCardCommandTest {
         assertTrue(selectFirstCommand.equals(selectFirstCommand));
 
         // same values -> returns true
-        SelectCommand selectFirstCommandCopy = new SelectCardCommand(INDEX_FIRST_CARD, (CardsView) model.getViewState());
+        SelectCommand selectFirstCommandCopy = new SelectCardCommand(INDEX_FIRST_CARD,
+                                                                     (CardsView) model.getViewState());
         assertTrue(selectFirstCommand.equals(selectFirstCommandCopy));
 
         // different types -> returns false
