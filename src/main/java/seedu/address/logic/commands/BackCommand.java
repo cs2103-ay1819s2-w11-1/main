@@ -6,7 +6,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 
 /**
- * Selects a deck identified using its displayed index.
+ * Goes back to deck view.
  */
 public class BackCommand extends Command {
 
@@ -17,6 +17,7 @@ public class BackCommand extends Command {
 
     private static final String MESSAGE_CLOSE_DECK_SUCCESS = "Closed deck";
 
+    @Override
     public CommandResult execute(Model model, CommandHistory history) {
 
         requireNonNull(model);

@@ -16,7 +16,7 @@ import seedu.address.model.deck.QuestionContainsKeywordsPredicate;
  */
 public class FindCardCommandParser implements Parser<FindCardCommand> {
 
-    private final String IN_BETWEEN_QUOTES_REGEX = "\"([^\"]*)\"";
+    private static final String IN_BETWEEN_QUOTES_REGEX = "\"([^\"]*)\"";
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand

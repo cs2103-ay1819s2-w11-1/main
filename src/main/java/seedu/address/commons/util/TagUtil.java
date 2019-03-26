@@ -7,6 +7,9 @@ import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 
+/**
+ * Helper function for handling tags search
+ */
 public class TagUtil {
 
     /**

@@ -1,6 +1,5 @@
 package seedu.address.logic;
 
-
 import seedu.address.model.deck.Card;
 import seedu.address.model.deck.Deck;
 import seedu.address.model.deck.UniqueCardList;

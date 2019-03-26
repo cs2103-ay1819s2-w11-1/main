@@ -8,6 +8,9 @@ import seedu.address.logic.commands.StudyDeckCommand;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parser creates a new StudyDeckCommand Object.
+ */
 public class StudyDeckCommandParser {
 
     private DecksView viewState;

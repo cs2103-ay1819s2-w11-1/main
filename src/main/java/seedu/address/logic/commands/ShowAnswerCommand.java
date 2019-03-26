@@ -19,7 +19,7 @@ public class ShowAnswerCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         StudyView studyView = ((StudyView) model.getViewState());
-        studyView.setCurrentStudyState(StudyView.studyState.ANSWER);
+        studyView.setCurrentStudyState(StudyView.StudyState.ANSWER);
         studyView.updateTextShown();
         studyView.setUserAnswer(userAnswer);
         return new CommandResult("");

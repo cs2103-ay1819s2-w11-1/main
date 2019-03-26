@@ -21,7 +21,7 @@ public class DeckNameContainsKeywordsPredicate implements Predicate<Deck> {
             return deck.getName().toString().toLowerCase().contains(keywords.get(0).toLowerCase());
         }
         return keywords.stream().anyMatch(
-                keyword -> StringUtil.containsKeywordsInQuestionIgnoreCase(deck.getName().fullName, keyword));
+            keyword -> StringUtil.containsKeywordsInQuestionIgnoreCase(deck.getName().fullName, keyword));
     }
 
     @Override

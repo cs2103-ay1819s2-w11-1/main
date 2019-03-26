@@ -112,7 +112,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyProperty<StudyView.studyState> studyStateProperty() {
+    public ReadOnlyProperty<StudyView.StudyState> studyStateProperty() {
         StudyView studyView = (StudyView) model.getViewState();
         return studyView.studyStateProperty();
     }

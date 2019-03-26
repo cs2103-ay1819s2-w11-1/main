@@ -77,10 +77,8 @@ public class CardsView implements ListViewState {
             }
 
             boolean wasSelectedItemReplaced =
-                    change.wasReplaced() && change.getAddedSize() == change.getRemovedSize() && change.getRemoved()
-                                                                                                      .contains(
-                                                                                                              selectedCard
-                                                                                                                      .getValue());
+                    change.wasReplaced() && change.getAddedSize()
+                            == change.getRemovedSize() && change.getRemoved().contains(selectedCard.getValue());
             if (wasSelectedItemReplaced) {
                 // Update selectedCard to its new value.
                 int index = change.getRemoved().indexOf(selectedCard.getValue());

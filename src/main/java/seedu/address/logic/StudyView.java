@@ -13,11 +13,14 @@ import seedu.address.model.Model;
 import seedu.address.model.deck.Card;
 import seedu.address.model.deck.Deck;
 
+/**
+ * Stores the state of the Study View.
+ */
 public class StudyView implements ViewState {
     public final List<Card> listOfCards;
     private final Model model;
     private final Deck activeDeck;
-    private final SimpleObjectProperty<studyState> currentStudyState = new SimpleObjectProperty<>();
+    private final SimpleObjectProperty<StudyState> currentStudyState = new SimpleObjectProperty<>();
     private final SimpleObjectProperty<String> textShown = new SimpleObjectProperty<>();
     private final SimpleObjectProperty<String> userAnswer = new SimpleObjectProperty<>();
     private Card currentCard;
@@ -27,7 +30,7 @@ public class StudyView implements ViewState {
         this.model = model;
         this.activeDeck = deck;
         listOfCards = deck.getCards().internalList;
-        setCurrentStudyState(studyState.QUESTION);
+        setCurrentStudyState(StudyState.QUESTION);
         this.deckShuffler = new DeckShuffler(activeDeck);
         generateCard();
     }
@@ -39,7 +42,7 @@ public class StudyView implements ViewState {
         case DoneCommand.COMMAND_WORD:
             return new DoneCommand();
         default:
-            if (getCurrentStudyState() == studyState.QUESTION) {
+            if (getCurrentStudyState() == StudyState.QUESTION) {
                 return new ShowAnswerCommand(commandWord + arguments);
             } else {
                 return new GenerateQuestionCommand();
@@ -62,28 +65,31 @@ public class StudyView implements ViewState {
         updateTextShown();
     }
 
-    public ReadOnlyProperty<studyState> studyStateProperty() {
+    public ReadOnlyProperty<StudyState> studyStateProperty() {
         return currentStudyState;
     }
 
     //=========== Study States ================================================================================
 
-    public studyState getCurrentStudyState() {
+    public StudyState getCurrentStudyState() {
         return currentStudyState.getValue();
     }
 
-    public void setCurrentStudyState(studyState state) {
+    public void setCurrentStudyState(StudyState state) {
         currentStudyState.setValue(state);
     }
 
     public void updateTextShown() {
-        String text = (getCurrentStudyState() == studyState.QUESTION) ? currentCard.getQuestion() : currentCard
+        String text = (getCurrentStudyState() == StudyState.QUESTION) ? currentCard.getQuestion() : currentCard
                 .getAnswer();
         textShown.setValue(text);
     }
 
     //=========== TextShown ================================================================================
 
+    /**
+     * String to be shown in flashcard
+     */
     public ReadOnlyProperty<String> textShownProperty() {
         updateTextShown();
         return textShown;
@@ -103,7 +109,7 @@ public class StudyView implements ViewState {
         userAnswer.setValue(answer);
     }
 
-    public enum studyState {
+    public enum StudyState {
         QUESTION, ANSWER
     }
 

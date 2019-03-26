@@ -66,10 +66,8 @@ public class DecksView implements ListViewState {
             }
 
             boolean wasSelectedItemReplaced =
-                    change.wasReplaced() && change.getAddedSize() == change.getRemovedSize() && change.getRemoved()
-                                                                                                      .contains(
-                                                                                                              selectedDeck
-                                                                                                                      .getValue());
+                    change.wasReplaced() && change.getAddedSize()
+                            == change.getRemovedSize() && change.getRemoved().contains(selectedDeck.getValue());
             if (wasSelectedItemReplaced) {
                 // Update selectedDeck to its new value.
                 int index = change.getRemoved().indexOf(selectedDeck.getValue());
@@ -78,7 +76,7 @@ public class DecksView implements ListViewState {
             }
 
             boolean wasSelectedItemRemoved = change.getRemoved().stream().anyMatch(
-                    removedItem -> selectedDeck.getValue().equals(removedItem));
+                removedItem -> selectedDeck.getValue().equals(removedItem));
             if (wasSelectedItemRemoved) {
                 // Select the card that came before it in the list,
                 // or clear the selection if there is no such card.
