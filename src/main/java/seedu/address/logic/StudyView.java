@@ -1,5 +1,7 @@
 package seedu.address.logic;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
 
 import javafx.beans.property.ReadOnlyProperty;
@@ -53,9 +55,13 @@ public class StudyView implements ViewState {
 
     //=========== Current Card ================================================================================
 
-
     public void setCurrentCard(Card card) {
+        requireNonNull(card);
         currentCard = card;
+    }
+
+    public Card getCurrentCard() {
+        return currentCard;
     }
 
     public void generateCard() {
@@ -70,6 +76,7 @@ public class StudyView implements ViewState {
     }
 
     public void setCurrentStudyState(studyState state) {
+        requireNonNull(state);
         currentStudyState.setValue(state);
     }
 
@@ -99,6 +106,7 @@ public class StudyView implements ViewState {
     }
 
     public void setUserAnswer(String answer) {
+        requireNonNull(answer);
         userAnswer.setValue(answer);
     }
 
