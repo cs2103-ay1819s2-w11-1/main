@@ -41,41 +41,6 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setUserPrefs_nullUserPrefs_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        modelManager.setUserPrefs(null);
-    }
-
-    @Override
-    public Command parse(String commandWord, String arguments) throws ParseException {
-
-        switch (commandWord) {
-        case DoneCommand.COMMAND_WORD:
-            return new DoneCommand();
-        default:
-            if (getCurrentStudyState() == studyState.QUESTION) {
-                return new ShowAnswerCommand(commandWord+arguments);
-            } else {
-                return new GenerateQuestionCommand();
-            }
-        }
-    }
-
-    @Test
-    public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
-        UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setTopDeckFilePath(Paths.get("topdeck/file/path"));
-        userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
-        modelManager.setUserPrefs(userPrefs);
-        assertEquals(userPrefs, modelManager.getUserPrefs());
-
-        // Modifying userPrefs should not modify modelManager's userPrefs
-        UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setTopDeckFilePath(Paths.get("new/topdeck/file/path"));
-        assertEquals(oldUserPrefs, modelManager.getUserPrefs());
-    }
-
-    @Test
     public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         modelManager.setGuiSettings(null);

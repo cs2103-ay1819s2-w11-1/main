@@ -8,7 +8,6 @@ import seedu.address.logic.commands.DoneCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.GenerateQuestionCommand;
 import seedu.address.logic.commands.ShowAnswerCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.deck.Card;
 import seedu.address.model.deck.Deck;
 
