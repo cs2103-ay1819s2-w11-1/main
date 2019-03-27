@@ -73,7 +73,7 @@ public class ModelManager implements Model {
     }
 
     public void studyDeck(Deck deck) {
-        viewState = new StudyView(this, deck);
+        viewState = new StudyView(deck);
     }
 
     @Override

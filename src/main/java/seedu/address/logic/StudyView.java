@@ -9,12 +9,10 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.GenerateQuestionCommand;
 import seedu.address.logic.commands.ShowAnswerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
 import seedu.address.model.deck.Card;
 import seedu.address.model.deck.Deck;
 
 public class StudyView implements ViewState {
-    private final Model model;
     public final List<Card> listOfCards;
     private final Deck activeDeck;
     private Card currentCard;
@@ -27,8 +25,7 @@ public class StudyView implements ViewState {
         QUESTION, ANSWER;
     }
 
-    public StudyView(Model model, Deck deck) {
-        this.model = model;
+    public StudyView(Deck deck) {
         this.activeDeck = deck;
         listOfCards = deck.getCards().internalList;
         setCurrentStudyState(studyState.QUESTION);
