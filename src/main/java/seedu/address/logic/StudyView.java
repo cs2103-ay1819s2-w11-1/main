@@ -34,7 +34,7 @@ public class StudyView implements ViewState {
     }
 
     @Override
-    public Command parse(String commandWord, String arguments) throws ParseException {
+    public Command parse(String commandWord, String arguments){
 
         switch (commandWord) {
             case DoneCommand.COMMAND_WORD:
