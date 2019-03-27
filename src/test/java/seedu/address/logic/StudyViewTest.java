@@ -5,7 +5,9 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CardsView;
+import seedu.address.logic.DeckShuffler;
 import seedu.address.logic.StudyView;
+import seedu.address.model.deck.Deck;
 import seedu.address.model.deck.DeckNameContainsKeywordsPredicate;
 import seedu.address.model.deck.exceptions.CardNotFoundException;
 import seedu.address.model.deck.exceptions.IllegalOperationWhileReviewingDeckException;
@@ -32,17 +34,31 @@ public class ModelManagerTest {
     private StudyView studyView = new StudyView();
 
     @Test
-    public void constructor() {
-        assertEquals(new Model(), modelManager.getUserPrefs());
-        assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new TopDeck(), modelManager.getTopDeck());
-        assertEquals(null, modelManager.getSelectedItem());
+    public void constructor(Deck deck) {
+        assertEquals(deck, studyView.getActiveDeck());
+        assertEquals(StudyView.studyState.QUESTION, studyView.getCurrentStudyState());
+        assertEquals(null, studyView.getUserAnswer());
     }
 
     @Test
     public void setUserPrefs_nullUserPrefs_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         modelManager.setUserPrefs(null);
+    }
+
+    @Override
+    public Command parse(String commandWord, String arguments) throws ParseException {
+
+        switch (commandWord) {
+        case DoneCommand.COMMAND_WORD:
+            return new DoneCommand();
+        default:
+            if (getCurrentStudyState() == studyState.QUESTION) {
+                return new ShowAnswerCommand(commandWord+arguments);
+            } else {
+                return new GenerateQuestionCommand();
+            }
+        }
     }
 
     @Test
