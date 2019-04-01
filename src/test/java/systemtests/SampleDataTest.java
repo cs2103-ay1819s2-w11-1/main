@@ -1,16 +1,10 @@
 package systemtests;
 
-import static seedu.address.ui.testutil.GuiTestAssert.assertDeckListMatching;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import org.junit.Test;
-
 import seedu.address.model.TopDeck;
-import seedu.address.model.deck.Deck;
-import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 
 public class SampleDataTest extends TopDeckSystemTest {
@@ -43,10 +37,10 @@ public class SampleDataTest extends TopDeckSystemTest {
         }
     }
 
-//    @Test
-//    public void topDeck_dataFileDoesNotExist_loadSampleData() {
-//        Deck[] expectedList = SampleDataUtil.getSampleDecks();
-//        assertDeckListMatching(getCardListPanel(), expectedList);
-//    }
+    //    @Test
+    //    public void topDeck_dataFileDoesNotExist_loadSampleData() {
+    //        Deck[] expectedList = SampleDataUtil.getSampleDecks();
+    //        assertDeckListMatching(getCardListPanel(), expectedList);
+    //    }
 
 }

@@ -16,10 +16,11 @@ import seedu.address.model.ReadOnlyTopDeck;
 public interface Logic {
     /**
      * Executes the command and returns the result.
+     *
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
-     * @throws ParseException If an error occurs during parsing.
+     * @throws ParseException   If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
@@ -35,7 +36,9 @@ public interface Logic {
      */
     void setSelectedItem(ListItem item);
 
-    /** Returns an unmodifiable view of the current filtered list. The element type depends on the view state. */
+    /**
+     * Returns an unmodifiable view of the current filtered list. The element type depends on the view state.
+     */
     ObservableList<ListItem> getFilteredList();
 
     /**
@@ -71,9 +74,9 @@ public interface Logic {
     ReadOnlyProperty<String> textShownProperty();
 
     /**
-     * Current studyState in the StudyView
+     * Current StudyState in the StudyView
      */
-    ReadOnlyProperty<StudyView.studyState> studyStateProperty();
+    ReadOnlyProperty<StudyView.StudyState> studyStateProperty();
 
     /**
      * Current userAnswer

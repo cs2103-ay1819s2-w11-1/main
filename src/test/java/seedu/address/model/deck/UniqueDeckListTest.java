@@ -20,6 +20,7 @@ import seedu.address.model.deck.exceptions.DuplicateDeckException;
 import seedu.address.testutil.DeckBuilder;
 
 public class UniqueDeckListTest {
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -60,6 +61,26 @@ public class UniqueDeckListTest {
         uniqueDeckList.add(DECK_A);
         thrown.expect(DuplicateDeckException.class);
         uniqueDeckList.add(DECK_A);
+    }
+
+    @Test
+    public void getDeck_nullTargetDeck_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        uniqueDeckList.getDeck(null);
+    }
+
+    @Test
+    public void getDeck_targetDeckNotInList_throwsDeckNotFoundException() {
+        thrown.expect(DeckNotFoundException.class);
+        uniqueDeckList.getDeck(DECK_A);
+    }
+
+    @Test
+    public void getDeck_targetDeckInList_success() {
+        uniqueDeckList.add(DECK_A);
+        uniqueDeckList.add(DECK_B);
+        Deck retrievedDeck = uniqueDeckList.getDeck(DECK_A);
+        assertTrue(retrievedDeck.isSameDeck(DECK_A));
     }
 
     @Test

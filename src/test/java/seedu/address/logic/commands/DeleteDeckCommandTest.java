@@ -50,7 +50,7 @@ public class DeleteDeckCommandTest {
         DeleteDeckCommand deleteCommand = new DeleteDeckCommand(decksView, outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, commandHistory,
-                Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);
+                             Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);
     }
 
     @Test
@@ -80,7 +80,7 @@ public class DeleteDeckCommandTest {
         DeleteDeckCommand deleteCommand = new DeleteDeckCommand(decksView, outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, commandHistory,
-                Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);
+                             Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);
     }
 
     @Test

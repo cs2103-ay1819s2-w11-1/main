@@ -1,13 +1,12 @@
 package seedu.address.testutil;
 
 import seedu.address.model.TopDeck;
-import seedu.address.model.deck.Card;
 import seedu.address.model.deck.Deck;
 
 /**
  * A utility class to help with building TopDeck objects.
  * Example usage: <br>
- *     {@code TopDeck td = new TopDeckBuilder().withCard("Question1", "Question2").build();}
+ * {@code TopDeck td = new TopDeckBuilder().withCard("Question1", "Question2").build();}
  */
 public class TopDeckBuilder {
 

@@ -42,7 +42,8 @@ public class InvalidationListenerManager {
     /**
      * Removes {@code listener} from the list of listeners.
      * If the given listener was not previously added, then this method call is a no-op.
-     * If the given listener was added more than once, then only the first occurrence in the list will be removed.
+     * If the given listener was added more than once, then only the first occurrence in the list will be
+     * removed.
      */
     public void removeListener(InvalidationListener listener) {
         requireNonNull(listener);

@@ -96,7 +96,8 @@ public class ListElementPointerTest {
         assertFalse(firstPointer.equals(null));
 
         // different elements -> returns false
-        ListElementPointer differentElementPointer = new ListElementPointer(Collections.singletonList(SECOND_ELEMENT));
+        ListElementPointer differentElementPointer = new ListElementPointer(
+                Collections.singletonList(SECOND_ELEMENT));
         assertFalse(firstPointer.equals(differentElementPointer));
 
         // different index -> returns false

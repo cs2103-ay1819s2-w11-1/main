@@ -42,8 +42,8 @@ public class EditCardCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
-    private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCardCommand.MESSAGE_USAGE);
+    private static final String MESSAGE_INVALID_FORMAT = String
+            .format(MESSAGE_INVALID_COMMAND_FORMAT, EditCardCommand.MESSAGE_USAGE);
 
     private Model model = new ModelManager(getTypicalTopDeck(), new UserPrefs());
     private EditCardCommandParser parser;
@@ -85,21 +85,28 @@ public class EditCardCommandParserTest {
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_MOD + TAG_DESC_SUBJECT + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_MOD + TAG_EMPTY + TAG_DESC_SUBJECT, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_MOD + TAG_DESC_SUBJECT, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_MOD + TAG_DESC_SUBJECT + TAG_EMPTY,
+                           Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_MOD + TAG_EMPTY + TAG_DESC_SUBJECT,
+                           Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_MOD + TAG_DESC_SUBJECT,
+                           Tag.MESSAGE_CONSTRAINTS);
 
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_CARD;
-        String userInput = targetIndex.getOneBased() + QUESTION_DESC_HELLO + ANSWER_DESC_HELLO + TAG_DESC_SUBJECT
-            + TAG_DESC_MOD;
+        String userInput =
+                targetIndex.getOneBased() + QUESTION_DESC_HELLO + ANSWER_DESC_HELLO + TAG_DESC_SUBJECT
+                        + TAG_DESC_MOD;
 
         EditCardDescriptor descriptor = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_HELLO)
-                .withAnswer(VALID_ANSWER_HELLO).withTags(VALID_TAG_SUBJECT, VALID_TAG_MOD).build();
-        EditCardCommand expectedCommand = new EditCardCommand((CardsView) model.getViewState(), targetIndex, descriptor);
+                                                                       .withAnswer(VALID_ANSWER_HELLO)
+                                                                       .withTags(VALID_TAG_SUBJECT,
+                                                                                 VALID_TAG_MOD).build();
+        EditCardCommand expectedCommand = new EditCardCommand((CardsView) model.getViewState(), targetIndex,
+                                                              descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -110,8 +117,9 @@ public class EditCardCommandParserTest {
         String userInput = targetIndex.getOneBased() + ANSWER_DESC_HELLO;
 
         EditCardCommand.EditCardDescriptor descriptor = new EditCardDescriptorBuilder()
-            .withAnswer(VALID_ANSWER_HELLO).build();
-        EditCardCommand expectedCommand = new EditCardCommand((CardsView) model.getViewState(), targetIndex, descriptor);
+                .withAnswer(VALID_ANSWER_HELLO).build();
+        EditCardCommand expectedCommand = new EditCardCommand((CardsView) model.getViewState(), targetIndex,
+                                                              descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -132,8 +140,9 @@ public class EditCardCommandParserTest {
         Index targetIndex = INDEX_THIRD_CARD;
         String userInput = targetIndex.getOneBased() + QUESTION_DESC_ADDITION;
         EditCardCommand.EditCardDescriptor descriptor = new EditCardDescriptorBuilder()
-            .withQuestion(VALID_QUESTION_ADDITION).build();
-        EditCardCommand expectedCommand = new EditCardCommand((CardsView) model.getViewState(), targetIndex, descriptor);
+                .withQuestion(VALID_QUESTION_ADDITION).build();
+        EditCardCommand expectedCommand = new EditCardCommand((CardsView) model.getViewState(), targetIndex,
+                                                              descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // answer
@@ -152,12 +161,14 @@ public class EditCardCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_CARD;
-        String userInput = targetIndex.getOneBased() + ANSWER_DESC_ADDITION + ANSWER_DESC_SUBTRACTION
-            + ANSWER_DESC_HELLO + TAG_DESC_MOD + TAG_DESC_SUBJECT;
+        String userInput =
+                targetIndex.getOneBased() + ANSWER_DESC_ADDITION + ANSWER_DESC_SUBTRACTION + ANSWER_DESC_HELLO
+                        + TAG_DESC_MOD + TAG_DESC_SUBJECT;
 
-        EditCardCommand.EditCardDescriptor descriptor = new EditCardDescriptorBuilder().withAnswer(VALID_ANSWER_HELLO)
-                .withTags(VALID_TAG_MOD, VALID_TAG_SUBJECT).build();
-        EditCardCommand expectedCommand = new EditCardCommand((CardsView) model.getViewState(), targetIndex, descriptor);
+        EditCardCommand.EditCardDescriptor descriptor = new EditCardDescriptorBuilder()
+                .withAnswer(VALID_ANSWER_HELLO).withTags(VALID_TAG_MOD, VALID_TAG_SUBJECT).build();
+        EditCardCommand expectedCommand = new EditCardCommand((CardsView) model.getViewState(), targetIndex,
+                                                              descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -168,7 +179,8 @@ public class EditCardCommandParserTest {
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
         EditCardCommand.EditCardDescriptor descriptor = new EditCardDescriptorBuilder().withTags().build();
-        EditCardCommand expectedCommand = new EditCardCommand((CardsView) model.getViewState(), targetIndex, descriptor);
+        EditCardCommand expectedCommand = new EditCardCommand((CardsView) model.getViewState(), targetIndex,
+                                                              descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

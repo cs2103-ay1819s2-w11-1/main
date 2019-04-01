@@ -42,6 +42,21 @@ public class UniqueDeckList implements Iterable<Deck> {
     }
 
     /**
+     * Returns the deck that has the same identifier as {@code target}.
+     * The deck must exist in the list.
+     */
+    public Deck getDeck(Deck target) {
+        requireNonNull(target);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new DeckNotFoundException();
+        }
+
+        return internalList.get(index);
+    }
+
+    /**
      * Replaces the deck {@code target} in the list with {@code editedDeck}.
      * {@code target} must exist in the list.
      * The deck identity of {@code editedDeck} must not be the same as another existing deck in the list.

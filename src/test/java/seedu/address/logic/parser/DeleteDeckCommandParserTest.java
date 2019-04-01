@@ -21,16 +21,19 @@ public class DeleteDeckCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteDeckCommand((DecksView) model.getViewState(), INDEX_FIRST_DECK));
+        assertParseSuccess(parser, "1",
+                           new DeleteDeckCommand((DecksView) model.getViewState(), INDEX_FIRST_DECK));
     }
 
     @Test
     public void parse_blankArgs_throwsParseException() {
-        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteDeckCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "",
+                           String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteDeckCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteDeckCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a",
+                           String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteDeckCommand.MESSAGE_USAGE));
     }
 }

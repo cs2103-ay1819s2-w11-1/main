@@ -19,9 +19,9 @@ public class StudyPanel extends UiPart<Region> {
 
     private static final String FXML = "StudyPanel.fxml";
     private static final PseudoClass ANSWER = PseudoClass.getPseudoClass("answer");
+    private static final String YOUR_ANSWER_LABEL = "Your answer: ";
 
     private final Logger logger = LogsCenter.getLogger(ListPanel.class);
-    private final String YOUR_ANSWER_LABEL = "Your answer: ";
 
     @FXML
     private HBox studyPane;
@@ -39,16 +39,13 @@ public class StudyPanel extends UiPart<Region> {
     private Label userAnswerLabel;
 
 
-    public StudyPanel(ObservableValue<String> textShown,
-                      ObservableValue<StudyView.studyState> studyState,
+    public StudyPanel(ObservableValue<String> textShown, ObservableValue<StudyView.StudyState> studyState,
                       ObservableValue<String> userAnswer) {
         super(FXML);
 
         question.setText(textShown.getValue());
         userAnswerLabel.setVisible(false);
-
         card.pseudoClassStateChanged(ANSWER, false);
-
         textShown.addListener((observable, oldValue, newValue) -> {
             logger.info("textShown changed to: " + newValue);
             question.setText(textShown.getValue());
@@ -56,9 +53,9 @@ public class StudyPanel extends UiPart<Region> {
 
         studyState.addListener((observable, oldValue, newValue) -> {
             logger.info("color changed for: " + newValue);
-            card.pseudoClassStateChanged(ANSWER, studyState.getValue() == StudyView.studyState.ANSWER);
-            question.pseudoClassStateChanged(ANSWER, studyState.getValue() == StudyView.studyState.ANSWER);
-            userAnswerLabel.setVisible(studyState.getValue() == StudyView.studyState.ANSWER);
+            card.pseudoClassStateChanged(ANSWER, studyState.getValue() == StudyView.StudyState.ANSWER);
+            question.pseudoClassStateChanged(ANSWER, studyState.getValue() == StudyView.StudyState.ANSWER);
+            userAnswerLabel.setVisible(studyState.getValue() == StudyView.StudyState.ANSWER);
         });
 
         userAnswer.addListener((observable, oldValue, newValue) -> {

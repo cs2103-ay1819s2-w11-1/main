@@ -57,8 +57,7 @@ public class Card implements ListItem {
             return true;
         }
 
-        return otherCard != null
-                && otherCard.getQuestion().equals(question);
+        return otherCard != null && otherCard.getQuestion().equals(question);
     }
 
 
@@ -78,9 +77,8 @@ public class Card implements ListItem {
 
         Card otherCard = (Card) other;
 
-        return this.answer.equals(otherCard.answer)
-                && this.question.equals(otherCard.question)
-                && this.tags.equals(otherCard.tags);
+        return this.answer.equals(otherCard.answer) && this.question.equals(otherCard.question) && this.tags
+                .equals(otherCard.tags);
     }
 
     @Override
@@ -91,11 +89,8 @@ public class Card implements ListItem {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Question: ")
-                .append(getQuestion())
-                .append(" Answer: ")
-                .append(getAnswer())
-                .append(" Tags: ");
+        builder.append("Question: ").append(getQuestion()).append(" Answer: ").append(getAnswer())
+               .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }

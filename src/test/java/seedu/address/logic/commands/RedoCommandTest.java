@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertUpdateCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.deleteFirstDeck;
 import static seedu.address.testutil.TypicalDecks.getTypicalTopDeck;
 
@@ -37,13 +37,16 @@ public class RedoCommandTest {
     public void execute() {
         // multiple redoable states in model
         expectedModel.redoTopDeck();
-        assertCommandSuccess(new RedoCommand(model.getViewState()), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertUpdateCommandSuccess(new RedoCommand(model.getViewState()), model, commandHistory,
+                                   RedoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // single redoable state in model
         expectedModel.redoTopDeck();
-        assertCommandSuccess(new RedoCommand(model.getViewState()), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertUpdateCommandSuccess(new RedoCommand(model.getViewState()), model, commandHistory,
+                                   RedoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // no redoable state in model
-        assertCommandFailure(new RedoCommand(model.getViewState()), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new RedoCommand(model.getViewState()), model, commandHistory,
+                             RedoCommand.MESSAGE_FAILURE);
     }
 }

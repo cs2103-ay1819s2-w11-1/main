@@ -10,17 +10,21 @@ import java.util.Optional;
  * Stores mapping of prefixes to their respective arguments.
  * Each key may be associated with multiple argument values.
  * Values for a given key are stored in a list, and the insertion ordering is maintained.
- * Keys are unique, but the list of argument values may contain duplicate argument values, i.e. the same argument value
+ * Keys are unique, but the list of argument values may contain duplicate argument values, i.e. the same
+ * argument value
  * can be inserted multiple times for the same prefix.
  */
 public class ArgumentMultimap {
 
-    /** Prefixes mapped to their respective arguments**/
+    /**
+     * Prefixes mapped to their respective arguments
+     **/
     private final Map<Prefix, List<String>> argMultimap = new HashMap<>();
 
     /**
      * Associates the specified argument value with {@code prefix} key in this map.
-     * If the map previously contained a mapping for the key, the new value is appended to the list of existing values.
+     * If the map previously contained a mapping for the key, the new value is appended to the list of
+     * existing values.
      *
      * @param prefix   Prefix key with which the specified argument value is to be associated
      * @param argValue Argument value to be associated with the specified prefix key

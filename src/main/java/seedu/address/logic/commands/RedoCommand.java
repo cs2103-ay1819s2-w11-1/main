@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CARDS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DECKS;
 
 import seedu.address.logic.CardsView;
@@ -10,6 +9,7 @@ import seedu.address.logic.DecksView;
 import seedu.address.logic.ViewState;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.deck.Deck;
 
 /**
  * Reverts the {@code model}'s deck to its previously undone state.
@@ -35,10 +35,14 @@ public class RedoCommand extends Command {
 
         model.redoTopDeck();
         if (model.isAtDecksView()) {
-            ((DecksView)viewState).updateFilteredList(PREDICATE_SHOW_ALL_DECKS);
+            DecksView decksView = (DecksView) viewState;
+            decksView.updateFilteredList(PREDICATE_SHOW_ALL_DECKS);
         } else if (model.isAtCardsView()) {
-            ((CardsView)viewState).updateFilteredList(PREDICATE_SHOW_ALL_CARDS);
+            CardsView currentView = (CardsView) viewState;
+            Deck currentActiveDeck = currentView.getActiveDeck();
+            Deck newActiveDeck = model.getDeck(currentActiveDeck);
+            model.changeDeck(newActiveDeck);
         }
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new UpdatePanelCommandResult(MESSAGE_SUCCESS);
     }
 }

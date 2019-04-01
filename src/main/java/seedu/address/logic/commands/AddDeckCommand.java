@@ -17,11 +17,9 @@ public class AddDeckCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Create a new deck."
-            + "Parameters: "
-            + PREFIX_NAME + "NAME\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "MyDeck";
+    public static final String MESSAGE_USAGE =
+            COMMAND_WORD + ": Create a new deck." + "Parameters: " + PREFIX_NAME + "NAME\n" + "Example: "
+                    + COMMAND_WORD + " " + PREFIX_NAME + "MyDeck";
 
     public static final String MESSAGE_SUCCESS = "New deck added: %1$s";
     public static final String MESSAGE_DUPLICATE_DECK = "A deck with this name already exists";

@@ -14,7 +14,7 @@ public class GenerateQuestionCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         StudyView studyView = ((StudyView) model.getViewState());
         studyView.generateCard();
-        studyView.setCurrentStudyState(StudyView.studyState.QUESTION);
+        studyView.setCurrentStudyState(StudyView.StudyState.QUESTION);
         studyView.updateTextShown();
         return new CommandResult("");
     }

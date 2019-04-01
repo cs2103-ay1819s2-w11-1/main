@@ -17,7 +17,9 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all decks";
+    public static final String MESSAGE_DECK_SUCCESS = "Listed all decks";
+    public static final String MESSAGE_CARD_SUCCESS = "Listed all cards";
+
     private final ViewState viewState;
 
     public ListCommand(ViewState viewState) {
@@ -28,11 +30,14 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         if (model.isAtDecksView()) {
-            ((DecksView)viewState).updateFilteredList(PREDICATE_SHOW_ALL_DECKS);
-        } else if (model.isAtCardsView()) {
-            ((CardsView)viewState).updateFilteredList(PREDICATE_SHOW_ALL_CARDS);
+            DecksView decksView = (DecksView) viewState;
+            decksView.updateFilteredList(PREDICATE_SHOW_ALL_DECKS);
+            return new CommandResult(MESSAGE_DECK_SUCCESS);
+        } else {
+            CardsView cardsView = (CardsView) viewState;
+            cardsView.updateFilteredList(PREDICATE_SHOW_ALL_CARDS);
+            return new CommandResult(MESSAGE_CARD_SUCCESS);
         }
 
-        return new CommandResult(MESSAGE_SUCCESS);
     }
 }

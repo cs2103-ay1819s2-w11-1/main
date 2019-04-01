@@ -21,7 +21,8 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager();
         expectedModel.commitTopDeck();
 
-        assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS,
+                             expectedModel);
     }
 
     @Test
@@ -31,7 +32,8 @@ public class ClearCommandTest {
         expectedModel.setTopDeck(new TopDeck());
         expectedModel.commitTopDeck();
 
-        assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS,
+                             expectedModel);
     }
 
 }

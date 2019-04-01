@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import javafx.beans.property.ReadOnlyProperty;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
@@ -25,7 +25,12 @@ import seedu.address.logic.ListItem;
 import seedu.address.logic.ViewState;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.*;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyTopDeck;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.TopDeck;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.deck.Card;
 import seedu.address.model.deck.Deck;
 import seedu.address.testutil.DeckBuilder;
@@ -52,7 +57,8 @@ public class AddDeckCommandTest {
         ModelStubAcceptingDeckAdded modelStub = new ModelStubAcceptingDeckAdded();
         Deck validDeck = new DeckBuilder().build();
 
-        CommandResult commandResult = new AddDeckCommand((DecksView) model.getViewState(), validDeck).execute(modelStub, commandHistory);
+        CommandResult commandResult = new AddDeckCommand((DecksView) model.getViewState(), validDeck)
+                .execute(modelStub, commandHistory);
 
         assertEquals(String.format(AddDeckCommand.MESSAGE_SUCCESS, validDeck), commandResult.feedbackToUser);
         assertEquals(Arrays.asList(validDeck), modelStub.decksAdded);
@@ -75,13 +81,15 @@ public class AddDeckCommandTest {
         Deck firstDeck = new DeckBuilder().withName("Test Deck1").build();
         Deck secondDeck = new DeckBuilder().withName("Test Deck2").build();
         AddDeckCommand addFirstDeckCommand = new AddDeckCommand((DecksView) model.getViewState(), firstDeck);
-        AddDeckCommand addSecondDeckCommand = new AddDeckCommand((DecksView) model.getViewState(), secondDeck);
+        AddDeckCommand addSecondDeckCommand = new AddDeckCommand((DecksView) model.getViewState(),
+                                                                 secondDeck);
 
         // same object -> returns true
         assertTrue(addFirstDeckCommand.equals(addFirstDeckCommand));
 
         // same values -> returns true
-        AddDeckCommand addFirstDeckCommandCopy = new AddDeckCommand((DecksView) model.getViewState(), firstDeck);
+        AddDeckCommand addFirstDeckCommandCopy = new AddDeckCommand((DecksView) model.getViewState(),
+                                                                    firstDeck);
         assertTrue(addFirstDeckCommand.equals(addFirstDeckCommandCopy));
 
         // different types -> returns false
@@ -99,12 +107,12 @@ public class AddDeckCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
+        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -129,33 +137,38 @@ public class AddDeckCommandTest {
         }
 
         @Override
-        public void setTopDeck(ReadOnlyTopDeck newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ReadOnlyTopDeck getTopDeck() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasCard(Card card) {
+        public void setTopDeck(ReadOnlyTopDeck newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addCard(Card card) {
+        public boolean hasCard(Card card, Deck deck) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addCard(Card card, Deck deck) {
             throw new AssertionError("This method should not be called.");
         }
 
 
         @Override
-        public void deleteCard(Card target) {
+        public void deleteCard(Card target, Deck deck) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setCard(Card target, Card editedCard) {
+        public void setCard(Card target, Card editedCard, Deck deck) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Deck getDeck(Deck target) {
             throw new AssertionError("This method should not be called.");
         }
 

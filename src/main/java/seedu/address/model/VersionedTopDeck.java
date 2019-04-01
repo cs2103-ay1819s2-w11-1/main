@@ -84,8 +84,8 @@ public class VersionedTopDeck extends TopDeck {
         VersionedTopDeck otherVersionedTopDeck = (VersionedTopDeck) other;
 
         // state check
-        return super.equals(otherVersionedTopDeck)
-                && topDeckStateList.equals(otherVersionedTopDeck.topDeckStateList)
+        return super.equals(otherVersionedTopDeck) && topDeckStateList
+                .equals(otherVersionedTopDeck.topDeckStateList)
                 && currentStatePointer == otherVersionedTopDeck.currentStatePointer;
     }
 

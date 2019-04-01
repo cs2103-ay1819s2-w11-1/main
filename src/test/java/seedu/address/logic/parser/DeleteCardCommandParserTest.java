@@ -38,11 +38,13 @@ public class DeleteCardCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCardCommand((CardsView) model.getViewState(), INDEX_FIRST_CARD));
+        assertParseSuccess(parser, "1",
+                           new DeleteCardCommand((CardsView) model.getViewState(), INDEX_FIRST_CARD));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCardCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a",
+                           String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCardCommand.MESSAGE_USAGE));
     }
 }

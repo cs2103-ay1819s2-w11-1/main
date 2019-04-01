@@ -54,28 +54,29 @@ public class AddCardCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + QUESTION_DESC_SUBTRACTION + ANSWER_DESC_SUBTRACTION
-            + TAG_DESC_MOD, new AddCardCommand((CardsView) model.getViewState(), expectedCard));
+                + TAG_DESC_MOD, new AddCardCommand((CardsView) model.getViewState(), expectedCard));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, QUESTION_DESC_HELLO + QUESTION_DESC_SUBTRACTION + ANSWER_DESC_SUBTRACTION
-            + TAG_DESC_MOD, new AddCardCommand((CardsView) model.getViewState(), expectedCard));
+                + TAG_DESC_MOD, new AddCardCommand((CardsView) model.getViewState(), expectedCard));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, QUESTION_DESC_SUBTRACTION + ANSWER_DESC_HELLO + ANSWER_DESC_SUBTRACTION
-            + TAG_DESC_MOD, new AddCardCommand((CardsView) model.getViewState(), expectedCard));
+                + TAG_DESC_MOD, new AddCardCommand((CardsView) model.getViewState(), expectedCard));
 
         // multiple tags - all accepted
-        Card expectedCardMultipleTags = new CardBuilder(HELLO_WORLD).withTags(VALID_TAG_MOD, VALID_TAG_SUBJECT)
-                .build();
-        assertParseSuccess(parser, QUESTION_DESC_HELLO + ANSWER_DESC_HELLO + TAG_DESC_MOD
-            + TAG_DESC_SUBJECT, new AddCardCommand((CardsView) model.getViewState(), expectedCardMultipleTags));
+        Card expectedCardMultipleTags = new CardBuilder(HELLO_WORLD)
+                .withTags(VALID_TAG_MOD, VALID_TAG_SUBJECT).build();
+        assertParseSuccess(parser, QUESTION_DESC_HELLO + ANSWER_DESC_HELLO + TAG_DESC_MOD + TAG_DESC_SUBJECT,
+                           new AddCardCommand((CardsView) model.getViewState(), expectedCardMultipleTags));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Card expectedCard = new CardBuilder(ADDITION).withTags().build();
-        assertParseSuccess(parser, QUESTION_DESC_ADDITION + ANSWER_DESC_ADDITION, new AddCardCommand((CardsView) model.getViewState(), expectedCard));
+        assertParseSuccess(parser, QUESTION_DESC_ADDITION + ANSWER_DESC_ADDITION,
+                           new AddCardCommand((CardsView) model.getViewState(), expectedCard));
     }
 
     @Test
@@ -96,11 +97,12 @@ public class AddCardCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid tag
         assertParseFailure(parser, QUESTION_DESC_HELLO + ANSWER_DESC_HELLO + INVALID_TAG_DESC + VALID_TAG_MOD,
-                Tag.MESSAGE_CONSTRAINTS);
+                           Tag.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + QUESTION_DESC_HELLO + ANSWER_DESC_HELLO
-                + TAG_DESC_SUBJECT + TAG_DESC_MOD,
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCardCommand.MESSAGE_USAGE));
+        assertParseFailure(parser,
+                           PREAMBLE_NON_EMPTY + QUESTION_DESC_HELLO + ANSWER_DESC_HELLO + TAG_DESC_SUBJECT
+                                   + TAG_DESC_MOD,
+                           String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCardCommand.MESSAGE_USAGE));
     }
 }

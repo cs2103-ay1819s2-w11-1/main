@@ -30,9 +30,8 @@ public class StatusBarFooterTest extends GuiUnitTest {
 
     private static final Clock originalClock = StatusBarFooter.getClock();
     private static final Clock injectedClock = Clock.fixed(Instant.now(), ZoneId.systemDefault());
-
-    private StatusBarFooterHandle statusBarFooterHandle;
     private final TopDeck topDeck = new TopDeck();
+    private StatusBarFooterHandle statusBarFooterHandle;
 
     @BeforeClass
     public static void setUpBeforeClass() {
@@ -58,13 +57,14 @@ public class StatusBarFooterTest extends GuiUnitTest {
     public void display() {
         // initial state
         assertStatusBarContent(RELATIVE_PATH.resolve(STUB_SAVE_LOCATION).toString(), SYNC_STATUS_INITIAL,
-                String.format(TOTAL_DECKS_STATUS, INITIAL_TOTAL_DECKS));
+                               String.format(TOTAL_DECKS_STATUS, INITIAL_TOTAL_DECKS));
 
         // after address book is updated
         guiRobot.interact(() -> topDeck.addDeck(DECK_A));
         assertStatusBarContent(RELATIVE_PATH.resolve(STUB_SAVE_LOCATION).toString(),
-                String.format(SYNC_STATUS_UPDATED, new Date(injectedClock.millis()).toString()),
-                String.format(TOTAL_DECKS_STATUS, topDeck.getDeckList().size()));
+                               String.format(SYNC_STATUS_UPDATED,
+                                             new Date(injectedClock.millis()).toString()),
+                               String.format(TOTAL_DECKS_STATUS, topDeck.getDeckList().size()));
     }
 
     /**

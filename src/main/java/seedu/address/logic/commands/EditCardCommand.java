@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CARDS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -17,10 +16,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CardsView;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.ListItem;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.deck.Card;
+import seedu.address.model.deck.Deck;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,13 +32,9 @@ public class EditCardCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the card identified "
             + "by the index number used in the displayed card list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_QUESTION + "QUESTION] "
-            + "[" + PREFIX_ANSWER + "ANSWER] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_QUESTION + "What is the sum from 1 to 10? "
-            + PREFIX_ANSWER + "55";
+            + "Parameters: INDEX (must be a positive integer) " + "[" + PREFIX_QUESTION + "QUESTION] " + "["
+            + PREFIX_ANSWER + "ANSWER] " + "[" + PREFIX_TAG + "TAG]...\n" + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_QUESTION + "What is the sum from 1 to 10? " + PREFIX_ANSWER + "55";
 
     public static final String MESSAGE_EDIT_CARD_SUCCESS = "Edited Card: %1$s";
     public static final String MESSAGE_EDIT_CARD_AUTOCOMPLETE = "";
@@ -50,7 +45,7 @@ public class EditCardCommand extends Command {
     private final CardsView cardsView;
 
     /**
-     * @param index of the card in the filtered card list to edit
+     * @param index              of the card in the filtered card list to edit
      * @param editCardDescriptor details to edit the card with
      */
     public EditCardCommand(CardsView cardsView, Index index, EditCardDescriptor editCardDescriptor) {
@@ -70,47 +65,6 @@ public class EditCardCommand extends Command {
         this.editCardDescriptor = Optional.empty();
     }
 
-    @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        requireNonNull(model);
-        List<Card> lastShownList = cardsView.getFilteredList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
-        }
-
-        if (editCardDescriptor.isPresent()) {
-            Card cardToEdit = (Card) lastShownList.get(index.getZeroBased());
-            Card editedCard = createEditedCard(cardToEdit, editCardDescriptor.get());
-
-            if (!cardToEdit.isSameCard(editedCard) && model.hasCard(editedCard)) {
-                throw new CommandException(MESSAGE_DUPLICATE_CARD);
-            }
-
-            model.setCard(cardToEdit, editedCard);
-            cardsView.updateFilteredList(PREDICATE_SHOW_ALL_CARDS);
-            model.commitTopDeck();
-            return new CommandResult(String.format(MESSAGE_EDIT_CARD_SUCCESS, editedCard));
-        } else {
-            Card cardToEdit = (Card) lastShownList.get(index.getZeroBased());
-            String question = cardToEdit.getQuestion();
-            String answer = cardToEdit.getAnswer();
-            Set<Tag> tags = cardToEdit.getTags();
-
-            final StringBuilder builder = new StringBuilder();
-            for (Tag tag : tags) {
-                builder.append(" ").append(PREFIX_TAG).append(tag.tagName);
-            }
-            String updatedText = String.format("%s %d %s%s %s%s %s",
-                    COMMAND_WORD,
-                    index.getOneBased(),
-                    PREFIX_QUESTION, question,
-                    PREFIX_ANSWER, answer,
-                    builder.toString());
-            return new PrefillCommandBoxCommandResult(MESSAGE_EDIT_CARD_AUTOCOMPLETE, updatedText);
-        }
-    }
-
     /**
      * Creates and returns a {@code Card} with the details of {@code cardToEdit}
      * edited with {@code editCardDescriptor}.
@@ -123,6 +77,44 @@ public class EditCardCommand extends Command {
         Set<Tag> updatedTags = editCardDescriptor.getTags().orElse(cardToEdit.getTags());
 
         return new Card(updatedQuestion, updatedAnswer, updatedTags);
+    }
+
+    @Override
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        requireNonNull(model);
+        List<Card> lastShownList = cardsView.getFilteredList();
+        Deck activeDeck = cardsView.getActiveDeck();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
+        }
+
+        if (editCardDescriptor.isPresent()) {
+            Card cardToEdit = lastShownList.get(index.getZeroBased());
+            Card editedCard = createEditedCard(cardToEdit, editCardDescriptor.get());
+
+            if (!cardToEdit.isSameCard(editedCard) && model.hasCard(editedCard, activeDeck)) {
+                throw new CommandException(MESSAGE_DUPLICATE_CARD);
+            }
+
+            model.setCard(cardToEdit, editedCard, activeDeck);
+            model.commitTopDeck();
+            return new UpdatePanelCommandResult(String.format(MESSAGE_EDIT_CARD_SUCCESS, editedCard));
+        } else {
+            Card cardToEdit = lastShownList.get(index.getZeroBased());
+            String question = cardToEdit.getQuestion();
+            String answer = cardToEdit.getAnswer();
+            Set<Tag> tags = cardToEdit.getTags();
+
+            final StringBuilder builder = new StringBuilder();
+            for (Tag tag : tags) {
+                builder.append(" ").append(PREFIX_TAG).append(tag.tagName);
+            }
+            String updatedText = String
+                    .format("%s %d %s%s %s%s %s", COMMAND_WORD, index.getOneBased(), PREFIX_QUESTION,
+                            question, PREFIX_ANSWER, answer, builder.toString());
+            return new PrefillCommandBoxCommandResult(MESSAGE_EDIT_CARD_AUTOCOMPLETE, updatedText);
+        }
     }
 
     @Override
@@ -139,8 +131,7 @@ public class EditCardCommand extends Command {
 
         // state check
         EditCardCommand e = (EditCardCommand) other;
-        return index.equals(e.index)
-                && editCardDescriptor.equals(e.editCardDescriptor);
+        return index.equals(e.index) && editCardDescriptor.equals(e.editCardDescriptor);
     }
 
     /**
@@ -152,7 +143,8 @@ public class EditCardCommand extends Command {
         private String answer;
         private Set<Tag> tags;
 
-        public EditCardDescriptor() {}
+        public EditCardDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -171,28 +163,20 @@ public class EditCardCommand extends Command {
             return CollectionUtil.isAnyNonNull(question, answer, tags);
         }
 
-        public void setQuestion(String question) {
-            this.question = question;
-        }
-
         public Optional<String> getQuestion() {
             return Optional.ofNullable(question);
         }
 
-        public void setAnswer(String answer) {
-            this.answer = answer;
+        public void setQuestion(String question) {
+            this.question = question;
         }
 
         public Optional<String> getAnswer() {
             return Optional.ofNullable(answer);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setAnswer(String answer) {
+            this.answer = answer;
         }
 
         /**
@@ -202,6 +186,14 @@ public class EditCardCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTags(Set<Tag> tags) {
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         @Override
@@ -219,9 +211,8 @@ public class EditCardCommand extends Command {
             // state check
             EditCardDescriptor e = (EditCardDescriptor) other;
 
-            return getQuestion().equals(e.getQuestion())
-                    && getAnswer().equals(e.getAnswer())
-                    && getTags().equals(e.getTags());
+            return getQuestion().equals(e.getQuestion()) && getAnswer().equals(e.getAnswer()) && getTags()
+                    .equals(e.getTags());
         }
     }
 }

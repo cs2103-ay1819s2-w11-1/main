@@ -29,7 +29,8 @@ public class JsonAdaptedDeck {
      * Constructs a {@code JsonAdaptedDeck} with the given deck details.
      */
     @JsonCreator
-    public JsonAdaptedDeck(@JsonProperty("name") String name, @JsonProperty("cards") List<JsonAdaptedCard> cards) {
+    public JsonAdaptedDeck(@JsonProperty("name") String name,
+                           @JsonProperty("cards") List<JsonAdaptedCard> cards) {
         this.name = name;
         this.cards = new ArrayList<>(cards);
     }
@@ -39,9 +40,8 @@ public class JsonAdaptedDeck {
      */
     public JsonAdaptedDeck(Deck source) {
         name = source.getName().fullName;
-        cards = source.getCards().internalList.stream()
-                .map(JsonAdaptedCard::new)
-                .collect(Collectors.toList());
+        cards = source.getCards().internalList.stream().map(JsonAdaptedCard::new)
+                                              .collect(Collectors.toList());
     }
 
     /**
@@ -56,7 +56,8 @@ public class JsonAdaptedDeck {
         }
 
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_NAME);
@@ -77,8 +78,7 @@ public class JsonAdaptedDeck {
         }
 
         JsonAdaptedDeck otherDeck = (JsonAdaptedDeck) other;
-        return Objects.equals(name, otherDeck.name)
-                && cards.equals(otherDeck.cards);
+        return Objects.equals(name, otherDeck.name) && cards.equals(otherDeck.cards);
     }
 }
 

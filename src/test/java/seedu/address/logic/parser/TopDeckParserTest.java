@@ -1,13 +1,26 @@
 package seedu.address.logic.parser;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DECK_NAME_A_ARGS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DECK_A;
+import static seedu.address.testutil.TypicalCards.getTypicalDeck;
+import static seedu.address.testutil.TypicalCards.getTypicalTopDeck;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CARD;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
 import seedu.address.logic.CardsView;
 import seedu.address.logic.DecksView;
 import seedu.address.logic.commands.AddCardCommand;
 import seedu.address.logic.commands.AddDeckCommand;
-import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCardCommand;
 import seedu.address.logic.commands.EditCardCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -24,28 +37,15 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.deck.Card;
-import seedu.address.model.deck.QuestionContainsKeywordsPredicate;
 import seedu.address.model.deck.Deck;
+import seedu.address.model.deck.QuestionContainsKeywordsPredicate;
 import seedu.address.testutil.CardBuilder;
 import seedu.address.testutil.CardUtil;
 import seedu.address.testutil.DeckBuilder;
 import seedu.address.testutil.EditCardDescriptorBuilder;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DECK_NAME_A_ARGS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DECK_A;
-import static seedu.address.testutil.TypicalCards.getTypicalDeck;
-import static seedu.address.testutil.TypicalCards.getTypicalTopDeck;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CARD;
-
 public class TopDeckParserTest {
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -69,18 +69,19 @@ public class TopDeckParserTest {
         assertEquals(new AddCardCommand((CardsView) model.getViewState(), card), command);
     }
 
-//    @Test
-//    public void parseCommand_clear() throws Exception {
-//        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD, model) instanceof ClearCommand);
-//        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3", model) instanceof ClearCommand);
-//    }
+    //    @Test
+    //    public void parseCommand_clear() throws Exception {
+    //        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD, model) instanceof ClearCommand);
+    //        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3", model) instanceof
+    //        ClearCommand);
+    //    }
 
     @Test
     public void parseCommand_deleteCard() throws Exception {
         model.changeDeck(getTypicalDeck());
 
-        DeleteCardCommand command = (DeleteCardCommand) parser.parseCommand(
-                DeleteCardCommand.COMMAND_WORD + " " + INDEX_FIRST_CARD.getOneBased(), model);
+        DeleteCardCommand command = (DeleteCardCommand) parser
+                .parseCommand(DeleteCardCommand.COMMAND_WORD + " " + INDEX_FIRST_CARD.getOneBased(), model);
         assertEquals(new DeleteCardCommand((CardsView) model.getViewState(), INDEX_FIRST_CARD), command);
     }
 
@@ -90,9 +91,11 @@ public class TopDeckParserTest {
 
         Card card = new CardBuilder().build();
         EditCardCommand.EditCardDescriptor descriptor = new EditCardDescriptorBuilder(card).build();
-        EditCardCommand command = (EditCardCommand) parser.parseCommand(EditCardCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_CARD.getOneBased() + " " + CardUtil.getEditCardDescriptorDetails(descriptor), model);
-        assertEquals(new EditCardCommand((CardsView) model.getViewState(), INDEX_FIRST_CARD, descriptor), command);
+        EditCardCommand command = (EditCardCommand) parser.parseCommand(
+                EditCardCommand.COMMAND_WORD + " " + INDEX_FIRST_CARD.getOneBased() + " " + CardUtil
+                        .getEditCardDescriptorDetails(descriptor), model);
+        assertEquals(new EditCardCommand((CardsView) model.getViewState(), INDEX_FIRST_CARD, descriptor),
+                     command);
     }
 
     @Test
@@ -108,8 +111,9 @@ public class TopDeckParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCardCommand command = (FindCardCommand) parser.parseCommand(
                 FindCardCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")),
-            model);
-        assertEquals(new FindCardCommand((CardsView) model.getViewState(), new QuestionContainsKeywordsPredicate(keywords)), command);
+                model);
+        assertEquals(new FindCardCommand((CardsView) model.getViewState(),
+                                         new QuestionContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -141,8 +145,8 @@ public class TopDeckParserTest {
     public void parseCommand_selectCard() throws Exception {
         model.changeDeck(getTypicalDeck());
 
-        SelectCardCommand command = (SelectCardCommand) parser.parseCommand(
-                SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_CARD.getOneBased(), model);
+        SelectCardCommand command = (SelectCardCommand) parser
+                .parseCommand(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_CARD.getOneBased(), model);
         assertEquals(new SelectCardCommand((CardsView) model.getViewState(), INDEX_FIRST_CARD), command);
     }
 
@@ -161,7 +165,7 @@ public class TopDeckParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() throws Exception {
         thrown.expect(ParseException.class);
-        thrown.expectMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND);
         parser.parseCommand("", model);
     }
 

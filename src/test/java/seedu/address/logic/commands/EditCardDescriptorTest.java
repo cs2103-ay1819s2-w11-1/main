@@ -17,7 +17,8 @@ public class EditCardDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditCardCommand.EditCardDescriptor descriptorWithSameValues = new EditCardCommand.EditCardDescriptor(DESC_HELLO);
+        EditCardCommand.EditCardDescriptor descriptorWithSameValues = new EditCardCommand.EditCardDescriptor(
+                DESC_HELLO);
         assertTrue(DESC_HELLO.equals(descriptorWithSameValues));
 
         // same object -> returns true

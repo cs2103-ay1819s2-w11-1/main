@@ -21,6 +21,7 @@ public class DeleteCardCommandParser implements Parser<DeleteCardCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCardCommand
      * and returns an DeleteCardCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCardCommand parse(String args) throws ParseException {

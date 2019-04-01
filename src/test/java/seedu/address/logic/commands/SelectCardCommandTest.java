@@ -71,8 +71,8 @@ public class SelectCardCommandTest {
 
         Index outOfBoundsIndex = INDEX_SECOND_CARD;
         // ensures that outOfBoundIndex is still in bounds of TopDeck list
-        assertTrue(outOfBoundsIndex.getZeroBased() <
-            model.getTopDeck().getDeckList().get(0).getCards().internalList.size());
+        assertTrue(outOfBoundsIndex.getZeroBased() < model.getTopDeck().getDeckList().get(0)
+                                                          .getCards().internalList.size());
 
         assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
     }
@@ -101,7 +101,8 @@ public class SelectCardCommandTest {
 
     /**
      * Executes a {@code SelectCommand} with the given {@code index},
-     * and checks that the model's selected card is set to the card at {@code index} in the filtered card list.
+     * and checks that the model's selected card is set to the card at {@code index} in the filtered card
+     * list.
      */
     private void assertExecutionSuccess(Index index) {
         SelectCommand selectCommand = new SelectCardCommand(cardsView, index);
@@ -112,7 +113,8 @@ public class SelectCardCommandTest {
     }
 
     /**
-     * Executes a {@code SelectCommand} with the given {@code index}, and checks that a {@code CommandException}
+     * Executes a {@code SelectCommand} with the given {@code index}, and checks that a {@code
+     * CommandException}
      * is thrown with the {@code expectedMessage}.
      */
     private void assertExecutionFailure(Index index, String expectedMessage) {

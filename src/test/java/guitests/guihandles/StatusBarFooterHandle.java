@@ -69,18 +69,21 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
     }
 
     /**
-     * Returns true if the current content of the sync status is different from the value remembered by the most recent
+     * Returns true if the current content of the sync status is different from the value remembered by the
+     * most recent
      * {@code rememberSyncStatus()} call.
      */
     public boolean isSyncStatusChanged() {
         return !lastRememberedSyncStatus.equals(getSyncStatus());
     }
+
     /**
      * Remembers the content of the 'total cards' portion of the status bar.
      */
     public void rememberTotalCardsStatus() {
         lastRememberedTotalCardsStatus = getTotalCardsStatus();
     }
+
     /**
      * Remembers the content of the 'total decks' portion of the status bar.
      */
@@ -89,7 +92,8 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
     }
 
     /**
-     * Returns true if the current content of the 'total persons' is different from the value remembered by the most
+     * Returns true if the current content of the 'total persons' is different from the value remembered by
+     * the most
      * recent {@code rememberTotalPersonsStatus()} call.
      */
     public boolean isTotalPersonsStatusChanged() {
@@ -104,7 +108,8 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
     }
 
     /**
-     * Returns true if the current content of the 'save location' is different from the value remembered by the most
+     * Returns true if the current content of the 'save location' is different from the value remembered by
+     * the most
      * recent {@code rememberSaveLocation()} call.
      */
     public boolean isSaveLocationChanged() {

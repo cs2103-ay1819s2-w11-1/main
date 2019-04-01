@@ -55,7 +55,8 @@ public class GuiTestAssert {
     /**
      * Asserts that the list in {@code listPanelHandle} displays the details of {@code listItems} correctly.
      */
-    public static void assertListMatching(ListPanelHandle listPanelHandle, List<? extends ListItem> listItems) {
+    public static void assertListMatching(ListPanelHandle listPanelHandle,
+                                          List<? extends ListItem> listItems) {
         ListItem firstItem = listItems.get(0);
         if (firstItem instanceof Deck) {
             ArrayList<Deck> deckList = new ArrayList<>();
@@ -106,7 +107,7 @@ public class GuiTestAssert {
      */
     private static void assertTagsEqual(Card expectedCard, CardDisplayHandle actualCard) {
         List<String> expectedTags = new ArrayList<String>();
-        for (Tag tag: expectedCard.getTags()) {
+        for (Tag tag : expectedCard.getTags()) {
             expectedTags.add(tag.tagName);
         }
         assertEquals(expectedTags, actualCard.getTags());

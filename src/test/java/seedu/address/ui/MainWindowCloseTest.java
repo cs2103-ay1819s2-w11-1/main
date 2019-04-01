@@ -34,8 +34,10 @@ public class MainWindowCloseTest extends GuiUnitTest {
 
     @Before
     public void setUp() throws Exception {
-        JsonTopDeckStorage jsonAddressBookStorage = new JsonTopDeckStorage(temporaryFolder.newFile().toPath());
-        JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.newFile().toPath());
+        JsonTopDeckStorage jsonAddressBookStorage = new JsonTopDeckStorage(
+                temporaryFolder.newFile().toPath());
+        JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(
+                temporaryFolder.newFile().toPath());
         StorageManager storageManager = new StorageManager(jsonAddressBookStorage, jsonUserPrefsStorage);
         FxToolkit.setupStage(stage -> {
             this.stage = stage;
@@ -80,7 +82,8 @@ public class MainWindowCloseTest extends GuiUnitTest {
         }
 
         /**
-         * Closes the {@code MainWindow} through an external request {@code MainWindow} (e.g pressing the 'X' button on
+         * Closes the {@code MainWindow} through an external request {@code MainWindow} (e.g pressing the
+         * 'X' button on
          * the {@code MainWindow} or closing the app through the taskbar).
          */
         private void closeMainWindowExternally() {

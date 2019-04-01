@@ -8,6 +8,9 @@ import seedu.address.logic.commands.StudyDeckCommand;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parser creates a StudyDeckCommand Object.
+ */
 public class StudyDeckCommandParser {
 
     private DecksView decksView;
@@ -16,6 +19,12 @@ public class StudyDeckCommandParser {
         this.decksView = decksView;
     }
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the StudyDeckCommand
+     * and returns an StudyDeckCommand object for execution.
+     *
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public StudyDeckCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);

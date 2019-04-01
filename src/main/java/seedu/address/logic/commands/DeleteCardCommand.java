@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CARDS;
 
 import java.util.List;
 
@@ -12,6 +11,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.deck.Card;
+import seedu.address.model.deck.Deck;
 
 /**
  * Deletes a card identified using it's displayed index from the deck.
@@ -22,8 +22,7 @@ public class DeleteCardCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the card identified by the index number used in the displayed card list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_CARD_SUCCESS = "Deleted Card: %1$s";
 
@@ -39,16 +38,16 @@ public class DeleteCardCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Card> lastShownList = cardsView.getFilteredList();
+        Deck activeDeck = cardsView.getActiveDeck();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
         }
 
-        Card cardToDelete = (Card) lastShownList.get(targetIndex.getZeroBased());
-        model.deleteCard(cardToDelete);
+        Card cardToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteCard(cardToDelete, activeDeck);
         model.commitTopDeck();
-        cardsView.updateFilteredList(PREDICATE_SHOW_ALL_CARDS);
-        return new CommandResult(String.format(MESSAGE_DELETE_CARD_SUCCESS, cardToDelete));
+        return new UpdatePanelCommandResult(String.format(MESSAGE_DELETE_CARD_SUCCESS, cardToDelete));
     }
 
     @Override

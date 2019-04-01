@@ -18,14 +18,17 @@ public class QuestionContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        QuestionContainsKeywordsPredicate firstPredicate = new QuestionContainsKeywordsPredicate(firstPredicateKeywordList);
-        QuestionContainsKeywordsPredicate secondPredicate = new QuestionContainsKeywordsPredicate(secondPredicateKeywordList);
+        QuestionContainsKeywordsPredicate firstPredicate = new QuestionContainsKeywordsPredicate(
+                firstPredicateKeywordList);
+        QuestionContainsKeywordsPredicate secondPredicate = new QuestionContainsKeywordsPredicate(
+                secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        QuestionContainsKeywordsPredicate firstPredicateCopy = new QuestionContainsKeywordsPredicate(firstPredicateKeywordList);
+        QuestionContainsKeywordsPredicate firstPredicateCopy = new QuestionContainsKeywordsPredicate(
+                firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -41,7 +44,8 @@ public class QuestionContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        QuestionContainsKeywordsPredicate predicate = new QuestionContainsKeywordsPredicate(Collections.singletonList("Alice"));
+        QuestionContainsKeywordsPredicate predicate = new QuestionContainsKeywordsPredicate(
+                Collections.singletonList("Alice"));
         assertTrue(predicate.test(new CardBuilder().withQuestion("Alice Bob").build()));
 
         // Multiple keywords
@@ -60,7 +64,8 @@ public class QuestionContainsKeywordsPredicateTest {
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        QuestionContainsKeywordsPredicate predicate = new QuestionContainsKeywordsPredicate(Collections.emptyList());
+        QuestionContainsKeywordsPredicate predicate = new QuestionContainsKeywordsPredicate(
+                Collections.emptyList());
         assertFalse(predicate.test(new CardBuilder().withQuestion("Alice").build()));
 
         // Non-matching keyword

@@ -46,6 +46,10 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing TopDeck ]===========================");
@@ -69,7 +73,8 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s top deck and {@code userPrefs}. <br>
+     * Returns a {@code ModelManager} with the data from {@code storage}'s top deck and {@code userPrefs}.
+     * <br>
      * The data from the sample deck will be used instead if {@code storage}'s top deck is not found,
      * or an empty deck will be used instead if errors occur when reading {@code storage}'s deck.
      */
@@ -120,7 +125,7 @@ public class MainApp extends Application {
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
             logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. "
-                    + "Using default config properties");
+                                   + "Using default config properties");
             initializedConfig = new Config();
         }
 
@@ -148,7 +153,7 @@ public class MainApp extends Application {
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataConversionException e) {
             logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. "
-                    + "Using default user prefs");
+                                   + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty TopDeck");
@@ -179,9 +184,5 @@ public class MainApp extends Application {
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

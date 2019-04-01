@@ -25,6 +25,7 @@ public class EditCardDescriptorBuilder {
 
     /**
      * Returns an {@code EditPersonDescriptor} with fields containing {@code card}'s details
+     *
      * @param card
      */
     public EditCardDescriptorBuilder(Card card) {

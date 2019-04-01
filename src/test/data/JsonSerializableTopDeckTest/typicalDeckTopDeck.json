@@ -1,190 +1,306 @@
 {
-  "decks" : [ {
-    "name" : "Typical Deck",
-    "cards" : [ {
-      "question" : "Solve 1 + 1.",
-      "answer" : "2",
-      "tags" : [ "Math" ]
-    }, {
-      "question" : "What is 10 - 10?",
-      "answer" : "0",
-      "tags" : [ "Math" ]
-    }, {
-      "question" : "What is 8 * 8?",
-      "answer" : "64",
-      "tags" : [ "Math" ]
-    }, {
-      "question" : "Evaluate 1024 / 2.",
-      "answer" : "512",
-      "tags" : [ "Math" ]
-    }, {
-      "question" : "Hello?",
-      "answer" : "World",
-      "tags" : [ "CS", "Simple" ]
-    }, {
-      "question" : "Are there any tag?",
-      "answer" : "No",
-      "tags" : [ ]
-    }, {
-      "question" : "Is this card unique?",
-      "answer" : "Yes it is.",
-      "tags" : [ ]
-    }, {
-      "question" : "Which later is HTTP at?",
-      "answer" : "Application",
-      "tags" : [ "CS2105" ]
-    }, {
-      "question" : "What transport does HTTP use?",
-      "answer" : "TCP",
-      "tags" : [ "CS2105" ]
-    }, {
-      "question" : "What is the status code for OK in HTTP?",
-      "answer" : "200",
-      "tags" : [ "CS2105" ]
-    } ]
-  },  {
-    "name" : "Algebra",
-    "cards" : [ ]
-  }, {
-    "name" : "Bacon Salad Recipe",
-    "cards" : [ ]
-  }, {
-    "name" : "Calculus",
-    "cards" : [ ]
-  }, {
-    "name" : "Darwinian Studies",
-    "cards" : [ {
-      "question" : "Solve 1 + 1.",
-      "answer" : "2",
-      "tags" : [ "Math" ]
-    }, {
-      "question" : "What is 10 - 10?",
-      "answer" : "0",
-      "tags" : [ "Math" ]
-    }, {
-      "question" : "What is 8 * 8?",
-      "answer" : "64",
-      "tags" : [ "Math" ]
-    }, {
-      "question" : "Evaluate 1024 / 2.",
-      "answer" : "512",
-      "tags" : [ "Math" ]
-    }, {
-      "question" : "Hello?",
-      "answer" : "World",
-      "tags" : [ "CS", "Simple" ]
-    }, {
-      "question" : "Are there any tag?",
-      "answer" : "No",
-      "tags" : [ ]
-    }, {
-      "question" : "Is this card unique?",
-      "answer" : "Yes it is.",
-      "tags" : [ ]
-    }, {
-      "question" : "Which later is HTTP at?",
-      "answer" : "Yes it is.",
-      "tags" : [ ]
-    }, {
-      "question" : "What transport does HTTP use?",
-      "answer" : "TCP",
-      "tags" : [ "CS2105" ]
-    }, {
-      "question" : "What is the status code for OK in HTTP?",
-      "answer" : "200",
-      "tags" : [ "CS2105" ]
-    } ]
-  }, {
-    "name" : "Epistemology",
-    "cards" : [ {
-      "question" : "Solve 1 + 1.",
-      "answer" : "2",
-      "tags" : [ "Math" ]
-    }, {
-      "question" : "What is 10 - 10?",
-      "answer" : "0",
-      "tags" : [ "Math" ]
-    }, {
-      "question" : "What is 8 * 8?",
-      "answer" : "64",
-      "tags" : [ "Math" ]
-    }, {
-      "question" : "Evaluate 1024 / 2.",
-      "answer" : "512",
-      "tags" : [ "Math" ]
-    }, {
-      "question" : "Hello?",
-      "answer" : "World",
-      "tags" : [ "CS", "Simple" ]
-    }, {
-      "question" : "Are there any tag?",
-      "answer" : "No",
-      "tags" : [ ]
-    }, {
-      "question" : "Is this card unique?",
-      "answer" : "Yes it is.",
-      "tags" : [ ]
-    }, {
-      "question" : "Which later is HTTP at?",
-      "answer" : "Yes it is.",
-      "tags" : [ ]
-    }, {
-      "question" : "What transport does HTTP use?",
-      "answer" : "TCP",
-      "tags" : [ "CS2105" ]
-    }, {
-      "question" : "What is the status code for OK in HTTP?",
-      "answer" : "200",
-      "tags" : [ "CS2105" ]
-    } ]
-  },  {
-    "name" : "Baby there",
-    "cards" : [ {
-      "question" : "Solve 1 + 1.",
-      "answer" : "2",
-      "tags" : [ "Math" ]
-    }, {
-      "question" : "What is 10 - 10?",
-      "answer" : "0",
-      "tags" : [ "Math" ]
-    }, {
-      "question" : "What is 8 * 8?",
-      "answer" : "64",
-      "tags" : [ "Math" ]
-    }, {
-      "question" : "Evaluate 1024 / 2.",
-      "answer" : "512",
-      "tags" : [ "Math" ]
-    }, {
-      "question" : "Hello?",
-      "answer" : "World",
-      "tags" : [ "CS", "Simple" ]
-    }, {
-      "question" : "Are there any tag?",
-      "answer" : "No",
-      "tags" : [ ]
-    }, {
-      "question" : "Is this card unique?",
-      "answer" : "Yes it is.",
-      "tags" : [ ]
-    }, {
-      "question" : "Which later is HTTP at?",
-      "answer" : "Yes it is.",
-      "tags" : [ ]
-    }, {
-      "question" : "What transport does HTTP use?",
-      "answer" : "TCP",
-      "tags" : [ "CS2105" ]
-    }, {
-      "question" : "What is the status code for OK in HTTP?",
-      "answer" : "200",
-      "tags" : [ "CS2105" ]
-    } ]
-  }, {
-    "name" : "is nothing",
-    "cards" : [ ]
-  }, {
-    "name" : "holding me back",
-    "cards" : [ ]
-  } ]
+  "decks": [
+    {
+      "name": "Typical Deck",
+      "cards": [
+        {
+          "question": "Solve 1 + 1.",
+          "answer": "2",
+          "tags": [
+            "Math"
+          ]
+        },
+        {
+          "question": "What is 10 - 10?",
+          "answer": "0",
+          "tags": [
+            "Math"
+          ]
+        },
+        {
+          "question": "What is 8 * 8?",
+          "answer": "64",
+          "tags": [
+            "Math"
+          ]
+        },
+        {
+          "question": "Evaluate 1024 / 2.",
+          "answer": "512",
+          "tags": [
+            "Math"
+          ]
+        },
+        {
+          "question": "Hello?",
+          "answer": "World",
+          "tags": [
+            "CS",
+            "Simple"
+          ]
+        },
+        {
+          "question": "Are there any tag?",
+          "answer": "No",
+          "tags": []
+        },
+        {
+          "question": "Is this card unique?",
+          "answer": "Yes it is.",
+          "tags": []
+        },
+        {
+          "question": "Which later is HTTP at?",
+          "answer": "Application",
+          "tags": [
+            "CS2105"
+          ]
+        },
+        {
+          "question": "What transport does HTTP use?",
+          "answer": "TCP",
+          "tags": [
+            "CS2105"
+          ]
+        },
+        {
+          "question": "What is the status code for OK in HTTP?",
+          "answer": "200",
+          "tags": [
+            "CS2105"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Algebra",
+      "cards": []
+    },
+    {
+      "name": "Bacon Salad Recipe",
+      "cards": []
+    },
+    {
+      "name": "Calculus",
+      "cards": []
+    },
+    {
+      "name": "Darwinian Studies",
+      "cards": [
+        {
+          "question": "Solve 1 + 1.",
+          "answer": "2",
+          "tags": [
+            "Math"
+          ]
+        },
+        {
+          "question": "What is 10 - 10?",
+          "answer": "0",
+          "tags": [
+            "Math"
+          ]
+        },
+        {
+          "question": "What is 8 * 8?",
+          "answer": "64",
+          "tags": [
+            "Math"
+          ]
+        },
+        {
+          "question": "Evaluate 1024 / 2.",
+          "answer": "512",
+          "tags": [
+            "Math"
+          ]
+        },
+        {
+          "question": "Hello?",
+          "answer": "World",
+          "tags": [
+            "CS",
+            "Simple"
+          ]
+        },
+        {
+          "question": "Are there any tag?",
+          "answer": "No",
+          "tags": []
+        },
+        {
+          "question": "Is this card unique?",
+          "answer": "Yes it is.",
+          "tags": []
+        },
+        {
+          "question": "Which later is HTTP at?",
+          "answer": "Yes it is.",
+          "tags": []
+        },
+        {
+          "question": "What transport does HTTP use?",
+          "answer": "TCP",
+          "tags": [
+            "CS2105"
+          ]
+        },
+        {
+          "question": "What is the status code for OK in HTTP?",
+          "answer": "200",
+          "tags": [
+            "CS2105"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Epistemology",
+      "cards": [
+        {
+          "question": "Solve 1 + 1.",
+          "answer": "2",
+          "tags": [
+            "Math"
+          ]
+        },
+        {
+          "question": "What is 10 - 10?",
+          "answer": "0",
+          "tags": [
+            "Math"
+          ]
+        },
+        {
+          "question": "What is 8 * 8?",
+          "answer": "64",
+          "tags": [
+            "Math"
+          ]
+        },
+        {
+          "question": "Evaluate 1024 / 2.",
+          "answer": "512",
+          "tags": [
+            "Math"
+          ]
+        },
+        {
+          "question": "Hello?",
+          "answer": "World",
+          "tags": [
+            "CS",
+            "Simple"
+          ]
+        },
+        {
+          "question": "Are there any tag?",
+          "answer": "No",
+          "tags": []
+        },
+        {
+          "question": "Is this card unique?",
+          "answer": "Yes it is.",
+          "tags": []
+        },
+        {
+          "question": "Which later is HTTP at?",
+          "answer": "Yes it is.",
+          "tags": []
+        },
+        {
+          "question": "What transport does HTTP use?",
+          "answer": "TCP",
+          "tags": [
+            "CS2105"
+          ]
+        },
+        {
+          "question": "What is the status code for OK in HTTP?",
+          "answer": "200",
+          "tags": [
+            "CS2105"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Baby there",
+      "cards": [
+        {
+          "question": "Solve 1 + 1.",
+          "answer": "2",
+          "tags": [
+            "Math"
+          ]
+        },
+        {
+          "question": "What is 10 - 10?",
+          "answer": "0",
+          "tags": [
+            "Math"
+          ]
+        },
+        {
+          "question": "What is 8 * 8?",
+          "answer": "64",
+          "tags": [
+            "Math"
+          ]
+        },
+        {
+          "question": "Evaluate 1024 / 2.",
+          "answer": "512",
+          "tags": [
+            "Math"
+          ]
+        },
+        {
+          "question": "Hello?",
+          "answer": "World",
+          "tags": [
+            "CS",
+            "Simple"
+          ]
+        },
+        {
+          "question": "Are there any tag?",
+          "answer": "No",
+          "tags": []
+        },
+        {
+          "question": "Is this card unique?",
+          "answer": "Yes it is.",
+          "tags": []
+        },
+        {
+          "question": "Which later is HTTP at?",
+          "answer": "Yes it is.",
+          "tags": []
+        },
+        {
+          "question": "What transport does HTTP use?",
+          "answer": "TCP",
+          "tags": [
+            "CS2105"
+          ]
+        },
+        {
+          "question": "What is the status code for OK in HTTP?",
+          "answer": "200",
+          "tags": [
+            "CS2105"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "is nothing",
+      "cards": []
+    },
+    {
+      "name": "holding me back",
+      "cards": []
+    }
+  ]
 }

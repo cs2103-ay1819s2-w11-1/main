@@ -7,6 +7,9 @@ import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 
+/**
+ * Helper functions for handling tags.
+ */
 public class TagUtil {
 
     /**
@@ -28,7 +31,6 @@ public class TagUtil {
 
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
 
-        return tags.stream().map(tag -> tag.tagName.toLowerCase())
-            .anyMatch(preppedWord::equalsIgnoreCase);
+        return tags.stream().map(tag -> tag.tagName.toLowerCase()).anyMatch(preppedWord::equalsIgnoreCase);
     }
 }

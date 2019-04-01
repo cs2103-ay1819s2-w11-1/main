@@ -31,18 +31,17 @@ public class AddDeckCommandParserTest {
 
         // clean
         assertParseSuccess(parser, VALID_DECK_NAME_A_ARGS,
-                new AddDeckCommand((DecksView) model.getViewState(), expectedDeck));
+                           new AddDeckCommand((DecksView) model.getViewState(), expectedDeck));
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + VALID_DECK_NAME_A_ARGS,
-                new AddDeckCommand((DecksView) model.getViewState(), expectedDeck));
+                           new AddDeckCommand((DecksView) model.getViewState(), expectedDeck));
     }
 
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AddDeckCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDeckCommand.MESSAGE_USAGE);
 
         // No argument
         assertParseFailure(parser, "", expectedMessage);
@@ -54,13 +53,11 @@ public class AddDeckCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AddDeckCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDeckCommand.MESSAGE_USAGE);
         assertParseFailure(parser, "n/" + INVALID_DECK_NAME_ARGS, expectedMessage);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + VALID_NAME_DECK_A,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddDeckCommand.MESSAGE_USAGE));
+                           String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDeckCommand.MESSAGE_USAGE));
     }
 }

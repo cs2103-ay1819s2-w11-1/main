@@ -3,8 +3,11 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static seedu.address.testutil.TypicalCards.ADDITION;
-import static seedu.address.testutil.TypicalCards.getTypicalTopDeck;
+import static seedu.address.testutil.TypicalCards.UNIQUE;
 import static seedu.address.testutil.TypicalDecks.DECK_A;
+import static seedu.address.testutil.TypicalDecks.DECK_F;
+import static seedu.address.testutil.TypicalDecks.DECK_WITH_CARDS;
+import static seedu.address.testutil.TypicalDecks.getTypicalTopDeck;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,12 +25,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.deck.Card;
 import seedu.address.model.deck.Deck;
+import seedu.address.model.deck.exceptions.CardNotFoundException;
+import seedu.address.model.deck.exceptions.DeckNotFoundException;
 import seedu.address.model.deck.exceptions.DuplicateCardException;
 import seedu.address.model.deck.exceptions.DuplicateDeckException;
 import seedu.address.testutil.CardBuilder;
 import seedu.address.testutil.DeckBuilder;
 
 public class TopDeckTest {
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -109,6 +115,99 @@ public class TopDeckTest {
         topDeck.removeListener(listener);
         topDeck.addDeck(DECK_A);
         assertEquals(0, counter.get());
+    }
+
+    @Test
+    public void addCard_null_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        topDeck.addCard(null, null);
+    }
+
+    @Test
+    public void addCard_deckNotInList_throwsDeckNotFoundException() {
+        TopDeck typicalTopDeck = getTypicalTopDeck();
+        thrown.expect(DeckNotFoundException.class);
+        typicalTopDeck.addCard(UNIQUE, DECK_F);
+    }
+
+    @Test
+    public void addCard_cardInList_throwsDuplicateCardException() {
+        TopDeck typicalTopDeck = getTypicalTopDeck();
+        thrown.expect(DuplicateCardException.class);
+        typicalTopDeck.addCard(ADDITION, DECK_WITH_CARDS);
+    }
+
+    @Test
+    public void addCard_validCard_returnsEditedDeck() {
+        TopDeck typicalTopDeck = getTypicalTopDeck();
+        Deck newDeck = typicalTopDeck.addCard(ADDITION, DECK_A);
+
+        Deck expectedDeck = new DeckBuilder(DECK_A).withCards(Arrays.asList(ADDITION)).build();
+
+        assertEquals(newDeck, expectedDeck);
+    }
+
+    @Test
+    public void deleteCard_null_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        topDeck.deleteCard(null, null);
+    }
+
+    @Test
+    public void deleteCard_deckNotInList_throwsDeckNotFoundException() {
+        TopDeck typicalTopDeck = getTypicalTopDeck();
+        thrown.expect(DeckNotFoundException.class);
+        typicalTopDeck.deleteCard(UNIQUE, DECK_F);
+    }
+
+    @Test
+    public void deleteCard_cardNotInList_throwsCardNotFoundException() {
+        TopDeck typicalTopDeck = getTypicalTopDeck();
+        thrown.expect(CardNotFoundException.class);
+        typicalTopDeck.deleteCard(ADDITION, DECK_A);
+    }
+
+    @Test
+    public void deleteCard_cardInList_returnsEditedDeck() {
+        TopDeck typicalTopDeck = getTypicalTopDeck();
+        Deck newDeck = typicalTopDeck.deleteCard(ADDITION, DECK_WITH_CARDS);
+
+        Deck expectedDeck = new DeckBuilder(DECK_WITH_CARDS).build();
+        expectedDeck.removeCard(ADDITION);
+
+        assertEquals(newDeck, expectedDeck);
+    }
+
+    @Test
+    public void setCard_null_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        topDeck.setCard(null, null, null);
+    }
+
+    @Test
+    public void setCard_deckNotInList_throwsDeckNotFoundException() {
+        TopDeck typicalTopDeck = getTypicalTopDeck();
+        thrown.expect(DeckNotFoundException.class);
+        typicalTopDeck.setCard(UNIQUE, ADDITION, DECK_F);
+    }
+
+    @Test
+    public void setCard_cardNotInList_throwsCardNotFoundException() {
+        TopDeck typicalTopDeck = getTypicalTopDeck();
+        thrown.expect(CardNotFoundException.class);
+        typicalTopDeck.setCard(ADDITION, UNIQUE, DECK_A);
+    }
+
+    @Test
+    public void setCard_cardInList_returnsEditedDeck() {
+        TopDeck typicalTopDeck = getTypicalTopDeck();
+        Card newCard = new CardBuilder().withQuestion("Edited Question").withAnswer("Edited Answer").build();
+        Deck newDeck = typicalTopDeck.setCard(ADDITION, newCard, DECK_WITH_CARDS);
+
+        Deck expectedDeck = new DeckBuilder(DECK_WITH_CARDS).build();
+        expectedDeck.setCard(ADDITION, newCard);
+
+        assertEquals(newDeck, expectedDeck);
     }
 
     /**

@@ -24,7 +24,8 @@ public class JsonUtilTest {
 
         JsonUtil.serializeObjectToJsonFile(SERIALIZATION_FILE, serializableTestClass);
 
-        assertEquals(FileUtil.readFromFile(SERIALIZATION_FILE), SerializableTestClass.JSON_STRING_REPRESENTATION);
+        assertEquals(FileUtil.readFromFile(SERIALIZATION_FILE),
+                     SerializableTestClass.JSON_STRING_REPRESENTATION);
     }
 
     @Test
@@ -35,8 +36,10 @@ public class JsonUtilTest {
                 .deserializeObjectFromJsonFile(SERIALIZATION_FILE, SerializableTestClass.class);
 
         assertEquals(serializableTestClass.getName(), SerializableTestClass.getNameTestValue());
-        assertEquals(serializableTestClass.getListOfLocalDateTimes(), SerializableTestClass.getListTestValues());
-        assertEquals(serializableTestClass.getMapOfIntegerToString(), SerializableTestClass.getHashMapTestValues());
+        assertEquals(serializableTestClass.getListOfLocalDateTimes(),
+                     SerializableTestClass.getListTestValues());
+        assertEquals(serializableTestClass.getMapOfIntegerToString(),
+                     SerializableTestClass.getHashMapTestValues());
     }
 
     //TODO: @Test jsonUtil_readJsonStringToObjectInstance_correctObject()

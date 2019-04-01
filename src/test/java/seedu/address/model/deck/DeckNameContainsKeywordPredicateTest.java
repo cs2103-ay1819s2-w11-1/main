@@ -63,7 +63,8 @@ public class DeckNameContainsKeywordPredicateTest {
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        DeckNameContainsKeywordsPredicate predicate = new DeckNameContainsKeywordsPredicate(Collections.emptyList());
+        DeckNameContainsKeywordsPredicate predicate = new DeckNameContainsKeywordsPredicate(
+                Collections.emptyList());
         assertFalse(predicate.test(new DeckBuilder().withName("Alice").build()));
 
         // Non-matching keyword

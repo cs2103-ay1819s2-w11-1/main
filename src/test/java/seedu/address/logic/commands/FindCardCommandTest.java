@@ -1,18 +1,5 @@
 package seedu.address.logic.commands;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import seedu.address.logic.CardsView;
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.deck.QuestionContainsKeywordsPredicate;
-
-import java.util.Arrays;
-import java.util.Collections;
-
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -22,6 +9,19 @@ import static seedu.address.testutil.TypicalCards.LAYER;
 import static seedu.address.testutil.TypicalCards.OK_STATUS;
 import static seedu.address.testutil.TypicalCards.getTypicalDeck;
 import static seedu.address.testutil.TypicalCards.getTypicalTopDeck;
+
+import java.util.Arrays;
+import java.util.Collections;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import seedu.address.logic.CardsView;
+import seedu.address.logic.CommandHistory;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.deck.QuestionContainsKeywordsPredicate;
 
 public class FindCardCommandTest {
     private Model model = new ModelManager(getTypicalTopDeck(), new UserPrefs());
@@ -44,10 +44,10 @@ public class FindCardCommandTest {
 
     @Test
     public void equals() {
-        QuestionContainsKeywordsPredicate firstPredicate =
-            new QuestionContainsKeywordsPredicate(Collections.singletonList("first"));
-        QuestionContainsKeywordsPredicate secondPredicate =
-            new QuestionContainsKeywordsPredicate(Collections.singletonList("second"));
+        QuestionContainsKeywordsPredicate firstPredicate = new QuestionContainsKeywordsPredicate(
+                Collections.singletonList("first"));
+        QuestionContainsKeywordsPredicate secondPredicate = new QuestionContainsKeywordsPredicate(
+                Collections.singletonList("second"));
 
         FindCardCommand findFirstCommand = new FindCardCommand(cardsView, firstPredicate);
         FindCardCommand findSecondCommand = new FindCardCommand(cardsView, secondPredicate);

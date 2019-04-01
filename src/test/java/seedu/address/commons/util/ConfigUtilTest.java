@@ -120,9 +120,8 @@ public class ConfigUtilTest {
     }
 
     private Path addToTestDataPathIfNotNull(String configFileInTestDataFolder) {
-        return configFileInTestDataFolder != null
-                                  ? TEST_DATA_FOLDER.resolve(configFileInTestDataFolder)
-                                  : null;
+        return configFileInTestDataFolder != null ? TEST_DATA_FOLDER
+                .resolve(configFileInTestDataFolder) : null;
     }
 
 

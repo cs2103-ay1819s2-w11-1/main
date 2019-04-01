@@ -33,14 +33,16 @@ public class FindCardCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCardCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                           String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCardCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
-        FindCardCommand expectedFindCommand =
-                new FindCardCommand((CardsView) model.getViewState(), new QuestionContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+        FindCardCommand expectedFindCommand = new FindCardCommand((CardsView) model.getViewState(),
+                                                                  new QuestionContainsKeywordsPredicate(
+                                                                          Arrays.asList("Alice", "Bob")));
         assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords

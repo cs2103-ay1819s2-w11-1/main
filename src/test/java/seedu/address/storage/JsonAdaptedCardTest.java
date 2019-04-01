@@ -20,8 +20,8 @@ public class JsonAdaptedCardTest {
     private static final String VALID_QUESTION = HELLO_WORLD.getQuestion();
     private static final String VALID_ANSWER = HELLO_WORLD.getAnswer();
     private static final List<JsonAdaptedTag> VALID_TAGS = HELLO_WORLD.getTags().stream()
-            .map(JsonAdaptedTag::new)
-            .collect(Collectors.toList());
+                                                                      .map(JsonAdaptedTag::new)
+                                                                      .collect(Collectors.toList());
 
     @Test
     public void toModelType_validCardDetails_returnsCard() throws Exception {
@@ -48,8 +48,7 @@ public class JsonAdaptedCardTest {
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
-        JsonAdaptedCard card =
-                new JsonAdaptedCard(VALID_QUESTION, VALID_ANSWER, invalidTags);
+        JsonAdaptedCard card = new JsonAdaptedCard(VALID_QUESTION, VALID_ANSWER, invalidTags);
         Assert.assertThrows(IllegalValueException.class, card::toModelType);
     }
 

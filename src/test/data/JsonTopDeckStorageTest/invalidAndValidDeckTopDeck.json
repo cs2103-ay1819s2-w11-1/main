@@ -1,14 +1,23 @@
 {
-  "decks" : [ {
-    "name" : "Deck1",
-    "cards" : [ {
-      "question": "Is this a valid question?",
-      "answer": "Yes it is",
-      "tagged": [ "tag1" ]
-    }, {
-      "question": "Is this an invalid question?",
-      "answer": "Yes it is",
-      "tagged": [ "bad*tag" ]
-    } ]
-  } ]
+  "decks": [
+    {
+      "name": "Deck1",
+      "cards": [
+        {
+          "question": "Is this a valid question?",
+          "answer": "Yes it is",
+          "tagged": [
+            "tag1"
+          ]
+        },
+        {
+          "question": "Is this an invalid question?",
+          "answer": "Yes it is",
+          "tagged": [
+            "bad*tag"
+          ]
+        }
+      ]
+    }
+  ]
 }

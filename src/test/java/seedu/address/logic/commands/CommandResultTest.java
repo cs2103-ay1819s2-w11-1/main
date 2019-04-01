@@ -56,11 +56,13 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new ExitCommandResult("feedback").hashCode());
 
         // PrefillCommandBoxCommandResult -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new PrefillCommandBoxCommandResult("feedback", "a").hashCode());
+        assertNotEquals(commandResult.hashCode(),
+                        new PrefillCommandBoxCommandResult("feedback", "a").hashCode());
 
         // PrefillCommandBoxCommandResult with different fields -> returns different hashcode
         CommandResult prefillCommandBoxCommandResult1 = new PrefillCommandBoxCommandResult("feedback", "a");
         CommandResult prefillCommandBoxCommandResult2 = new PrefillCommandBoxCommandResult("feedback", "b");
-        assertNotEquals(prefillCommandBoxCommandResult1.hashCode(), prefillCommandBoxCommandResult2.hashCode());
+        assertNotEquals(prefillCommandBoxCommandResult1.hashCode(),
+                        prefillCommandBoxCommandResult2.hashCode());
     }
 }

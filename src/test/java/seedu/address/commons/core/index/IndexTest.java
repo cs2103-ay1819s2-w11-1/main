@@ -53,7 +53,8 @@ public class IndexTest {
     }
 
     /**
-     * Executes either {@code Index#fromZeroBased(int)} (if it is zero based), or {@code Index#fromOneBased(int)}
+     * Executes either {@code Index#fromZeroBased(int)} (if it is zero based), or {@code Index#fromOneBased
+     * (int)}
      * (if it is one based), and confirms that an {@code IndexOutOfBoundsException} is thrown.
      */
     private void assertCreateFailure(int invalidIndex, boolean isZeroBased) {

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.Test;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.deck.Name;
 import seedu.address.testutil.Assert;
@@ -16,9 +17,10 @@ public class JsonAdaptedDeckTest {
     private static final String INVALID_NAME = " ";
 
     private static final String VALID_NAME = DECK_A.getName().toString();
-    private static final List<JsonAdaptedCard> VALID_CARDS = DECK_A.getCards()
-            .internalList.stream()
-            .map(JsonAdaptedCard::new).collect(Collectors.toList());
+    private static final List<JsonAdaptedCard> VALID_CARDS = DECK_A.getCards().internalList.stream()
+                                                                                           .map(JsonAdaptedCard::new)
+                                                                                           .collect(Collectors
+                                                                                                            .toList());
 
     @Test
     public void toModelType_validDeckDetails_returnsDeck() throws Exception {

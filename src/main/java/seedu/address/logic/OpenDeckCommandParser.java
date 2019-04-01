@@ -21,6 +21,7 @@ public class OpenDeckCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the OpenDeckCommand
      * and returns an OpenDeckCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public OpenDeckCommand parse(String args) throws ParseException {

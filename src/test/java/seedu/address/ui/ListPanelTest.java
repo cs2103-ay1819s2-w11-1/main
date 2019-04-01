@@ -1,15 +1,5 @@
 package seedu.address.ui;
 
-import guitests.guihandles.DeckDisplayHandle;
-import guitests.guihandles.ListPanelHandle;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import org.junit.Test;
-import seedu.address.logic.ListItem;
-import seedu.address.model.deck.Deck;
-import seedu.address.model.deck.Name;
-
 import static java.time.Duration.ofMillis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
@@ -18,11 +8,21 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_DECK;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysDeckObject;
 import static seedu.address.ui.testutil.GuiTestAssert.assertDeckDisplayEquals;
 
-public class ListPanelTest extends GuiUnitTest {
-    private static final ObservableList<Deck> TYPICAL_DECKS =
-            FXCollections.observableList(getTypicalDecks());
+import org.junit.Test;
 
-    private static final long DECK_CREATION_AND_DELETION_TIMEOUT= 2500;
+import guitests.guihandles.DeckDisplayHandle;
+import guitests.guihandles.ListPanelHandle;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.logic.ListItem;
+import seedu.address.model.deck.Deck;
+import seedu.address.model.deck.Name;
+
+public class ListPanelTest extends GuiUnitTest {
+    private static final ObservableList<Deck> TYPICAL_DECKS = FXCollections.observableList(getTypicalDecks());
+
+    private static final long DECK_CREATION_AND_DELETION_TIMEOUT = 2500;
 
     private final SimpleObjectProperty<ListItem> selectedItem = new SimpleObjectProperty<>();
 
@@ -38,7 +38,7 @@ public class ListPanelTest extends GuiUnitTest {
             DeckDisplayHandle actualDeck = listPanelHandle.getDeckDisplayHandle(i);
 
             assertCardDisplaysDeckObject(expectedDeck, actualDeck);
-            assertEquals(Integer.toString(i + 1) + ". ", actualDeck.getId());
+            assertEquals((i + 1) + ". ", actualDeck.getId());
         }
     }
 
@@ -49,7 +49,8 @@ public class ListPanelTest extends GuiUnitTest {
         guiRobot.interact(() -> selectedItem.set(secondDeck));
         guiRobot.pauseForHuman();
 
-        DeckDisplayHandle expectedDeck = listPanelHandle.getDeckDisplayHandle(INDEX_SECOND_DECK.getZeroBased());
+        DeckDisplayHandle expectedDeck = listPanelHandle
+                .getDeckDisplayHandle(INDEX_SECOND_DECK.getZeroBased());
         DeckDisplayHandle selectedDeck = listPanelHandle.getHandleToSelectedDeck();
         assertDeckDisplayEquals(expectedDeck, selectedDeck);
     }
@@ -88,11 +89,10 @@ public class ListPanelTest extends GuiUnitTest {
      * Also shows the {@code Stage} that displays only {@code ListPanel}.
      */
     private void initUi(ObservableList<? extends ListItem> list) {
-        ListPanel listPanel =
-                new ListPanel((ObservableList<ListItem>)list, selectedItem, selectedItem::set);
+        ListPanel listPanel = new ListPanel((ObservableList<ListItem>) list, selectedItem, selectedItem::set);
         uiPartRule.setUiPart(listPanel);
 
-        listPanelHandle = new ListPanelHandle(getChildNode(listPanel.getRoot(),
-                ListPanelHandle.DECK_LIST_VIEW_ID));
+        listPanelHandle = new ListPanelHandle(
+                getChildNode(listPanel.getRoot(), ListPanelHandle.DECK_LIST_VIEW_ID));
     }
 }

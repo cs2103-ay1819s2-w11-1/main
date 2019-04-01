@@ -18,17 +18,16 @@ public class QuestionContainsKeywordsPredicate implements Predicate<Card> {
 
     @Override
     public boolean test(Card card) {
-        return keywords.stream()
-            .anyMatch(keyword ->
-                StringUtil.containsKeywordsInQuestionIgnoreCase(card.getQuestion(), keyword) ||
-                    TagUtil.containsWordInTags(card.getTags(), keyword));
+        return keywords.stream().anyMatch(
+            keyword -> StringUtil.containsKeywordsInQuestionIgnoreCase(card.getQuestion(), keyword)
+                || TagUtil.containsWordInTags(card.getTags(), keyword));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof QuestionContainsKeywordsPredicate // instanceof handles nulls
-            && keywords.equals(((QuestionContainsKeywordsPredicate) other).keywords)); // state check
+                || (other instanceof QuestionContainsKeywordsPredicate // instanceof handles nulls
+                && keywords.equals(((QuestionContainsKeywordsPredicate) other).keywords)); // state check
     }
 
 

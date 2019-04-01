@@ -32,11 +32,8 @@ public class CardDisplayHandle extends NodeHandle<Node> {
         answerLabel = getChildNode(ANSWER_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
-        tagLabels = tagsContainer
-                .getChildrenUnmodifiable()
-                .stream()
-                .map(Label.class::cast)
-                .collect(Collectors.toList());
+        tagLabels = tagsContainer.getChildrenUnmodifiable().stream().map(Label.class::cast)
+                                 .collect(Collectors.toList());
     }
 
     public String getId() {
@@ -52,21 +49,18 @@ public class CardDisplayHandle extends NodeHandle<Node> {
     }
 
     public List<String> getTags() {
-        return tagLabels
-                .stream()
-                .map(Label::getText)
-                .collect(Collectors.toList());
+        return tagLabels.stream().map(Label::getText).collect(Collectors.toList());
     }
 
     /**
      * Returns true if this handle contains {@code card}.
+     *
      * @param card
      */
     public boolean equals(Card card) {
-        return getQuestion().equals(card.getQuestion())
-                && getAnswer().equals(card.getAnswer())
-                && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(card.getTags().stream()
-                        .map(tag -> tag.tagName)
-                        .collect(Collectors.toList())));
+        return getQuestion().equals(card.getQuestion()) && getAnswer().equals(card.getAnswer())
+            && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset
+            .copyOf(card.getTags().stream().map(tag -> tag.tagName)
+                    .collect(Collectors.toList())));
     }
 }

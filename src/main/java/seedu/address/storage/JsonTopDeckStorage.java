@@ -45,8 +45,8 @@ public class JsonTopDeckStorage implements TopDeckStorage {
     public Optional<ReadOnlyTopDeck> readTopDeck(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableTopDeck> jsonTopDeck = JsonUtil.readJsonFile(
-                filePath, JsonSerializableTopDeck.class);
+        Optional<JsonSerializableTopDeck> jsonTopDeck = JsonUtil
+                .readJsonFile(filePath, JsonSerializableTopDeck.class);
         if (!jsonTopDeck.isPresent()) {
             return Optional.empty();
         }
@@ -66,6 +66,7 @@ public class JsonTopDeckStorage implements TopDeckStorage {
 
     /**
      * Similar to {@link #saveTopDeck(ReadOnlyTopDeck)}.
+     *
      * @param filePath location of the data. Cannot be null.
      */
     public void saveTopDeck(ReadOnlyTopDeck topDeck, Path filePath) throws IOException {

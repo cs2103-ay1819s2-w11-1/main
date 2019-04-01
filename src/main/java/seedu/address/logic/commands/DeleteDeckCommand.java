@@ -9,7 +9,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.DecksView;
-import seedu.address.logic.ListItem;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.deck.Deck;
@@ -23,13 +22,11 @@ public class DeleteDeckCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the deck identified by the index number used in the displayed deck list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_DECK_SUCCESS = "Deleted Deck: %1$s";
-
-    private Index targetIndex;
     private final DecksView decksView;
+    private Index targetIndex;
 
     public DeleteDeckCommand(DecksView decksView, Index targetIndex) {
         this.decksView = decksView;

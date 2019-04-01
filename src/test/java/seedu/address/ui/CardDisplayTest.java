@@ -16,7 +16,7 @@ public class CardDisplayTest extends GuiUnitTest {
     @Test
     public void display() {
         // no tags
-        Card cardWithNoTags = new CardBuilder().withTags(new String[0]).build();
+        Card cardWithNoTags = new CardBuilder().withTags().build();
         CardDisplay cardDisplay = new CardDisplay(cardWithNoTags, 1);
         uiPartRule.setUiPart(cardDisplay);
         assertCardDisplay(cardDisplay, cardWithNoTags, 1);
@@ -64,7 +64,7 @@ public class CardDisplayTest extends GuiUnitTest {
         CardDisplayHandle cardDisplayHandle = new CardDisplayHandle(cardDisplay.getRoot());
 
         // verify id is displayed correctly
-        assertEquals(Integer.toString(expectedId) + ". ", cardDisplayHandle.getId());
+        assertEquals(expectedId + ". ", cardDisplayHandle.getId());
 
         // verify card details are displayed correctly
         assertCardDisplaysCardObject(expectedCard, cardDisplayHandle);

@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertUpdateCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.deleteFirstDeck;
 import static seedu.address.testutil.TypicalDecks.getTypicalTopDeck;
 
@@ -33,13 +33,16 @@ public class UndoCommandTest {
     public void execute() {
         // multiple undoable states in model
         expectedModel.undoTopDeck();
-        assertCommandSuccess(new UndoCommand(model.getViewState()), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertUpdateCommandSuccess(new UndoCommand(model.getViewState()), model, commandHistory,
+                                   UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // single undoable state in model
         expectedModel.undoTopDeck();
-        assertCommandSuccess(new UndoCommand(model.getViewState()), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertUpdateCommandSuccess(new UndoCommand(model.getViewState()), model, commandHistory,
+                                   UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // no undoable states in model
-        assertCommandFailure(new UndoCommand(model.getViewState()), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new UndoCommand(model.getViewState()), model, commandHistory,
+                             UndoCommand.MESSAGE_FAILURE);
     }
 }
