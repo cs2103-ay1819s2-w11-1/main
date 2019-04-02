@@ -68,7 +68,15 @@
 </li>
 <li><a href="#faq">5. FAQ</a></li>
 <li><a href="#glossary">6. Glossary</a></li>
-<li><a href="#command-summary">7. Command Summary</a></li>
+<li><a href="#command-summary">7. Command Summary</a>
+<ul class="sectlevel3">
+<li><a href="#decks-view-2">7.1. Decks View</a></li>
+<li><a href="#cards-view-2">7.2. Cards View</a></li>
+<li><a href="#study-view-2">7.3. Study View</a></li>
+<li><a href="#global-commands-2">7.4. Global Commands</a></li>
+<li><a href="#switching-views">7.5. Switching Views</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -193,6 +201,16 @@ In decks view, you can:</p>
 <h3 id="studyview"><a class="link" href="#studyview">3.3. Study View</a></h3>
 <div class="paragraph">
 <p>In this view you can study a deck of cards.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Test your knowledge of the cards in your chosen deck</p>
+</li>
+<li>
+<p>Rate the difficulty of the cards.</p>
+</li>
+</ul>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -788,41 +806,29 @@ When studying, TopDeck will show the question, and the answer will be revealed w
 <div class="paragraph">
 <p>A convenient cheat sheet of commands</p>
 </div>
+<div class="sect3">
+<h4 id="decks-view-2"><a class="link" href="#decks-view-2">7.1. Decks View</a></h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 40%;">
 <col style="width: 60%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Command</th>
-<th class="tableblock halign-left valign-top">What does it do?</th>
-</tr>
-</thead>
 <tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>help</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Lists all available commands and their respective formats.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>list</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Displays a list of all available decks. If inside a deck displays all cards in that deck.</p></td>
-</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>add n/NAME</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Adds a new deck.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>edit INDEX n/NAME</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Edits the name of the deck at INDEX.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete INDEX</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Deletes the deck at INDEX.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>select INDEX</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Selects the deck at INDEX.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>edit INDEX n/NAME</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Edits the name of the deck at INDEX.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>find NAME</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Finds a deck by name.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>open INDEX</code></p></td>
@@ -830,24 +836,36 @@ When studying, TopDeck will show the question, and the answer will be revealed w
 Use <code>back</code> to navigate out of the deck.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>find NAME</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Finds a deck by name.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>select INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selects the deck at INDEX.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>study INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Studying the deck at INDEX.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="cards-view-2"><a class="link" href="#cards-view-2">7.2. Cards View</a></h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 60%;">
+</colgroup>
+<tbody>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>add q/QUESTION a/ANSWER</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a new card in the current deck.<br>
-You must be inside a deck to perform this operation.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a new card in the current deck.<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes the card at INDEX.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>edit INDEX [q/QUESTION]-[a/ANSWER]</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Edits the details of the card at INDEX.<br>
-At least one parameter must be present.<br>
-You must be inside a deck to perform this operation.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete INDEX</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes the card at INDEX.<br>
-You must be inside a deck to perform this operation.</p></td>
+At least one parameter must be present.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>find NAME</code></p></td>
@@ -857,30 +875,36 @@ You must be inside a deck to perform this operation.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>study</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Studying the active deck.</p></td>
 </tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="study-view-2"><a class="link" href="#study-view-2">7.3. Study View</a></h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 60%;">
+</colgroup>
+<tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>done</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>back</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Returning to deck view after studying.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>export INDEX</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Exports the deck at the specified INDEX. (Default location is the same folder as TopDeck)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>deck</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Opens the deck in cards view.</p></td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>import FILEPATH</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Imports a deck from the <code>json</code> file at the specified FILEPATH.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>history</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">List all entered commands in reverse chronological order.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>undo</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Undo previous command.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>redo</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Redo previously undone command.</p></td>
-</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="global-commands-2"><a class="link" href="#global-commands-2">7.4. Global Commands</a></h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 60%;">
+</colgroup>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>clear</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Clear all decks and cards.</p></td>
@@ -889,7 +913,67 @@ You must be inside a deck to perform this operation.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>exit</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Exits the program.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>export INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exports the deck at the specified INDEX. (Default location is the same folder as TopDeck)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>help</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lists all available commands and their respective formats.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>history</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List all entered commands in reverse chronological order.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>import FILEPATH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Imports a deck from the <code>json</code> file at the specified FILEPATH.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>list</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Displays a list of all available decks. If inside a deck displays all cards in that deck.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>redo</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Redo previously undone command.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>undo</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Undo previous command.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 13:11:12 UTC</div></div></div></body></html>
+<div class="sect3">
+<h4 id="switching-views"><a class="link" href="#switching-views">7.5. Switching Views</a></h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 60%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>back</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cards/study view to Decks view.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>deck</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Study view to cards view.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>open DECK_INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decks view to cards view</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>study</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cards view to study view.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>study DECK_INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decks view to study view.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 13:30:01 UTC</div></div></div></body></html>
