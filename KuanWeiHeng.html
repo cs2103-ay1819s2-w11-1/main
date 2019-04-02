@@ -1,0 +1,343 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Kuan Wei Heng - Project Portfolio for TopDeck</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">TopDeck</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link active" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/cs2103-ay1819s2-w11-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Kuan Wei Heng - Project Portfolio for TopDeck</h1></div><div id="content"><div class="sect1">
+<h2 id="about-the-project"><a class="link" href="#about-the-project">1. About the Project</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>My team and I were tasked to with morphing a basic commandline interface addressbook for our
+so!ware engineering project. We decided to morph the application into a Flashcard management
+application called TopDeck TopDeck is a user-friendly tool that aims to help users better memorise any
+content that they desire. Users can use it to learn a language, remember a math formula or simply
+recall an answer to a question.</p>
+</div>
+<div class="paragraph">
+<p>One of the key features of our application is the simplicity that we would like
+to provide out user in terms of the commands and this meant that we had to implement states for
+different part of the application namely, a state for card management, decks management and
+one for studying the cards. I was in charge of implementing this states and decided to implement it
+using polymorphism.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">2. Summary of Contributions</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section shows a summary of my coding, documentation, and other helpful contributions to the team project.</p>
+</div>
+<div class="paragraph">
+<p><strong>Enhancement added:</strong> I modified the architecture of our software such that
+stateful interface is supported. I added the state management features in the application so that the
+same commands given by the user can be overloaded. For example, <code>add</code> can mean both
+adding a deck or a card depending on which state the app is currently in.</p>
+</div>
+<div class="paragraph">
+<p>Justification: A user should be able to execute simple commands easily instead of having
+to give a context to the application.</p>
+</div>
+<div class="paragraph">
+<p><strong>Code Contributed:</strong> Please view our github page to see the code that I have contributed.</p>
+</div>
+<div class="paragraph">
+<p><strong>Other contributions</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Project management:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>I ensured that members were on track and not falling behind.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Enhancements to existing features:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>I added the autocomplete feature to reduce typing needed for the "Edit Card" command.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>I made our documentation look better.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>I reviewed pull requests and gave comments on how my peers can improve the readability of their code.</p>
+</li>
+<li>
+<p>I contributed to discussions on how the UI should look like, and how lists should be stored internally.</p>
+</li>
+<li>
+<p>I put up issues and enhancements to keep our team on track.</p>
+</li>
+<li>
+<p>I gave our team a few tips on the git workflow.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Tools:</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-user-guide"><a class="link" href="#contributions-to-user-guide">3. Contributions to User Guide</a></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="quick-start"><a class="link" href="#quick-start">4. Quick Start</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To get started with TopDeck:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Ensure you have Java version <code>9</code> or later installed in your Computer.</p>
+</li>
+<li>
+<p>Download the latest <code>topdeck.jar</code> <a href="https://github.com/cs2103-ay1819s2-w11-1/main/tree/master/releases">here</a>.</p>
+</li>
+<li>
+<p>Copy the file to the folder you want to use as the home folder for TopDeck.</p>
+</li>
+<li>
+<p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/Ui.png" alt="Ui" width="790">
+</div>
+</div>
+</li>
+<li>
+<p>Type the command in the command box and press <kbd>Enter</kbd> to execute it.<br>
+e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> will open the help window.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Once you have set up TopDeck, you can try these commands:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add Capitals</code> : creates a new deck named "Capitals"</p>
+</li>
+<li>
+<p><code>delete 3</code> : deletes the third deck in the list</p>
+</li>
+<li>
+<p><code>exit</code> : exits the app</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You may refer to <a href="#commands">Section 6, &#8220;Commands&#8221;</a> for details of each command.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="user-interface"><a class="link" href="#user-interface">5. User interface</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>TopDeck&#8217;s interface is seperated into three different views.
+By default, TopDeck starts in <a href="#decksview">Decks View</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="decksview"><a class="link" href="#decksview">5.1. Decks View</a></h3>
+<div class="paragraph">
+<p>This view displays a list of the decks in your collection.
+In decks view, you can:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create, edit and delete decks.</p>
+</li>
+<li>
+<p>Open a deck to view its contents. TopDeck will enter <a href="#cardsview">cards view</a>.</p>
+</li>
+<li>
+<p>Pick a deck to study. TopDeck will enter <a href="#studyview">study view</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cardsview"><a class="link" href="#cardsview">5.2. Cards View</a></h3>
+<div class="paragraph">
+<p>This view displays the cards in a particular deck. In cards view, you can:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create, edit and delete cards in the deck.</p>
+</li>
+<li>
+<p>View your performance for specific cards.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="studyview"><a class="link" href="#studyview">5.3. Study View</a></h3>
+<div class="paragraph">
+<p>In this view you can study a deck of cards.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Test your knowledge of the cards in your chosen deck</p>
+</li>
+<li>
+<p>Rate the difficulty of the cards.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/study_ug_diagrams/study_1.png" alt="study 1" width="800">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="commands"><a class="link" href="#commands">6. Commands</a></h2>
+<div class="sectionbody">
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command Format</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user.<br>
+Example: In <code>add DECK_NAME</code>, <code>DECK_NAME</code> is a parameter which can be used as <code>add Spanish</code>.</p>
+</li>
+<li>
+<p>Items in square brackets are optional.<br>
+Example: <code>q/QUESTION a/ANSWER [t/TAG]</code> can be used as <code>q/China a/Beijing t/Asia</code> or as <code>q/China a/Beijing</code>.</p>
+</li>
+<li>
+<p>Items with <code>…</code>​ after them can be used any number of times including zero.<br>
+Example: <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>t/Asia</code>, <code>t/trivia t/history</code> etc.</p>
+</li>
+<li>
+<p>Parameters can be in any order.<br>
+Example: If the command specifies <code>q/QUESTION a/ANSWER</code>, <code>q/QUESTION a/ANSWER</code> is also acceptable.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-developer-guide"><a class="link" href="#contributions-to-developer-guide">7. Contributions to Developer Guide</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="stateful-user-interface"><a class="link" href="#stateful-user-interface">7.1. Stateful user interface</a></h3>
+<div class="sect3">
+<h4 id="introduction"><a class="link" href="#introduction">7.1.1. Introduction</a></h4>
+<div class="paragraph">
+<p>TopDeck has a stateful user interface.
+This means that the set of valid commands and their respective functionality
+depend on the context of the application state.</p>
+</div>
+<div class="paragraph">
+<p>For example, the command word <code>add</code> is "overloaded" with two capabilities:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In decks view, it adds a new deck: <code>add DECK_NAME</code></p>
+</li>
+<li>
+<p>In cards view, it adds a new card to a particular deck: <code>add q/QUESTION a/ANSWER</code></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>It is the active state in TopDeck that resolves the actual command that is called.
+Also, TopDeck does not request information from the user that is already implicit in the state
+(e.g. the target deck in the second command).</p>
+</div>
+<div class="paragraph">
+<p>The reasons for choosing to implement a stateful user interface are manifold.
+Most importantly, it is necessary to support the implementation of study view which is stateful in nature.
+A stateful user interface is also preferable to end users since it
+requires less cognitive effort to operate by virtue of the fewer and shorter commands.</p>
+</div>
+<div class="paragraph">
+<p>However, implementing state in full generality required nontrivial modifications to the AB4 architecture.
+We will now describe how state is implemented in TopDeck.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">7.1.2. Current implementation</a></h4>
+<div class="paragraph">
+<p>States partition the functionalities that are exposed to users.
+Hence, it is natural to consider distinct views in the user interface as separate states.
+States in TopDeck correspond to the three possible views described in the user guide:
+decks view, cards view and study view.</p>
+</div>
+<div class="paragraph">
+<p>The following figure illustrates the transitions between these states.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/state_diagram.png" alt="state diagram">
+</div>
+<div class="title">Figure 1. State diagram for TopDeck</div>
+</div>
+<div class="paragraph">
+<p>Each state implements a common interface <code>ViewState</code>
+and holds transient data that is relevant only while the state is active.
+For example, <code>CardsView</code> has a member <code>activeDeck</code> which holds a reference to the deck opened in decks view.
+Commands in cards view such as <code>add</code> will then operate on this deck.</p>
+</div>
+<div class="paragraph">
+<p><code>ModelManager</code> owns the sole instance of <code>ViewState</code>.
+Having only one instance of any state makes it trivial to enforce mutual exclusion.
+The <code>Model</code> is also responsible for executing state transitions.
+Each transition is exposed as a method in the <code>Model</code> API.
+For example, <code>Model#changeDeck(Deck deck)</code> implements the transition from decks view to cards view.
+As state entry is handled by the constructors of each state,
+the implementation of a transition is as simple as constructing a new state object.</p>
+</div>
+<div class="paragraph">
+<p>Technically, <code>Model#changeDeck(Deck deck)</code> can be called from any state, not just decks view.
+This is a consequence of the design of <code>Model</code>.
+The <code>Model</code> API is designed such that no state tracking is necessary.
+All methods are expected to work regardless of the current state.
+We assume that if a caller is capable of providing the required arguments to a method,
+the method call is valid and expected.
+This obviates the need for state-checking code in <code>ModelManager</code>.</p>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 16:23:11 UTC</div></div></div></body></html>
