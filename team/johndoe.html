@@ -188,7 +188,8 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th person in TopDeck. The <code>delete</code> command calls <code>Model#commitTopDeck()</code>, causing the modified state of TopDeck after the <code>delete 5</code> command executes to be saved in the <code>topDeckStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted TopDeck state.</p>
+<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th deck in TopDeck. The <code>delete</code> command calls
+<code>Model#commitTopDeck()</code>, causing the modified state of TopDeck after the <code>delete 5</code> command executes to be saved in the <code>topDeckStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted TopDeck state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -196,7 +197,8 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new person. The <code>add</code> command also calls <code>Model#commitTopDeck()</code>, causing another modified TopDeck state to be saved into the <code>topDeckStateList</code>.</p>
+<p>Step 3. The user executes <code>add n/History &#8230;&#8203;</code> to add a new deck. The <code>add</code> command also calls <code>Model#commitTopDeck()</code>,
+causing another modified TopDeck state to be saved into the <code>topDeckStateList</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -216,7 +218,8 @@ If a command fails its execution, it will not call <code>Model#commitTopDeck()</
 </table>
 </div>
 <div class="paragraph">
-<p>Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoTopDeck()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous TopDeck state, and restores TopDeck to that state.</p>
+<p>Step 4. The user now decides that adding the deck was a mistake, and decides to undo that action by executing the <code>undo</code>
+ command. The <code>undo</code> command will call <code>Model#undoTopDeck()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous TopDeck state, and restores TopDeck to that state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -307,7 +310,7 @@ If the <code>currentStatePointer</code> is at index <code>topDeckStateList.size(
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the person being deleted).</p>
+<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the deck being deleted).</p>
 </li>
 <li>
 <p>Cons: We must ensure that the implementation of each individual command are correct.</p>
@@ -369,4 +372,4 @@ If the <code>currentStatePointer</code> is at index <code>topDeckStateList.size(
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 16:23:11 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 20:25:19 UTC</div></div></div></body></html>

@@ -20,16 +20,15 @@
 </li>
 <li><a href="#commands">4. Commands</a>
 <ul class="sectlevel2">
-<li><a href="#decks-view">4.1. Decks View</a>
+<li><a href="#deck-view">4.1. Deck View</a>
 <ul class="sectlevel3">
 <li><a href="#creating-a-deck-code-add-code">4.1.1. Creating a deck: <code>add</code></a></li>
 <li><a href="#deleting-a-deck-code-delete-code">4.1.2. Deleting a deck: <code>delete</code></a></li>
 <li><a href="#editing-the-name-of-a-deck-code-edit-code">4.1.3. Editing the name of a deck: <code>edit</code></a></li>
 <li><a href="#finding-a-deck-by-name-code-find-code">4.1.4. Finding a deck by name: <code>find</code></a></li>
 <li><a href="#listing-all-decks-code-list-code">4.1.5. Listing all decks: <code>list</code></a></li>
-<li><a href="#selecting-a-deck-code-select-code">4.1.6. Selecting a deck: <code>select</code></a></li>
-<li><a href="#navigating-into-a-deck-code-open-code">4.1.7. Navigating into a deck: <code>open</code></a></li>
-<li><a href="#studying-a-deck-code-study-code">4.1.8. Studying a deck: <code>study</code></a></li>
+<li><a href="#navigating-into-a-deck-code-open-code">4.1.6. Navigating into a deck: <code>open</code></a></li>
+<li><a href="#studying-a-deck-code-study-code">4.1.7. Studying a deck: <code>study</code></a></li>
 </ul>
 </li>
 <li><a href="#cards-view">4.2. Cards View</a>
@@ -70,7 +69,7 @@
 <li><a href="#glossary">6. Glossary</a></li>
 <li><a href="#command-summary">7. Command Summary</a>
 <ul class="sectlevel3">
-<li><a href="#decks-view-2">7.1. Decks View</a></li>
+<li><a href="#decks-view">7.1. Decks View</a></li>
 <li><a href="#cards-view-2">7.2. Cards View</a></li>
 <li><a href="#study-view-2">7.3. Study View</a></li>
 <li><a href="#global-commands-2">7.4. Global Commands</a></li>
@@ -253,9 +252,17 @@ Example: If the command specifies <code>q/QUESTION a/ANSWER</code>, <code>q/QUES
 </div>
 </div>
 <div class="sect2">
-<h3 id="decks-view"><a class="link" href="#decks-view">4.1. Decks View</a></h3>
+<h3 id="deck-view"><a class="link" href="#deck-view">4.1. Deck View</a></h3>
 <div class="paragraph">
-<p>These commands are only available in decks view.</p>
+<p>In this view you can create, edit and find decks. This is the default view when TopDeck is first launched.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/deck.png" alt="deck" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>These are commands only available in deck view.</p>
 </div>
 <div class="sect3">
 <h4 id="creating-a-deck-code-add-code"><a class="link" href="#creating-a-deck-code-add-code">4.1.1. Creating a deck: <code>add</code></a></h4>
@@ -265,6 +272,25 @@ Example: If the command specifies <code>q/QUESTION a/ANSWER</code>, <code>q/QUES
 <div class="paragraph">
 <p><strong>Outcome</strong>: Creates a new deck called <code>DECK_NAME</code>.</p>
 </div>
+<div class="paragraph">
+<p><strong>Example</strong>: <code>add n/History</code></p>
+</div>
+<div class="paragraph">
+<p>Before:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/add_deck_1.png" alt="add deck 1" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>After:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/add_deck_2.png" alt="add deck 2" width="800">
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="deleting-a-deck-code-delete-code"><a class="link" href="#deleting-a-deck-code-delete-code">4.1.2. Deleting a deck: <code>delete</code></a></h4>
@@ -273,6 +299,9 @@ Example: If the command specifies <code>q/QUESTION a/ANSWER</code>, <code>q/QUES
 </div>
 <div class="paragraph">
 <p><strong>Outcome</strong>: Deletes the deck at <code>INDEX</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>: <code>delete 2</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -288,6 +317,22 @@ Example: If the command specifies <code>q/QUESTION a/ANSWER</code>, <code>q/QUES
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>Before:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/delete_deck_1.png" alt="delete deck 1" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>After:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/delete_deck_2.png" alt="delete deck 2" width="800">
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="editing-the-name-of-a-deck-code-edit-code"><a class="link" href="#editing-the-name-of-a-deck-code-edit-code">4.1.3. Editing the name of a deck: <code>edit</code></a></h4>
@@ -296,6 +341,25 @@ Example: If the command specifies <code>q/QUESTION a/ANSWER</code>, <code>q/QUES
 </div>
 <div class="paragraph">
 <p><strong>Outcome</strong>: Changes the name of the deck at <code>INDEX</code> to <code>NEW_DECK_NAME</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>: <code>edit 2 Addition</code></p>
+</div>
+<div class="paragraph">
+<p>Before:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/edit_deck_1.png" alt="edit deck 1" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>After:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/edit_deck_2.png" alt="edit deck 2" width="800">
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -306,6 +370,25 @@ Example: If the command specifies <code>q/QUESTION a/ANSWER</code>, <code>q/QUES
 <div class="paragraph">
 <p><strong>Outcome</strong>: Lists all decks containing <code>KEYWORD</code> in its name.</p>
 </div>
+<div class="paragraph">
+<p><strong>Example</strong>: <code>find sci</code></p>
+</div>
+<div class="paragraph">
+<p>Before:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/find_deck_1.png" alt="find deck 1" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>After:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/find_deck_2.png" alt="find deck 2" width="800">
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="listing-all-decks-code-list-code"><a class="link" href="#listing-all-decks-code-list-code">4.1.5. Listing all decks: <code>list</code></a></h4>
@@ -315,32 +398,49 @@ Example: If the command specifies <code>q/QUESTION a/ANSWER</code>, <code>q/QUES
 <div class="paragraph">
 <p><strong>Outcome</strong>: Displays a list of all decks.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/list_deck_1.png" alt="list deck 1" width="800">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/list_deck_2.png" alt="list deck 2" width="800">
+</div>
+</div>
 </div>
 <div class="sect3">
-<h4 id="selecting-a-deck-code-select-code"><a class="link" href="#selecting-a-deck-code-select-code">4.1.6. Selecting a deck: <code>select</code></a></h4>
-<div class="paragraph">
-<p><strong>Format</strong>: <code>select INDEX</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Outcome</strong>: Selects the deck at <code>INDEX</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="navigating-into-a-deck-code-open-code"><a class="link" href="#navigating-into-a-deck-code-open-code">4.1.7. Navigating into a deck: <code>open</code></a></h4>
+<h4 id="navigating-into-a-deck-code-open-code"><a class="link" href="#navigating-into-a-deck-code-open-code">4.1.6. Navigating into a deck: <code>open</code></a></h4>
 <div class="paragraph">
 <p><strong>Format</strong>: <code>open INDEX</code></p>
 </div>
 <div class="paragraph">
 <p><strong>Outcome</strong>: Opens the deck at <code>INDEX</code></p>
 </div>
+<div class="paragraph">
+<p><strong>Example</strong>: <code>open 1</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/open_deck.png" alt="open deck" width="800">
+</div>
+</div>
 </div>
 <div class="sect3">
-<h4 id="studying-a-deck-code-study-code"><a class="link" href="#studying-a-deck-code-study-code">4.1.8. Studying a deck: <code>study</code></a></h4>
+<h4 id="studying-a-deck-code-study-code"><a class="link" href="#studying-a-deck-code-study-code">4.1.7. Studying a deck: <code>study</code></a></h4>
 <div class="paragraph">
 <p><strong>Format</strong>: <code>study INDEX</code></p>
 </div>
 <div class="paragraph">
 <p><strong>Outcome</strong>: Enters study view with the deck at <code>INDEX</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>: <code>study 1</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/study_deck.png" alt="study deck" width="800">
+</div>
 </div>
 </div>
 </div>
@@ -809,7 +909,7 @@ When studying, TopDeck will show the question, and the answer will be revealed w
 <p>A convenient cheat sheet of commands</p>
 </div>
 <div class="sect3">
-<h4 id="decks-view-2"><a class="link" href="#decks-view-2">7.1. Decks View</a></h4>
+<h4 id="decks-view"><a class="link" href="#decks-view">7.1. Decks View</a></h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 40%;">
@@ -978,4 +1078,4 @@ At least one parameter must be present.</p></td>
 </table>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 16:23:11 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 20:25:19 UTC</div></div></div></body></html>

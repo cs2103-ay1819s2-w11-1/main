@@ -1,0 +1,440 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Wong Chin Kiat, John - Project Portfolio for TopDeck</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">TopDeck</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link active" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/cs2103-ay1819s2-w11-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Wong Chin Kiat, John - Project Portfolio for TopDeck</h1></div><div id="content"><div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">1. Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This portfolio documents my contributions to the project I have undertaken in the course CS2103T -
+Software Engineering. It aims to demonstrate the theoretical and practical knowledge I have gained in the
+field of Software Engineering over the semester.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="project"><a class="link" href="#project">2. Project</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>TopDeck is a general purpose flashcard application created to solve the inherent problems associated with physical
+flashcards. It aims to facilitate quick and intuitive management of virtual flashcards as well as having a study mode
+which allows for extra-efficient studying.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">3. Summary of Contributions</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section acts as a summary of my contributions to TopDeck.</p>
+</div>
+<div class="paragraph">
+<p><strong>Enhancement added:</strong> I added the deck list to allow for the management of decks.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: The decklist allows users to better navigate and manage decks. It allows users to add, edit and
+find decks with ease.</p>
+</li>
+<li>
+<p>Justification: In order for a flash card application to work seamlessly, it needs the ability to manage and store
+cards easily. This deck management system allows the user to store related cards into decks.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Code Contributed:</strong>
+<a href="https://github.com/cs2103-ay1819s2-w11-1/main/commits?author=ckjohn000">My GitHub commits</a>,
+<a href="https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=ckjohn000&amp;sort=displayName&amp;since=2019-02-10&amp;until=2019-04-02&amp;timeframe=day&amp;reverse=false&amp;repoSort=true">My RepoSense Dashboard</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Other contributions</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Project management:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ensured loose coupling between deck and card management.</p>
+</li>
+<li>
+<p>Ensured Storage component of TopDeck preserved functionality throughout.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Enhancements to existing features:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Added the ability to store a list of cards instead of just one card.</p>
+</li>
+<li>
+<p>Wrote additional tests for existing features.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Did changes to the user and developer guide to improve reader-friendliness of existing content.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>I reviewed pull requests for decks and cards.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-user-guide"><a class="link" href="#contributions-to-user-guide">4. Contributions to User Guide</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="deck-view"><a class="link" href="#deck-view">4.1. Deck View</a></h3>
+<div class="paragraph">
+<p>In this view you can create, edit and find decks. This is the default view when TopDeck is first launched.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/deck.png" alt="deck" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>These are commands only available in deck view.</p>
+</div>
+<div class="sect3">
+<h4 id="creating-a-deck-code-add-code"><a class="link" href="#creating-a-deck-code-add-code">4.1.1. Creating a deck: <code>add</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>add DECK_NAME</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Creates a new deck called <code>DECK_NAME</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>: <code>add n/History</code></p>
+</div>
+<div class="paragraph">
+<p>Before:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/add_deck_1.png" alt="add deck 1" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>After:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/add_deck_2.png" alt="add deck 2" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="deleting-a-deck-code-delete-code"><a class="link" href="#deleting-a-deck-code-delete-code">4.1.2. Deleting a deck: <code>delete</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>delete INDEX</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Deletes the deck at <code>INDEX</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>: <code>delete 2</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The index refers to the index number shown in the displayed deck list. The index <strong>must be a positive integer</strong> 1, 2, 3&#8230;&#8203;</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Before:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/delete_deck_1.png" alt="delete deck 1" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>After:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/delete_deck_2.png" alt="delete deck 2" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editing-the-name-of-a-deck-code-edit-code"><a class="link" href="#editing-the-name-of-a-deck-code-edit-code">4.1.3. Editing the name of a deck: <code>edit</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>edit INDEX NEW_DECK_NAME</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Changes the name of the deck at <code>INDEX</code> to <code>NEW_DECK_NAME</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>: <code>edit 2 Addition</code></p>
+</div>
+<div class="paragraph">
+<p>Before:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/edit_deck_1.png" alt="edit deck 1" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>After:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/edit_deck_2.png" alt="edit deck 2" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="finding-a-deck-by-name-code-find-code"><a class="link" href="#finding-a-deck-by-name-code-find-code">4.1.4. Finding a deck by name: <code>find</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>find KEYWORD</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Lists all decks containing <code>KEYWORD</code> in its name.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>: <code>find sci</code></p>
+</div>
+<div class="paragraph">
+<p>Before:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/find_deck_1.png" alt="find deck 1" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>After:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/find_deck_2.png" alt="find deck 2" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="listing-all-decks-code-list-code"><a class="link" href="#listing-all-decks-code-list-code">4.1.5. Listing all decks: <code>list</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>list</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Displays a list of all decks.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/list_deck_1.png" alt="list deck 1" width="800">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/list_deck_2.png" alt="list deck 2" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="navigating-into-a-deck-code-open-code"><a class="link" href="#navigating-into-a-deck-code-open-code">4.1.6. Navigating into a deck: <code>open</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>open INDEX</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Opens the deck at <code>INDEX</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>: <code>open 1</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/open_deck.png" alt="open deck" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="studying-a-deck-code-study-code"><a class="link" href="#studying-a-deck-code-study-code">4.1.7. Studying a deck: <code>study</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>study INDEX</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Enters study view with the deck at <code>INDEX</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>: <code>study 1</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/study_deck.png" alt="study deck" width="800">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-developer-guide"><a class="link" href="#contributions-to-developer-guide">5. Contributions to Developer Guide</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="deck-operations"><a class="link" href="#deck-operations">5.1. Deck operations</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">5.1.1. Current implementation</a></h4>
+<div class="paragraph">
+<p>Deck operations are supported in TopDeck class: A Deck consists of a list of <code>cards</code>. Decks are deemed as equal if they
+have the same name. This is to prevent users from creating 2 or more decks with the same name.</p>
+</div>
+<div class="paragraph">
+<p>Within the Model, <code>Deck</code> is encapsulated by the following data structure:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Model</code></p>
+</li>
+<li>
+<p><code>VersionedTopDeck</code></p>
+</li>
+<li>
+<p><code>TopDeck</code></p>
+</li>
+<li>
+<p><code>UniqueDeckList</code></p>
+</li>
+<li>
+<p><code>Deck</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Create, Read, Update and Delete(CRUD) operation will trickle down the encapsulations
+and be executed in <code>UniqueDeckList</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">5.1.2. Current implementation</a></h4>
+<div class="paragraph">
+<p>Deck Management is facilitated by <code>Deck</code> which implements the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>add(Deck deck)</p>
+</li>
+<li>
+<p>edit(Deck target, Deck editedDeck)</p>
+</li>
+<li>
+<p>delete(Deck deck)</p>
+</li>
+<li>
+<p>find(Name name)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The CRUD operations are exposed in the Model interface as <code>Model#addDeck(Deck deck)</code> and
+<code>Model#deleteDeck(Deck toDelete)</code>. For each deck operation,
+there are 2 main updates that need to be done. The first update will be on the model
+and the second will be on the <code>ViewState</code>.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the addDeck(Deck) mechanism behaves at each step:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/addDeckSequence.png" alt="addDeckSequence" width="800">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The user starts up the application and is in the <code>DecksView</code>. The user then
+executes the <code>add</code> command <code>add n/NAME</code> to create a new deck. The <code>add</code> command
+is parsed and calls <code>Model#addDeck(Deck deck)</code>.</p>
+</li>
+<li>
+<p><code>Model#addDeck(Deck deck)</code> first checks if the current state is a
+DecksView. Following, it will create a new deck to be added into `VersionedTopDeck.addDeck(Deck deck).</p>
+</li>
+<li>
+<p>Once that is done, the filteredItems list is being updated to reflect the change.</p>
+</li>
+<li>
+<p>To continue to add <code>cards</code>, the user will then execute the command <code>select INDEX</code>. For example, user
+executes the <code>select 1</code> command to select the first deck. This should change the <code>ViewState</code> in the
+<code>ModelManager</code> from <code>DeckView</code> to <code>CardView</code>. For more information on <code>cards</code>, refer to cards&#8217;s feature.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">5.1.3. Design considerations</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Implement the logic of deck operations in TopDeck class.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement and debug as all logic related with executing commands are implemented in TopDeck.</p>
+</li>
+<li>
+<p>Cons: Card class is not informed, or notified when its UniqueDeckList is modified. This might result in unexpected
+behaviors if a deck command is executed and the person in charge of Card class assumes that the UniqueDeckList is
+unmodified.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Implement the logic of card-level operations in Deck class.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The responsibility of each class is clear, only a Deck can modify its list of cards.</p>
+</li>
+<li>
+<p>Cons: The logic for executing deck-level and card-level commands are implemented at different places.
+We must ensure that the implementation of each command is correct.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Why Alternative 1:</strong> Without changing the current Undo/Redo feature makes it difficult to implement as we have
+decided to go with a stateful implementation. However being stateful allows for more features like our study mode in
+the future.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 20:25:19 UTC</div></div></div></body></html>

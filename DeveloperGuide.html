@@ -31,7 +31,7 @@
 <li><a href="#implementation">4. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#stateful-user-interface">4.1. Stateful user interface</a></li>
-<li><a href="#deck-management">4.2. Deck management</a></li>
+<li><a href="#deck-operations">4.2. Deck operations</a></li>
 <li><a href="#card-management">4.3. Card management</a></li>
 <li><a href="#study-view">4.4. Study view</a></li>
 <li><a href="#undo-redo-feature">4.5. Undo/redo feature</a></li>
@@ -638,12 +638,12 @@ This obviates the need for state-checking code in <code>ModelManager</code>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deck-management"><a class="link" href="#deck-management">4.2. Deck management</a></h3>
+<h3 id="deck-operations"><a class="link" href="#deck-operations">4.2. Deck operations</a></h3>
 <div class="sect3">
-<h4 id="data-structure-implementation"><a class="link" href="#data-structure-implementation">4.2.1. Data structure implementation</a></h4>
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">4.2.1. Current implementation</a></h4>
 <div class="paragraph">
-<p>A Deck consists of a list of <code>cards</code>. Decks are deemed as equal if they have the same name. This
-is to prevent users from creating 2 or more decks with the same name.</p>
+<p>Deck operations are supported in TopDeck class: A Deck consists of a list of <code>cards</code>. Decks are deemed as equal if they
+have the same name. This is to prevent users from creating 2 or more decks with the same name.</p>
 </div>
 <div class="paragraph">
 <p>Within the Model, <code>Deck</code> is encapsulated by the following data structure:</p>
@@ -673,23 +673,23 @@ and be executed in <code>UniqueDeckList</code>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">4.2.2. Current implementation</a></h4>
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">4.2.2. Current implementation</a></h4>
 <div class="paragraph">
 <p>Deck Management is facilitated by <code>Deck</code> which implements the following operations:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>adddeck(Deck deck)</p>
+<p>add(Deck deck)</p>
 </li>
 <li>
-<p>editdeck(Deck deck)</p>
+<p>edit(Deck target, Deck editedDeck)</p>
 </li>
 <li>
-<p>deletedeck(Deck deck)</p>
+<p>delete(Deck deck)</p>
 </li>
 <li>
-<p>select(Deck toSelect)</p>
+<p>find(Name name)</p>
 </li>
 </ul>
 </div>
@@ -702,11 +702,16 @@ and the second will be on the <code>ViewState</code>.</p>
 <div class="paragraph">
 <p>Given below is an example usage scenario and how the addDeck(Deck) mechanism behaves at each step:</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/addDeckSequence.png" alt="addDeckSequence" width="800">
+</div>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
 <p>The user starts up the application and is in the <code>DecksView</code>. The user then
-executes the <code>addDeck</code> command <code>adddeck n/NAME</code> to create a new deck. The <code>adddeck</code> command
+executes the <code>add</code> command <code>add n/NAME</code> to create a new deck. The <code>add</code> command
 is parsed and calls <code>Model#addDeck(Deck deck)</code>.</p>
 </li>
 <li>
@@ -722,6 +727,48 @@ executes the <code>select 1</code> command to select the first deck. This should
 <code>ModelManager</code> from <code>DeckView</code> to <code>CardView</code>. For more information on <code>cards</code>, refer to cards&#8217;s feature.</p>
 </li>
 </ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">4.2.3. Design considerations</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Implement the logic of deck operations in TopDeck class.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement and debug as all logic related with executing commands are implemented in TopDeck.</p>
+</li>
+<li>
+<p>Cons: Card class is not informed, or notified when its UniqueDeckList is modified. This might result in unexpected
+behaviors if a deck command is executed and the person in charge of Card class assumes that the UniqueDeckList is
+unmodified.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Implement the logic of card-level operations in Deck class.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The responsibility of each class is clear, only a Deck can modify its list of cards.</p>
+</li>
+<li>
+<p>Cons: The logic for executing deck-level and card-level commands are implemented at different places.
+We must ensure that the implementation of each command is correct.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Why Alternative 1:</strong> Without changing the current Undo/Redo feature makes it difficult to implement as we have
+decided to go with a stateful implementation. However being stateful allows for more features like our study mode in
+the future. The following design considerations for card management will better illustrate why we decided to go with
+this approach.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -756,7 +803,7 @@ For more information refer to the section on ViewState management.
 </div>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">4.3.2. Current implementation</a></h4>
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">4.3.2. Current implementation</a></h4>
 <div class="paragraph">
 <p>Card management is currently facilitated by <code>Model</code> which implements the following operations:</p>
 </div>
@@ -905,7 +952,7 @@ to the next TopDeck as per figure 6.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">4.3.3. Design considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.3.3. Design considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-crud-operation-should-work"><a class="link" href="#aspect-how-crud-operation-should-work">Aspect: How CRUD operation should work</a></h5>
 <div class="ulist">
@@ -946,7 +993,7 @@ will have to be changed to store the previous commands and the object changed.</
 <div class="sect2">
 <h3 id="study-view"><a class="link" href="#study-view">4.4. Study view</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">4.4.1. Current implementation</a></h4>
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">4.4.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The purpose of the third view, study view, is to help users retain the knowledge
 of their flash cards.</p>
@@ -987,7 +1034,7 @@ to store variables which the UI has to display. This wrapper is chosen as it imp
 </div>
 </div>
 <div class="sect3">
-<h4 id="data-structure-implementation-2"><a class="link" href="#data-structure-implementation-2">4.4.2. Data structure implementation</a></h4>
+<h4 id="data-structure-implementation"><a class="link" href="#data-structure-implementation">4.4.2. Data structure implementation</a></h4>
 <div class="paragraph">
 <p>This section discusses how the two variables, <code>currentCard</code> and <code>studyState</code> are continuously modified,
 and also the other variables that change as a result of these two functions.</p>
@@ -1094,7 +1141,7 @@ The last is important to show the contents of the flash card.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.4.4. Design considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.4.4. Design considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-to-store-states-within-study-view"><a class="link" href="#aspect-how-to-store-states-within-study-view">Aspect: How to store states within  study view</a></h5>
 <div class="ulist">
@@ -1131,7 +1178,7 @@ that would be costly.</p>
 <div class="sect2">
 <h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">4.5. Undo/redo feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">4.5.1. Current implementation</a></h4>
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">4.5.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedTopDeck</code>.
 It extends <code>TopDeck</code> with an undo/redo history, stored internally as an <code>TopDeckStateList</code> and <code>currentStatePointer</code>.
@@ -1165,7 +1212,8 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th person in TopDeck. The <code>delete</code> command calls <code>Model#commitTopDeck()</code>, causing the modified state of TopDeck after the <code>delete 5</code> command executes to be saved in the <code>topDeckStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted TopDeck state.</p>
+<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th deck in TopDeck. The <code>delete</code> command calls
+<code>Model#commitTopDeck()</code>, causing the modified state of TopDeck after the <code>delete 5</code> command executes to be saved in the <code>topDeckStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted TopDeck state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1173,7 +1221,8 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new person. The <code>add</code> command also calls <code>Model#commitTopDeck()</code>, causing another modified TopDeck state to be saved into the <code>topDeckStateList</code>.</p>
+<p>Step 3. The user executes <code>add n/History &#8230;&#8203;</code> to add a new deck. The <code>add</code> command also calls <code>Model#commitTopDeck()</code>,
+causing another modified TopDeck state to be saved into the <code>topDeckStateList</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1193,7 +1242,8 @@ If a command fails its execution, it will not call <code>Model#commitTopDeck()</
 </table>
 </div>
 <div class="paragraph">
-<p>Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoTopDeck()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous TopDeck state, and restores TopDeck to that state.</p>
+<p>Step 4. The user now decides that adding the deck was a mistake, and decides to undo that action by executing the <code>undo</code>
+ command. The <code>undo</code> command will call <code>Model#undoTopDeck()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous TopDeck state, and restores TopDeck to that state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1261,7 +1311,7 @@ If the <code>currentStatePointer</code> is at index <code>topDeckStateList.size(
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.5.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -1284,7 +1334,7 @@ If the <code>currentStatePointer</code> is at index <code>topDeckStateList.size(
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the person being deleted).</p>
+<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the deck being deleted).</p>
 </li>
 <li>
 <p>Cons: We must ensure that the implementation of each individual command are correct.</p>
@@ -1842,20 +1892,20 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">add a new person</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add a new deck</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delete a person</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete a deck</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">remove entries that I no longer need</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">find a person by name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locate details of persons without having to go through the entire list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find a deck by name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">locate details of decks without having to go through the entire list</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
@@ -1865,9 +1915,9 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user with many persons in TopDeck</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">sort persons by name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locate a person easily</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user with many decks in TopDeck</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort decks by name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">locate a deck easily</p></td>
 </tr>
 </tbody>
 </table>
@@ -1945,7 +1995,7 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 <p>Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>9</code> or higher installed.</p>
 </li>
 <li>
-<p>Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.</p>
+<p>Should be able to hold up to 1000 decks without a noticeable sluggishness in performance for typical usage.</p>
 </li>
 <li>
 <p>A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.</p>
@@ -2120,4 +2170,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 16:23:11 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 20:25:19 UTC</div></div></div></body></html>
