@@ -45,7 +45,10 @@
 </li>
 <li><a href="#study-view">4.3. Study View</a>
 <ul class="sectlevel3">
-<li><a href="#returning-to-decks-view-code-done-code">4.3.1. Returning to decks view: <code>done</code></a></li>
+<li><a href="#returning-to-decks-view-code-back-code-2">4.3.1. Returning to decks view: <code>back</code></a></li>
+<li><a href="#opening-the-deck-in-cards-view-code-deck-code">4.3.2. Opening the deck in cards view: <code>deck</code></a></li>
+<li><a href="#revealing-the-answer-to-card-code-any-attempt-code">4.3.3. Revealing the answer to card: <code>[any attempt]</code></a></li>
+<li><a href="#displaying-the-next-card-code-your-difficulty-rating-code">4.3.4. Displaying the next card: <code>[your difficulty rating]</code></a></li>
 </ul>
 </li>
 <li><a href="#global-commands">4.4. Global commands</a>
@@ -81,8 +84,9 @@ You can easily review your cards and TopDeck will track your performance.
 Improve your memory without the hassle of managing a physical pile of cards!</p>
 </div>
 <div class="paragraph">
-<p>TopDeck is optimized for those who prefer to work with a Command Line Interface (CLI)
-while still having the benefits of a Graphical User Interface (GUI).</p>
+<p>TopDeck has  a Command Line Interface (CLI), which means that users can
+interact with the program easily by typing commands in. It also has a Graphical User Interface (GUI),
+a visual display of the app, so that users can see the decks and cards stored.</p>
 </div>
 <div class="paragraph">
 <p>If this sounds like the tool you have been looking for,
@@ -188,7 +192,8 @@ In decks view, you can:</p>
 <div class="sect2">
 <h3 id="studyview"><a class="link" href="#studyview">3.3. Study View</a></h3>
 <div class="paragraph">
-<p>In this view you can study a deck of cards.</p>
+<p>In this view you can study a deck of cards.
+image::study_ug_diagrams/study_1.png[width="800"]</p>
 </div>
 </div>
 </div>
@@ -520,15 +525,62 @@ Phrases should have only alphanumeric characters and spaces.
 <div class="sect2">
 <h3 id="study-view"><a class="link" href="#study-view">4.3. Study View</a></h3>
 <div class="paragraph">
-<p>These are commands are only available in study view, after <code>study</code> command is executed.</p>
+<p>These are commands are only available in study view, after <code>study INDEX</code> or <code>study</code> command is executed.</p>
 </div>
 <div class="sect3">
-<h4 id="returning-to-decks-view-code-done-code"><a class="link" href="#returning-to-decks-view-code-done-code">4.3.1. Returning to decks view: <code>done</code></a></h4>
+<h4 id="returning-to-decks-view-code-back-code-2"><a class="link" href="#returning-to-decks-view-code-back-code-2">4.3.1. Returning to decks view: <code>back</code></a></h4>
 <div class="paragraph">
-<p><strong>Format</strong>: <code>done</code></p>
+<p><strong>Format</strong>: <code>back</code></p>
 </div>
 <div class="paragraph">
 <p><strong>Outcome</strong>: Returns to decks view.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="opening-the-deck-in-cards-view-code-deck-code"><a class="link" href="#opening-the-deck-in-cards-view-code-deck-code">4.3.2. Opening the deck in cards view: <code>deck</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>deck</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Opens the deck in cards view.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="revealing-the-answer-to-card-code-any-attempt-code"><a class="link" href="#revealing-the-answer-to-card-code-any-attempt-code">4.3.3. Revealing the answer to card: <code>[any attempt]</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>[any attempt]</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Reveals the answer to card, with your attempt shown beside it.</p>
+</div>
+<div class="paragraph">
+<p>For example, you can type in <code>CO2</code> and hit <kbd>Enter</kbd></p>
+</div>
+<div class="paragraph">
+<p>image::study_ug_diagrams/study_1.png</p>
+</div>
+<div class="paragraph">
+<p>The following image is the result of the command.</p>
+</div>
+<div class="paragraph">
+<p>image::study_ug_diagrams/study_2.png</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="displaying-the-next-card-code-your-difficulty-rating-code"><a class="link" href="#displaying-the-next-card-code-your-difficulty-rating-code">4.3.4. Displaying the next card: <code>[your difficulty rating]</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>[your difficulty rating]</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Displays another card from the deck. Stores your difficulty rating for the card.</p>
+</div>
+<div class="paragraph">
+<p>Entering a number 3 indicates that you rate the difficulty as 3.
+image::study_ug_diagrams/study_3.png</p>
+</div>
+<div class="paragraph">
+<p>Submitting this reveals the next question.
+image::study_ug_diagrams/study_4.png</p>
 </div>
 </div>
 </div>
@@ -824,4 +876,4 @@ You must be inside a deck to perform this operation.</p></td>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 10:02:29 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 12:58:10 UTC</div></div></div></body></html>
