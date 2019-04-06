@@ -1,21 +1,13 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Kuan Wei Heng - Project Portfolio for TopDeck</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Kuan Wei Heng - Project Portfolio for TopDeck</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">TopDeck</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link active" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/cs2103-ay1819s2-w11-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Kuan Wei Heng - Project Portfolio for TopDeck</h1></div><div id="content"><div class="sect1">
-<h2 id="about-the-project"><a class="link" href="#about-the-project">1. About the Project</a></h2>
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">TopDeck</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link active" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/cs2103-ay1819s2-w11-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Kuan Wei Heng - Project Portfolio for TopDeck</h1></div><div id="content"><div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">1. Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>My team and I were tasked to with morphing a basic commandline interface addressbook for our
-so!ware engineering project. We decided to morph the application into a Flashcard management
-application called TopDeck TopDeck is a user-friendly tool that aims to help users better memorise any
-content that they desire. Users can use it to learn a language, remember a math formula or simply
-recall an answer to a question.</p>
-</div>
-<div class="paragraph">
-<p>One of the key features of our application is the simplicity that we would like
-to provide out user in terms of the commands and this meant that we had to implement states for
-different part of the application namely, a state for card management, decks management and
-one for studying the cards. I was in charge of implementing this states and decided to implement it
-using polymorphism.</p>
+<p>This document serves to document my contributions to TopDeck, the project I worked on
+as part of our introductory software engineering module in NUS.
+TopDeck is a flash card application built on top of the code from
+<a href="https://github.com/nus-cs2103-AY1819S1/addressbook-level4">Addressbook Level 4</a>.</p>
 </div>
 </div>
 </div>
@@ -23,17 +15,70 @@ using polymorphism.</p>
 <h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">2. Summary of Contributions</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section shows a summary of my coding, documentation, and other helpful contributions to the team project.</p>
+<p>This section summarises my key contributions to TopDeck:</p>
 </div>
-<div class="paragraph">
-<p><strong>Enhancement added:</strong> I modified the architecture of our software such that
-stateful interface is supported. I added the state management features in the application so that the
-same commands given by the user can be overloaded. For example, <code>add</code> can mean both
-adding a deck or a card depending on which state the app is currently in.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major Enhancement</strong>: I added state to the user interface.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: A stateful interface looks and behave differently depending
+on the state of the applicaton.</p>
+</li>
+<li>
+<p>Justification: Having state in the user interface enhances usability in
+many ways. It offers a useful mental model for users by exposing features
+only when they are relevant to what a user is currently doing. It allows
+us to assign multiple related features to the same command word (since
+they can be disambiguated by state), minimizing the total number of unique
+commands words. It also leads to shorter commands in general since TopDeck
+does not have to request information from users that may be already be
+inferred from the current state.</p>
+</li>
+<li>
+<p>Highlights: AB4 could not be readily adapted to support state because it
+was designed around assumptions that do not hold with a stateful user
+interface in full generality. AB4 has a static user interface that assumes
+there always exists a list of items. This assumption runs so deep that
+first-class access to <code>filteredList</code> and <code>selectedItem</code> is provided
+through the <code>Model</code> API. So I had to rewrite <code>Model</code>. I also had to modify
+many subsystems (such as parsing) along the pipeline of a typical command
+execution. As a result of my work, the rest of my team could work on their
+features independently and easily integrate their work through the new API
+I designed.</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<p>Justification: A user should be able to execute simple commands easily instead of having
-to give a context to the application.</p>
+</li>
+<li>
+<p><strong>Minor Enhancement</strong>: I added argument completion to the edit card command</p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: The edit card command has an abbreviated form <code>edit INDEX</code>.
+This prefills the command box with an expanded command which, if submitted
+verbatim, leaves the card at <code>INDEX</code> unchanged.</p>
+</li>
+<li>
+<p>Justification: This feature is meant to be a shortcut for making small
+edits. Suppose a user notices a typo in a question. Instead of retyping
+the entire question, they can quickly expand all arguments to the edit
+command and edit the question from there.</p>
+</li>
+<li>
+<p>Highlights: This is the only new feature in TopDeck that interacts with
+the command box and is made possible with
+<code>PrefillCommandBoxCommandResult</code> which extends <code>CommandResult</code> and holds
+the string to be prefilled. In general, commands that need to interact
+with <code>UI</code> through <code>MainWindow</code> do so by returning an appropriate subclass
+of <code>CommandResult</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p><strong>Code Contributed:</strong> Please view our github page to see the code that I have contributed.</p>
@@ -48,7 +93,7 @@ to give a context to the application.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>I ensured that members were on track and not falling behind.</p>
+<p>I ensured the group stayed on schedule.</p>
 </li>
 </ul>
 </div>
@@ -58,7 +103,7 @@ to give a context to the application.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>I added the autocomplete feature to reduce typing needed for the "Edit Card" command.</p>
+<p>I refactored a lot of code to support stateful user interface.</p>
 </li>
 </ul>
 </div>
@@ -68,7 +113,18 @@ to give a context to the application.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>I made our documentation look better.</p>
+<p>I adapted the AB4 developer guide to fit our project.</p>
+</li>
+<li>
+<p>I enhanced the look of our documentation by tweaking the CSS.</p>
+</li>
+<li>
+<p>I polished our documentation according to the standards set by our CS2101
+tutor.</p>
+</li>
+<li>
+<p>I proofread sections of the documentation that were not explicitly assigned
+to anyone.</p>
 </li>
 </ul>
 </div>
@@ -78,13 +134,13 @@ to give a context to the application.</p>
 <div class="ulist">
 <ul>
 <li>
+<p>I led the design of the user interface and user experience.</p>
+</li>
+<li>
 <p>I reviewed pull requests and gave comments on how my peers can improve the readability of their code.</p>
 </li>
 <li>
-<p>I contributed to discussions on how the UI should look like, and how lists should be stored internally.</p>
-</li>
-<li>
-<p>I put up issues and enhancements to keep our team on track.</p>
+<p>I put up issues and filed bug reports to keep our team on track.</p>
 </li>
 <li>
 <p>I gave our team a few tips on the git workflow.</p>
@@ -94,6 +150,14 @@ to give a context to the application.</p>
 </li>
 <li>
 <p>Tools:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>I configured the team repository on Github and integrated the suggested
+services into our workflow (TravisCI, AppVeyor, Coveralls).</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -126,7 +190,7 @@ to give a context to the application.</p>
 <p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
 <div class="imageblock">
 <div class="content">
-<img src="images/Ui.png" alt="Ui" width="790">
+<img src="../images/Ui.png" alt="Ui" width="790">
 </div>
 </div>
 </li>
@@ -217,7 +281,7 @@ In decks view, you can:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/study_ug_diagrams/study_1.png" alt="study 1" width="800">
+<img src="../images/study_ug_diagrams/study_1.png" alt="study 1" width="800">
 </div>
 </div>
 </div>
@@ -309,7 +373,7 @@ decks view, cards view and study view.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/state_diagram.png" alt="state diagram">
+<img src="../images/state_diagram.png" alt="state diagram">
 </div>
 <div class="title">Figure 1. State diagram for TopDeck</div>
 </div>
@@ -340,4 +404,4 @@ This obviates the need for state-checking code in <code>ModelManager</code>.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-03 07:16:43 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-06 03:34:30 UTC</div></div></div></body></html>
