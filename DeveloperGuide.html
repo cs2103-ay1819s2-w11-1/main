@@ -490,7 +490,7 @@ The following class plays an important role at the architecture level:</p>
 <h3 id="Design-Model"><a class="link" href="#Design-Model">3.4. Model component</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="images/TopDeckModelComponentClassDiagram.png" alt="TopDeckModelComponentClassDiagram" width="800">
+<img src="images/TopDeckClassDiagram.png" alt="TopDeckClassDiagram" width="800">
 </div>
 <div class="title">Figure 7. Structure of the Model Component</div>
 </div>
@@ -509,10 +509,10 @@ The following class plays an important role at the architecture level:</p>
 <p>stores the TopDeck data.</p>
 </li>
 <li>
-<p>exposes an unmodifiable <code>ObservableList&lt;Card&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
+<p>stores a <code>ViewState</code> object which represents the current state of the application.</p>
 </li>
 <li>
-<p>does not depend on any of the other three components.</p>
+<p>The <code>ViewState</code> object can either be a <code>DecksView</code>, <code>CardsView</code> or <code>StudyView</code></p>
 </li>
 </ul>
 </div>
@@ -777,7 +777,7 @@ this approach.</p>
 <div class="sect3">
 <h4 id="data-structure"><a class="link" href="#data-structure">4.3.1. Data structure</a></h4>
 <div class="paragraph">
-<p>A Card consists of a question, an answer and the respective tags associated with it.
+<p>A Card consists of a question, an answer, its difficulty and the respective tags associated with it.
 Card&#8217;s are deemed as equal if they have the same question to prevent the user from
 creating same question twice or to have 2 different answer for the same question.
 Cards are stored inside a <code>Deck</code> as a list of unique cards.
@@ -825,11 +825,11 @@ For more information refer to the section on ViewState management.
 </div>
 <div class="paragraph">
 <p>The CRUD operations are exposed in the Model interface as <code>Model#addCard(Card card, Deck deck)</code>,
-<code>Model#deleteCard(Card target, Deck deck)</code> and <code>Model#setCard(Card target, Card newCard, Deck deck)</code>. For each operation,
-there are 2 objects that need to be updated namely, <code>VersionedTopDeck</code> and <code>CardsView</code>.</p>
+<code>Model#deleteCard(Card target, Deck deck)</code> and <code>Model#setCard(Card target, Card newCard, Deck deck)</code>.
+For each operation, there are 2 objects that need to be updated namely, <code>VersionedTopDeck</code> and <code>CardsView</code>.</p>
 </div>
 <div class="paragraph">
-<p>Each CRUD operation can be broken down into the following steps:</p>
+<p>Each CRUD operation called by `ModelManager`can be broken down into the following steps:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -837,9 +837,9 @@ there are 2 objects that need to be updated namely, <code>VersionedTopDeck</code
 <p>Find the chosen deck using <code>CardsView.activeDeck</code> and create a new deck from it.</p>
 </li>
 <li>
-<p>Execute <code>VersionedTopDeck#addCard(Card newCard, Deck deck)</code> or
-<code>VersionedTopDeck#removeCard(Card target, Deck deck)</code> or
-<code>VersionedTopDeck#setCard(Card target, Card editedCard, Deck deck)</code> using <code>CardsView.activeDeck</code>.</p>
+<p>Execute <code>VersionedTopDeck#addCard(Card newCard, Deck activeDeck)</code> or
+<code>VersionedTopDeck#removeCard(Card target, Deck activeDeck)</code> or
+<code>VersionedTopDeck#setCard(Card target, Card editedCard, Deck activeDeck)</code> using <code>CardsView.activeDeck</code>.</p>
 </li>
 <li>
 <p>Update the <code>CardsView</code> with the new editedDeck.</p>
@@ -850,27 +850,28 @@ there are 2 objects that need to be updated namely, <code>VersionedTopDeck</code
 </ol>
 </div>
 <div class="paragraph">
-<p>Given below is an example usage scenario and how the CRUD operation works and how it
-interacts with Undo/Redo:</p>
+<p>Here is a code snippet for <code>VersionedTopDeck#addCard(Card newCard, Deck deck)</code> which shows the sequence
+of functions carried out and returns the newly edited deck to <code>ModelManager</code>:</p>
 </div>
-<div class="paragraph">
-<p>Step 1. The user starts up the application and is in the <code>DecksView</code>. The user then
-executes the <code>open 1</code> command to open the first deck(D1 in the figure). This should change the
-<code>ViewState</code> in the <code>ModelManager</code> from <code>DeckView</code> to <code>CardsView</code> and causes
-<code>CardsView.activeDeck</code> to point to the first deck as per figure 1. For more information, refer to
-Deck&#8217;s feature.</p>
-</div>
-<div class="imageblock">
+<div class="literalblock">
 <div class="content">
-<img src="images/card_dg_diagrams/card_diag_1.png" alt="card diag 1" width="800">
+<pre>public Deck addCard(Card card, Deck activeDeck) throws DuplicateCardException, DeckNotFoundException {
+        requireAllNonNull(card, activeDeck);
+        if (!decks.contains(activeDeck)) {
+            throw new DeckNotFoundException();
+        }
+        if (activeDeck.hasCard(card)) {
+            throw new DuplicateCardException();
+        }
+        Deck editedDeck = new Deck(activeDeck);
+        editedDeck.addCard(card);
+        decks.setDeck(activeDeck, editedDeck);
+        .
+        .
+        .
+        return editedDeck;
+}</pre>
 </div>
-</div>
-<div class="paragraph">
-<p>Step 2. The user executes <code>add q/question a/answer</code> to add the new card into the current deck.
-The <code>add</code> command is parsed and calls <code>Model#addCard(Card card, Deck deck)</code>.
-<code>VersionedTopDeck(Card newCard, Deck deck)</code> is then called. D3 which is a copy
-of D1 is created and the new card is added to D3. <code>VersionedTopDeck</code> is then updated
-as per figure 2 by calling <code>UniqueDeckList.setDeck(Deck target, Deck editedDeck)</code>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -879,25 +880,51 @@ as per figure 2 by calling <code>UniqueDeckList.setDeck(Deck target, Deck edited
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-All other CRUD operations works the same except for the model call. Instead of
+All other CRUD operations works similarly except for the model call. Instead of
 <code>Model#addCard(Card card, Deck deck)</code>, <code>Model#deleteCard(Card target, Deck deck)</code> or
-<code>Model#setCard(Card target, Card newCard, Deck deck)</code> is called instead.
+<code>Model#setCard(Card target, Card newCard, Deck deck)</code> is called instead. Similarly,
+instead of <code>VersionedTopDeck.addCard(Card card, Deck activeDeck)</code>,
+<code>VersionedTopDeck.deleteCard(Card target, Deck activeDeck)</code> or
+<code>VersionedTopDeck.setCard(Card target, Card newCard, Deck activeDeck)</code> is called.
 </td>
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the add operation works and how it
+interacts with Undo/Redo:</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user starts up the application and is in the <code>DecksView</code>. The user then
+executes the <code>open 1</code> command to open the first deck(D1 in the figure). This should change the
+<code>ViewState</code> in the <code>ModelManager</code> from <code>DeckView</code> to <code>CardsView</code> and causes
+<code>CardsView.activeDeck</code> to point to the first deck as per figure 4.3.1. For more information, refer to
+the Deck feature.</p>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="images/card_dg_diagrams/card_diag_2.png" alt="card diag 2" width="800">
+<img src="images/card_dg_fig/card_fig_1.png" alt="card fig 1" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 2. The user executes <code>add q/question a/answer</code> to add the new card into the current deck.
+The <code>add</code> command is parsed and calls <code>Model#addCard(Card card, Deck deck)</code>.
+<code>VersionedTopDeck(Card newCard, Deck deck)</code> is then called. D3 which is a copy
+of D1 is created and the new card is added to D3. <code>VersionedTopDeck</code> is then updated
+as per figure 4.3.2 by calling <code>UniqueDeckList.setDeck(Deck target, Deck editedDeck)</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/card_dg_fig/card_fig_2.png" alt="card fig 2" width="800">
 </div>
 </div>
 <div class="paragraph">
 <p>Step 3. Next, the CardsView is updated creating a new <code>CardsView</code> that points to D3
-as in figure 3.</p>
+as in figure 4.3.3</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/card_dg_diagrams/card_diag_3.png" alt="card diag 3" width="800">
+<img src="images/card_dg_fig/card_fig_3.png" alt="card fig 3" width="800">
 </div>
 </div>
 <div class="paragraph">
@@ -905,41 +932,41 @@ as in figure 3.</p>
 reflect the change.</p>
 </div>
 <div class="paragraph">
-<p>Step 5. Now the user executes <code>undo</code>. This results in the the CurrentStatePointer to point
-to the previous TopDeck as per figure 4.</p>
+<p>Step 5. Now the user executes <code>undo</code>. This results in the CurrentStatePointer to point
+to the previous TopDeck as per figure 4.3.4</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/card_dg_diagrams/card_diag_4.png" alt="card diag 4" width="800">
+<img src="images/card_dg_fig/card_fig_4.png" alt="card fig 4" width="800">
 </div>
 </div>
 <div class="paragraph">
-<p>Step 6. Using D3, the application will get D1 in the TopDeck that is pointed to by CurrentStatePointer.
-A new CardsView(CardsView3) is then created and points to D1 as per figure 5. The application
+<p>Step 6. Using D3, the application will get D1 in TopDeck that is pointed to by CurrentStatePointer.
+A new CardsView(CardsView3) is then created and points to D1 as per figure 4.3.5. The application
 then updates <code>ModelManager.filteredItems</code> and the UI is being updated.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/card_dg_diagrams/card_diag_5.png" alt="card diag 5" width="800">
+<img src="images/card_dg_fig/card_fig_5.png" alt="card fig 5" width="800">
 </div>
 </div>
 <div class="paragraph">
 <p>Step 7. Now, the user executes redo. This results in the the CurrentStatePointer to point
-to the next TopDeck as per figure 6.</p>
+to the next TopDeck as per figure 4.3.6</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/card_dg_diagrams/card_diag_6.png" alt="card diag 6" width="800">
+<img src="images/card_dg_fig/card_fig_6.png" alt="card fig 6" width="800">
 </div>
 </div>
 <div class="paragraph">
-<p>Step 8. Using D1, the application will get D3 in the TopDeck that is pointed to by CurrentStatePointer.
-   A new CardsView(CardsView4) is then created and points to D3 as per figure 7. The application
+<p>Step 8. Using D1, the application will get D3 in TopDeck that is pointed to by CurrentStatePointer.
+   A new CardsView(CardsView4) is then created and points to D3 as per figure 4.3.7. The application
    then updates <code>ModelManager.filteredItems</code> and the UI is being updated.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/card_dg_diagrams/card_diag_7.png" alt="card diag 7" width="800">
+<img src="images/card_dg_fig/card_fig_7.png" alt="card fig 7" width="800">
 </div>
 </div>
 <div class="paragraph">
@@ -947,12 +974,62 @@ to the next TopDeck as per figure 6.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/card_dg_diagrams/card_diag_8.png" alt="card diag 8" width="800">
+<img src="images/card_dg_fig/card_fig_8.png" alt="card fig 8" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Below is a sequence diagram to illustrate the sequence of activities upon calling
+<code>Model#addCard(Card card, Deck deck)</code>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/card_dg_fig/card_fig_9.png" alt="card fig 9" width="800">
 </div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.3.3. Design considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-data-structure-of-cards"><a class="link" href="#aspect-data-structure-of-cards">Aspect: Data structure of cards</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1(current choice):</strong> Have a list of cards within each deck</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Allows for decks features such as import and export. Also, any search operation is
+done within the deck only.</p>
+</li>
+<li>
+<p>Cons: There is a need to implement an extra <code>Deck</code> data structure and makes
+the model more complicated.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2(current choice):</strong> Have a global list of cards with tags.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Updating of UI will be easier as there is one global list only.</p>
+</li>
+<li>
+<p>Cons: In order to study the cards, the application has to search through the
+global list to find the cards with the tags that we want to study. Organisation of
+cards will also be messy as the only form of organisation for cards is through tagging.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Reason for choice 1:</strong> Choice one was chosen as it would allow the user an extra layer of
+organisation(<code>Deck</code> and <code>Tag</code>) when managing cards.</p>
+</li>
+</ul>
+</div>
+</div>
 <div class="sect4">
 <h5 id="aspect-how-crud-operation-should-work"><a class="link" href="#aspect-how-crud-operation-should-work">Aspect: How CRUD operation should work</a></h5>
 <div class="ulist">
@@ -966,24 +1043,30 @@ to the next TopDeck as per figure 6.</p>
 implement.</p>
 </li>
 <li>
-<p>Cons: Constantly creating <code>CardsView</code> even with a small change.</p>
+<p>Cons: There is a memory and operation overhead as a new <code>CardsView</code> is constantly being
+created. Also, there is a need to refresh the UI at every update as the UI needs to render
+the new <code>CardsView</code>.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> CardView updates itself base on the chosen deck.</p>
+<p><strong>Alternative 2:</strong> Alter the card list in <code>CardsView</code> and the model upon each operation</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Only has to update the pointer to the current Deck.</p>
+<p>Pros: Only has to update the active Deck in CardsView and the model</p>
 </li>
 <li>
 <p>Cons: As <code>CardsView.activeDeck</code> can only reference to one deck only, the current Undo/Redo feature
-will have to be changed to store the previous commands and the object changed.</p>
+will have to be re-implemented to store the previous commands and the object changed.</p>
 </li>
 </ul>
 </div>
+</li>
+<li>
+<p><strong>Reason for choice 1:</strong> Choice one was chosen in order to retain the Undo/Redo function and to
+leverage on the original architecture instead of changing it.</p>
 </li>
 </ul>
 </div>
@@ -2170,4 +2253,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-11 13:55:48 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-12 03:45:26 UTC</div></div></div></body></html>

@@ -1,0 +1,722 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Chang Ning Shen - Project Portfolio for TopDeck</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">TopDeck</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/cs2103-ay1819s2-w11-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Chang Ning Shen - Project Portfolio for TopDeck</h1></div><div id="content"><div class="sect1">
+<h2 id="about-the-project"><a class="link" href="#about-the-project">1. About the Project</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>My team and I were tasked with morphing a basic commandline interface addressbook application(AB4) for our software
+engineering project. We decided to morph the application into a Flashcard management application called TopDeck</p>
+</div>
+<div class="paragraph">
+<p><strong>TopDeck</strong> is a user-friendly flashcard management application that aims to help users better memorise any content
+that they desire.
+The main functionality of the application include managing a list of decks, managing the cards within
+each deck and having study sessions.
+Users can use it to learn a language, remember a math formula or simply recall an answer to a question.</p>
+</div>
+<div class="paragraph">
+<p>I was in-charge of the card&#8217;s management feature within the application and these include creating,
+reading, updating and deleting (CRUD) a card within a deck as well as searching for cards that the user is interested in.
+The following sections illustrate these enhancements as well as the relevant sections that I have included in the user and
+developer guides.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="glossary"><a class="link" href="#glossary">2. Glossary</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following symbols are used throughout the application and represent the following:</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+NOTE
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+CAUTION
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">3. Summary of Contributions</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section shows a summary of my coding, documentation, and
+other helpful contributions to the team project.</p>
+</div>
+<div class="paragraph">
+<p>Enhancement added: I added the ability for users to add, delete and edit cards.
+Along with the usual CRUD operation, I also added a find and clear feature for the cards.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Justification: A user should be able to execute basic CRUD operations on a deck
+of cards to customize the study session that the user will experience. A find feature will help
+the user to locate the specific card especially when  they want to recall the question or
+answer to the specific question. A clear feature will allow the user to remove all the cards
+quickly in a deck when the user wants to recreate the whole deck.</p>
+</li>
+<li>
+<p>Highlights: The CRUD operation has to work with the existing commands and
+data structure in AB4. This was challenging as the <code>Undo</code> and <code>Redo</code> methods in the
+original application leverages on the immutability of the data structure.
+The card list however is an object in a deck and all card related operation
+is a modification of the current deck. As such, there was a need to ensure that
+both requirements will be fulfilled.
+Also, our application maintains a state object which the UI is dependent on. As such, there is
+also a need to ensure both the state of the application and the model is consistent with each other
+after every command.</p>
+</li>
+<li>
+<p>Credits: The edit command has an auto-complete feature which was implemented
+by my team mate  Wei Heng.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed:</strong></p>
+</div>
+<div class="paragraph">
+<p><a href="https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=ChangDarren&amp;sort=displayName&amp;since=2019-02-10&amp;until=2019-04-02&amp;timeframe=day&amp;reverse=false&amp;repoSort=true">My Reposense Dashboard</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/cs2103-ay1819s2-w11-1/main/commits?author=ChangDarren">My Github Page</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Other contributions</strong>:</p>
+</div>
+<div class="paragraph">
+<p>Project management:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>There were a total of 4 milestones, I managed the milestone tracking through out
+the whole project through the issue tracker on GitHub.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Enhancements to existing feature:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Wrote Card System test to increase the coverage from 82% to 87% (Pull request <a href="https://github.com/cs2103-ay1819s2-w11-1/main/pull/96">#96</a>)</p>
+</li>
+<li>
+<p>Enhance <code>find</code> command to allow for finding of cards using phrases. (Pull request <a href="https://github.com/cs2103-ay1819s2-w11-1/main/pull/60">#60</a>)</p>
+</li>
+<li>
+<p>Enhance UI test for ListPanelHandle so that it can take both Deck and Cards (Examples: <a href="https://github.com/cs2103-ay1819s2-w11-1/main/pull/54">#54</a>,
+<a href="https://github.com/cs2103-ay1819s2-w11-1/main/pull/94">#94</a>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Community:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Reviewed Pull-Requests (Examples: <a href="https://github.com/cs2103-ay1819s2-w11-1/main/pull/58">#58</a>, <a href="https://github.com/cs2103-ay1819s2-w11-1/main/pull/28">#28</a>,
+<a href="https://github.com/cs2103-ay1819s2-w11-1/main/pull/88">#88</a>)</p>
+</li>
+<li>
+<p>Reported bugs (Examples: <a href="https://github.com/cs2103-ay1819s2-w11-1/main/issues/34">#34</a>, <a href="https://github.com/cs2103-ay1819s2-w11-1/main/issues/136">#136</a>)</p>
+</li>
+<li>
+<p>Updated Class diagrams (Examples: <a href="https://github.com/cs2103-ay1819s2-w11-1/main/pull/16">#16</a>,
+<a href="https://github.com/cs2103-ay1819s2-w11-1/main/pull/148">#148</a>)</p>
+</li>
+<li>
+<p>Refactored initial code from AB4 (Pull request <a href="https://github.com/cs2103-ay1819s2-w11-1/main/pull/8">#8</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">4. Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We had to update the original User Guide with new instructions for the different enhancements implemented.
+The following is an excerpt from that I have written for Card&#8217;s Management from <strong>TopDeck User Guide</strong>.</p>
+</div>
+<div class="sect2">
+<h3 id="cards-view"><a class="link" href="#cards-view">4.1. Cards View</a></h3>
+<div class="paragraph">
+<p>These commands are only available in cards view.
+In this section, the active deck is the deck used in the <code>open</code> command.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The Footer Bar will continue to track the number of decks in the app.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="selecting-a-card-in-the-active-deck-code-select-code"><a class="link" href="#selecting-a-card-in-the-active-deck-code-select-code">4.1.1. Selecting a card in the active deck: <code>select</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>select INDEX</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Selects the card in the deck with index at <code>INDEX</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>: <code>select 1</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="adding-a-card-to-the-active-deck-code-add-code"><a class="link" href="#adding-a-card-to-the-active-deck-code-add-code">4.1.2. Adding a card to the active deck: <code>add</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>add q/QUESTION a/ANSWER [t/TAG]</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Creates a new card with question and answers and
+adds it to the current deck.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>: <code>add q/Hello a/World t/TopDeckSample</code></p>
+</div>
+<div class="paragraph">
+<p>Below is an example of what the user should see upon the execution of the command:</p>
+</div>
+<div class="paragraph">
+<p>Before:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/card_ug_diagrams/add_card_1.png" alt="add card 1" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>After:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/card_ug_diagrams/add_card_2.png" alt="add card 2" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="deleting-a-card-in-the-active-deck-code-delete-code"><a class="link" href="#deleting-a-card-in-the-active-deck-code-delete-code">4.1.3. Deleting a card in the active deck: <code>delete</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>delete INDEX</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Deletes the card at <code>INDEX</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>: <code>delete 2</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editing-a-card-in-the-active-deck-code-edit-code"><a class="link" href="#editing-a-card-in-the-active-deck-code-edit-code">4.1.4. Editing a card in the active deck: <code>edit</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>edit INDEX q/QUESTION a/ANSWER [t/TAG]</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Edits the text of the card at <code>INDEX</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>: <code>edit 1 q/Edit Hello a/World t/Editted</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Auto-Complete</strong>: Instead of typing the whole command,
+TopDeck also provides an auto-complete feature for the <code>edit</code> command.
+Users need only type <code>edit INDEX</code> and TopDeck will fill up the commandline
+for the user to edit accordingly.</p>
+</div>
+<div class="paragraph">
+<p>Below is a walk-through of the <code>edit</code> command:</p>
+</div>
+<div class="paragraph">
+<p>Suppose the user adds a new card with a typo:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/card_ug_diagrams/edit_card_1.png" alt="edit card 1" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The user can then retrieve the full detail of the card by simply typing
+<code>edit 2</code> and pressing enter. The following would appear</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/card_ug_diagrams/edit_card_2.png" alt="edit card 2" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The user can then edit and correct the mistake made.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/card_ug_diagrams/edit_card_3.png" alt="edit card 3" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>This would be the end result:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/card_ug_diagrams/edit_card_4.png" alt="edit card 4" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="finding-a-card-in-the-active-deck-by-name-code-find-code"><a class="link" href="#finding-a-card-in-the-active-deck-by-name-code-find-code">4.1.5. Finding a card in the active deck by name: <code>find</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>find KEYWORD [KEYWORD]&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Search for phrases</strong>: TopDeck provides users the ability to search for
+specific question by searching for a whole phrase instead of only individual words.
+This is done by putting <code>"</code> around <code>KEYWORD</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Lists all cards within the current deck containing <code>KEYWORD</code> in its text.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>find</code> will only search for full-matching words. For e.g. <code>Animals</code> will not be found if
+<code>animal</code> is used to search for it.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+The entire phrase inside <code>"</code> will be matched word for word. For example, <code>find "Is there a question"</code>
+will show the question with the entire phrase <code>Is there a question</code> and the phrase
+<code>Is there a question?</code> will not be matched due to the extra <code>?</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find Singapore</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Below is the result of executing this command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/card_ug_diagrams/find_card_1.png" alt="find card 1" width="800">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find "When was Singapore founded?"</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Below is the result of executing this command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/card_ug_diagrams/find_card_2.png" alt="find card 2" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="clearing-all-cards-in-the-active-deck-code-clear-code"><a class="link" href="#clearing-all-cards-in-the-active-deck-code-clear-code">4.1.6. Clearing all cards in the active deck: <code>clear</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>clear</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Clears all of the cards in the deck.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="listing-all-cards-in-the-active-deck-code-list-code"><a class="link" href="#listing-all-cards-in-the-active-deck-code-list-code">4.1.7. Listing all cards in the active deck: <code>list</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>list</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Displays a list of all cards in the deck.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="studying-the-active-deck-code-study-code"><a class="link" href="#studying-the-active-deck-code-study-code">4.1.8. Studying the active deck: <code>study</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>study</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Enters study view with the current deck.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="returning-to-decks-view-code-back-code"><a class="link" href="#returning-to-decks-view-code-back-code">4.1.9. Returning to decks view: <code>back</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>back</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Returns to decks view.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="to-be-implemented-in-v2-0-adding-a-picture-to-a-card"><a class="link" href="#to-be-implemented-in-v2-0-adding-a-picture-to-a-card">4.1.10. [To be implemented in V2.0] Adding a picture to a card</a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>addImg INDEX IMAGEPATH</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Adds the image as a question to the card at <code>INDEX</code></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">5. Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following section shows my additions to the <strong>TopDeck Developer Guide</strong> for the Card Management features.</p>
+</div>
+<div class="sect2">
+<h3 id="card-management"><a class="link" href="#card-management">5.1. Card management</a></h3>
+<div class="sect3">
+<h4 id="data-structure"><a class="link" href="#data-structure">5.1.1. Data structure</a></h4>
+<div class="paragraph">
+<p>A Card consists of a question, an answer, its difficulty and the respective tags associated with it.
+Card&#8217;s are deemed as equal if they have the same question to prevent the user from
+creating same question twice or to have 2 different answer for the same question.
+Cards are stored inside a <code>Deck</code> as a list of unique cards.
+The Create, Read, Update and Delete (CRUD) operation of a card in a chosen <code>Deck</code> is thus a modification of
+the chosen <code>Deck</code>.</p>
+</div>
+<div class="paragraph">
+<p>In order to facilitate the CRUD operations, <code>CardsView</code> contains <code>activeDeck</code> which is a reference to the
+current deck that we are modifying.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Before any Card related operation can be executed, <code>ViewState</code> in ModelManager has to be of type <code>CardsView</code>.
+For more information refer to the section on ViewState management.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">5.1.2. Current implementation</a></h4>
+<div class="paragraph">
+<p>Card management is currently facilitated by <code>Model</code> which implements the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>hasCard(Card card, Deck deck)</p>
+</li>
+<li>
+<p>addCard(Card card, Deck deck)</p>
+</li>
+<li>
+<p>removeCard(Card target, Deck deck)</p>
+</li>
+<li>
+<p>editCard(Card newCard, Deck deck)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The CRUD operations are exposed in the Model interface as <code>Model#addCard(Card card, Deck deck)</code>,
+<code>Model#deleteCard(Card target, Deck deck)</code> and <code>Model#setCard(Card target, Card newCard, Deck deck)</code>.
+For each operation, there are 2 objects that need to be updated namely, <code>VersionedTopDeck</code> and <code>CardsView</code>.</p>
+</div>
+<div class="paragraph">
+<p>Each CRUD operation called by `ModelManager`can be broken down into the following steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Find the chosen deck using <code>CardsView.activeDeck</code> and create a new deck from it.</p>
+</li>
+<li>
+<p>Execute <code>VersionedTopDeck#addCard(Card newCard, Deck activeDeck)</code> or
+<code>VersionedTopDeck#removeCard(Card target, Deck activeDeck)</code> or
+<code>VersionedTopDeck#setCard(Card target, Card editedCard, Deck activeDeck)</code> using <code>CardsView.activeDeck</code>.</p>
+</li>
+<li>
+<p>Update the <code>CardsView</code> with the new editedDeck.</p>
+</li>
+<li>
+<p>Update the UI to reflect the new CardsView.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Here is a code snippet for <code>VersionedTopDeck#addCard(Card newCard, Deck deck)</code> which shows the sequence
+of functions carried out and returns the newly edited deck to <code>ModelManager</code>:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>public Deck addCard(Card card, Deck activeDeck) throws DuplicateCardException, DeckNotFoundException {
+        requireAllNonNull(card, activeDeck);
+        if (!decks.contains(activeDeck)) {
+            throw new DeckNotFoundException();
+        }
+        if (activeDeck.hasCard(card)) {
+            throw new DuplicateCardException();
+        }
+        Deck editedDeck = new Deck(activeDeck);
+        editedDeck.addCard(card);
+        decks.setDeck(activeDeck, editedDeck);
+        .
+        .
+        .
+        return editedDeck;
+}</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+All other CRUD operations works similarly except for the model call. Instead of
+<code>Model#addCard(Card card, Deck deck)</code>, <code>Model#deleteCard(Card target, Deck deck)</code> or
+<code>Model#setCard(Card target, Card newCard, Deck deck)</code> is called instead. Similarly,
+instead of <code>VersionedTopDeck.addCard(Card card, Deck activeDeck)</code>,
+<code>VersionedTopDeck.deleteCard(Card target, Deck activeDeck)</code> or
+<code>VersionedTopDeck.setCard(Card target, Card newCard, Deck activeDeck)</code> is called.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the add operation works and how it
+interacts with Undo/Redo:</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user starts up the application and is in the <code>DecksView</code>. The user then
+executes the <code>open 1</code> command to open the first deck(D1 in the figure). This should change the
+<code>ViewState</code> in the <code>ModelManager</code> from <code>DeckView</code> to <code>CardsView</code> and causes
+<code>CardsView.activeDeck</code> to point to the first deck as per figure 4.3.1. For more information, refer to
+the Deck feature.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/card_dg_fig/card_fig_1.png" alt="card fig 1" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 2. The user executes <code>add q/question a/answer</code> to add the new card into the current deck.
+The <code>add</code> command is parsed and calls <code>Model#addCard(Card card, Deck deck)</code>.
+<code>VersionedTopDeck(Card newCard, Deck deck)</code> is then called. D3 which is a copy
+of D1 is created and the new card is added to D3. <code>VersionedTopDeck</code> is then updated
+as per figure 4.3.2 by calling <code>UniqueDeckList.setDeck(Deck target, Deck editedDeck)</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/card_dg_fig/card_fig_2.png" alt="card fig 2" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 3. Next, the CardsView is updated creating a new <code>CardsView</code> that points to D3
+as in figure 4.3.3</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/card_dg_fig/card_fig_3.png" alt="card fig 3" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 4. Once that is done, the <code>ModelManager.filteredItems</code> list and the UI is being updated to
+reflect the change.</p>
+</div>
+<div class="paragraph">
+<p>Step 5. Now the user executes <code>undo</code>. This results in the CurrentStatePointer to point
+to the previous TopDeck as per figure 4.3.4</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/card_dg_fig/card_fig_4.png" alt="card fig 4" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 6. Using D3, the application will get D1 in TopDeck that is pointed to by CurrentStatePointer.
+A new CardsView(CardsView3) is then created and points to D1 as per figure 4.3.5. The application
+then updates <code>ModelManager.filteredItems</code> and the UI is being updated.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/card_dg_fig/card_fig_5.png" alt="card fig 5" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 7. Now, the user executes redo. This results in the the CurrentStatePointer to point
+to the next TopDeck as per figure 4.3.6</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/card_dg_fig/card_fig_6.png" alt="card fig 6" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 8. Using D1, the application will get D3 in TopDeck that is pointed to by CurrentStatePointer.
+   A new CardsView(CardsView4) is then created and points to D3 as per figure 4.3.7. The application
+   then updates <code>ModelManager.filteredItems</code> and the UI is being updated.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/card_dg_fig/card_fig_7.png" alt="card fig 7" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 9. Below is the final state of <code>ModelManager</code>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/card_dg_fig/card_fig_8.png" alt="card fig 8" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Below is a sequence diagram to illustrate the sequence of activities upon calling
+<code>Model#addCard(Card card, Deck deck)</code>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/card_dg_fig/card_fig_9.png" alt="card fig 9" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">5.1.3. Design considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-data-structure-of-cards"><a class="link" href="#aspect-data-structure-of-cards">Aspect: Data structure of cards</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1(current choice):</strong> Have a list of cards within each deck</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Allows for decks features such as import and export. Also, any search operation is
+done within the deck only.</p>
+</li>
+<li>
+<p>Cons: There is a need to implement an extra <code>Deck</code> data structure and makes
+the model more complicated.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2(current choice):</strong> Have a global list of cards with tags.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Updating of UI will be easier as there is one global list only.</p>
+</li>
+<li>
+<p>Cons: In order to study the cards, the application has to search through the
+global list to find the cards with the tags that we want to study. Organisation of
+cards will also be messy as the only form of organisation for cards is through tagging.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Reason for choice 1:</strong> Choice one was chosen as it would allow the user an extra layer of
+organisation(<code>Deck</code> and <code>Tag</code>) when managing cards.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-crud-operation-should-work"><a class="link" href="#aspect-how-crud-operation-should-work">Aspect: How CRUD operation should work</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Recreate the CardViews after each operation</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Leverages on the current implementation of <code>VersionTopDeck</code> making it easier to
+implement.</p>
+</li>
+<li>
+<p>Cons: There is a memory and operation overhead as a new <code>CardsView</code> is constantly being
+created. Also, there is a need to refresh the UI at every update as the UI needs to render
+the new <code>CardsView</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Alter the card list in <code>CardsView</code> and the model upon each operation</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Only has to update the active Deck in CardsView and the model</p>
+</li>
+<li>
+<p>Cons: As <code>CardsView.activeDeck</code> can only reference to one deck only, the current Undo/Redo feature
+will have to be re-implemented to store the previous commands and the object changed.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Reason for choice 1:</strong> Choice one was chosen in order to retain the Undo/Redo function and to
+leverage on the original architecture instead of changing it.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-12 03:45:26 UTC</div></div></div></body></html>
