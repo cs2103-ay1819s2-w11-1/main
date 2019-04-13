@@ -20,7 +20,7 @@
 </li>
 <li><a href="#commands">4. Commands</a>
 <ul class="sectlevel2">
-<li><a href="#deck-view">4.1. Deck View</a>
+<li><a href="#decksviewc">4.1. Decks View</a>
 <ul class="sectlevel3">
 <li><a href="#creating-a-deck-code-add-code">4.1.1. Creating a deck: <code>add</code></a></li>
 <li><a href="#deleting-a-deck-code-delete-code">4.1.2. Deleting a deck: <code>delete</code></a></li>
@@ -34,7 +34,7 @@
 <li><a href="#selecting-a-deck-code-select-code">4.1.10. Selecting a deck: <code>select</code></a></li>
 </ul>
 </li>
-<li><a href="#cards-view">4.2. Cards View</a>
+<li><a href="#cardsviewc">4.2. Cards View</a>
 <ul class="sectlevel3">
 <li><a href="#selecting-a-card-in-the-active-deck-code-select-code">4.2.1. Selecting a card in the active deck: <code>select</code></a></li>
 <li><a href="#adding-a-card-to-the-active-deck-code-add-code">4.2.2. Adding a card to the active deck: <code>add</code></a></li>
@@ -50,20 +50,20 @@
 </li>
 <li><a href="#study-view">4.3. Study View</a>
 <ul class="sectlevel3">
-<li><a href="#returning-to-decks-view-code-back-code-2">4.3.1. Returning to decks view: <code>back</code></a></li>
-<li><a href="#opening-the-deck-in-cards-view-code-deck-code">4.3.2. Opening the deck in cards view: <code>deck</code></a></li>
-<li><a href="#revealing-the-answer-to-card-code-any-attempt-code">4.3.3. Revealing the answer to card: <code>[any attempt]</code></a></li>
-<li><a href="#displaying-the-next-card-code-your-difficulty-rating-code">4.3.4. Displaying the next card: <code>[your difficulty rating]</code></a></li>
+<li><a href="#qnphase">4.3.1. Question Phase</a></li>
+<li><a href="#ansphase">4.3.2. Answer Phase</a></li>
+<li><a href="#studyback">4.3.3. Returning to decks view: <code>back</code></a></li>
+<li><a href="#opening-the-deck-in-cards-view-code-open-code">4.3.4. Opening the deck in cards view: <code>open</code></a></li>
 </ul>
 </li>
 <li><a href="#global-commands">4.4. Global commands</a>
 <ul class="sectlevel3">
 <li><a href="#listing-entered-commands-code-history-code">4.4.1. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-a-command-code-undo-code">4.4.2. Undoing a command : <code>undo</code></a></li>
-<li><a href="#redoing-a-command-code-redo-code">4.4.3. Redoing a command : <code>redo</code></a></li>
-<li><a href="#viewing-help-code-help-code">4.4.4. Viewing help : <code>help</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">4.4.5. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">4.4.6. Exiting the program : <code>exit</code></a></li>
+<li><a href="#viewing-help-code-help-code">4.4.2. Viewing help : <code>help</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">4.4.3. Exiting the program : <code>exit</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">4.4.4. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#undoing-a-command-code-undo-code">4.4.5. Undoing a command : <code>undo</code></a></li>
+<li><a href="#redoing-a-command-code-redo-code">4.4.6. Redoing a command : <code>redo</code></a></li>
 <li><a href="#saving-your-data">4.4.7. Saving your data</a></li>
 </ul>
 </li>
@@ -74,7 +74,7 @@
 <li><a href="#command-summary">7. Command Summary</a>
 <ul class="sectlevel2">
 <li><a href="#decks-view">7.1. Decks View</a></li>
-<li><a href="#cards-view-2">7.2. Cards View</a></li>
+<li><a href="#cards-view">7.2. Cards View</a></li>
 <li><a href="#study-view-2">7.3. Study View</a></li>
 <li><a href="#global-commands-2">7.4. Global Commands</a></li>
 <li><a href="#switching-views">7.5. Switching Views</a></li>
@@ -129,6 +129,7 @@ jump to <a href="#quick-start">Section 2, &#8220;Quick Start&#8221;</a> to get s
 <div class="content">
 <img src="images/Ui.png" alt="Ui" width="790">
 </div>
+<div class="title">Figure 1. TopDeck&#8217;s initial GUI</div>
 </div>
 </li>
 <li>
@@ -143,7 +144,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p><code>add Capitals</code> : creates a new deck named "Capitals"</p>
+<p><code>add Parseltongue</code> : creates a new deck named "Parseltongue"</p>
 </li>
 <li>
 <p><code>delete 3</code> : deletes the third deck in the list</p>
@@ -162,13 +163,53 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <h2 id="user-interface"><a class="link" href="#user-interface">3. User interface</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TopDeck&#8217;s interface is seperated into three different views.
+<p>TopDeck&#8217;s GUI is very simple. It consists of four main areas -
+Menu Bar, Command Box, Results Display, and Content Panel.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/gen_ug_diagrams/ui_annotate.png" alt="ui annotate" width="790">
+</div>
+<div class="title">Figure 2. Main Areas in TopDeck GUI</div>
+</div>
+<div class="paragraph">
+<p>Here are what you can do with each:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Menu Bar - access general commands such as <code>exit</code> and <code>help</code></p>
+</li>
+<li>
+<p>Command Box - input commands to interact with the application</p>
+</li>
+<li>
+<p>Results Display - see the outcome of your commands</p>
+</li>
+<li>
+<p>Content Panel - view decks or cards, etc. Content is dependent on
+the view you are in.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>TopDeck currently supports three different views - Decks View, Cards
+View, and Study View.
 By default, TopDeck starts in <a href="#decksview">Decks View</a>.</p>
 </div>
 <div class="sect2">
 <h3 id="decksview"><a class="link" href="#decksview">3.1. Decks View</a></h3>
 <div class="paragraph">
 <p>This view displays a list of the decks in your collection.</p>
+</div>
+<div class="paragraph">
+<p>The figure below shows a preview of Decks View.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/deck.png" alt="deck" width="800">
+</div>
+<div class="title">Figure 3. Decks View</div>
 </div>
 <div class="paragraph">
 <p>In decks view, you can:</p>
@@ -179,21 +220,36 @@ By default, TopDeck starts in <a href="#decksview">Decks View</a>.</p>
 <p>Create, edit, delete and find decks.</p>
 </li>
 <li>
-<p>Open a deck to view its contents. TopDeck will enter <a href="#cardsview">cards view</a>.</p>
+<p>Open a deck to view its contents. TopDeck will enter <a href="#cardsview">Cards View</a>.</p>
 </li>
 <li>
-<p>Pick a deck to study. TopDeck will enter <a href="#studyview">study view</a>.</p>
+<p>Pick a deck to study. TopDeck will enter <a href="#studyview">Study View</a>.</p>
 </li>
 <li>
 <p>Export or Import a deck.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>Jump to <a href="#decksviewc">Decks View Commands</a>.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="cardsview"><a class="link" href="#cardsview">3.2. Cards View</a></h3>
 <div class="paragraph">
-<p>This view displays the cards in a particular deck. In cards view, you can:</p>
+<p>This view displays the cards in a particular deck.</p>
+</div>
+<div class="paragraph">
+<p>The figure below shows a preview of Cards View.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/gen_ug_diagrams/cards.png" alt="cards" width="800">
+</div>
+<div class="title">Figure 4. Cards View</div>
+</div>
+<div class="paragraph">
+<p>In cards view, you can:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -205,9 +261,26 @@ By default, TopDeck starts in <a href="#decksview">Decks View</a>.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>Jump to <a href="#cardsviewc">Cards View Commands</a>.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="studyview"><a class="link" href="#studyview">3.3. Study View</a></h3>
+<div class="paragraph">
+<p>This view enables you to conduct a self-study session.
+In this view, TopDeck flashes questions followed by
+their answers.</p>
+</div>
+<div class="paragraph">
+<p>The following is a preview of Study View.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/gen_ug_diagrams/study.png" alt="study" width="800">
+</div>
+<div class="title">Figure 5. Study View</div>
+</div>
 <div class="paragraph">
 <p>In this view you can study a deck of cards.</p>
 </div>
@@ -220,6 +293,9 @@ By default, TopDeck starts in <a href="#decksview">Decks View</a>.</p>
 <p>Rate the difficulty of the cards.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>Learn more about <a href="#studyviewc">Study View</a>.</p>
 </div>
 </div>
 </div>
@@ -259,14 +335,9 @@ will be accepted. I.e. If you entered add n/nameOne n/nameTwo, the new deck will
 </div>
 </div>
 <div class="sect2">
-<h3 id="deck-view"><a class="link" href="#deck-view">4.1. Deck View</a></h3>
+<h3 id="decksviewc"><a class="link" href="#decksviewc">4.1. Decks View</a></h3>
 <div class="paragraph">
 <p>In this view you can create, edit and find decks. This is the default view when TopDeck is first launched.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/deck_ug_diagrams/deck.png" alt="deck" width="800">
-</div>
 </div>
 <div class="paragraph">
 <p>These are commands only available in deck view.</p>
@@ -283,11 +354,22 @@ will be accepted. I.e. If you entered add n/nameOne n/nameTwo, the new deck will
 <p><strong>Example</strong>: <code>add n/History</code></p>
 </div>
 <div class="paragraph">
+<p>Here is what you type in.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deck_ug_diagrams/add.png" alt="add">
+</div>
+</div>
+<div class="paragraph">
+<p>The deck should appear at the bottom of the list.</p>
+</div>
+<div class="paragraph">
 <p>Before:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/deck_ug_diagrams/add_deck_1.png" alt="add deck 1" width="800">
+<img src="images/deck_ug_diagrams/add_deck_1.png" alt="add deck 1" width="200">
 </div>
 </div>
 <div class="paragraph">
@@ -295,7 +377,7 @@ will be accepted. I.e. If you entered add n/nameOne n/nameTwo, the new deck will
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/deck_ug_diagrams/add_deck_2.png" alt="add deck 2" width="800">
+<img src="images/deck_ug_diagrams/add_deck_2.png" alt="add deck 2" width="200">
 </div>
 </div>
 </div>
@@ -329,7 +411,7 @@ will be accepted. I.e. If you entered add n/nameOne n/nameTwo, the new deck will
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/deck_ug_diagrams/delete_deck_1.png" alt="delete deck 1" width="800">
+<img src="images/deck_ug_diagrams/delete_deck_1.png" alt="delete deck 1" width="200">
 </div>
 </div>
 <div class="paragraph">
@@ -337,7 +419,7 @@ will be accepted. I.e. If you entered add n/nameOne n/nameTwo, the new deck will
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/deck_ug_diagrams/delete_deck_2.png" alt="delete deck 2" width="800">
+<img src="images/deck_ug_diagrams/delete_deck_2.png" alt="delete deck 2" width="200">
 </div>
 </div>
 </div>
@@ -576,7 +658,7 @@ for select in v2.0. Refer to <a href="#upcoming-features">Section 8, &#8220;Upco
 </div>
 </div>
 <div class="sect2">
-<h3 id="cards-view"><a class="link" href="#cards-view">4.2. Cards View</a></h3>
+<h3 id="cardsviewc"><a class="link" href="#cardsviewc">4.2. Cards View</a></h3>
 <div class="paragraph">
 <p>These commands are only available in cards view.
 In this section, the active deck is the deck used in the <code>open</code> command.</p>
@@ -826,10 +908,80 @@ will show the question with the entire phrase <code>Is there a question</code> a
 <div class="sect2">
 <h3 id="study-view"><a class="link" href="#study-view">4.3. Study View</a></h3>
 <div class="paragraph">
-<p>These are commands are only available in study view, after <code>study INDEX</code> or <code>study</code> command is executed.</p>
+<p>Study View can be accessed using any of these commands:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>study INDEX</code> from Decks View</p>
+</li>
+<li>
+<p><code>study</code> from Cards View</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In order to facilitate your study session,
+Study View presents Flash Cards in two phases, namely <a href="#qnphase">Question Phase</a> and <a href="#ansphase">Answer Phase</a>.</p>
 </div>
 <div class="sect3">
-<h4 id="returning-to-decks-view-code-back-code-2"><a class="link" href="#returning-to-decks-view-code-back-code-2">4.3.1. Returning to decks view: <code>back</code></a></h4>
+<h4 id="qnphase"><a class="link" href="#qnphase">4.3.1. Question Phase</a></h4>
+<div class="paragraph">
+<p>Study View starts off in Question Phase, which displays the question in this user interface:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/study_ug_diagrams/question.png" alt="question" width="800">
+</div>
+<div class="title">Figure 6. Study View&#8217;s Question Phase</div>
+</div>
+<div class="paragraph">
+<p>As seen above, the question is displayed in a blue flash card.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Currently, questions are chosen this way: TopDeck shuffles the deck and displays all cards until the entire deck
+has been viewed. Topdeck repeats this endlessly until you choose to <a href="#studyback">end your study session</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You may choose to attempt the question by typing your answer into the Command Box.
+ Once you&#8217;re ready to see the answer, hit <kbd>Enter</kbd>. Your attempt will be recorded and
+ TopDeck goes into Answer Phase.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ansphase"><a class="link" href="#ansphase">4.3.2. Answer Phase</a></h4>
+<div class="paragraph">
+<p>During this phase, you will see the answer to the earlier question in the following
+user interface:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/study_ug_diagrams/answer.png" alt="answer" width="800">
+</div>
+<div class="title">Figure 7. Study View&#8217;s Answer Phase</div>
+</div>
+<div class="paragraph">
+<p>The correct answer is displayed in a white flash card. Your attempt is displayed on the top right hand side for your own comparison.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, a prompt asks you to rate the difficulty of that flash card.
+You should input your rating into the Command Box.</p>
+</div>
+<div class="paragraph">
+<p>During both phases, the following commands are available:</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="studyback"><a class="link" href="#studyback">4.3.3. Returning to decks view: <code>back</code></a></h4>
 <div class="paragraph">
 <p><strong>Format</strong>: <code>back</code></p>
 </div>
@@ -838,62 +990,12 @@ will show the question with the entire phrase <code>Is there a question</code> a
 </div>
 </div>
 <div class="sect3">
-<h4 id="opening-the-deck-in-cards-view-code-deck-code"><a class="link" href="#opening-the-deck-in-cards-view-code-deck-code">4.3.2. Opening the deck in cards view: <code>deck</code></a></h4>
+<h4 id="opening-the-deck-in-cards-view-code-open-code"><a class="link" href="#opening-the-deck-in-cards-view-code-open-code">4.3.4. Opening the deck in cards view: <code>open</code></a></h4>
 <div class="paragraph">
-<p><strong>Format</strong>: <code>deck</code></p>
+<p><strong>Format</strong>: <code>open</code></p>
 </div>
 <div class="paragraph">
 <p><strong>Outcome</strong>: Opens the deck in cards view.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="revealing-the-answer-to-card-code-any-attempt-code"><a class="link" href="#revealing-the-answer-to-card-code-any-attempt-code">4.3.3. Revealing the answer to card: <code>[any attempt]</code></a></h4>
-<div class="paragraph">
-<p><strong>Format</strong>: <code>[any attempt]</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Outcome</strong>: Reveals the answer to card, with your attempt shown beside it.</p>
-</div>
-<div class="paragraph">
-<p>For example, you can type in <code>CO2</code> and hit <kbd>Enter</kbd></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/study_ug_diagrams/study_1.png" alt="study 1" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The following image is the result of the command.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/study_ug_diagrams/study_2.png" alt="study 2" width="800">
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="displaying-the-next-card-code-your-difficulty-rating-code"><a class="link" href="#displaying-the-next-card-code-your-difficulty-rating-code">4.3.4. Displaying the next card: <code>[your difficulty rating]</code></a></h4>
-<div class="paragraph">
-<p><strong>Format</strong>: <code>[your difficulty rating]</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Outcome</strong>: Displays another card from the deck. Stores your difficulty rating for the card.</p>
-</div>
-<div class="paragraph">
-<p>Entering a number 3 indicates that you rate the difficulty as 3.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/study_ug_diagrams/study_3.png" alt="study 3" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Submitting this reveals the next question.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/study_ug_diagrams/study_4.png" alt="study 4" width="800">
-</div>
 </div>
 </div>
 </div>
@@ -926,7 +1028,48 @@ will show the question with the entire phrase <code>Is there a question</code> a
 </div>
 </div>
 <div class="sect3">
-<h4 id="undoing-a-command-code-undo-code"><a class="link" href="#undoing-a-command-code-undo-code">4.4.2. Undoing a command : <code>undo</code></a></h4>
+<h4 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.4.2. Viewing help : <code>help</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>help</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Displays information regarding commands</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.4.3. Exiting the program : <code>exit</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>exit</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Exits the program</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.4.4. Clearing all entries : <code>clear</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>clear</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Clears all entries in TopDeck</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Clearing TopDeck is disabled in study view.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="undoing-a-command-code-undo-code"><a class="link" href="#undoing-a-command-code-undo-code">4.4.5. Undoing a command : <code>undo</code></a></h4>
 <div class="paragraph">
 <p><strong>Format</strong>: <code>undo</code></p>
 </div>
@@ -941,7 +1084,6 @@ will show the question with the entire phrase <code>Is there a question</code> a
 <li>
 <p><em>In decks view</em><br>
 <code>delete 1</code><br>
-<code>list</code><br>
 <code>undo</code> (undos <code>delete 1</code>)<br></p>
 </li>
 <li>
@@ -969,7 +1111,7 @@ will show the question with the entire phrase <code>Is there a question</code> a
 </div>
 </div>
 <div class="sect3">
-<h4 id="redoing-a-command-code-redo-code"><a class="link" href="#redoing-a-command-code-redo-code">4.4.3. Redoing a command : <code>redo</code></a></h4>
+<h4 id="redoing-a-command-code-redo-code"><a class="link" href="#redoing-a-command-code-redo-code">4.4.6. Redoing a command : <code>redo</code></a></h4>
 <div class="paragraph">
 <p><strong>Format</strong>: <code>redo</code></p>
 </div>
@@ -1002,32 +1144,19 @@ The <code>redo</code> command fails as there is no undone state to restore.</p>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect3">
-<h4 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.4.4. Viewing help : <code>help</code></a></h4>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p><strong>Format</strong>: <code>help</code></p>
+<p>Redoing is disabled in study view.</p>
 </div>
-<div class="paragraph">
-<p><strong>Outcome</strong>: Displays information regarding commands</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.4.5. Clearing all entries : <code>clear</code></a></h4>
-<div class="paragraph">
-<p><strong>Format</strong>: <code>clear</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Outcome</strong>: Clears all entries in TopDeck</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.4.6. Exiting the program : <code>exit</code></a></h4>
-<div class="paragraph">
-<p><strong>Format</strong>: <code>exit</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Outcome</strong>: Exits the program</p>
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect3">
@@ -1117,7 +1246,7 @@ functionality will be added in v2.0)</p></td>
 </table>
 </div>
 <div class="sect2">
-<h3 id="cards-view-2"><a class="link" href="#cards-view-2">7.2. Cards View</a></h3>
+<h3 id="cards-view"><a class="link" href="#cards-view">7.2. Cards View</a></h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 40%;">
@@ -1247,4 +1376,4 @@ At least one parameter must be present.</p></td>
 for that deck.</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-12 08:37:26 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-13 19:32:19 UTC</div></div></div></body></html>
