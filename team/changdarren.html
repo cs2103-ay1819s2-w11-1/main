@@ -68,26 +68,21 @@ Along with the usual CRUD operation, I also added a find and clear feature for t
 <div class="ulist">
 <ul>
 <li>
-<p>Justification: A user should be able to execute basic CRUD operations on a deck
-of cards to customize the study session that the user will experience. A find feature will help
-the user to locate the specific card especially when  they want to recall the question or
-answer to the specific question. A clear feature will allow the user to remove all the cards
-quickly in a deck when the user wants to recreate the whole deck.</p>
+<p>Justification: A user should be able to modify a deck to customize the study session that the
+user will experience. A find feature will help the user to locate the specific card especially when
+they want to recall the question or answer to the specific question.</p>
 </li>
 <li>
 <p>Highlights: The CRUD operation has to work with the existing commands and
 data structure in AB4. This was challenging as the <code>Undo</code> and <code>Redo</code> methods in the
 original application leverages on the immutability of the data structure.
-The card list however is an object in a deck and all card related operation
-is a modification of the current deck. As such, there was a need to ensure that
-both requirements will be fulfilled.
 Also, our application maintains a state object which the UI is dependent on. As such, there is
 also a need to ensure both the state of the application and the model is consistent with each other
 after every command.</p>
 </li>
 <li>
 <p>Credits: The edit command has an auto-complete feature which was implemented
-by my team mate  Wei Heng.</p>
+by my teammate  Wei Heng.</p>
 </li>
 </ul>
 </div>
@@ -95,7 +90,7 @@ by my team mate  Wei Heng.</p>
 <p><strong>Code contributed:</strong></p>
 </div>
 <div class="paragraph">
-<p><a href="https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=ChangDarren&amp;sort=displayName&amp;since=2019-02-10&amp;until=2019-04-02&amp;timeframe=day&amp;reverse=false&amp;repoSort=true">My Reposense Dashboard</a></p>
+<p><a href="https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=changdarren&amp;sort=displayName&amp;since=2019-02-10&amp;until=2019-04-14&amp;timeframe=day&amp;reverse=false&amp;repoSort=true">My Reposense Dashboard</a></p>
 </div>
 <div class="paragraph">
 <p><a href="https://github.com/cs2103-ay1819s2-w11-1/main/commits?author=ChangDarren">My Github Page</a></p>
@@ -159,7 +154,10 @@ the whole project through the issue tracker on GitHub.</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>We had to update the original User Guide with new instructions for the different enhancements implemented.
-The following is an excerpt from that I have written for Card&#8217;s Management from <strong>TopDeck User Guide</strong>.</p>
+The following is an extract from <strong>TopDeck User Guide</strong> that I have written.</p>
+</div>
+<div class="paragraph">
+<p>(Start of extract)</p>
 </div>
 <div class="sect2">
 <h3 id="cards-view"><a class="link" href="#cards-view">4.1. Cards View</a></h3>
@@ -167,32 +165,8 @@ The following is an excerpt from that I have written for Card&#8217;s Management
 <p>These commands are only available in cards view.
 In this section, the active deck is the deck used in the <code>open</code> command.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The Footer Bar will continue to track the number of decks in the app.
-</td>
-</tr>
-</table>
-</div>
 <div class="sect3">
-<h4 id="selecting-a-card-in-the-active-deck-code-select-code"><a class="link" href="#selecting-a-card-in-the-active-deck-code-select-code">4.1.1. Selecting a card in the active deck: <code>select</code></a></h4>
-<div class="paragraph">
-<p><strong>Format</strong>: <code>select INDEX</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Outcome</strong>: Selects the card in the deck with index at <code>INDEX</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Example</strong>: <code>select 1</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="adding-a-card-to-the-active-deck-code-add-code"><a class="link" href="#adding-a-card-to-the-active-deck-code-add-code">4.1.2. Adding a card to the active deck: <code>add</code></a></h4>
+<h4 id="adding-a-card-to-the-active-deck-code-add-code"><a class="link" href="#adding-a-card-to-the-active-deck-code-add-code">4.1.1. Adding a card to the active deck: <code>add</code></a></h4>
 <div class="paragraph">
 <p><strong>Format</strong>: <code>add q/QUESTION a/ANSWER [t/TAG]</code></p>
 </div>
@@ -224,19 +198,7 @@ adds it to the current deck.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="deleting-a-card-in-the-active-deck-code-delete-code"><a class="link" href="#deleting-a-card-in-the-active-deck-code-delete-code">4.1.3. Deleting a card in the active deck: <code>delete</code></a></h4>
-<div class="paragraph">
-<p><strong>Format</strong>: <code>delete INDEX</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Outcome</strong>: Deletes the card at <code>INDEX</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Example</strong>: <code>delete 2</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="editing-a-card-in-the-active-deck-code-edit-code"><a class="link" href="#editing-a-card-in-the-active-deck-code-edit-code">4.1.4. Editing a card in the active deck: <code>edit</code></a></h4>
+<h4 id="editing-a-card-in-the-active-deck-code-edit-code"><a class="link" href="#editing-a-card-in-the-active-deck-code-edit-code">4.1.2. Editing a card in the active deck: <code>edit</code></a></h4>
 <div class="paragraph">
 <p><strong>Format</strong>: <code>edit INDEX q/QUESTION a/ANSWER [t/TAG]</code></p>
 </div>
@@ -252,52 +214,17 @@ TopDeck also provides an auto-complete feature for the <code>edit</code> command
 Users need only type <code>edit INDEX</code> and TopDeck will fill up the commandline
 for the user to edit accordingly.</p>
 </div>
-<div class="paragraph">
-<p>Below is a walk-through of the <code>edit</code> command:</p>
-</div>
-<div class="paragraph">
-<p>Suppose the user adds a new card with a typo:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/card_ug_diagrams/edit_card_1.png" alt="edit card 1" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The user can then retrieve the full detail of the card by simply typing
-<code>edit 2</code> and pressing enter. The following would appear</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/card_ug_diagrams/edit_card_2.png" alt="edit card 2" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The user can then edit and correct the mistake made.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/card_ug_diagrams/edit_card_3.png" alt="edit card 3" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>This would be the end result:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/card_ug_diagrams/edit_card_4.png" alt="edit card 4" width="800">
-</div>
-</div>
 </div>
 <div class="sect3">
-<h4 id="finding-a-card-in-the-active-deck-by-name-code-find-code"><a class="link" href="#finding-a-card-in-the-active-deck-by-name-code-find-code">4.1.5. Finding a card in the active deck by name: <code>find</code></a></h4>
+<h4 id="finding-a-card-in-the-active-deck-by-name-code-find-code"><a class="link" href="#finding-a-card-in-the-active-deck-by-name-code-find-code">4.1.3. Finding a card in the active deck by name: <code>find</code></a></h4>
 <div class="paragraph">
 <p><strong>Format</strong>: <code>find KEYWORD [KEYWORD]&#8230;&#8203;</code></p>
 </div>
 <div class="paragraph">
-<p><strong>Search for phrases</strong>: TopDeck provides users the ability to search for
+<p><strong>Search for phrases</strong>: TopDeck provides the user the ability to search for
 specific question by searching for a whole phrase instead of only individual words.
-This is done by putting <code>"</code> around <code>KEYWORD</code>.</p>
+This is done by putting <code>"</code> around <code>KEYWORD</code>. There should not be any <code>"</code> character in
+<code>KEYWORD</code>. Searching using phrases only searches the question.</p>
 </div>
 <div class="paragraph">
 <p><strong>Outcome</strong>: Lists all cards within the current deck containing <code>KEYWORD</code> in its text.</p>
@@ -323,7 +250,7 @@ This is done by putting <code>"</code> around <code>KEYWORD</code>.</p>
 </td>
 <td class="content">
 The entire phrase inside <code>"</code> will be matched word for word. For example, <code>find "Is there a question"</code>
-will show the question with the entire phrase <code>Is there a question</code> and the phrase
+will display the questions with the entire phrase <code>Is there a question</code> and the question
 <code>Is there a question?</code> will not be matched due to the extra <code>?</code>
 </td>
 </tr>
@@ -359,53 +286,11 @@ will show the question with the entire phrase <code>Is there a question</code> a
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/card_ug_diagrams/find_card_2.png" alt="find card 2" width="800">
+<img src="../images/card_ug_diagrams/find_card_2.png" alt="find card 2" width="800" height="200">
 </div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="clearing-all-cards-in-the-active-deck-code-clear-code"><a class="link" href="#clearing-all-cards-in-the-active-deck-code-clear-code">4.1.6. Clearing all cards in the active deck: <code>clear</code></a></h4>
-<div class="paragraph">
-<p><strong>Format</strong>: <code>clear</code></p>
 </div>
 <div class="paragraph">
-<p><strong>Outcome</strong>: Clears all of the cards in the deck.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="listing-all-cards-in-the-active-deck-code-list-code"><a class="link" href="#listing-all-cards-in-the-active-deck-code-list-code">4.1.7. Listing all cards in the active deck: <code>list</code></a></h4>
-<div class="paragraph">
-<p><strong>Format</strong>: <code>list</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Outcome</strong>: Displays a list of all cards in the deck.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="studying-the-active-deck-code-study-code"><a class="link" href="#studying-the-active-deck-code-study-code">4.1.8. Studying the active deck: <code>study</code></a></h4>
-<div class="paragraph">
-<p><strong>Format</strong>: <code>study</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Outcome</strong>: Enters study view with the current deck.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="returning-to-decks-view-code-back-code"><a class="link" href="#returning-to-decks-view-code-back-code">4.1.9. Returning to decks view: <code>back</code></a></h4>
-<div class="paragraph">
-<p><strong>Format</strong>: <code>back</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Outcome</strong>: Returns to decks view.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="to-be-implemented-in-v2-0-adding-a-picture-to-a-card"><a class="link" href="#to-be-implemented-in-v2-0-adding-a-picture-to-a-card">4.1.10. [To be implemented in V2.0] Adding a picture to a card</a></h4>
-<div class="paragraph">
-<p><strong>Format</strong>: <code>addImg INDEX IMAGEPATH</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Outcome</strong>: Adds the image as a question to the card at <code>INDEX</code></p>
+<p>(End of extract)</p>
 </div>
 </div>
 </div>
@@ -415,40 +300,15 @@ will show the question with the entire phrase <code>Is there a question</code> a
 <h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">5. Contributions to the Developer Guide</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The following section shows my additions to the <strong>TopDeck Developer Guide</strong> for the Card Management features.</p>
+<p>The following section is an extract of my additions to <strong>TopDeck Developer Guide</strong>.</p>
+</div>
+<div class="paragraph">
+<p>(Start of extract)</p>
 </div>
 <div class="sect2">
 <h3 id="card-management"><a class="link" href="#card-management">5.1. Card management</a></h3>
 <div class="sect3">
-<h4 id="data-structure"><a class="link" href="#data-structure">5.1.1. Data structure</a></h4>
-<div class="paragraph">
-<p>A Card consists of a question, an answer, its difficulty and the respective tags associated with it.
-Card&#8217;s are deemed as equal if they have the same question to prevent the user from
-creating same question twice or to have 2 different answer for the same question.
-Cards are stored inside a <code>Deck</code> as a list of unique cards.
-The Create, Read, Update and Delete (CRUD) operation of a card in a chosen <code>Deck</code> is thus a modification of
-the chosen <code>Deck</code>.</p>
-</div>
-<div class="paragraph">
-<p>In order to facilitate the CRUD operations, <code>CardsView</code> contains <code>activeDeck</code> which is a reference to the
-current deck that we are modifying.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Before any Card related operation can be executed, <code>ViewState</code> in ModelManager has to be of type <code>CardsView</code>.
-For more information refer to the section on ViewState management.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">5.1.2. Current implementation</a></h4>
+<h4 id="current-implementation"><a class="link" href="#current-implementation">5.1.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>Card management is currently facilitated by <code>Model</code> which implements the following operations:</p>
 </div>
@@ -525,10 +385,7 @@ of functions carried out and returns the newly edited deck to <code>ModelManager
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-All other CRUD operations works similarly except for the model call. Instead of
-<code>Model#addCard(Card card, Deck deck)</code>, <code>Model#deleteCard(Card target, Deck deck)</code> or
-<code>Model#setCard(Card target, Card newCard, Deck deck)</code> is called instead. Similarly,
-instead of <code>VersionedTopDeck.addCard(Card card, Deck activeDeck)</code>,
+All other CRUD operations works similarly. Instead of <code>VersionedTopDeck.addCard(Card card, Deck activeDeck)</code>,
 <code>VersionedTopDeck.deleteCard(Card target, Deck activeDeck)</code> or
 <code>VersionedTopDeck.setCard(Card target, Card newCard, Deck activeDeck)</code> is called.
 </td>
@@ -536,7 +393,7 @@ instead of <code>VersionedTopDeck.addCard(Card card, Deck activeDeck)</code>,
 </table>
 </div>
 <div class="paragraph">
-<p>Given below is an example usage scenario and how the add operation works and how it
+<p>Given below is an example usage scenario of how the add operation works and how it
 interacts with Undo/Redo:</p>
 </div>
 <div class="paragraph">
@@ -548,7 +405,7 @@ the Deck feature.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/card_dg_fig/card_fig_1.png" alt="card fig 1" width="800">
+<img src="../images/card_dg_fig/card_fig_1.png" alt="card fig 1" width="800" height="150">
 </div>
 </div>
 <div class="paragraph">
@@ -577,52 +434,6 @@ as in figure 4.3.3</p>
 reflect the change.</p>
 </div>
 <div class="paragraph">
-<p>Step 5. Now the user executes <code>undo</code>. This results in the CurrentStatePointer to point
-to the previous TopDeck as per figure 4.3.4</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/card_dg_fig/card_fig_4.png" alt="card fig 4" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 6. Using D3, the application will get D1 in TopDeck that is pointed to by CurrentStatePointer.
-A new CardsView(CardsView3) is then created and points to D1 as per figure 4.3.5. The application
-then updates <code>ModelManager.filteredItems</code> and the UI is being updated.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/card_dg_fig/card_fig_5.png" alt="card fig 5" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 7. Now, the user executes redo. This results in the the CurrentStatePointer to point
-to the next TopDeck as per figure 4.3.6</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/card_dg_fig/card_fig_6.png" alt="card fig 6" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 8. Using D1, the application will get D3 in TopDeck that is pointed to by CurrentStatePointer.
-   A new CardsView(CardsView4) is then created and points to D3 as per figure 4.3.7. The application
-   then updates <code>ModelManager.filteredItems</code> and the UI is being updated.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/card_dg_fig/card_fig_7.png" alt="card fig 7" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 9. Below is the final state of <code>ModelManager</code>:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/card_dg_fig/card_fig_8.png" alt="card fig 8" width="800">
-</div>
-</div>
-<div class="paragraph">
 <p>Below is a sequence diagram to illustrate the sequence of activities upon calling
 <code>Model#addCard(Card card, Deck deck)</code>:</p>
 </div>
@@ -633,7 +444,7 @@ to the next TopDeck as per figure 4.3.6</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">5.1.3. Design considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">5.1.2. Design considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-data-structure-of-cards"><a class="link" href="#aspect-data-structure-of-cards">Aspect: Data structure of cards</a></h5>
 <div class="ulist">
@@ -715,8 +526,11 @@ leverage on the original architecture instead of changing it.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>(End of extract)</p>
 </div>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 10:31:54 UTC</div></div></div></body></html>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 12:01:12 UTC</div></div></div></body></html>

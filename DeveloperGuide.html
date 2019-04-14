@@ -779,10 +779,7 @@ this approach.</p>
 <div class="paragraph">
 <p>A Card consists of a question, an answer, its difficulty and the respective tags associated with it.
 Card&#8217;s are deemed as equal if they have the same question to prevent the user from
-creating same question twice or to have 2 different answer for the same question.
-Cards are stored inside a <code>Deck</code> as a list of unique cards.
-The Create, Read, Update and Delete (CRUD) operation of a card in a chosen <code>Deck</code> is thus a modification of
-the chosen <code>Deck</code>.</p>
+creating same question twice or to have 2 different answer for the same question.</p>
 </div>
 <div class="paragraph">
 <p>In order to facilitate the CRUD operations, <code>CardsView</code> contains <code>activeDeck</code> which is a reference to the
@@ -880,10 +877,7 @@ of functions carried out and returns the newly edited deck to <code>ModelManager
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-All other CRUD operations works similarly except for the model call. Instead of
-<code>Model#addCard(Card card, Deck deck)</code>, <code>Model#deleteCard(Card target, Deck deck)</code> or
-<code>Model#setCard(Card target, Card newCard, Deck deck)</code> is called instead. Similarly,
-instead of <code>VersionedTopDeck.addCard(Card card, Deck activeDeck)</code>,
+All other CRUD operations works similarly. Instead of <code>VersionedTopDeck.addCard(Card card, Deck activeDeck)</code>,
 <code>VersionedTopDeck.deleteCard(Card target, Deck activeDeck)</code> or
 <code>VersionedTopDeck.setCard(Card target, Card newCard, Deck activeDeck)</code> is called.
 </td>
@@ -891,7 +885,7 @@ instead of <code>VersionedTopDeck.addCard(Card card, Deck activeDeck)</code>,
 </table>
 </div>
 <div class="paragraph">
-<p>Given below is an example usage scenario and how the add operation works and how it
+<p>Given below is an example usage scenario of how the add operation works and how it
 interacts with Undo/Redo:</p>
 </div>
 <div class="paragraph">
@@ -2253,4 +2247,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 10:31:54 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 12:01:12 UTC</div></div></div></body></html>
