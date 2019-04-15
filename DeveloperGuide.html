@@ -1136,23 +1136,15 @@ leverage on the original architecture instead of changing it.</p>
 <div class="sect2">
 <h3 id="study-view"><a class="link" href="#study-view">4.4. Study view</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">4.4.1. Current implementation</a></h4>
+<h4 id="studystate"><a class="link" href="#studystate">4.4.1. Stateful implementation</a></h4>
 <div class="paragraph">
-<p>The purpose of the third view, study view, is to help users retain the knowledge
-of their flash cards.</p>
+<p>The purpose of a study session is to let users
+test their knowledge of flash cards. This is done by randomly generating
+ a card to be shown to users, presenting them with questions followed by answers
+ in an alternating manner.</p>
 </div>
 <div class="paragraph">
-<p>This is done by consecutively presenting users with random cards from the deck.
-For each card, users are able to see the questions first, and then reveal the answers afterwards.</p>
-</div>
-<div class="paragraph">
-<p>The functionality above is supported by the <code>StudyView</code> class.</p>
-</div>
-<div class="paragraph">
-<p><strong>Important Variables</strong></p>
-</div>
-<div class="paragraph">
-<p>This <code>StudyView</code> class two important variables:</p>
+<p>In order to facilitate the alternation between two states, the <code>StudyView</code> class holds two main variables:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1160,168 +1152,306 @@ For each card, users are able to see the questions first, and then reveal the an
 <p><code>currentCard</code> - the card which is currently being shown to the user.</p>
 </li>
 <li>
-<p><code>currentStudyState</code> - variable which stores a <code>studyState</code> enum. The enum can be either <code>QUESTION</code> or <code>ANSWER</code></p>
+<p><code>currentStudyState</code> - an enum which can be either be <code>QUESTION</code> or <code>ANSWER</code></p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>These two important variables are continuously being altered every time the user interacts with the program,
-explained in detail later.</p>
+<p>These two  variables are continuously being altered to change the view
+every time the user interacts with the program.</p>
 </div>
 <div class="paragraph">
-<p><strong>Observable Values</strong></p>
+<p><strong>User Commands</strong> <a id="studyusercommands"></a></p>
 </div>
 <div class="paragraph">
-<p>Besides these variables, <code>StudyView</code> also makes extensive use of <code>ReadOnlyProperty</code> wrapper
+<p>The user can execute two types of commands to toggle value of <code>currentStudyState</code>. These are
+<code>ShowAnswerCommand</code> and <code>GenerateQuestionCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p>Unlike other commands, the type of command executed is
+inferred on the basis of  <code>currentStudyState</code> instead of the command word.
+Upon command execution, <code>currentStudyState</code> is evaluated and is toggled to
+ the opposite state. This behaviour is summarised below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/study_dg_diagrams/cyc.png" alt="cyc" width="800">
+</div>
+<div class="title">Figure 8. Alternation of states summary</div>
+</div>
+<div class="paragraph">
+<p>Besides toggling state, both commands also call
+ other functions to fully support <code>StudyView</code> functionality as detailed below.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="studyshow"><a class="link" href="#studyshow">4.4.2. <code>ShowAnswerCommand</code></a></h4>
+<div class="paragraph">
+<p>This command is executed when users types in anything to the <code>CommandBox</code> during question state.</p>
+</div>
+<div class="paragraph">
+<p>This string typed is the user&#8217;s attempt for the question shown. <code>ShowAnswerCommand</code> has to store this string internally
+for later display. This is done by setting <code>userAnswer</code> variable in <code>StudyView</code> class.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the <code>ShowAnswer</code> mechanism behaves at each step.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/study_dg_diagrams/show.png" alt="show" width="800">
+</div>
+<div class="title">Figure 9. How ShowAnswerCommand works</div>
+</div>
+<div class="paragraph">
+<p>Step 1. User attempts the question by typing in any command. If in question state and the command is not a preset command,
+a <code>ShowAnswerCommand</code> object containing <code>userAnswer</code> is returned.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. When command is executed, the user&#8217;s answer is stored internally in <code>userAnswer</code>
+ variable of <code>StudyView</code> through the <code>setUserAnswer()</code> function.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. <code>currentStudyState</code> in  <code>StudyView</code> is toggled to <code>ANSWER</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 4. UI automatically changes to show answer as shown <a href="#studyui">UI section</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="code-generatequestioncommand-code"><a class="link" href="#code-generatequestioncommand-code">4.4.3. <code>GenerateQuestionCommand</code></a></h4>
+<div class="paragraph">
+<p>This command is executed when users types into the <code>CommandBox</code> during answer state.</p>
+</div>
+<div class="paragraph">
+<p>The string typed is his rating for the flash card shown.
+Thus, <code>GenerateQuestionCommand</code> needs to modify
+average difficulty rating inside <code>Card</code> object.
+Besides that, it needs to modify <code>currentCard</code> to show a new card as well.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the <code>ShowAnswer</code> mechanism behaves at each step.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/study_dg_diagrams/gen.png" alt="gen" width="800">
+</div>
+<div class="title">Figure 10. How GenerateQuestionCommand works</div>
+</div>
+<div class="paragraph">
+<p>Step 1. User enters a rating. If in answer state, and command is not a preset command,
+and rating is between 1-5, a <code>GenerateQuestionCommand</code> object containing <code>int rating</code> is returned.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. When command is executed, <code>addRating()</code> is called to modify the difficulty of the
+<code>currentCard</code>. This calls <code>addDifficulty()</code> in <code>Difficulty</code> class which is
+a property of <code>Card</code> class. Implementation detailes are found in <a href="#studydiff">Difficulty Section</a>.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. <code>generateCard()</code> in <code>StudyView</code> is called. <code>StudyView</code> calls its <code>DeckShuffler</code> to generate a card as detailed in
+<a href="#studyshuffle">DeckShuffler section</a>. <code>Card</code> returned by <code>DeckShuffler</code> is passed back to <code>StudyView</code> and studyView uses this to reset its own <code>currentCard</code>
+through <code>setCurrentCard()</code> function.</p>
+</div>
+<div class="paragraph">
+<p>Step 4. <code>currentStudyState</code> in <code>StudyView</code> is toggled to <code>QUESTION</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 5. UI automatically changes to show question as shown in <a href="#studyui">UI section</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Summary of Changes</strong></p>
+</div>
+<div class="paragraph">
+<p>The summary of variable changes to <code>StudyState</code> after running these commands is detailed below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/study_dg_diagrams/cycle.png" alt="cycle" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="studyui"><a class="link" href="#studyui">4.4.4. UI implementation</a></h4>
+<div class="paragraph">
+<p><code>StudyView</code> makes  use of <code>ReadOnlyProperty</code> wrapper
 to store variables which the UI has to display. This wrapper is chosen as it implements the <code>Observable</code> interface.</p>
 </div>
+<div class="paragraph">
+<p>The UI listens out for three things: the <code>studyState</code>, <code>userAnswer</code>, and <code>textShown</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/study_dg_diagrams/ui.png" alt="ui" width="800">
+</div>
+<div class="title">Figure 11. UI Observer-Listener relationship diagram</div>
+</div>
+<div class="paragraph">
+<p>The following details the changes to these observable variables.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">observableProperty variable</th>
+<th class="tableblock halign-left valign-top">How this variable is modified</th>
+<th class="tableblock halign-left valign-top">Changes in UI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>currentStudyState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Explained in <a href="#studyusercommands">Study User Commands</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sCard.pseudoClass</code> (flash card background color),
+ <code>sQuestion.pseudoClass</code> (colour of flash card text),
+<code>status.visibility</code> (whether or not to <code>userAnswer</code> and difficulty rating prompt is seen. These must be seen only during answer state)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">textShown</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calling <code>setCurrentCard()</code> and <code>setCurrentStudyState()</code> modifies <code>textShown</code> assign it a value which is either
+<code>Question</code> or <code>Answer</code> of <code>currentCard</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sQuestion.text</code> (text written on flash card)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">userAnswer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Explained in <a href="#studyshow">Show Answer Command</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>userLabel.text</code> (label which displays user&#8217;s answer
+to question displayed earlier)</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect3">
-<h4 id="data-structure-implementation"><a class="link" href="#data-structure-implementation">4.4.2. Data structure implementation</a></h4>
+<h4 id="deckshuffler-brief-overview"><a class="link" href="#deckshuffler-brief-overview">4.4.5. DeckShuffler brief overview</a></h4>
 <div class="paragraph">
-<p>This section discusses how the two variables, <code>currentCard</code> and <code>studyState</code> are continuously modified,
-and also the other variables that change as a result of these two functions.</p>
-</div>
-<div class="paragraph">
-<p>Given below is an example usage scenario and how the <code>study</code> mechanism behaves at each step.</p>
-</div>
-<div class="paragraph">
-<p>Step 1. User enter study mode using <code>study 1</code> command.</p>
-</div>
-<div class="paragraph">
-<p>A <code>StudyDeckCommand</code> is issued.</p>
-</div>
-<div class="paragraph">
-<p>Upon the execution of this command, Model&#8217;s <code>viewState</code> will now hold a <code>StudyView</code> object with 1st deck as active deck.</p>
-</div>
-<div class="paragraph">
-<p>As part of the execution of <code>StudyDeckCommand</code>, step 2 is ran.</p>
-</div>
-<div class="paragraph">
-<p>Step 2. Generating a question.</p>
-</div>
-<div class="paragraph">
-<p>In order to present questions to users, these are the functions called by the <code>GenerateQuestionCommand()</code>:</p>
+<p>In order to generate a random <code>Card</code> object reference, <code>DeckShuffler</code> holds 3 variables:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>DeckSuffler#generateCard()</code> The <code>DeckShuffler</code> class has an algorithm (implementation explained later)
-to select a Card object, and passes this reference to <code>StudyView</code>.</p>
+<p><code>activeDeck</code> - deck that it needs to choose cards from</p>
 </li>
 <li>
-<p><code>currentCard</code> refers now to that card.</p>
+<p><code>shuffledDeck</code> - list of cards in <code>activeDeck</code> that has been shuffled by <code>Collections.shuffle()</code></p>
 </li>
 <li>
-<p><code>currentState</code> is set to QUESTION.</p>
-</li>
-<li>
-<p>Consequently, <code>textShown</code> property is also modified. In this case, it will contain
-the question  of the chosen card.</p>
+<p><code>it</code> - a <code>Card</code> iterator that loops through cards in <code>shuffledDeck</code>.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Step 2. User executes the <code>[wildcard]</code> command to signal that he has come up with the answer.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>User answer, ie whatever the user wrote, is stored as command under the statistics variable.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Step 3. The  command generates a <code>ShowAnswerCommand()</code></p>
-</div>
-<div class="paragraph">
-<p>The follwing are ran upon execution of the show answer command:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>currentStudyState</code> to ANSWER.</p>
-</li>
-<li>
-<p>Similar to the above, we also change the <code>textShown</code> property to show user answer instead.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Step 4. User enters the difficulty rating "command" to rate how difficult they thought it was to recall
-the answer.</p>
-</div>
-<div class="paragraph">
-<p>The following things happen:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Their answer stored under userAnswer variable, which will be displayed later.</p>
-</li>
-<li>
-<p>This is perfect as we do not want users to revert statistics by executing undo command.</p>
-</li>
-<li>
-<p><code>GenerateQuestionCommand()</code> is executed once again. Back to Step 2.</p>
-</li>
-</ul>
+<p>When <code>generateCard()</code> is called, iterator calls <code>next</code> and returns <code>Card</code> referenced. If none, <code>shuffledDeck</code> is shuffled again and
+iterator is set to <code>shuffledDeck.begin()</code>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="ui-implementation"><a class="link" href="#ui-implementation">4.4.3. UI implementation</a></h4>
+<h4 id="difficulty-class-overview"><a class="link" href="#difficulty-class-overview">4.4.6. Difficulty class overview</a></h4>
 <div class="paragraph">
-<p>The UI listens for three things: the <code>studyState</code>, <code>userAnswer</code>, and <code>textShown</code>.</p>
+<p>The <code>Difficulty</code> object, a property of <code>Card</code>, has two variables:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>totalRating</code></p>
+</li>
+<li>
+<p><code>numberOfAttempts</code></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>The first is important because depending on whether it&#8217;s question or answer, we
-modify the colours of flash cards in the UI. This variables also specifies whether or not we need to display users'
-answers and whether or not we need to prompt them to rate the difficulty.</p>
-</div>
-<div class="paragraph">
-<p>The second is important to show the users what they answered.
-The last is important to show the contents of the flash card.</p>
+<p>When <code>addDifficulty(int rating)</code> is called, <code>rating</code> is added to <code>totalRating</code> and <code>noOfAttempts</code>
+is incremented by 1. Other views can obtain average by obtaining quotient of the two variables above.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.4.4. Design considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.4.7. Design considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-how-to-store-states-within-study-view"><a class="link" href="#aspect-how-to-store-states-within-study-view">Aspect: How to store states within  study view</a></h5>
+<h5 id="aspect-how-to-store-states"><a class="link" href="#aspect-how-to-store-states">Aspect: How to store states</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong></p>
+<p><strong>Alternative 1 (current choice): Using enums </strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to implement.</p>
+<p>Pros: Easy to implement. Makes sense as <code>QuestionState</code> and <code>AnswerState</code> do
+not have intrinsic properties, besides the UI looks associated with each state.</p>
 </li>
 <li>
-<p>Cons: UI just changes state based on commands issued.</p>
+<p>Cons: Unused variables in <code>StudyView</code>, such as <code>userAnswer</code> variable.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2: (current choice):</strong> Use an event listener to see whether the <code>textShown</code> has changed.
-Because it is easy to modify textShown immediately, there is no need for the UI to track this variable as
-that would be costly.</p>
+<p><strong>Alternative 2: polymorphism using <code>QuestionState</code> and <code>AnswerState</code> classess </strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Less unused variables. More organised.</p>
+</li>
+<li>
+<p>Cons: Requires larger structural changes.</p>
 </li>
 </ul>
 </div>
+</li>
+</ul>
 </div>
-</div>
-<div class="sect3">
-<h4 id="ui-implementation-2"><a class="link" href="#ui-implementation-2">4.4.5. UI implementation</a></h4>
 <div class="paragraph">
-<p>UI uses event listeners to know the</p>
+<p>I chose the first implementation as the problem of unused variables is minimal.
+I do not foresee major changes to the way <code>QUESTION</code> and <code>ANSWER</code>  works in future.
+There are not many possible reasons to store extra variables associated only with either state.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-to-implement-ui-modifications"><a class="link" href="#aspect-how-to-implement-ui-modifications">Aspect: How to implement UI modifications</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice): Observable Properties </strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: UI changes automatically. Concerns are separated as
+no additional command is needed to manually update UI during internal state change.</p>
+</li>
+<li>
+<p>Cons: Less control over UI changes.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2: Manual Modification of UI </strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Greater control over items to send to UI</p>
+</li>
+<li>
+<p>Cons: <code>StudyView</code> will have to concern itself with UI arrangements</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>I chose the first implementation as UI changes happen all the time
+but the UI is highly similar in both states. Thus, a few Observable variables
+should suffice to achieve the desired variation between states.</p>
+</div>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">4.5. Undo/redo feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">4.5.1. Current implementation</a></h4>
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">4.5.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedTopDeck</code>.
 It extends <code>TopDeck</code> with an undo/redo history, stored internally as an <code>TopDeckStateList</code> and <code>currentStatePointer</code>.
@@ -1628,7 +1758,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 8. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 12. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
@@ -2307,4 +2437,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 10:22:56 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 13:30:49 UTC</div></div></div></body></html>

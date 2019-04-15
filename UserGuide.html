@@ -48,7 +48,7 @@
 <li><a href="#adding-a-picture-to-a-card-coming-in-v2-0">4.2.10. Adding a picture to a card [Coming in V2.0]</a></li>
 </ul>
 </li>
-<li><a href="#study-view">4.3. Study view</a>
+<li><a href="#studyviewc">4.3. Study View</a>
 <ul class="sectlevel3">
 <li><a href="#qnphase">4.3.1. Question Phase</a></li>
 <li><a href="#ansphase">4.3.2. Answer Phase</a></li>
@@ -75,7 +75,7 @@
 <ul class="sectlevel2">
 <li><a href="#decks-view">7.1. Decks view</a></li>
 <li><a href="#cards-view">7.2. Cards view</a></li>
-<li><a href="#study-view-2">7.3. Study view</a></li>
+<li><a href="#study-view">7.3. Study view</a></li>
 <li><a href="#global-commands-2">7.4. Global Commands</a></li>
 <li><a href="#switching-views">7.5. Switching views</a></li>
 </ul>
@@ -924,7 +924,7 @@ will display the questions with the entire phrase <code>Is there a question</cod
 </div>
 </div>
 <div class="sect2">
-<h3 id="study-view"><a class="link" href="#study-view">4.3. Study view</a></h3>
+<h3 id="studyviewc"><a class="link" href="#studyviewc">4.3. Study View</a></h3>
 <div class="paragraph">
 <p>Study view can be accessed using any of these commands:</p>
 </div>
@@ -949,12 +949,12 @@ Study view presents Flash Cards in two phases, namely <a href="#qnphase">Questio
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/study_ug_diagrams/question.png" alt="question" width="800">
+<img src="images/study_ug_diagrams/question.png" alt="question" width="600">
 </div>
 <div class="title">Figure 7. Study view&#8217;s Question Phase</div>
 </div>
 <div class="paragraph">
-<p>As seen above, the question is displayed in a blue flash card.</p>
+<p>As seen above, the question to be answered is displayed in a dark blue flash card.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -963,16 +963,17 @@ Study view presents Flash Cards in two phases, namely <a href="#qnphase">Questio
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Currently, questions are chosen this way: TopDeck shuffles the deck and displays all cards until the entire deck
+Currently, questions are chosen this way: TopDeck shuffles the deck and displays cards one at a time until the entire deck
 has been viewed. Topdeck repeats this endlessly until you choose to <a href="#studyback">end your study session</a>.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>You may choose to attempt the question by typing your answer into the Command Box.
+<p>You may attempt the question by typing your answer into the Command Box,
+which now doubles as an Answer Box.
  Once you&#8217;re ready to see the answer, hit <kbd>Enter</kbd>. Your attempt will be recorded and
- TopDeck goes into Answer Phase.</p>
+ TopDeck will enter Answer Phase.</p>
 </div>
 </div>
 <div class="sect3">
@@ -988,14 +989,20 @@ user interface:</p>
 <div class="title">Figure 8. Study view&#8217;s Answer Phase</div>
 </div>
 <div class="paragraph">
-<p>The correct answer is displayed in a white flash card. Your attempt is displayed on the top right hand side for your own comparison.</p>
+<p>As seen from the figure, the correct answer is displayed on a white flash card.
+Your attempt is shown on top next to the card for your own comparison.</p>
 </div>
 <div class="paragraph">
 <p>Additionally, a prompt asks you to rate the difficulty of that flash card.
-You should input your rating into the Command Box.</p>
+You should input your rating into the Command Box which now doubles as a Rating Box.</p>
 </div>
 <div class="paragraph">
-<p>During both phases, the following commands are available:</p>
+<p>Once you&#8217;ve typed in your rating, hit <kbd>Enter</kbd>. Your rating will be recorded and this
+value will contribute to average difficulty statistic seen in cards view.
+Immediately after that, TopDeck will reenter Question Phase.</p>
+</div>
+<div class="paragraph">
+<p>During both phases, the following commands are available to end your study session:</p>
 </div>
 </div>
 <div class="sect3">
@@ -1304,7 +1311,7 @@ At least one parameter must be present.</p></td>
 </table>
 </div>
 <div class="sect2">
-<h3 id="study-view-2"><a class="link" href="#study-view-2">7.3. Study view</a></h3>
+<h3 id="study-view"><a class="link" href="#study-view">7.3. Study view</a></h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 40%;">
@@ -1398,4 +1405,4 @@ At least one parameter must be present.</p></td>
 for that deck.</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 10:22:56 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 13:30:49 UTC</div></div></div></body></html>
