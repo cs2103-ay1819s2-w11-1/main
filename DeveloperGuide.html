@@ -897,23 +897,11 @@ For each operation, there are 2 objects that need to be updated namely, <code>Ve
 <div class="paragraph">
 <p>Each CRUD operation called by `ModelManager`can be broken down into the following steps:</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Find the chosen deck using <code>CardsView.activeDeck</code> and create a new deck from it.</p>
-</li>
-<li>
-<p>Execute <code>VersionedTopDeck#addCard(Card newCard, Deck activeDeck)</code> or
-<code>VersionedTopDeck#removeCard(Card target, Deck activeDeck)</code> or
-<code>VersionedTopDeck#setCard(Card target, Card editedCard, Deck activeDeck)</code> using <code>CardsView.activeDeck</code>.</p>
-</li>
-<li>
-<p>Update the <code>CardsView</code> with the new editedDeck.</p>
-</li>
-<li>
-<p>Update the UI to reflect the new CardsView.</p>
-</li>
-</ol>
+<div class="imageblock">
+<div class="content">
+<img src="images/card_dg_fig/card_seq.png" alt="card seq" width="800">
+</div>
+<div class="title">Figure 4.3.1 ModelManager#addCard(Card card, Deck deck) Activity Diagram</div>
 </div>
 <div class="paragraph">
 <p>Here is a code snippet for <code>VersionedTopDeck#addCard(Card newCard, Deck deck)</code> which shows the sequence
@@ -961,34 +949,37 @@ interacts with Undo/Redo:</p>
 <p>Step 1. The user starts up the application and is in the <code>DecksView</code>. The user then
 executes the <code>open 1</code> command to open the first deck(D1 in the figure). This should change the
 <code>ViewState</code> in the <code>ModelManager</code> from <code>DeckView</code> to <code>CardsView</code> and causes
-<code>CardsView.activeDeck</code> to point to the first deck as per figure 4.3.1. For more information, refer to
+<code>CardsView.activeDeck</code> to point to the first deck as per figure 4.3.2. For more information, refer to
 the Deck feature.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/card_dg_fig/card_fig_1.png" alt="card fig 1" width="800">
 </div>
+<div class="title">Figure 4.3.2 Scenario 1</div>
 </div>
 <div class="paragraph">
 <p>Step 2. The user executes <code>add q/question a/answer</code> to add the new card into the current deck.
 The <code>add</code> command is parsed and calls <code>Model#addCard(Card card, Deck deck)</code>.
 <code>VersionedTopDeck(Card newCard, Deck deck)</code> is then called. D3 which is a copy
 of D1 is created and the new card is added to D3. <code>VersionedTopDeck</code> is then updated
-as per figure 4.3.2 by calling <code>UniqueDeckList.setDeck(Deck target, Deck editedDeck)</code>.</p>
+as per figure 4.3.3 by calling <code>UniqueDeckList.setDeck(Deck target, Deck editedDeck)</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/card_dg_fig/card_fig_2.png" alt="card fig 2" width="800">
 </div>
+<div class="title">Figure 4.3.3 Scenario 2</div>
 </div>
 <div class="paragraph">
 <p>Step 3. Next, the CardsView is updated creating a new <code>CardsView</code> that points to D3
-as in figure 4.3.3</p>
+as in figure 4.3.4</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/card_dg_fig/card_fig_3.png" alt="card fig 3" width="800">
 </div>
+<div class="title">Figure 4.3.4 Scenario 3</div>
 </div>
 <div class="paragraph">
 <p>Step 4. Once that is done, the <code>ModelManager.filteredItems</code> list and the UI is being updated to
@@ -996,41 +987,45 @@ reflect the change.</p>
 </div>
 <div class="paragraph">
 <p>Step 5. Now the user executes <code>undo</code>. This results in the CurrentStatePointer to point
-to the previous TopDeck as per figure 4.3.4</p>
+to the previous TopDeck as per figure 4.3.5</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/card_dg_fig/card_fig_4.png" alt="card fig 4" width="800">
 </div>
+<div class="title">Figure 4.3.5 Scenario 4</div>
 </div>
 <div class="paragraph">
 <p>Step 6. Using D3, the application will get D1 in TopDeck that is pointed to by CurrentStatePointer.
-A new CardsView(CardsView3) is then created and points to D1 as per figure 4.3.5. The application
+A new CardsView(CardsView3) is then created and points to D1 as per figure 4.3.6. The application
 then updates <code>ModelManager.filteredItems</code> and the UI is being updated.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/card_dg_fig/card_fig_5.png" alt="card fig 5" width="800">
 </div>
+<div class="title">Figure 4.3.6 Scenario 5</div>
 </div>
 <div class="paragraph">
 <p>Step 7. Now, the user executes redo. This results in the the CurrentStatePointer to point
-to the next TopDeck as per figure 4.3.6</p>
+to the next TopDeck as per figure 4.3.7</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/card_dg_fig/card_fig_6.png" alt="card fig 6" width="800">
 </div>
+<div class="title">Figure 4.3.7 Scenario 6</div>
 </div>
 <div class="paragraph">
 <p>Step 8. Using D1, the application will get D3 in TopDeck that is pointed to by CurrentStatePointer.
-   A new CardsView(CardsView4) is then created and points to D3 as per figure 4.3.7. The application
+   A new CardsView(CardsView4) is then created and points to D3 as per figure 4.3.8. The application
    then updates <code>ModelManager.filteredItems</code> and the UI is being updated.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/card_dg_fig/card_fig_7.png" alt="card fig 7" width="800">
 </div>
+<div class="title">Figure 4.3.8 Scenario 7</div>
 </div>
 <div class="paragraph">
 <p>Step 9. Below is the final state of <code>ModelManager</code>:</p>
@@ -1039,6 +1034,7 @@ to the next TopDeck as per figure 4.3.6</p>
 <div class="content">
 <img src="images/card_dg_fig/card_fig_8.png" alt="card fig 8" width="800">
 </div>
+<div class="title">Figure 4.3.9 Scenario 8</div>
 </div>
 <div class="paragraph">
 <p>Below is a sequence diagram to illustrate the sequence of activities upon calling
@@ -1048,6 +1044,7 @@ to the next TopDeck as per figure 4.3.6</p>
 <div class="content">
 <img src="images/card_dg_fig/card_fig_9.png" alt="card fig 9" width="800">
 </div>
+<div class="title">Figure 4.3.10 Sequence Diagram</div>
 </div>
 </div>
 <div class="sect3">
@@ -2310,4 +2307,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 08:52:33 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 10:22:56 UTC</div></div></div></body></html>

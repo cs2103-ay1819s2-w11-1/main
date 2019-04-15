@@ -318,28 +318,14 @@ will display the questions with the entire phrase <code>Is there a question</cod
 <div class="paragraph">
 <p>The CRUD operations are exposed in the Model interface as <code>Model#addCard(Card card, Deck deck)</code>,
 <code>Model#deleteCard(Card target, Deck deck)</code> and <code>Model#setCard(Card target, Card newCard, Deck deck)</code>.
-For each operation, there are 2 objects that need to be updated namely, <code>VersionedTopDeck</code> and <code>CardsView</code>.</p>
+For each operation, there are 2 objects that need to be updated namely, <code>VersionedTopDeck</code> and <code>CardsView</code>.
+Each CRUD operation called by `ModelManager`can be broken down into the following steps:</p>
 </div>
-<div class="paragraph">
-<p>Each CRUD operation called by `ModelManager`can be broken down into the following steps:</p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/card_dg_fig/card_seq.png" alt="card seq" width="800">
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Find the chosen deck using <code>CardsView.activeDeck</code> and create a new deck from it.</p>
-</li>
-<li>
-<p>Execute <code>VersionedTopDeck#addCard(Card newCard, Deck activeDeck)</code> or
-<code>VersionedTopDeck#removeCard(Card target, Deck activeDeck)</code> or
-<code>VersionedTopDeck#setCard(Card target, Card editedCard, Deck activeDeck)</code> using <code>CardsView.activeDeck</code>.</p>
-</li>
-<li>
-<p>Update the <code>CardsView</code> with the new editedDeck.</p>
-</li>
-<li>
-<p>Update the UI to reflect the new CardsView.</p>
-</li>
-</ol>
+<div class="title">Figure 4.3.1 ModelManager#addCard(Card card, Deck deck) Activity Diagram</div>
 </div>
 <div class="paragraph">
 <p>Here is a code snippet for <code>VersionedTopDeck#addCard(Card newCard, Deck deck)</code> which shows the sequence
@@ -387,34 +373,37 @@ interacts with Undo/Redo:</p>
 <p>Step 1. The user starts up the application and is in the <code>DecksView</code>. The user then
 executes the <code>open 1</code> command to open the first deck(D1 in the figure). This should change the
 <code>ViewState</code> in the <code>ModelManager</code> from <code>DeckView</code> to <code>CardsView</code> and causes
-<code>CardsView.activeDeck</code> to point to the first deck as per figure 4.3.1. For more information, refer to
+<code>CardsView.activeDeck</code> to point to the first deck as per figure 4.3.2. For more information, refer to
 the Deck feature.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/card_dg_fig/card_fig_1.png" alt="card fig 1" width="800" height="150">
+<img src="../images/card_dg_fig/card_fig_1.png" alt="card fig 1" width="800">
 </div>
+<div class="title">Figure 4.3.2 Scenario 1</div>
 </div>
 <div class="paragraph">
 <p>Step 2. The user executes <code>add q/question a/answer</code> to add the new card into the current deck.
 The <code>add</code> command is parsed and calls <code>Model#addCard(Card card, Deck deck)</code>.
 <code>VersionedTopDeck(Card newCard, Deck deck)</code> is then called. D3 which is a copy
 of D1 is created and the new card is added to D3. <code>VersionedTopDeck</code> is then updated
-as per figure 4.3.2 by calling <code>UniqueDeckList.setDeck(Deck target, Deck editedDeck)</code>.</p>
+as per figure 4.3.3 by calling <code>UniqueDeckList.setDeck(Deck target, Deck editedDeck)</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/card_dg_fig/card_fig_2.png" alt="card fig 2" width="800">
 </div>
+<div class="title">Figure 4.3.3 Scenario 2</div>
 </div>
 <div class="paragraph">
 <p>Step 3. Next, the CardsView is updated creating a new <code>CardsView</code> that points to D3
-as in figure 4.3.3</p>
+as in figure 4.3.4</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/card_dg_fig/card_fig_3.png" alt="card fig 3" width="800">
 </div>
+<div class="title">Figure 4.3.4 Scenario 3</div>
 </div>
 <div class="paragraph">
 <p>Step 4. Once that is done, the <code>ModelManager.filteredItems</code> list and the UI is being updated to
@@ -428,6 +417,7 @@ reflect the change.</p>
 <div class="content">
 <img src="../images/card_dg_fig/card_fig_9.png" alt="card fig 9" width="800">
 </div>
+<div class="title">Figure 4.3.10 Sequence Diagram</div>
 </div>
 </div>
 <div class="sect3">
@@ -520,4 +510,4 @@ leverage on the original architecture instead of changing it.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 08:52:33 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 10:22:56 UTC</div></div></div></body></html>

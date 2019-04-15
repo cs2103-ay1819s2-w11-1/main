@@ -1,0 +1,420 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Tiffany Chong - Project Portfolio for TopDeck</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">TopDeck</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link active" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/cs2103-ay1819s2-w11-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Tiffany Chong - Project Portfolio for TopDeck</h1></div><div id="content"><div class="sect1">
+<h2 id="about-the-project"><a class="link" href="#about-the-project">1. About the Project</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For our Software Engineering module CS2103T, our team was tasked to modify or enhance the addressbook program into
+our software of choice. We morphed it into TopDeck, a general purpose flash card application, which
+allows users store flash cards in decks, and study these flash cards later.</p>
+</div>
+<div class="paragraph">
+<p>My role was to design the Study Sessions. The following sections will describe my contributions in
+greater detail, as well as the sections I&#8217;ve added to the user and developer guides with regards
+to these enhancements.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">2. Summary of Contributions</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section shows a summary of my coding, documentation, and other helpful contributions to the team project.</p>
+</div>
+<div class="paragraph">
+<p><strong>Enhancement added:</strong> I added the Study View to study a deck of flash cards.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: The study session allows users to study a deck of cards. This is done by presenting
+users with random questions from cards in a deck. Once the users have recalled their answers, they can choose to
+reveal the answers. Cards do not repeat until the whole deck has been viewed.</p>
+</li>
+<li>
+<p>Justification: In order for a flash card application to aid users in memory tasks, there has to be a mode where the users
+can test their own knowledge. This mode allows users to randomise viewing of questions and then
+choose when to see the answers.</p>
+</li>
+<li>
+<p>Highlights: The ability to generate flash cards are found in a separate class, making it easy
+for smarter study algorithms to be implemented in future. Several designs were considered to
+ensure that the display would have minimal interactions with the internal state of the program.
+The feature was challenging to implement because it entails stateful interactions. Another challenge
+was creating a UI that made it intuitive for users to know whether they were viewing questions
+or answers.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Code Contributed:</strong> Please view our github page to see the code that I have contributed.</p>
+</div>
+<div class="paragraph">
+<p><strong>Other contributions</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Project management:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>There were a total of 4 releases, from version 1.1 to 1.4. I managed releases versions 1.2 to 1.3 (2 releases),
+together with the mid-versions (mid 1.2 and mid 1.3) on GitHub. This includes compiling the requirements needed at each stage,
+ensuring that all issues are resolved before each release, as well as building and releasing the binary.</p>
+</li>
+<li>
+<p>I proposed a few meetings in order for our team to settle our roles before the release.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Enhancements to existing features:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>I added the ability to switch between Cards/Deck view to Study view and vice versa</p>
+</li>
+<li>
+<p>I resolved checkStyle issues</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>I made slight changes to the introduction to make it more comprehensible for non-technical users.</p>
+</li>
+<li>
+<p>I alphabetised and split our Command Summary based on relevant categories.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>I reviewed pull requests for deck and card testing, and undoing of Card commands.</p>
+</li>
+<li>
+<p>I contributed to finding the reasons why the Undo functionality was not working for Card Commands.</p>
+</li>
+<li>
+<p>I contributed to planning how the final UI should look like.</p>
+</li>
+<li>
+<p>I put up issues and enhancements to keep our team on track.</p>
+</li>
+<li>
+<p>I helped my friends add screenshots of our UI for our documentation.</p>
+</li>
+<li>
+<p>I gave our team a few tips on the IntelliJ workflow.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Tools:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>I made the project RepoSense Compatible</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-user-guide"><a class="link" href="#contributions-to-user-guide">3. Contributions to User Guide</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="studyview"><a class="link" href="#studyview">3.1. Study View</a></h3>
+<div class="paragraph">
+<p>In this view you can study a deck of cards.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Test your knowledge of the cards in your chosen deck</p>
+</li>
+<li>
+<p>Rate the difficulty of the cards.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/study_ug_diagrams/study_1.png" alt="study 1" width="800">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="study-view"><a class="link" href="#study-view">3.2. Study View</a></h3>
+<div class="paragraph">
+<p>These are commands are only available in study view, after <code>study INDEX</code> or <code>study</code> command is executed.</p>
+</div>
+<div class="sect3">
+<h4 id="returning-to-decks-view-code-back-code"><a class="link" href="#returning-to-decks-view-code-back-code">3.2.1. Returning to decks view: <code>back</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>back</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Returns to decks view.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="opening-the-deck-in-cards-view-code-deck-code"><a class="link" href="#opening-the-deck-in-cards-view-code-deck-code">3.2.2. Opening the deck in cards view: <code>deck</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>deck</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Opens the deck in cards view.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="revealing-the-answer-to-card-code-any-attempt-code"><a class="link" href="#revealing-the-answer-to-card-code-any-attempt-code">3.2.3. Revealing the answer to card: <code>[any attempt]</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>[any attempt]</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Reveals the answer to card, with your attempt shown beside it.</p>
+</div>
+<div class="paragraph">
+<p>For example, you can type in <code>CO2</code> and hit <kbd>Enter</kbd></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/study_ug_diagrams/study_1.png" alt="study 1" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The following image is the result of the command.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/study_ug_diagrams/study_2.png" alt="study 2" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="displaying-the-next-card-code-your-difficulty-rating-code"><a class="link" href="#displaying-the-next-card-code-your-difficulty-rating-code">3.2.4. Displaying the next card: <code>[your difficulty rating]</code></a></h4>
+<div class="paragraph">
+<p><strong>Format</strong>: <code>[your difficulty rating]</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Outcome</strong>: Displays another card from the deck. Stores your difficulty rating for the card.</p>
+</div>
+<div class="paragraph">
+<p>Entering a number 3 indicates that you rate the difficulty as 3.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/study_ug_diagrams/study_3.png" alt="study 3" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Submitting this reveals the next question.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/study_ug_diagrams/study_4.png" alt="study 4" width="800">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-developer-guide"><a class="link" href="#contributions-to-developer-guide">4. Contributions to Developer Guide</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="study-view-2"><a class="link" href="#study-view-2">4.1. Study view</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">4.1.1. Current implementation</a></h4>
+<div class="paragraph">
+<p>The purpose of the third view, study view, is to help users retain the knowledge
+of their flash cards.</p>
+</div>
+<div class="paragraph">
+<p>This is done by consecutively presenting users with random cards from the deck.
+For each card, users are able to see the questions first, and then reveal the answers afterwards.</p>
+</div>
+<div class="paragraph">
+<p>The functionality above is supported by the <code>StudyView</code> class.</p>
+</div>
+<div class="paragraph">
+<p><strong>Important Variables</strong></p>
+</div>
+<div class="paragraph">
+<p>This <code>StudyView</code> class two important variables:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>currentCard</code> - the card which is currently being shown to the user.</p>
+</li>
+<li>
+<p><code>currentStudyState</code> - variable which stores a <code>studyState</code> enum. The enum can be either <code>QUESTION</code> or <code>ANSWER</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These two important variables are continuously being altered every time the user interacts with the program,
+explained in detail later.</p>
+</div>
+<div class="paragraph">
+<p><strong>Observable Values</strong></p>
+</div>
+<div class="paragraph">
+<p>Besides these variables, <code>StudyView</code> also makes extensive use of <code>ReadOnlyProperty</code> wrapper
+to store variables which the UI has to display. This wrapper is chosen as it implements the <code>Observable</code> interface.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="data-structure-implementation"><a class="link" href="#data-structure-implementation">4.1.2. Data structure implementation</a></h4>
+<div class="paragraph">
+<p>This section discusses how the two variables, <code>currentCard</code> and <code>studyState</code> are continuously modified,
+and also the other variables that change as a result of these two functions.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the <code>study</code> mechanism behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. User enter study mode using <code>study 1</code> command.</p>
+</div>
+<div class="paragraph">
+<p>A <code>StudyDeckCommand</code> is issued.</p>
+</div>
+<div class="paragraph">
+<p>Upon the execution of this command, Model&#8217;s <code>viewState</code> will now hold a <code>StudyView</code> object with 1st deck as active deck.</p>
+</div>
+<div class="paragraph">
+<p>As part of the execution of <code>StudyDeckCommand</code>, step 2 is ran.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. Generating a question.</p>
+</div>
+<div class="paragraph">
+<p>In order to present questions to users, these are the functions called by the <code>GenerateQuestionCommand()</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>DeckSuffler#generateCard()</code> The <code>DeckShuffler</code> class has an algorithm (implementation explained later)
+to select a Card object, and passes this reference to <code>StudyView</code>.</p>
+</li>
+<li>
+<p><code>currentCard</code> refers now to that card.</p>
+</li>
+<li>
+<p><code>currentState</code> is set to QUESTION.</p>
+</li>
+<li>
+<p>Consequently, <code>textShown</code> property is also modified. In this case, it will contain
+the question  of the chosen card.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Step 2. User executes the <code>[wildcard]</code> command to signal that he has come up with the answer.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>User answer, ie whatever the user wrote, is stored as command under the statistics variable.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Step 3. The  command generates a <code>ShowAnswerCommand()</code></p>
+</div>
+<div class="paragraph">
+<p>The follwing are ran upon execution of the show answer command:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>currentStudyState</code> to ANSWER.</p>
+</li>
+<li>
+<p>Similar to the above, we also change the <code>textShown</code> property to show user answer instead.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Step 4. User enters the difficulty rating "command" to rate how difficult they thought it was to recall
+the answer.</p>
+</div>
+<div class="paragraph">
+<p>The following things happen:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Their answer stored under userAnswer variable, which will be displayed later.</p>
+</li>
+<li>
+<p>This is perfect as we do not want users to revert statistics by executing undo command.</p>
+</li>
+<li>
+<p><code>GenerateQuestionCommand()</code> is executed once again. Back to Step 2.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ui-implementation"><a class="link" href="#ui-implementation">4.1.3. UI implementation</a></h4>
+<div class="paragraph">
+<p>The UI listens for three things: the <code>studyState</code>, <code>userAnswer</code>, and <code>textShown</code>.</p>
+</div>
+<div class="paragraph">
+<p>The first is important because depending on whether it&#8217;s question or answer, we
+modify the colours of flash cards in the UI. This variables also specifies whether or not we need to display users'
+answers and whether or not we need to prompt them to rate the difficulty.</p>
+</div>
+<div class="paragraph">
+<p>The second is important to show the users what they answered.
+The last is important to show the contents of the flash card.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">4.1.4. Design considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-to-store-states-within-study-view"><a class="link" href="#aspect-how-to-store-states-within-study-view">Aspect: How to store states within  study view</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: UI just changes state based on commands issued.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2: (current choice):</strong> Use an event listener to see whether the <code>textShown</code> has changed.
+Because it is easy to modify textShown immediately, there is no need for the UI to track this variable as
+that would be costly.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 10:22:56 UTC</div></div></div></body></html>
