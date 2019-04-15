@@ -5,9 +5,9 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>This document serves to document my contributions to TopDeck, the project I worked on
-as part of our introductory software engineering module in NUS.
+while taking the introductory software engineering module in NUS.
 TopDeck is a flash card application built on top of the code from
-<a href="https://github.com/nus-cs2103-AY1819S1/addressbook-level4">Addressbook Level 4</a>.</p>
+<a href="https://github.com/nus-cs2103-AY1819S1/addressbook-level4">Addressbook Level 4</a> (AB4).</p>
 </div>
 </div>
 </div>
@@ -53,7 +53,8 @@ I designed.</p>
 </div>
 </li>
 <li>
-<p><strong>Minor Enhancement</strong>: I added argument completion to the edit card command</p>
+<p><strong>Minor Enhancement</strong>: I added argument completion to the edit commands
+(the remaining exposition will focus on the edit card command).</p>
 <div class="ulist">
 <ul>
 <li>
@@ -68,12 +69,11 @@ the entire question, they can quickly expand all arguments to the edit
 command and edit the question from there.</p>
 </li>
 <li>
-<p>Highlights: This is the only new feature in TopDeck that interacts with
-the command box and is made possible with
-<code>PrefillCommandBoxCommandResult</code> which extends <code>CommandResult</code> and holds
-the string to be prefilled. In general, commands that need to interact
-with <code>UI</code> through <code>MainWindow</code> do so by returning an appropriate subclass
-of <code>CommandResult</code>.</p>
+<p>Highlights: Completion is a feature that interacts with the command box
+and is implemented by defining a new subclass of <code>CommandResult</code> that
+holds the string to be prefilled. In general, commands that need to
+interact with <code>UI</code> through <code>MainWindow</code> do so by returning an appropriate
+subclass of <code>CommandResult</code>.</p>
 </li>
 </ul>
 </div>
@@ -81,7 +81,7 @@ of <code>CommandResult</code>.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Code Contributed:</strong> Please view our github page to see the code that I have contributed.</p>
+<p><strong>Code Contributed</strong>: <a href="https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=xsot">CS2103T Dashboard</a></p>
 </div>
 <div class="paragraph">
 <p><strong>Other contributions</strong>:</p>
@@ -137,10 +137,10 @@ to anyone.</p>
 <p>I led the design of the user interface and user experience.</p>
 </li>
 <li>
-<p>I reviewed pull requests and gave comments on how my peers can improve the readability of their code.</p>
+<p>I reviewed pull requests (with non-trivial review comments): <a href="https://github.com/cs2103-ay1819s2-w11-1/main/pull/8">#8</a>, <a href="https://github.com/cs2103-ay1819s2-w11-1/main/pull/39">#39</a>, <a href="https://github.com/cs2103-ay1819s2-w11-1/main/pull/77">#77</a></p>
 </li>
 <li>
-<p>I put up issues and filed bug reports to keep our team on track.</p>
+<p>I reported some subtle bugs: <a href="https://github.com/cs2103-ay1819s2-w11-1/main/issues/7">#7</a>, <a href="https://github.com/cs2103-ay1819s2-w11-1/main/issues/63">#63</a></p>
 </li>
 <li>
 <p>I gave our team a few tips on the git workflow.</p>
@@ -166,166 +166,269 @@ services into our workflow (TravisCI, AppVeyor, Coveralls).</p>
 <div class="sect1">
 <h2 id="contributions-to-user-guide"><a class="link" href="#contributions-to-user-guide">3. Contributions to User Guide</a></h2>
 <div class="sectionbody">
-
-</div>
-</div>
-<div class="sect1">
-<h2 id="quick-start"><a class="link" href="#quick-start">4. Quick Start</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>To get started with TopDeck:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Ensure you have Java version <code>9</code> or later installed in your Computer.</p>
-</li>
-<li>
-<p>Download the latest <code>topdeck.jar</code> <a href="https://github.com/cs2103-ay1819s2-w11-1/main/tree/master/releases">here</a>.</p>
-</li>
-<li>
-<p>Copy the file to the folder you want to use as the home folder for TopDeck.</p>
-</li>
-<li>
-<p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
-<div class="imageblock">
+<div class="exampleblock">
 <div class="content">
-<img src="../images/Ui.png" alt="Ui" width="790">
-</div>
-</div>
-</li>
-<li>
-<p>Type the command in the command box and press <kbd>Enter</kbd> to execute it.<br>
-e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> will open the help window.</p>
-</li>
-</ol>
-</div>
 <div class="paragraph">
-<p>Once you have set up TopDeck, you can try these commands:</p>
+<p>This section contains excerpts of my contributions to the user guide.
+They showcase my ability to write documentation for non-technical users.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>add Capitals</code> : creates a new deck named "Capitals"</p>
-</li>
-<li>
-<p><code>delete 3</code> : deletes the third deck in the list</p>
-</li>
-<li>
-<p><code>exit</code> : exits the app</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>You may refer to <a href="#commands">Section 6, &#8220;Commands&#8221;</a> for details of each command.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="user-interface"><a class="link" href="#user-interface">5. User interface</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>TopDeck&#8217;s interface is seperated into three different views.
-By default, TopDeck starts in <a href="#decksview">Decks View</a>.</p>
-</div>
-<div class="sect2">
-<h3 id="decksview"><a class="link" href="#decksview">5.1. Decks View</a></h3>
-<div class="paragraph">
-<p>This view displays a list of the decks in your collection.
-In decks view, you can:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Create, edit and delete decks.</p>
-</li>
-<li>
-<p>Open a deck to view its contents. TopDeck will enter <a href="#cardsview">cards view</a>.</p>
-</li>
-<li>
-<p>Pick a deck to study. TopDeck will enter <a href="#studyview">study view</a>.</p>
-</li>
-</ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="cardsview"><a class="link" href="#cardsview">5.2. Cards View</a></h3>
+<h3 id="introduction"><a class="link" href="#introduction">3.1. Introduction</a></h3>
 <div class="paragraph">
-<p>This view displays the cards in a particular deck. In cards view, you can:</p>
+<p>TopDeck is a desktop app for anyone who relies on flash cards to memorise things.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Create, edit and delete cards in the deck.</p>
-</li>
-<li>
-<p>View your performance for specific cards.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>TopDeck helps you digitise your flash cards and keeps them organised.
+You can easily review your cards and TopDeck will track your performance.
+Improve your memory without the hassle of managing a physical pile of cards!</p>
+</div>
+<div class="paragraph">
+<p>TopDeck has a Command Line Interface (CLI), which means you interact with it by typing commands.
+TopDeck can be operated entirely using the keyboard!</p>
+</div>
+<div class="paragraph">
+<p>If this sounds like the tool you have been looking for,
+jump to <a href="#Quick start">[Quick start]</a> to get started. Enjoy!</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="studyview"><a class="link" href="#studyview">5.3. Study View</a></h3>
+<h3 id="user-interface"><a class="link" href="#user-interface">3.2. User interface</a></h3>
 <div class="paragraph">
-<p>In this view you can study a deck of cards.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Test your knowledge of the cards in your chosen deck</p>
-</li>
-<li>
-<p>Rate the difficulty of the cards.</p>
-</li>
-</ul>
+<p>TopDeck&#8217;s interface is very simple. It consists of four main areas - the
+Menu Bar, the Command Box, the Results Display, and the Content Panel.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/study_ug_diagrams/study_1.png" alt="study 1" width="800">
+<img src="../images/gen_ug_diagrams/ui_annotate.png" alt="ui annotate" width="600">
 </div>
+<div class="title">Figure 1. Main areas in the user interface</div>
+</div>
+<div class="paragraph">
+<p>Here are the uses of each part of the interface:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Menu Bar: Provides access to general commands such as <code>exit</code> and <code>help</code> with dropdowns.</p>
+</li>
+<li>
+<p>Command Box: This is where you input commands to interact with the application.</p>
+</li>
+<li>
+<p>Results Display: This area shows the outcome of your commands.</p>
+</li>
+<li>
+<p>Content Panel: This is the main display area and changes depending on what you are doing.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>TopDeck&#8217;s functionality is separated into three distinct <em>views</em> - decks view, cards view and study view.
+The interface shown in the Content Panel and the commands available change depending on the view.
+By default, TopDeck starts in decks view.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Navigation.png" alt="Navigation" width="800">
+</div>
+<div class="title">Figure 2. Navigating the views in TopDeck</div>
+</div>
+<div class="paragraph">
+<p>The figure above provides a brief overview of the different views and shows how you may navigate between them.
+In general, the commands <code>open</code>, <code>study</code> and <code>back</code> are used to navigate to cards view, study view and decks view respectively.
+For more information about these commands, go to <a href="#Commands">[Commands]</a>.</p>
+</div>
+<div class="paragraph">
+<p>The following sections will describe each view in more detail.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="decksview"><a class="link" href="#decksview">3.3. Decks view</a></h3>
+<div class="imageblock" style="float: right">
+<div class="content">
+<img src="../images/deck_ug_diagrams/deck.png" alt="deck" width="300">
+</div>
+<div class="title">Figure 3. Decks view</div>
+</div>
+<div class="paragraph">
+<p>Decks view displays a list of the decks in your collection.
+The figure to the right shows a typical TopDeck session in decks view.</p>
+</div>
+<div class="paragraph">
+<p>In decks view, you can:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create a new deck.</p>
+</li>
+<li>
+<p>Edit, delete, or search for an existing deck.</p>
+</li>
+<li>
+<p>Open a deck to view its contents. TopDeck will open the deck in <a href="#cardsview">cards view</a>.</p>
+</li>
+<li>
+<p>Pick a deck to study. TopDeck will use the deck in <a href="#studyview">study view</a>.</p>
+</li>
+<li>
+<p>Export a deck in your collection or import a deck from your computer to TopDeck.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You may find the corresponding commands for the features in decks view <a href="#decksviewc">here</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cardsview"><a class="link" href="#cardsview">3.4. Cards view</a></h3>
+<div class="imageblock" style="float: right">
+<div class="content">
+<img src="../images/gen_ug_diagrams/cards.png" alt="cards" width="300">
+</div>
+<div class="title">Figure 4. Cards view</div>
+</div>
+<div class="paragraph">
+<p>Cards view displays the cards in a particular deck.
+The figure to the right shows a typical TopDeck session in cards view.</p>
+</div>
+<div class="paragraph">
+<p>In cards view, you can:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create a new card and add it to the deck.</p>
+</li>
+<li>
+<p>Edit, delete, or search for an existing card in the deck.</p>
+</li>
+<li>
+<p>View your past study performance for specific cards.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You may find the corresponding commands for the features in cards view <a href="#cardsviewc">here</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="studyview"><a class="link" href="#studyview">3.5. Study view</a></h3>
+<div class="imageblock" style="float: right">
+<div class="content">
+<img src="../images/gen_ug_diagrams/study.png" alt="study" width="300">
+</div>
+<div class="title">Figure 5. Study view</div>
+</div>
+<div class="paragraph">
+<p>In study view, TopDeck helps you to study a particular deck.
+The figure to the right shows a typical TopDeck session in study view.</p>
+</div>
+<div class="paragraph">
+<p>The cards from a particular deck will be shown one at a time.
+TopDeck will first show a question.
+You may then reveal the answer and verify if it matches your answer.
+Finally, you may rate how well you think you performed for that card before moving on to the next card.
+TopDeck automates the bookkeeping for you.</p>
+</div>
+<div class="paragraph">
+<p>You may find a more precise decription of the commands used in cards view <a href="#cardsviewc">here</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="commands"><a class="link" href="#commands">6. Commands</a></h2>
+<h2 id="contributions-to-developer-guide"><a class="link" href="#contributions-to-developer-guide">4. Contributions to Developer Guide</a></h2>
 <div class="sectionbody">
 <div class="exampleblock">
 <div class="content">
 <div class="paragraph">
-<p><strong>Command Format</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user.<br>
-Example: In <code>add DECK_NAME</code>, <code>DECK_NAME</code> is a parameter which can be used as <code>add Spanish</code>.</p>
-</li>
-<li>
-<p>Items in square brackets are optional.<br>
-Example: <code>q/QUESTION a/ANSWER [t/TAG]</code> can be used as <code>q/China a/Beijing t/Asia</code> or as <code>q/China a/Beijing</code>.</p>
-</li>
-<li>
-<p>Items with <code>…</code>​ after them can be used any number of times including zero.<br>
-Example: <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>t/Asia</code>, <code>t/trivia t/history</code> etc.</p>
-</li>
-<li>
-<p>Parameters can be in any order.<br>
-Example: If the command specifies <code>q/QUESTION a/ANSWER</code>, <code>q/QUESTION a/ANSWER</code> is also acceptable.</p>
-</li>
-</ul>
+<p>This section contains excerpts of my contributions to the developer guide.
+They showcase my ability to write technical documentation and the technical depth of my contributions to TopDeck.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="contributions-to-developer-guide"><a class="link" href="#contributions-to-developer-guide">7. Contributions to Developer Guide</a></h2>
-<div class="sectionbody">
 <div class="sect2">
-<h3 id="stateful-user-interface"><a class="link" href="#stateful-user-interface">7.1. Stateful user interface</a></h3>
+<h3 id="Design-Ui"><a class="link" href="#Design-Ui">4.1. UI component</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UiClassDiagram.png" alt="UiClassDiagram" width="800">
+</div>
+<div class="title">Figure 6. Structure of the UI Component</div>
+</div>
+<div class="paragraph">
+<p>The <code>UI</code> component is responsible for the user interface. It relays user commands to <code>Logic</code> for execution
+and updates the user interface according to the application data in <code>Model</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>UI</code> consists of a <code>MainWindow</code> that owns instances of the classes that make up the user interface such as <code>CommandBox</code>.
+Notably, <code>MainWindow</code> owns a <code>MainPanel</code> which is a reference type to one of the possible main panels.
+Its concrete type is dependent on <code>ViewState</code> from <code>Model</code>. The figure below shows how the user interface is divided into classes.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UiClasses.png" alt="UiClasses" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p><code>MainWindow</code> and all its owned classes extend <code>UiPart</code> which is an abstract class that represents a unit that can be rendered to the display.
+<code>UI</code> uses the JavaFx UI framework. By convention, the layout of each <code>UIPart</code> is defined in the corresponding <code>.fxml</code> file in <code>src/main/resources/view</code>.
+For example, the layout of <code>MainWindow</code> is defined in <code>MainWindow.fxml</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Design-Logic"><a class="link" href="#Design-Logic">4.2. Logic component</a></h3>
+<div id="fig-LogicClassDiagram" class="imageblock">
+<div class="content">
+<img src="../images/LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
+</div>
+<div class="title">Figure 7. Structure of the Logic Component</div>
+</div>
+<div class="paragraph">
+<p>The <code>Logic</code> component is responsible for parsing and executing commands. A typical command is parsed and executed as follows:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>Logic</code> uses the <code>TopDeckParser</code> class to parse the user command into a command word and its arguments.</p>
+</li>
+<li>
+<p><code>TopDeckParser</code> requests for the <code>ViewStateParser</code> from the active <code>ViewState</code> in <code>Model</code>.</p>
+</li>
+<li>
+<p>This <code>ViewStateParser</code> is then used to parse the command word itself.</p>
+</li>
+<li>
+<p>This results in a <code>Command</code> object which is executed by the <code>LogicManager</code>.</p>
+</li>
+<li>
+<p>The execution of this command may affect the <code>Model</code> (e.g. when deleting a deck).</p>
+</li>
+<li>
+<p>The result of the command execution is wrapped in a <code>CommandResult</code> object and returned back to <code>Ui</code>.</p>
+</li>
+<li>
+<p>Different subclasses of <code>CommandResult</code> may instruct <code>Ui</code> to perform different actions,
+such as <code>UpdatePanelCommandResult</code> which is used to construct a new <code>MainPanel</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>To make things clearer, below is the Sequence Diagram for interactions within the <code>Logic</code> component given an <code>execute("delete 1")</code> API call.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/DeletePersonSdForLogic.png" alt="DeletePersonSdForLogic">
+</div>
+<div class="title">Figure 8. Interactions Inside the Logic Component for <code>delete 1</code></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="stateful-user-interface"><a class="link" href="#stateful-user-interface">4.3. Stateful user interface</a></h3>
 <div class="sect3">
-<h4 id="introduction"><a class="link" href="#introduction">7.1.1. Introduction</a></h4>
+<h4 id="introduction-2"><a class="link" href="#introduction-2">4.3.1. Introduction</a></h4>
 <div class="paragraph">
 <p>TopDeck has a stateful user interface.
 This means that the set of valid commands and their respective functionality
@@ -337,7 +440,7 @@ depend on the context of the application state.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>In decks view, it adds a new deck: <code>add DECK_NAME</code></p>
+<p>In decks view, it adds a new deck: <code>add n/DECK_NAME</code></p>
 </li>
 <li>
 <p>In cards view, it adds a new card to a particular deck: <code>add q/QUESTION a/ANSWER</code></p>
@@ -357,11 +460,12 @@ requires less cognitive effort to operate by virtue of the fewer and shorter com
 </div>
 <div class="paragraph">
 <p>However, implementing state in full generality required nontrivial modifications to the AB4 architecture.
+These modifications have been reflected in <a href="#Architecture">[Architecture]</a>.
 We will now describe how state is implemented in TopDeck.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">7.1.2. Current implementation</a></h4>
+<h4 id="current-implementation"><a class="link" href="#current-implementation">4.3.2. Current implementation</a></h4>
 <div class="paragraph">
 <p>States partition the functionalities that are exposed to users.
 Hence, it is natural to consider distinct views in the user interface as separate states.
@@ -369,19 +473,12 @@ States in TopDeck correspond to the three possible views described in the user g
 decks view, cards view and study view.</p>
 </div>
 <div class="paragraph">
-<p>The following figure illustrates the transitions between these states.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/state_diagram.png" alt="state diagram">
-</div>
-<div class="title">Figure 1. State diagram for TopDeck</div>
-</div>
-<div class="paragraph">
 <p>Each state implements a common interface <code>ViewState</code>
 and holds transient data that is relevant only while the state is active.
 For example, <code>CardsView</code> has a member <code>activeDeck</code> which holds a reference to the deck opened in decks view.
-Commands in cards view such as <code>add</code> will then operate on this deck.</p>
+Commands in cards view such as <code>add</code> will then operate on this deck.
+The <code>ViewState</code> contract also requires each implementer to provide policies
+for parsing and rendering used by <code>Logic</code> and <code>Ui</code> respectively. This is an example of the strategy pattern.</p>
 </div>
 <div class="paragraph">
 <p><code>ModelManager</code> owns the sole instance of <code>ViewState</code>.
@@ -402,6 +499,86 @@ the method call is valid and expected.
 This obviates the need for state-checking code in <code>ModelManager</code>.</p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">4.3.3. Design considerations</a></h4>
+<div class="paragraph">
+<p>The design of the state classes was a significant technical decision. Below were my considerations.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Alternative 1: Keep the semantics of the original <code>Model</code> and put all state-specific fields and methods here. Maintain an enum to keep track of the active state.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Does not require much initial modifications to AB4 to support</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Model</code> will contain a lot of irrelevant fields and methods throughout its lifetime such as <code>getUserAnswer()</code>.</p>
+</li>
+<li>
+<p>Necessary to do a lot of switch-case checking, downcasting to concrete states and error handling of incorrect states.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Alternative 2 (current choice): Redefine the responsibilies of <code>Model</code> as above and put state-specific data and methods in the respective <code>ViewState</code> classes</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Separation of concerns. Allows different states to be developed independently.</p>
+</li>
+<li>
+<p>Safety. It is harder to write wrong code if there are no irrelevant fields in a class.</p>
+</li>
+<li>
+<p>Can use polymorphism to dynamically dispatch correct behaviour, obviating the need for switch-case checks.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Requires substantial modifications to AB4 to support and requires a rewrite of many tests.</p>
+</li>
+<li>
+<p>Makes testing harder since the model must be initialised to the correct state.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Despite its initial ease of adoption, alternative 1 is difficult to extend and creates significant technical debt in the long run as more state-specific functionality is added to <code>Model</code>.
+Thus, the choice is clear. Alternative 2 is preferable.</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 18:53:55 UTC</div></div></div></body></html>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 07:17:07 UTC</div></div></div></body></html>

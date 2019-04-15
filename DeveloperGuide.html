@@ -35,9 +35,8 @@
 <li><a href="#card-management">4.3. Card management</a></li>
 <li><a href="#study-view">4.4. Study view</a></li>
 <li><a href="#undo-redo-feature">4.5. Undo/redo feature</a></li>
-<li><a href="#proposed-data-encryption">4.6. [Proposed] Data encryption</a></li>
-<li><a href="#logging">4.7. Logging</a></li>
-<li><a href="#Implementation-Configuration">4.8. Configuration</a></li>
+<li><a href="#logging">4.6. Logging</a></li>
+<li><a href="#Implementation-Configuration">4.7. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -312,178 +311,174 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 <div class="sect1">
 <h2 id="design"><a class="link" href="#design">3. Design</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>This section discusses the design of TopDeck.</p>
+</div>
 <div class="sect2">
 <h3 id="Design-Architecture"><a class="link" href="#Design-Architecture">3.1. Architecture</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/Architecture.png" alt="Architecture" width="600">
 </div>
-<div class="title">Figure 1. Architecture Diagram</div>
+<div class="title">Figure 1. Architecture Diagram of TopDeck</div>
 </div>
 <div class="paragraph">
-<p>The <strong><em>Architecture Diagram</em></strong> given above explains the high-level design of the App. Given below is a quick overview of each component.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-The <code>.pptx</code> files used to create diagrams in this document can be found in the <a href="https://github.com/cs2103-ay1819s2-w11-1/main/tree/master/docs/diagrams/">diagrams</a> folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose <code>Save as picture</code>.
-</td>
-</tr>
-</table>
+<p>The <strong><em>Architecture Diagram</em></strong> above gives a high-level overview of the design of TopDeck.
+This rest of this section provides a quick overview of each component.</p>
 </div>
 <div class="paragraph">
-<p><code>Main</code> has only one class called <a href="https://github.com/cs2103-ay1819s2-w11-1/main/tree/master/src/main/java/seedu/address/MainApp.java"><code>MainApp</code></a>. It is responsible for,</p>
+<p><code>Main</code> has only one class called <a href="https://github.com/cs2103-ay1819s2-w11-1/main/tree/master/src/main/java/seedu/address/MainApp.java"><code>MainApp</code></a>. Its responsibilities:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>At app launch: Initializes the components in the correct sequence, and connects them up with each other.</p>
+<p>When TopDeck launches, initialize the components in the correct sequence and connect them together.</p>
 </li>
 <li>
-<p>At shut down: Shuts down the components and invokes cleanup method where necessary.</p>
+<p>When TopDeck terminates, shut down the components gracefully by invoking cleanup methods and freeing resources.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><a href="#Design-Commons"><strong><code>Commons</code></strong></a> represents a collection of classes used by multiple other components.
-The following class plays an important role at the architecture level:</p>
+<p><a href="#Design-Commons"><strong><code>Commons</code></strong></a> is a collection of classes used generically by other components.
+Notably, it contains the following class which plays an important role at the architecture level:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>LogsCenter</code> : Used by many classes to write log messages to the App&#8217;s log file.</p>
+<p><code>LogsCenter</code> : Logging facility used by many classes to write to the App&#8217;s log file.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The rest of the App consists of four components.</p>
+<p>The rest of the App can be divided into the following components:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#Design-Ui"><strong><code>UI</code></strong></a>: The UI of the App.</p>
+<p><a href="#Design-Ui"><strong><code>UI</code></strong></a>: User interface</p>
 </li>
 <li>
-<p><a href="#Design-Logic"><strong><code>Logic</code></strong></a>: The command executor.</p>
+<p><a href="#Design-Logic"><strong><code>Logic</code></strong></a>: Command execution</p>
 </li>
 <li>
-<p><a href="#Design-Model"><strong><code>Model</code></strong></a>: Holds the data of the App in-memory.</p>
+<p><a href="#Design-Model"><strong><code>Model</code></strong></a>: In-memory application data</p>
 </li>
 <li>
-<p><a href="#Design-Storage"><strong><code>Storage</code></strong></a>: Reads data from, and writes data to, the hard disk.</p>
+<p><a href="#Design-Storage"><strong><code>Storage</code></strong></a>: External storage</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Each of the four components</p>
+<p>Each component</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Defines its <em>API</em> in an <code>interface</code> with the same name as the Component.</p>
+<p>Defines its API in an <code>interface</code> with the same name as the component.</p>
 </li>
 <li>
-<p>Exposes its functionality using a <code>{Component Name}Manager</code> class.</p>
+<p>Exposes its functionality through a <code>{Component Name}Manager</code> class.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>For example, the <code>Logic</code> component (see the class diagram given below) defines it&#8217;s API in the <code>Logic.java</code> interface and exposes its functionality using the <code>LogicManager.java</code> class.</p>
+<p>For example, the <code>Logic</code> component defines its API in the <code>Logic.java</code> interface and exposes its functionality through the <code>LogicManager.java</code> class.</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="images/LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
-</div>
-<div class="title">Figure 2. Class Diagram of the Logic Component</div>
-</div>
-<h4 id="how-the-architecture-components-interact-with-each-other" class="discrete">How the architecture components interact with each other</h4>
 <div class="paragraph">
-<p>The <em>Sequence Diagram</em> below shows how the components interact with each other for the scenario where the user issues the command <code>delete 1</code>.</p>
+<p>These components interact regularly in response user commands in a typical application session.
+As an example, the <em>Sequence Diagram</em> below illustrates what happens when a user issues the command <code>delete 1</code> when they first launch TopDeck.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/SDforDeletePerson.png" alt="SDforDeletePerson" width="800">
 </div>
-<div class="title">Figure 3. Component interactions for <code>delete 1</code> command</div>
+<div class="title">Figure 2. Component interactions for <code>delete 1</code> command</div>
 </div>
 <div class="paragraph">
-<p>The sections below give more details of each component.</p>
+<p>The next few sections describe the design and responsibilites of each component in greater detail.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="Design-Ui"><a class="link" href="#Design-Ui">3.2. UI component</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="images/TopDeckUIClassDiagram.png" alt="TopDeckUIClassDiagram" width="800">
+<img src="images/UiClassDiagram.png" alt="UiClassDiagram">
 </div>
-<div class="title">Figure 4. Structure of the UI Component</div>
+<div class="title">Figure 3. Structure of the UI Component</div>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> : <a href="https://github.com/cs2103-ay1819s2-w11-1/main/tree/master/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+<p>The <code>UI</code> component is responsible for the user interface. It relays user commands to <code>Logic</code> for execution
+and updates the user interface according to the application data in <code>Model</code>.</p>
 </div>
 <div class="paragraph">
-<p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/cs2103-ay1819s2-w11-1/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/cs2103-ay1819s2-w11-1/main/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
+<p><code>UI</code> consists of a <code>MainWindow</code> that owns instances of the classes that make up the user interface such as <code>CommandBox</code>.
+Notably, <code>MainWindow</code> owns a <code>MainPanel</code> which is a reference type to one of the possible main panels.
+Its concrete type is dependent on <code>ViewState</code> from <code>Model</code>. The figure below shows how the user interface is divided into classes.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UiClasses.png" alt="UiClasses">
+</div>
 </div>
 <div class="paragraph">
-<p>The <code>UI</code> component,</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Executes user commands using the <code>Logic</code> component.</p>
-</li>
-<li>
-<p>Listens for changes to <code>Model</code> data so that the UI can be updated with the modified data.</p>
-</li>
-</ul>
+<p><code>MainWindow</code> and all its owned classes extend <code>UiPart</code> which is an abstract class that represents a unit that can be rendered to the display.
+<code>UI</code> uses the JavaFx UI framework. By convention, the layout of each <code>UIPart</code> is defined in the corresponding <code>.fxml</code> file in <code>src/main/resources/view</code>.
+For example, the layout of <code>MainWindow</code> is defined in <code>MainWindow.fxml</code>.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="Design-Logic"><a class="link" href="#Design-Logic">3.3. Logic component</a></h3>
 <div id="fig-LogicClassDiagram" class="imageblock">
 <div class="content">
-<img src="images/LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
+<img src="images/LogicClassDiagram.png" alt="LogicClassDiagram">
 </div>
-<div class="title">Figure 5. Structure of the Logic Component</div>
+<div class="title">Figure 4. Structure of the Logic Component</div>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> :
 <a href="https://github.com/cs2103-ay1819s2-w11-1/main/tree/master/src/main/java/seedu/address/logic/Logic.java"><code>Logic.java</code></a></p>
 </div>
+<div class="paragraph">
+<p>The <code>Logic</code> component is responsible for parsing and executing commands. A typical command is parsed and executed as follows:</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>Logic</code> uses the <code>TopDeckParser</code> class to parse the user command.</p>
+<p><code>Logic</code> uses the <code>TopDeckParser</code> class to parse the user command into a command word and its arguments.</p>
+</li>
+<li>
+<p><code>TopDeckParser</code> requests for the <code>ViewStateParser</code> from the active <code>ViewState</code> in <code>Model</code>.</p>
+</li>
+<li>
+<p>This <code>ViewStateParser</code> is then used to parse the command word itself.</p>
 </li>
 <li>
 <p>This results in a <code>Command</code> object which is executed by the <code>LogicManager</code>.</p>
 </li>
 <li>
-<p>The command execution can affect the <code>Model</code> (e.g. adding a deck).</p>
+<p>The execution of this command may affect the <code>Model</code> (e.g. when deleting a deck).</p>
 </li>
 <li>
-<p>The result of the command execution is encapsulated as a <code>CommandResult</code> object which is passed back to the <code>Ui</code>.</p>
+<p>The result of the command execution is wrapped in a <code>CommandResult</code> object and returned back to <code>Ui</code>.</p>
 </li>
 <li>
-<p>In addition, the <code>CommandResult</code> object can also instruct the <code>Ui</code> to perform certain actions, such as displaying help to the user.</p>
+<p>Different subclasses of <code>CommandResult</code> may instruct <code>Ui</code> to perform different actions,
+such as <code>UpdatePanelCommandResult</code> which is used to construct a new <code>MainPanel</code>.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>Given below is the Sequence Diagram for interactions within the <code>Logic</code> component for the <code>execute("delete 1")</code> API call.</p>
+<p>To make things clearer, below is the Sequence Diagram for interactions within the <code>Logic</code> component given an <code>execute("delete 1")</code> API call.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/DeletePersonSdForLogic.png" alt="DeletePersonSdForLogic" width="800">
+<img src="images/DeletePersonSdForLogic.png" alt="DeletePersonSdForLogic">
 </div>
-<div class="title">Figure 6. Interactions Inside the Logic Component for the <code>delete 1</code> Command</div>
+<div class="title">Figure 5. Interactions Inside the Logic Component for <code>delete 1</code></div>
 </div>
 </div>
 <div class="sect2">
@@ -492,7 +487,7 @@ The following class plays an important role at the architecture level:</p>
 <div class="content">
 <img src="images/TopDeckClassDiagram.png" alt="TopDeckClassDiagram" width="800">
 </div>
-<div class="title">Figure 7. Structure of the Model Component</div>
+<div class="title">Figure 6. Structure of the Model Component</div>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> : <a href="https://github.com/cs2103-ay1819s2-w11-1/main/tree/master/src/main/java/seedu/address/model/Model.java"><code>Model.java</code></a></p>
@@ -523,7 +518,7 @@ The following class plays an important role at the architecture level:</p>
 <div class="content">
 <img src="images/TopDeckStorageClassDiagram.png" alt="TopDeckStorageClassDiagram" width="800">
 </div>
-<div class="title">Figure 8. Structure of the Storage Component</div>
+<div class="title">Figure 7. Structure of the Storage Component</div>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> : <a href="https://github.com/cs2103-ay1819s2-w11-1/main/tree/master/src/main/java/seedu/address/storage/Storage.java"><code>Storage.java</code></a></p>
@@ -571,7 +566,7 @@ depend on the context of the application state.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>In decks view, it adds a new deck: <code>add DECK_NAME</code></p>
+<p>In decks view, it adds a new deck: <code>add n/DECK_NAME</code></p>
 </li>
 <li>
 <p>In cards view, it adds a new card to a particular deck: <code>add q/QUESTION a/ANSWER</code></p>
@@ -591,6 +586,7 @@ requires less cognitive effort to operate by virtue of the fewer and shorter com
 </div>
 <div class="paragraph">
 <p>However, implementing state in full generality required nontrivial modifications to the AB4 architecture.
+These modifications have been reflected in <a href="#Design-Architecture">Section 3.1, &#8220;Architecture&#8221;</a>.
 We will now describe how state is implemented in TopDeck.</p>
 </div>
 </div>
@@ -603,19 +599,12 @@ States in TopDeck correspond to the three possible views described in the user g
 decks view, cards view and study view.</p>
 </div>
 <div class="paragraph">
-<p>The following figure illustrates the transitions between these states.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/state_diagram.png" alt="state diagram">
-</div>
-<div class="title">Figure 9. State diagram for TopDeck</div>
-</div>
-<div class="paragraph">
 <p>Each state implements a common interface <code>ViewState</code>
 and holds transient data that is relevant only while the state is active.
 For example, <code>CardsView</code> has a member <code>activeDeck</code> which holds a reference to the deck opened in decks view.
-Commands in cards view such as <code>add</code> will then operate on this deck.</p>
+Commands in cards view such as <code>add</code> will then operate on this deck.
+The <code>ViewState</code> contract also requires each implementer to provide policies
+for parsing and rendering used by <code>Logic</code> and <code>Ui</code> respectively. This is an example of the strategy pattern.</p>
 </div>
 <div class="paragraph">
 <p><code>ModelManager</code> owns the sole instance of <code>ViewState</code>.
@@ -634,6 +623,86 @@ All methods are expected to work regardless of the current state.
 We assume that if a caller is capable of providing the required arguments to a method,
 the method call is valid and expected.
 This obviates the need for state-checking code in <code>ModelManager</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">4.1.3. Design considerations</a></h4>
+<div class="paragraph">
+<p>The design of the state classes was a significant technical decision. Below were my considerations.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Alternative 1: Keep the semantics of the original <code>Model</code> and put all state-specific fields and methods here. Maintain an enum to keep track of the active state.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Does not require much initial modifications to AB4 to support</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Model</code> will contain a lot of irrelevant fields and methods throughout its lifetime such as <code>getUserAnswer()</code>.</p>
+</li>
+<li>
+<p>Necessary to do a lot of switch-case checking, downcasting to concrete states and error handling of incorrect states.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Alternative 2 (current choice): Redefine the responsibilies of <code>Model</code> as above and put state-specific data and methods in the respective <code>ViewState</code> classes</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Separation of concerns. Allows different states to be developed independently.</p>
+</li>
+<li>
+<p>Safety. It is harder to write wrong code if there are no irrelevant fields in a class.</p>
+</li>
+<li>
+<p>Can use polymorphism to dynamically dispatch correct behaviour, obviating the need for switch-case checks.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Requires substantial modifications to AB4 to support and requires a rewrite of many tests.</p>
+</li>
+<li>
+<p>Makes testing harder since the model must be initialised to the correct state.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Despite its initial ease of adoption, alternative 1 is difficult to extend and creates significant technical debt in the long run as more state-specific functionality is added to <code>Model</code>.
+Thus, the choice is clear. Alternative 2 is preferable.</p>
 </div>
 </div>
 </div>
@@ -730,7 +799,7 @@ executes the <code>select 1</code> command to select the first deck. This should
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">4.2.3. Design considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.2.3. Design considerations</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -982,7 +1051,7 @@ to the next TopDeck as per figure 4.3.6</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.3.3. Design considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.3.3. Design considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-data-structure-of-cards"><a class="link" href="#aspect-data-structure-of-cards">Aspect: Data structure of cards</a></h5>
 <div class="ulist">
@@ -1218,7 +1287,7 @@ The last is important to show the contents of the flash card.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.4.4. Design considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.4.4. Design considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-to-store-states-within-study-view"><a class="link" href="#aspect-how-to-store-states-within-study-view">Aspect: How to store states within  study view</a></h5>
 <div class="ulist">
@@ -1388,7 +1457,7 @@ If the <code>currentStatePointer</code> is at index <code>topDeckStateList.size(
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.5.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -1458,20 +1527,14 @@ If the <code>currentStatePointer</code> is at index <code>topDeckStateList.size(
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">4.6. [Proposed] Data encryption</a></h3>
-<div class="paragraph">
-<p><em>{Explain here how the data encryption feature will be implemented}</em></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">4.7. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">4.6. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.8, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.7, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1502,7 +1565,7 @@ If the <code>currentStatePointer</code> is at index <code>topDeckStateList.size(
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.8. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.7. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -1568,7 +1631,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 10. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 8. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
@@ -2247,4 +2310,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 18:53:55 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-15 07:17:07 UTC</div></div></div></body></html>
